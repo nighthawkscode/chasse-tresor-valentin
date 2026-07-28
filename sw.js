@@ -1,5 +1,5 @@
 // Garde une copie de l'app pour qu'elle s'ouvre à zéro réseau, en montagne.
-const CACHE = "valentin-v1";
+const CACHE = "valentin-v2";
 const SHELL = ["./", "./index.html", "./manifest.webmanifest"];
 
 self.addEventListener("install", function (e) {

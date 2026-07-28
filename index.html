@@ -636,7 +636,7 @@
      GPS — sert uniquement de compteur de mètres
      ========================================================= */
 
-  let gpsActif = false, dernier = null, altitude = null;
+  let gpsActif = false, dernier = null, altitude = null, veille = null, aUnPoint = false;
 
   function distance(a, b) {
     const R = 6371000, r = Math.PI / 180;
@@ -648,25 +648,44 @@
 
   function demarrerGPS() {
     if (!navigator.geolocation) { majGPS("Ce téléphone ne donne pas la position"); return; }
+    if (veille != null) navigator.geolocation.clearWatch(veille);
+
     gpsActif = true;
-    majGPS();
-    navigator.geolocation.watchPosition(function (pos) {
+    majGPS(aUnPoint ? null : "Recherche du signal…");
+
+    veille = navigator.geolocation.watchPosition(function (pos) {
+      // Un point qui arrive après un timeout doit rattraper l'affichage.
+      gpsActif = true;
+      aUnPoint = true;
+
       const c = pos.coords;
       if (c.altitude != null && !isNaN(c.altitude)) altitude = Math.round(c.altitude);
-      if (c.accuracy != null && c.accuracy < 40) {
+      // En montagne les relevés sont moins précis qu'en ville, et iOS espace les
+      // mises à jour quand l'écran est éteint : il faut accepter de gros pas,
+      // sinon le compteur sous-estime énormément la marche réelle.
+      if (c.accuracy != null && c.accuracy < 60) {
         const p = { lat: c.latitude, lon: c.longitude };
         if (dernier) {
           const d = distance(dernier, p);
-          if (d > 6 && d < 120) { S.metres += d; sauver(); }
+          if (d > 6 && d < 400) { S.metres += d; sauver(); }
         }
         dernier = p;
       }
       majGPS();
       proposerIndice();
-    }, function () {
-      gpsActif = false;
-      majGPS("Position indisponible — tout marche quand même");
-    }, { enableHighAccuracy: true, maximumAge: 5000, timeout: 20000 });
+    }, function (err) {
+      // 1 = refusé, 2 = signal introuvable, 3 = trop lent.
+      if (err && err.code === 1) {
+        gpsActif = false;
+        navigator.geolocation.clearWatch(veille);
+        veille = null;
+        majGPS("Autorisation refusée : Réglages → Safari → Position → Demander");
+        return;
+      }
+      // Un timeout ou une perte de signal n'est jamais définitif : on continue d'écouter.
+      if (!aUnPoint) majGPS("Toujours pas de signal — ça vient parfois au bout d'une minute, dehors");
+      else majGPS();
+    }, { enableHighAccuracy: true, maximumAge: 10000, timeout: 60000 });
 
     if ("wakeLock" in navigator) navigator.wakeLock.request("screen").catch(function () {});
   }
@@ -682,6 +701,12 @@
       const b = el("button", "lien", message ? "réessayer" : "Compter les mètres parcourus (facultatif)");
       b.addEventListener("click", demarrerGPS);
       z.appendChild(b);
+      return;
+    }
+
+    // Actif mais pas encore de point : on le dit, sans faire croire à un échec.
+    if (message) {
+      z.appendChild(el("span", null, message));
       return;
     }
 
