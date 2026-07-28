@@ -1,0 +1,12 @@
+{
+  "name": "Le trésor du Valentin",
+  "short_name": "Trésor",
+  "description": "Chasse au trésor pour la randonnée au-dessus de Gourette.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F5F8F8",
+  "theme_color": "#0C7A7D",
+  "lang": "fr"
+}

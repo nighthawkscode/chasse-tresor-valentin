@@ -1,0 +1,1206 @@
+<title>Le trésor du Valentin — carnet d'explorateur</title>
+
+<style>
+  :root {
+    --neige:      #F5F8F8;
+    --papier:     #FFFFFF;
+    --papier-2:   #EDF3F3;
+    --brume:      #D2E0E1;
+    --roche:      #16272E;
+    --roche-2:    #4A6169;
+    --gave:       #0C7A7D;
+    --gave-2:     #D2ECEC;
+    --or:         #B87309;
+    --or-2:       #FAEDD4;
+    --gentiane:   #2C4C9B;
+    --gentiane-2: #E1E8F7;
+    --sur-plein:  #FFFFFF;
+
+    --display: "American Typewriter", "Rockwell", "Courier New", serif;
+    --corps: "Avenir Next", "Avenir", "Segoe UI", system-ui, sans-serif;
+
+    --r: 14px;
+    --ombre: 0 1px 2px rgba(22,39,46,.06), 0 6px 18px rgba(22,39,46,.07);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --neige:#0C1518; --papier:#142226; --papier-2:#1B2E33; --brume:#274046;
+      --roche:#E7F0F0; --roche-2:#93AAB0; --gave:#3CC7C9; --gave-2:#10373A;
+      --or:#F0B341; --or-2:#3B2C0F; --gentiane:#8AABF2; --gentiane-2:#1B2748;
+      --sur-plein:#08181A;
+      --ombre: 0 1px 2px rgba(0,0,0,.4), 0 6px 18px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --neige:#0C1518; --papier:#142226; --papier-2:#1B2E33; --brume:#274046;
+    --roche:#E7F0F0; --roche-2:#93AAB0; --gave:#3CC7C9; --gave-2:#10373A;
+    --or:#F0B341; --or-2:#3B2C0F; --gentiane:#8AABF2; --gentiane-2:#1B2748;
+    --sur-plein:#08181A;
+    --ombre: 0 1px 2px rgba(0,0,0,.4), 0 6px 18px rgba(0,0,0,.35);
+  }
+  :root[data-theme="light"] {
+    --neige:#F5F8F8; --papier:#FFFFFF; --papier-2:#EDF3F3; --brume:#D2E0E1;
+    --roche:#16272E; --roche-2:#4A6169; --gave:#0C7A7D; --gave-2:#D2ECEC;
+    --or:#B87309; --or-2:#FAEDD4; --gentiane:#2C4C9B; --gentiane-2:#E1E8F7;
+    --sur-plein:#FFFFFF;
+    --ombre: 0 1px 2px rgba(22,39,46,.06), 0 6px 18px rgba(22,39,46,.07);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--neige);
+    color: var(--roche);
+    font-family: var(--corps);
+    font-size: 17px;
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
+  }
+
+  .topo { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+  .topo svg { width: 100%; height: 100%; }
+  .topo ellipse { fill: none; stroke: var(--gave); stroke-width: 1.1; opacity: .09; }
+
+  .wrap { position: relative; z-index: 1; max-width: 620px; margin: 0 auto; padding: 0 16px 70px; }
+
+  /* ---------- bandeau ---------- */
+  .bandeau {
+    position: sticky; top: 0; z-index: 20;
+    margin: 0 -16px 18px; padding: 10px 16px 11px;
+    background: var(--neige);
+    background: color-mix(in srgb, var(--neige) 90%, transparent);
+    -webkit-backdrop-filter: saturate(1.6) blur(12px);
+    backdrop-filter: saturate(1.6) blur(12px);
+    border-bottom: 1px solid var(--brume);
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .bandeau-haut { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .eyebrow {
+    font-size: 11px; font-weight: 600; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--roche-2);
+  }
+  .score {
+    font-family: var(--display); font-size: 19px; font-weight: 700;
+    color: var(--or); font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+
+  .mot { display: flex; flex-wrap: wrap; gap: 4px 11px; }
+  .groupe { display: flex; gap: 4px; }
+  .case {
+    width: 27px; height: 32px;
+    border: 1.5px dashed var(--brume); border-radius: 6px;
+    display: grid; place-items: center;
+    font-family: var(--display); font-size: 17px; font-weight: 700;
+    color: transparent;
+  }
+  .case.pleine {
+    border: 1.5px solid var(--gave); background: var(--gave-2); color: var(--gave);
+    animation: tampon .45s cubic-bezier(.2,1.5,.4,1) both;
+  }
+  @keyframes tampon {
+    0%   { transform: scale(2.1) rotate(-14deg); opacity: 0; }
+    60%  { transform: scale(.93) rotate(3deg);   opacity: 1; }
+    100% { transform: scale(1) rotate(-2deg);    opacity: 1; }
+  }
+
+  .gps { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--roche-2); min-height: 20px; }
+  .gps b { color: var(--roche); font-variant-numeric: tabular-nums; font-weight: 600; }
+  .gps-sep { color: var(--brume); }
+  .lien {
+    background: none; border: none; padding: 0; font: inherit; font-size: 13px; font-weight: 600;
+    color: var(--gave); text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
+  }
+
+  h1 {
+    font-family: var(--display); font-size: 34px; line-height: 1.08; font-weight: 700;
+    margin: 20px 0 10px; text-wrap: balance; letter-spacing: -.01em;
+  }
+  h2 { font-family: var(--display); font-size: 21px; line-height: 1.2; font-weight: 700; margin: 0; text-wrap: balance; }
+  p { margin: 0 0 12px; }
+  p:last-child { margin-bottom: 0; }
+
+  .section-titre { display: flex; align-items: center; gap: 12px; margin: 34px 0 12px; }
+  .section-titre .eyebrow { white-space: nowrap; }
+  .section-titre::after { content: ""; flex: 1; height: 1px; background: var(--brume); }
+
+  .carte {
+    background: var(--papier); border: 1px solid var(--brume); border-radius: var(--r);
+    padding: 18px; margin-bottom: 12px; box-shadow: var(--ombre);
+  }
+  .carte.scellee { background: transparent; border-style: dashed; box-shadow: none; }
+
+  .carte-tete { display: flex; align-items: flex-start; gap: 12px; }
+  .pastille {
+    flex: none; width: 38px; height: 38px; border-radius: 10px;
+    display: grid; place-items: center;
+    font-family: var(--display); font-size: 18px; font-weight: 700;
+    background: var(--gave-2); color: var(--gave);
+    border: 1px solid color-mix(in srgb, var(--gave) 30%, transparent);
+  }
+  .pastille.vide { background: transparent; color: var(--roche-2); border: 1px dashed var(--brume); font-size: 16px; }
+  .lieu { font-size: 13px; color: var(--roche-2); margin-top: 2px; }
+
+  .corps { margin-top: 14px; display: flex; flex-direction: column; gap: 14px; }
+  .consigne { font-size: 18px; }
+
+  /* ---------- barre de progression ---------- */
+  .jauge { height: 8px; border-radius: 99px; background: var(--brume); overflow: hidden; }
+  .jauge > i { display: block; height: 100%; background: var(--gave); border-radius: 99px; transition: width .4s ease; }
+  .jauge-ligne { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; font-size: 13px; color: var(--roche-2); margin-bottom: 6px; }
+  .jauge-ligne > :last-child { white-space: nowrap; }
+  .jauge-ligne b { color: var(--roche); font-variant-numeric: tabular-nums; }
+
+  /* ---------- familles de trouvailles ---------- */
+  details.famille {
+    background: var(--papier); border: 1px solid var(--brume);
+    border-radius: var(--r); margin-bottom: 10px; overflow: hidden;
+  }
+  details.famille > summary {
+    list-style: none; cursor: pointer; padding: 15px 18px;
+    display: flex; align-items: center; gap: 12px;
+    font-family: var(--display); font-size: 18px; font-weight: 700;
+  }
+  details.famille > summary::-webkit-details-marker { display: none; }
+  .compte {
+    margin-left: auto; font-family: var(--corps); font-size: 13px; font-weight: 600;
+    color: var(--roche-2); font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+  .chev { color: var(--roche-2); font-size: 13px; transition: transform .2s; }
+  details[open] > summary .chev { transform: rotate(90deg); }
+  .famille-corps { padding: 0 12px 12px; display: flex; flex-direction: column; gap: 6px; }
+
+  .coche {
+    display: flex; align-items: center; gap: 12px;
+    min-height: 52px; padding: 8px 12px;
+    border: 1px solid var(--brume); border-radius: 11px;
+    background: var(--papier); color: var(--roche);
+    font: inherit; font-size: 16px; text-align: left; cursor: pointer;
+    transition: background .12s, border-color .12s;
+  }
+  .coche .box {
+    flex: none; width: 24px; height: 24px; border-radius: 7px;
+    border: 2px solid var(--brume); display: grid; place-items: center;
+    font-size: 14px; font-weight: 700; color: transparent;
+  }
+  .coche .lab-txt { flex: 1; min-width: 0; }
+  .coche .val { font-size: 12px; font-weight: 700; color: var(--roche-2); font-variant-numeric: tabular-nums; }
+  .coche[aria-pressed="true"] { border-color: var(--gave); background: var(--gave-2); }
+  .coche[aria-pressed="true"] .box { background: var(--gave); border-color: var(--gave); color: var(--sur-plein); }
+  .coche[aria-pressed="true"] .lab-txt { text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--gave) 60%, transparent); }
+  .coche.rare { border-style: dashed; }
+  .coche.rare .val { color: var(--or); }
+
+  /* ---------- quiz ---------- */
+  .options { display: flex; flex-direction: column; gap: 8px; }
+  .opt {
+    min-height: 52px; padding: 10px 16px;
+    border: 1px solid var(--brume); border-radius: 11px;
+    background: var(--papier); color: var(--roche);
+    font: inherit; text-align: left; cursor: pointer;
+  }
+  .opt.juste { border-color: var(--gave); background: var(--gave-2); font-weight: 600; }
+  .opt.faux { border-color: color-mix(in srgb, var(--or) 55%, transparent); background: var(--or-2); opacity: .7; }
+  .opt:disabled { cursor: default; }
+
+  .saisie { display: flex; gap: 8px; }
+  input[type="text"] {
+    flex: 1; min-width: 0; min-height: 52px; padding: 10px 14px;
+    border: 1px solid var(--brume); border-radius: 11px;
+    background: var(--papier); color: var(--roche);
+    font-family: var(--display); font-size: 19px; letter-spacing: .1em; text-transform: uppercase;
+  }
+  input[type="text"]::placeholder {
+    letter-spacing: 0; text-transform: none; font-family: var(--corps); font-size: 16px;
+    color: var(--roche-2); opacity: .6;
+  }
+
+  .btn {
+    min-height: 54px; padding: 12px 20px; border-radius: 12px;
+    border: 1px solid transparent; background: var(--gave); color: var(--sur-plein);
+    font-family: var(--corps); font-size: 17px; font-weight: 600; cursor: pointer; width: 100%;
+  }
+  .btn.creux { background: transparent; border-color: var(--brume); color: var(--roche); }
+  .btn.or { background: var(--or); color: var(--sur-plein); }
+  .btn:disabled { opacity: .4; cursor: default; }
+  .btn.petit { min-height: 46px; font-size: 15px; padding: 8px 16px; width: auto; }
+
+  .encart {
+    border-left: 3px solid var(--gave); background: var(--gave-2);
+    border-radius: 0 10px 10px 0; padding: 12px 14px; font-size: 15px;
+  }
+  .encart .lab {
+    display: block; font-size: 11px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--gave); margin-bottom: 4px;
+  }
+  .encart.alerte { border-left-color: var(--or); background: var(--or-2); }
+  .encart.alerte .lab { color: var(--or); }
+
+  .bonus {
+    border: 1px solid color-mix(in srgb, var(--gentiane) 35%, transparent);
+    background: var(--gentiane-2); border-radius: 11px; padding: 14px; font-size: 15px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .bonus .lab { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gentiane); }
+  .bonus .opt.juste { border-color: var(--gentiane); background: color-mix(in srgb, var(--gentiane) 14%, transparent); }
+
+  .reussi { display: flex; gap: 8px; font-size: 15px; color: var(--roche); }
+  .reussi .tick { color: var(--gave); font-weight: 700; }
+
+  .fait-ligne {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 12px; border-radius: 10px; background: var(--papier-2);
+    font-size: 14px; color: var(--roche-2); margin-bottom: 6px;
+  }
+  .fait-ligne .l {
+    flex: none; width: 26px; height: 26px; border-radius: 7px;
+    background: var(--gave-2); color: var(--gave); display: grid; place-items: center;
+    font-family: var(--display); font-weight: 700; font-size: 14px;
+  }
+
+  .defi-libre {
+    display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center;
+    padding: 12px 14px; border: 1px solid var(--brume); border-radius: 11px;
+    background: var(--papier); margin-bottom: 8px;
+  }
+  .defi-libre .d-txt { font-size: 15px; }
+  .defi-libre .d-txt b { display: block; font-family: var(--display); font-size: 16px; margin-bottom: 2px; }
+  .defi-libre.fait { background: var(--gave-2); border-color: var(--gave); }
+  .defi-libre .pts { font-size: 12px; color: var(--roche-2); font-weight: 600; }
+
+  .toast {
+    position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%) translateY(150%);
+    z-index: 60; background: var(--roche); color: var(--neige);
+    padding: 13px 20px; border-radius: 999px; font-size: 15px; font-weight: 600;
+    box-shadow: 0 8px 30px rgba(0,0,0,.28);
+    transition: transform .32s cubic-bezier(.2,1,.3,1); max-width: 90vw; text-align: center;
+  }
+  .toast.on { transform: translateX(-50%) translateY(0); }
+
+  .pied {
+    margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--brume);
+    font-size: 13px; color: var(--roche-2);
+    display: flex; justify-content: space-between; gap: 14px; align-items: center;
+  }
+
+  .diplome {
+    border: 2px solid var(--or); background: var(--or-2);
+    border-radius: var(--r); padding: 26px 20px; text-align: center;
+  }
+  .diplome .gros {
+    font-family: var(--display); font-size: 46px; font-weight: 700; color: var(--or);
+    font-variant-numeric: tabular-nums; line-height: 1; margin: 10px 0 4px;
+  }
+  .badges { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 16px; }
+  .badge { background: var(--papier); border: 1px solid var(--brume); border-radius: 999px; padding: 7px 14px; font-size: 14px; font-weight: 600; }
+
+  :focus-visible { outline: 3px solid var(--gentiane); outline-offset: 2px; border-radius: 8px; }
+  @media (prefers-reduced-motion: reduce) { * { animation-duration: .001ms !important; transition-duration: .001ms !important; } }
+</style>
+
+<div class="topo" aria-hidden="true">
+  <svg viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice">
+    <g transform="translate(200 300) rotate(-16)">
+      <ellipse rx="40" ry="26"/><ellipse rx="78" ry="52"/><ellipse rx="120" ry="80"/>
+      <ellipse rx="166" ry="112"/><ellipse rx="216" ry="148"/><ellipse rx="272" ry="188"/>
+    </g>
+    <g transform="translate(120 640) rotate(24)">
+      <ellipse rx="34" ry="22"/><ellipse rx="70" ry="46"/><ellipse rx="112" ry="74"/>
+      <ellipse rx="160" ry="106"/><ellipse rx="214" ry="142"/>
+    </g>
+  </svg>
+</div>
+
+<div class="wrap">
+  <header class="bandeau">
+    <div class="bandeau-haut">
+      <span class="eyebrow">Carnet d'explorateur · Gourette</span>
+      <span class="score" id="score">0 pts</span>
+    </div>
+    <div class="mot" id="mot" aria-label="Mot de passe du coffre"></div>
+    <div class="gps" id="gps"></div>
+  </header>
+
+  <main id="app"></main>
+
+  <div class="pied">
+    <span>Le trésor du Valentin</span>
+    <button class="lien" id="btn-reset">Tout recommencer</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  "use strict";
+
+  // Le fichier doit rester lisible même ouvert en direct depuis le téléphone.
+  function meta(attr, nom, valeur) {
+    if (document.querySelector("meta[" + attr + '="' + nom + '"]')) return;
+    const m = document.createElement("meta");
+    m.setAttribute(attr, nom);
+    m.content = valeur;
+    document.head.appendChild(m);
+  }
+  meta("name", "viewport", "width=device-width, initial-scale=1, viewport-fit=cover");
+  meta("name", "theme-color", "#0C7A7D");
+  meta("name", "apple-mobile-web-app-capable", "yes");
+  meta("name", "apple-mobile-web-app-title", "Trésor");
+  meta("name", "apple-mobile-web-app-status-bar-style", "default");
+  document.documentElement.lang = "fr";
+
+  // Installable et utilisable à zéro réseau quand la page est servie en HTTPS.
+  // Sur un artifact Claude, ces deux appels échouent sans bruit : c'est voulu.
+  if (!document.querySelector('link[rel="manifest"]')) {
+    const l = document.createElement("link");
+    l.rel = "manifest";
+    l.href = "./manifest.webmanifest";
+    document.head.appendChild(l);
+  }
+  if ("serviceWorker" in navigator && location.protocol === "https:") {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("./sw.js").catch(function () {});
+    });
+  }
+
+  /* =========================================================
+     1. LA GRANDE LISTE DES TROUVAILLES
+     Cochable n'importe quand, n'importe où, dans n'importe quel ordre.
+     ========================================================= */
+
+  const FAMILLES = [
+    {
+      id: "voir", titre: "Ouvre l'œil",
+      items: [
+        ["Une fleur jaune", 5],
+        ["Une fleur bleue ou violette", 5],
+        ["Une fleur blanche", 5],
+        ["Un papillon", 10],
+        ["Une vache ou une brebis", 5],
+        ["Un caillou plus gros que ta tête", 5],
+        ["Un caillou avec des paillettes qui brillent", 10],
+        ["Une tache de neige qui a survécu à l'été", 10],
+        ["De l'eau qui coule, même un tout petit filet", 5],
+        ["Un arbre tout seul, sans copains autour", 10],
+        ["Un nuage qui touche la montagne", 10],
+        ["Un trou dans le sol — quelqu'un habite là ?", 10],
+        ["Une pierre posée par quelqu'un, pas par la nature", 10],
+        ["Trois verts différents dans le même regard", 10]
+      ]
+    },
+    {
+      id: "sens", titre: "Écoute, sens, touche",
+      items: [
+        ["Entendre l'eau", 5],
+        ["Entendre le vent dans l'herbe", 5],
+        ["Entendre une cloche de troupeau", 10],
+        ["Sentir une herbe froissée entre tes doigts", 5],
+        ["Toucher de la mousse — douce ou piquante ?", 5],
+        ["Tremper un doigt dans l'eau glacée", 10],
+        ["Dix secondes de silence complet, tous ensemble", 10],
+        ["Sentir l'air : est-ce qu'il sent quelque chose ?", 5]
+      ]
+    },
+    {
+      id: "faire", titre: "À faire, où que tu sois",
+      items: [
+        ["Empiler cinq cailloux les uns sur les autres", 10],
+        ["Trouver un caillou en forme de cœur", 15],
+        ["Faire un câlin à un arbre", 5],
+        ["Marcher vingt pas sans faire de bruit", 10],
+        ["Dire bonjour à quelqu'un qu'on croise", 5],
+        ["Prendre une photo vraiment rigolote", 10],
+        ["Inventer un cri de ralliement pour l'équipe", 10],
+        ["Se retourner et montrer d'où on est partis", 5],
+        ["Boire une gorgée d'eau en regardant loin", 5],
+        ["Ramasser un déchet qui n'est pas à nous", 20]
+      ]
+    },
+    {
+      id: "rares", titre: "Les rares — gros points",
+      rare: true,
+      items: [
+        ["Une marmotte, en vrai", 25],
+        ["Entendre le sifflet d'une marmotte", 20],
+        ["Un isard (le chamois des Pyrénées)", 25],
+        ["Un grand oiseau qui plane sans battre des ailes", 20],
+        ["Un patou, le gros chien blanc du troupeau", 20],
+        ["Un arc-en-ciel, ou un rayon à travers les nuages", 20]
+      ]
+    }
+  ];
+
+  /* =========================================================
+     2. LES INDICES DU COFFRE — un tous les ~150 m
+     Aucun n'est lié à un endroit : tous faisables n'importe où.
+     ========================================================= */
+
+  const MOT = "LEGAVEDUVALENTIN";
+  const GROUPES = [2, 4, 2, 8]; // LE · GAVE · DU · VALENTIN
+  const PAS = 150;              // mètres entre deux indices
+
+  // Les lettres n'apparaissent pas de gauche à droite : chaque indice révèle
+  // une case tirée au hasard dans le mot, pour qu'on ne devine pas trop tôt.
+  const CASES = [7, 12, 2, 15, 5, 9, 0, 13, 4, 10, 1, 14, 8, 3, 11, 6];
+  function lettreDe(i) { return MOT[CASES[i]]; }
+
+  const INDICES = [
+    { titre: "La devinette du début",
+      quiz: { q: "« Je descends toujours et je ne remonte jamais. Je fais du bruit sans avoir de bouche. Je suis glacé même au mois de juillet. » Qui suis-je ?",
+        options: ["Le vent", "La rivière", "Un caillou", "L'ombre"], bonne: 1,
+        exp: "La rivière. C'est elle que vous allez rejoindre." } },
+
+    { titre: "Le caillou porte-bonheur",
+      defi: "Chacun ramasse <strong>un caillou</strong> qui tient dans la main. Gardez-le : c'est votre porte-bonheur jusqu'à la rivière." },
+
+    { titre: "Le sifflet",
+      quiz: { q: "Un coup de sifflet très aigu, une seule note, très forte. Qui vient de siffler ?",
+        options: ["Un berger", "Une marmotte", "Un isard", "Le vent dans les câbles"], bonne: 1,
+        exp: "La marmotte. Elle monte la garde debout. Un sifflet = danger dans le ciel. Plusieurs = danger au sol." },
+      bonus: { q: "Combien de mois par an la marmotte dort-elle ?",
+        options: ["Deux mois", "Six mois", "Toute l'année"], bonne: 1,
+        exp: "Six mois. Son cœur descend à 5 battements par minute — le tien en fait environ 90 en marchant." } },
+
+    { titre: "Les vingt pas muets",
+      defi: "Vingt pas sans faire un bruit et sans dire un mot. On compte dans sa tête. Le premier qui parle recommence." },
+
+    { titre: "Le mot d'ici",
+      quiz: { q: "Dans les Pyrénées, une rivière de montagne ne s'appelle pas une rivière. On dit :",
+        options: ["Un torrent", "Un gave", "Un ruz", "Un val"], bonne: 1,
+        exp: "Un gave, mot béarnais. Celui que vous rejoignez s'appelle le gave du Valentin." },
+      bonus: { q: "Le gave du Valentin descend jusqu'à Laruns et s'y jette dans un plus gros gave. Lequel ?",
+        options: ["Le gave d'Ossau", "La Garonne", "Le gave de Pau"], bonne: 0,
+        exp: "Le gave d'Ossau. Qui rejoint ensuite le gave d'Oloron, puis l'Adour, puis l'océan. Cette eau glacée finit à Bayonne." } },
+
+    { titre: "Le nez de l'explorateur",
+      defi: "Froisse un brin d'herbe entre tes doigts et sens-le. Puis fais sentir à quelqu'un d'autre. Ça sent quoi, à ton avis ?" },
+
+    { titre: "Plus haut, plus froid",
+      quiz: { q: "Plus on monte en altitude, plus il fait froid. Pourtant on se rapproche du soleil. Pourquoi ?",
+        options: ["Le soleil chauffe le sol, et c'est le sol qui réchauffe l'air", "Le vent est plus fort en haut", "Le soleil est moins allumé en haut"], bonne: 0,
+        exp: "Le soleil chauffe d'abord le sol. Plus tu t'éloignes du sol, moins l'air est réchauffé. En gros : 1 °C de moins tous les 150 m." } },
+
+    { titre: "Le planeur",
+      quiz: { q: "Quel oiseau plane des heures sans presque jamais battre des ailes, avec 2,60 m d'envergure ?",
+        options: ["La buse", "Le vautour fauve", "Le corbeau", "La mouette"], bonne: 1,
+        exp: "Le vautour fauve. Plus large que deux enfants couchés bout à bout. Il monte en tournant dans l'air chaud." },
+      bonus: { q: "Son cousin le gypaète barbu se nourrit surtout d'os. Comment fait-il pour les casser ?",
+        options: ["Il les écrase avec ses pattes", "Il les emporte en vol et les lâche sur les rochers", "Il les trempe dans l'eau pour les ramollir"], bonne: 1,
+        exp: "Il monte haut avec l'os et le lâche sur une dalle de pierre, jusqu'à ce qu'il se brise. Puis il avale les morceaux." } },
+
+    { titre: "Le concours de verts",
+      defi: "Chacun montre du doigt <strong>un vert différent</strong> : le vert de l'herbe, celui de la mousse, celui d'une feuille… Combien de verts différents à vous tous ?" },
+
+    { titre: "Le code du berger",
+      code: { enigme: "15 · 19 · 19 · 1 · 21",
+        intro: "Un vieux berger écrivait en chiffres. Sa règle : <strong>A = 1, B = 2, C = 3</strong>… à toi de continuer.",
+        reponse: "OSSAU", indice: "Cinq lettres. C'est le nom de la vallée où vous marchez.",
+        exp: "OSSAU. Vous êtes en vallée d'Ossau, en Béarn. C'est aussi le nom du fromage de brebis d'ici." } },
+
+    { titre: "Le manteau de laine",
+      quiz: { q: "« Je porte un manteau de laine même au mois d'août, je mange de l'herbe du matin au soir et je ne sais dire qu'un seul mot. » Qui suis-je ?",
+        options: ["La marmotte", "La brebis", "Le patou", "L'isard"], bonne: 1,
+        exp: "La brebis. Sa laine reste accrochée aux buissons — et les oiseaux viennent la chercher pour tapisser leur nid." } },
+
+    { titre: "Le regard en arrière",
+      defi: "Tout le monde se retourne. Montrez du doigt l'endroit d'où vous êtes partis. Vous avez marché tout ça." },
+
+    { titre: "Les galets tout ronds",
+      quiz: { q: "Pourquoi les galets d'une rivière sont-ils lisses et ronds, alors que les cailloux de la montagne sont pointus ?",
+        options: ["Ils sont d'une autre roche", "L'eau les roule et ils s'usent les uns contre les autres", "Le soleil les fait fondre"], bonne: 1,
+        exp: "L'eau les fait rouler pendant des milliers d'années. Un galet bien rond a beaucoup voyagé." },
+      bonus: { q: "Certaines pierres d'ici étaient au fond de la mer il y a très longtemps. Qu'y trouve-t-on parfois ?",
+        options: ["Du sel", "Des coquillages fossilisés", "Du sable de plage"], bonne: 1,
+        exp: "Des coquillages fossilisés, à 2 000 m d'altitude. Les Pyrénées ont soulevé un ancien fond marin." } },
+
+    { titre: "Le baptême de la montagne",
+      defi: "Chacun choisit une montagne en face et lui invente un nom. Le nom le plus rigolo est adopté pour la journée." },
+
+    { titre: "Le gros chien blanc",
+      quiz: { q: "Un gros chien blanc se lève près du troupeau et vient vers vous. Qu'est-ce qu'on fait ?",
+        options: ["On court", "On s'arrête, on ne crie pas, on le laisse renifler, puis on contourne", "On le caresse", "On lui donne à manger"], bonne: 1,
+        exp: "C'est un patou : il garde son troupeau, c'est son travail. On s'arrête, on baisse le bâton, on ne court jamais, et on contourne largement." },
+      bonus: { q: "Pourquoi élève-t-on le patou au milieu des brebis depuis qu'il est tout petit ?",
+        options: ["Pour qu'il apprenne à les compter", "Pour qu'il les prenne pour sa famille et les défende", "Pour qu'il ait chaud l'hiver"], bonne: 1,
+        exp: "Pour lui, le troupeau est sa famille. Il ne le dresse pas, il le protège — c'est pour ça qu'il vient voir qui approche." } },
+
+    { titre: "Le premier qui entend l'eau",
+      defi: "Tout le monde ferme les yeux et écoute pendant dix secondes. <strong>Le premier qui entend l'eau lève la main.</strong>" }
+  ];
+
+  const DEFIS_RIVIERE = [
+    { id: "ricochet", titre: "Les ricochets", texte: "Sortez les cailloux porte-bonheur. Combien de rebonds ? Le record de la famille compte double.", pts: 15 },
+    { id: "barrage", titre: "Le barrage", texte: "Construisez un petit barrage de galets à tous. Avant de repartir : on le défait, la rivière reprend son chemin.", pts: 15 },
+    { id: "bateau", titre: "La course de feuilles", texte: "Chacun choisit une feuille, on les lâche ensemble en amont. Première arrivée au caillou repère.", pts: 10 },
+    { id: "glacee", titre: "La main glacée", texte: "La main dans l'eau, on compte jusqu'à dix tous ensemble. On n'insiste pas si ça pique trop.", pts: 10 },
+    { id: "landart", titre: "Le land art", texte: "Avec des galets, des brindilles et des feuilles : fabriquez un animal ou un visage sur la berge. Photo obligatoire.", pts: 15 },
+    { id: "propre", titre: "Ne rien laisser", texte: "Avant de repartir, on ramasse tout. Y compris ce qui n'est pas à nous. Zéro trace.", pts: 20 }
+  ];
+
+  const DEFIS_RETOUR = [
+    { id: "silence", titre: "Les cent pas silencieux", texte: "Cent pas sans dire un mot, en comptant dans sa tête.", pts: 10 },
+    { id: "jevois", titre: "Je vois quelque chose que tu ne vois pas…", texte: "…et c'est de couleur ___ . Trois tours chacun.", pts: 10 },
+    { id: "meteo", titre: "Le nez au vent", texte: "Le vent souffle vers où ? Les nuages vont-ils dans le même sens ? Chacun donne sa prévision pour ce soir.", pts: 10 },
+    { id: "raconte", titre: "L'histoire à trois voix", texte: "Quelqu'un commence une histoire par « Il était une fois une marmotte… ». Chacun ajoute une phrase, chacun son tour.", pts: 15 },
+    { id: "merci", titre: "Le mot de la fin", texte: "Chacun dit son meilleur moment de la journée. En un mot, ou en une phrase.", pts: 15 }
+  ];
+
+  const PTS_INDICE = 20, PTS_BONUS = 10, PTS_COFFRE = 60;
+
+  /* =========================================================
+     ÉTAT
+     ========================================================= */
+
+  const CLE = "tresor-valentin-v2";
+  function neuf() {
+    return { demarre: false, trouvailles: {}, indices: {}, coffre: false,
+             riviere: {}, aRepart: false, retour: {}, fini: false, metres: 0 };
+  }
+  let S = charger();
+
+  function charger() {
+    try {
+      const brut = localStorage.getItem(CLE);
+      return brut ? Object.assign(neuf(), JSON.parse(brut)) : neuf();
+    } catch (e) { return neuf(); }
+  }
+  function sauver() { try { localStorage.setItem(CLE, JSON.stringify(S)); } catch (e) {} }
+
+  function etat(i) {
+    if (!S.indices[i]) S.indices[i] = { ok: false, bonus: false, repondu: false, ouvert: false };
+    return S.indices[i];
+  }
+  function indiceCourant() {
+    for (let i = 0; i < INDICES.length; i++) if (!etat(i).ok) return i;
+    return INDICES.length;
+  }
+  function toutesLesLettres() { return INDICES.every(function (_, i) { return etat(i).ok; }); }
+
+  function points() {
+    let p = 0;
+    FAMILLES.forEach(function (f) {
+      f.items.forEach(function (it, k) { if (S.trouvailles[f.id + ":" + k]) p += it[1]; });
+    });
+    INDICES.forEach(function (_, i) {
+      const e = S.indices[i];
+      if (!e) return;
+      if (e.ok) p += PTS_INDICE;
+      if (e.bonus) p += PTS_BONUS;
+    });
+    if (S.coffre) p += PTS_COFFRE;
+    DEFIS_RIVIERE.forEach(function (d) { if (S.riviere[d.id]) p += d.pts; });
+    DEFIS_RETOUR.forEach(function (d) { if (S.retour[d.id]) p += d.pts; });
+    return p;
+  }
+  function pointsMax() {
+    let p = INDICES.length * PTS_INDICE + PTS_COFFRE;
+    FAMILLES.forEach(function (f) { f.items.forEach(function (it) { p += it[1]; }); });
+    INDICES.forEach(function (x) { if (x.bonus) p += PTS_BONUS; });
+    DEFIS_RIVIERE.forEach(function (d) { p += d.pts; });
+    DEFIS_RETOUR.forEach(function (d) { p += d.pts; });
+    return p;
+  }
+  function nbTrouvailles() {
+    let n = 0, tot = 0;
+    FAMILLES.forEach(function (f) {
+      f.items.forEach(function (_, k) { tot++; if (S.trouvailles[f.id + ":" + k]) n++; });
+    });
+    return [n, tot];
+  }
+
+  /* =========================================================
+     OUTILS
+     ========================================================= */
+
+  const $ = function (s) { return document.querySelector(s); };
+  function el(tag, cls, html) {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (html != null) n.innerHTML = html;
+    return n;
+  }
+  let minuteur;
+  function toast(msg) {
+    const t = $("#toast");
+    t.textContent = msg;
+    t.classList.add("on");
+    clearTimeout(minuteur);
+    minuteur = setTimeout(function () { t.classList.remove("on"); }, 3200);
+  }
+  function vibre(m) { if (navigator.vibrate) navigator.vibrate(m); }
+
+  /* =========================================================
+     GPS — sert uniquement de compteur de mètres
+     ========================================================= */
+
+  let gpsActif = false, dernier = null, altitude = null;
+
+  function distance(a, b) {
+    const R = 6371000, r = Math.PI / 180;
+    const dLat = (b.lat - a.lat) * r, dLon = (b.lon - a.lon) * r;
+    const x = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(a.lat * r) * Math.cos(b.lat * r) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    return 2 * R * Math.asin(Math.sqrt(x));
+  }
+
+  function demarrerGPS() {
+    if (!navigator.geolocation) { majGPS("Ce téléphone ne donne pas la position"); return; }
+    gpsActif = true;
+    majGPS();
+    navigator.geolocation.watchPosition(function (pos) {
+      const c = pos.coords;
+      if (c.altitude != null && !isNaN(c.altitude)) altitude = Math.round(c.altitude);
+      if (c.accuracy != null && c.accuracy < 40) {
+        const p = { lat: c.latitude, lon: c.longitude };
+        if (dernier) {
+          const d = distance(dernier, p);
+          if (d > 6 && d < 120) { S.metres += d; sauver(); }
+        }
+        dernier = p;
+      }
+      majGPS();
+      proposerIndice();
+    }, function () {
+      gpsActif = false;
+      majGPS("Position indisponible — tout marche quand même");
+    }, { enableHighAccuracy: true, maximumAge: 5000, timeout: 20000 });
+
+    if ("wakeLock" in navigator) navigator.wakeLock.request("screen").catch(function () {});
+  }
+
+  function majGPS(message) {
+    const z = $("#gps");
+    if (!z) return;
+    z.innerHTML = "";
+    const i = indiceCourant();
+
+    if (!gpsActif) {
+      if (message) z.appendChild(el("span", null, message + " · "));
+      const b = el("button", "lien", message ? "réessayer" : "Compter les mètres parcourus (facultatif)");
+      b.addEventListener("click", demarrerGPS);
+      z.appendChild(b);
+      return;
+    }
+
+    const bouts = [];
+    if (altitude != null) bouts.push("<b>" + altitude + " m</b> d'altitude");
+    bouts.push("<b>" + Math.round(S.metres) + " m</b> parcourus");
+    if (i < INDICES.length && !etat(i).ouvert) {
+      const reste = Math.round((i + 1) * PAS - S.metres);
+      bouts.push(reste > 0
+        ? "indice " + (i + 1) + " dans <b>" + reste + " m</b>"
+        : "<b>indice " + (i + 1) + " prêt !</b>");
+    }
+    z.innerHTML = bouts.join(' <span class="gps-sep">·</span> ');
+  }
+
+  function proposerIndice() {
+    const i = indiceCourant();
+    if (i >= INDICES.length) return;
+    const e = etat(i);
+    if (!e.ouvert && S.metres >= (i + 1) * PAS) {
+      e.ouvert = true; sauver(); dessiner();
+      toast("Indice " + (i + 1) + " débloqué !");
+      vibre([40, 60, 40]);
+    }
+  }
+
+  /* =========================================================
+     BANDEAU
+     ========================================================= */
+
+  function dessinerBandeau() {
+    $("#score").textContent = points() + " pts";
+
+    const m = $("#mot");
+    if (!m.dataset.pret) {
+      let n = 0;
+      GROUPES.forEach(function (taille) {
+        const g = el("div", "groupe");
+        for (let k = 0; k < taille; k++) { g.appendChild(el("span", "case")); n++; }
+        m.appendChild(g);
+      });
+      m.dataset.pret = "1";
+    }
+    const revelees = {};
+    INDICES.forEach(function (_, i) { if (etat(i).ok) revelees[CASES[i]] = true; });
+
+    const cases = m.querySelectorAll(".case");
+    for (let p = 0; p < MOT.length; p++) {
+      const c = cases[p];
+      if (!c) continue;
+      const gagne = !!revelees[p];
+      if (gagne && !c.classList.contains("pleine")) { c.classList.add("pleine"); c.textContent = MOT[p]; }
+      else if (!gagne && c.classList.contains("pleine")) { c.classList.remove("pleine"); c.textContent = ""; }
+    }
+    majGPS();
+  }
+
+  /* =========================================================
+     RENDU
+     ========================================================= */
+
+  function dessiner() {
+    const app = $("#app");
+    const memo = window.scrollY;
+    app.innerHTML = "";
+
+    if (!S.demarre) { app.appendChild(ecranDepart()); dessinerBandeau(); return; }
+
+    app.appendChild(sectionTitre("La liste des trouvailles"));
+    app.appendChild(blocTrouvailles());
+
+    app.appendChild(sectionTitre("Les indices du coffre"));
+    app.appendChild(blocIndices());
+
+    app.appendChild(carteCoffre());
+
+    if (S.coffre) {
+      app.appendChild(sectionTitre("Le pique-nique au bord du gave"));
+      app.appendChild(blocDefis(DEFIS_RIVIERE, S.riviere,
+        "Le coffre est ouvert. Maintenant la rivière est à vous, dans l'ordre que vous voulez."));
+      if (!S.aRepart) {
+        const b = el("button", "btn creux", "On remet les chaussures, on repart →");
+        b.addEventListener("click", function () { S.aRepart = true; sauver(); dessiner(); });
+        app.appendChild(b);
+      }
+    }
+
+    if (S.aRepart) {
+      app.appendChild(sectionTitre("Le retour"));
+      app.appendChild(blocDefis(DEFIS_RETOUR, S.retour,
+        "La liste des trouvailles marche encore : tout ce qui n'est pas coché est rattrapable."));
+      if (!S.fini) {
+        const b = el("button", "btn or", "Nous sommes rentrés — voir le diplôme");
+        b.addEventListener("click", function () { S.fini = true; sauver(); dessiner(); });
+        app.appendChild(b);
+      }
+    }
+
+    if (S.fini) app.appendChild(diplome());
+
+    dessinerBandeau();
+    window.scrollTo(0, memo);
+  }
+
+  function sectionTitre(t) {
+    const d = el("div", "section-titre");
+    d.appendChild(el("span", "eyebrow", t));
+    return d;
+  }
+
+  function ecranDepart() {
+    const d = document.createElement("div");
+    d.appendChild(el("h1", null, "Le trésor<br>du Valentin"));
+
+    const c = el("div", "carte");
+    c.appendChild(el("p", null,
+      "Il paraît qu'une marmotte du cirque de Gourette a trouvé, il y a très longtemps, une pépite d'or dans le lit du gave. Elle l'a cachée au bord de l'eau, dans un coffre fermé par un mot de passe."));
+    c.appendChild(el("p", null,
+      "Puis elle s'est endormie pour l'hiver. Au printemps, elle avait oublié le mot. Heureusement, elle avait semé <strong>seize indices</strong> le long du chemin — un par lettre."));
+
+    const e1 = el("div", "encart");
+    e1.innerHTML = '<span class="lab">Deux jeux en même temps</span>' +
+      "<strong>La liste des trouvailles</strong> : 38 choses à repérer ou à faire, n'importe où, n'importe quand, dans l'ordre que vous voulez. C'est le jeu de fond, pendant toute la marche.<br><br>" +
+      "<strong>Les indices du coffre</strong> : un toutes les cinq minutes de marche environ. Chacun donne une lettre.";
+    c.appendChild(e1);
+
+    const e2 = el("div", "encart");
+    e2.innerHTML = '<span class="lab">Aucun indice n\'est attaché à un endroit</span>' +
+      "Tous sont faisables où que vous soyez sur le chemin. Si vous activez le compteur de mètres, l'app vous prévient quand le suivant est mûr — sinon, vous ouvrez quand vous voulez.";
+    c.appendChild(e2);
+
+    const e3 = el("div", "encart alerte");
+    e3.innerHTML = '<span class="lab">Pour les parents</span>' +
+      "Cachez un vrai petit trésor au bord de la rivière (bonbons, pièces dorées, un mot) avant que les enfants n'entrent le mot de passe.";
+    c.appendChild(e3);
+    d.appendChild(c);
+
+    const b = el("button", "btn", "Commencer l'expédition");
+    b.addEventListener("click", function () {
+      S.demarre = true; etat(0).ouvert = true; sauver(); dessiner(); demarrerGPS();
+    });
+    d.appendChild(b);
+    return d;
+  }
+
+  /* ---------- la grande liste ---------- */
+
+  function blocTrouvailles() {
+    const d = document.createElement("div");
+    const paire = nbTrouvailles();
+
+    const ligne = el("div", "jauge-ligne");
+    ligne.appendChild(el("span", null, "Cochez tout ce que vous croisez, quand vous voulez"));
+    ligne.appendChild(el("span", null, "<b>" + paire[0] + "</b> / " + paire[1]));
+    d.appendChild(ligne);
+    const j = el("div", "jauge");
+    j.style.marginBottom = "16px";
+    j.appendChild(el("i")).style.width = (paire[1] ? (paire[0] / paire[1]) * 100 : 0) + "%";
+    d.appendChild(j);
+
+    FAMILLES.forEach(function (f) {
+      let n = 0;
+      f.items.forEach(function (_, k) { if (S.trouvailles[f.id + ":" + k]) n++; });
+
+      const det = el("details", "famille");
+      if (n < f.items.length) det.open = true;
+
+      const sum = document.createElement("summary");
+      sum.appendChild(el("span", "chev", "▸"));
+      sum.appendChild(el("span", null, f.titre));
+      sum.appendChild(el("span", "compte", n + " / " + f.items.length));
+      det.appendChild(sum);
+
+      const corps = el("div", "famille-corps");
+      f.items.forEach(function (it, k) {
+        const cle = f.id + ":" + k;
+        const coche = !!S.trouvailles[cle];
+        const b = el("button", "coche" + (f.rare ? " rare" : ""));
+        b.type = "button";
+        b.setAttribute("aria-pressed", coche ? "true" : "false");
+        b.appendChild(el("span", "box", "✓"));
+        b.appendChild(el("span", "lab-txt", it[0]));
+        b.appendChild(el("span", "val", "+" + it[1]));
+        b.addEventListener("click", function () {
+          if (S.trouvailles[cle]) { delete S.trouvailles[cle]; }
+          else { S.trouvailles[cle] = true; vibre(30); }
+          sauver();
+          b.setAttribute("aria-pressed", S.trouvailles[cle] ? "true" : "false");
+          const nn = f.items.reduce(function (acc, _, kk) { return acc + (S.trouvailles[f.id + ":" + kk] ? 1 : 0); }, 0);
+          sum.querySelector(".compte").textContent = nn + " / " + f.items.length;
+          const p2 = nbTrouvailles();
+          ligne.lastChild.innerHTML = "<b>" + p2[0] + "</b> / " + p2[1];
+          j.firstChild.style.width = (p2[0] / p2[1]) * 100 + "%";
+          dessinerBandeau();
+        });
+        corps.appendChild(b);
+      });
+      det.appendChild(corps);
+      d.appendChild(det);
+    });
+    return d;
+  }
+
+  /* ---------- les indices ---------- */
+
+  function blocIndices() {
+    const d = document.createElement("div");
+    const courant = indiceCourant();
+
+    for (let i = 0; i < courant; i++) {
+      const l = el("div", "fait-ligne");
+      l.appendChild(el("span", "l", lettreDe(i)));
+      l.appendChild(el("span", null, INDICES[i].titre + (etat(i).bonus ? " · bonus réussi" : "")));
+      d.appendChild(l);
+    }
+
+    if (courant < INDICES.length) {
+      d.appendChild(carteIndice(INDICES[courant], courant));
+      const reste = INDICES.length - courant - 1;
+      if (reste > 0) {
+        const p = el("p", null, "Encore " + reste + " indice" + (reste > 1 ? "s" : "") + " après celui-là.");
+        p.style.cssText = "font-size:13px;color:var(--roche-2);text-align:center;margin:2px 0 0";
+        d.appendChild(p);
+      }
+    }
+    return d;
+  }
+
+  function carteIndice(ind, i) {
+    const e = etat(i);
+
+    if (!e.ouvert) {
+      const c = el("div", "carte scellee");
+      const t = el("div", "carte-tete");
+      t.appendChild(el("div", "pastille vide", String(i + 1)));
+      const x = el("div");
+      x.appendChild(el("h2", null, "Indice " + (i + 1) + " sur " + INDICES.length));
+      x.appendChild(el("div", "lieu", gpsActif
+        ? "Il s'ouvre tout seul après " + ((i + 1) * PAS) + " m de marche — ou tout de suite si vous voulez."
+        : "Faisable n'importe où sur le chemin."));
+      t.appendChild(x);
+      c.appendChild(t);
+      const b = el("button", "btn creux", "Ouvrir l'indice " + (i + 1));
+      b.style.marginTop = "14px";
+      b.addEventListener("click", function () { e.ouvert = true; sauver(); dessiner(); });
+      c.appendChild(b);
+      return c;
+    }
+
+    const c = el("div", "carte");
+    const t = el("div", "carte-tete");
+    t.appendChild(el("div", "pastille", String(i + 1)));
+    const x = el("div");
+    x.appendChild(el("h2", null, ind.titre));
+    x.appendChild(el("div", "lieu", "Indice " + (i + 1) + " sur " + INDICES.length + " · cache la lettre " + lettreDe(i)));
+    t.appendChild(x);
+    c.appendChild(t);
+
+    const corps = el("div", "corps");
+    c.appendChild(corps);
+
+    const valider = el("button", "btn", "Tamponner la lettre " + lettreDe(i));
+    function gagner() {
+      e.ok = true;
+      const suiv = i + 1;
+      if (suiv < INDICES.length && S.metres >= (suiv + 1) * PAS) etat(suiv).ouvert = true;
+      sauver(); dessiner(); vibre(60);
+      toast("Lettre " + lettreDe(i) + " tamponnée — mais où ?");
+    }
+
+    if (ind.quiz) {
+      corps.appendChild(el("div", "consigne", ind.quiz.q));
+      const box = el("div", "options");
+      ind.quiz.options.forEach(function (txt, k) {
+        const o = el("button", "opt", txt);
+        o.type = "button";
+        if (e.repondu && k === ind.quiz.bonne) o.classList.add("juste");
+        if (e.repondu) o.disabled = true;
+        o.addEventListener("click", function () {
+          if (k === ind.quiz.bonne) {
+            e.repondu = true; sauver();
+            o.classList.add("juste");
+            Array.prototype.forEach.call(box.children, function (n) { n.disabled = true; });
+            box.after(explication(ind.quiz.exp));
+            valider.disabled = false;
+            valider.textContent = "Tamponner la lettre " + lettreDe(i);
+          } else {
+            o.classList.add("faux"); o.disabled = true;
+            toast("Pas tout à fait. Réessaie !");
+          }
+        });
+        box.appendChild(o);
+      });
+      corps.appendChild(box);
+      if (e.repondu) corps.appendChild(explication(ind.quiz.exp));
+      valider.disabled = !e.repondu;
+      if (!e.repondu) valider.textContent = "Réponds d'abord à la question";
+    }
+
+    if (ind.code) {
+      corps.appendChild(el("div", "consigne", ind.code.intro));
+      const en = el("div", "encart");
+      en.innerHTML = '<span class="lab">Gravé dans la pierre</span>' +
+        '<span style="font-family:var(--display);font-size:23px;letter-spacing:.05em;">' + ind.code.enigme + "</span>";
+      corps.appendChild(en);
+
+      if (e.repondu) {
+        corps.appendChild(explication(ind.code.exp));
+      } else {
+        const ligne = el("div", "saisie");
+        const inp = document.createElement("input");
+        inp.type = "text"; inp.placeholder = "Le mot déchiffré";
+        inp.autocapitalize = "characters"; inp.autocomplete = "off";
+        const ok = el("button", "btn petit", "Vérifier");
+        ok.addEventListener("click", function () {
+          const v = inp.value.trim().toUpperCase().replace(/[^A-Z]/g, "");
+          if (v === ind.code.reponse) { e.repondu = true; sauver(); dessiner(); toast("Message déchiffré !"); }
+          else if (v.length) { toast(ind.code.indice); }
+        });
+        ligne.appendChild(inp); ligne.appendChild(ok);
+        corps.appendChild(ligne);
+      }
+      valider.disabled = !e.repondu;
+      if (!e.repondu) valider.textContent = "Déchiffre d'abord le message";
+    }
+
+    if (ind.defi) {
+      corps.appendChild(el("div", "consigne", ind.defi));
+      valider.textContent = "C'est fait — tamponner la lettre " + lettreDe(i);
+    }
+
+    corps.appendChild(valider);
+    valider.addEventListener("click", gagner);
+
+    if (ind.bonus && !e.bonus) {
+      const b = el("div", "bonus");
+      b.appendChild(el("div", "lab", "Défi des grands · +" + PTS_BONUS + " pts"));
+      b.appendChild(el("div", null, ind.bonus.q));
+      const box = el("div", "options");
+      ind.bonus.options.forEach(function (txt, k) {
+        const o = el("button", "opt", txt);
+        o.type = "button";
+        o.addEventListener("click", function () {
+          if (k === ind.bonus.bonne) {
+            e.bonus = true; sauver();
+            o.classList.add("juste");
+            Array.prototype.forEach.call(box.children, function (n) { n.disabled = true; });
+            b.appendChild(explication(ind.bonus.exp));
+            dessinerBandeau();
+            toast("+" + PTS_BONUS + " points !");
+          } else { o.classList.add("faux"); o.disabled = true; toast("Non… mais tu peux réessayer."); }
+        });
+        box.appendChild(o);
+      });
+      b.appendChild(box);
+      corps.appendChild(b);
+    }
+
+    return c;
+  }
+
+  function explication(txt) {
+    const d = el("div", "reussi");
+    d.appendChild(el("span", "tick", "✓"));
+    d.appendChild(el("span", null, txt));
+    return d;
+  }
+
+  /* ---------- le coffre ---------- */
+
+  function carteCoffre() {
+    const pretes = toutesLesLettres();
+
+    if (S.coffre) {
+      const c = el("div", "carte");
+      const t = el("div", "carte-tete");
+      t.appendChild(el("div", "pastille", "★"));
+      const x = el("div");
+      x.appendChild(el("h2", null, "Le coffre est ouvert"));
+      x.appendChild(el("div", "lieu", "Le mot de passe, c'était le nom de la rivière devant vous"));
+      t.appendChild(x);
+      c.appendChild(t);
+
+      const corps = el("div", "corps");
+      corps.appendChild(el("div", "consigne",
+        "<strong>LE GAVE DU VALENTIN.</strong> Voilà comment s'appelle l'eau que vous entendez."));
+
+      const g = el("div", "encart");
+      g.innerHTML = '<span class="lab">Mais au fait, c\'est quoi un gave ?</span>' +
+        "Ailleurs en France, on dit « rivière » ou « torrent ». Ici, dans les Pyrénées, on dit <strong>un gave</strong>. " +
+        "C'est un mot béarnais et gascon — les langues qu'on parlait dans ces vallées bien avant le français.<br><br>" +
+        "Un gave, ce n'est pas n'importe quelle rivière : il naît en haute montagne, de la neige qui fond et des sources d'altitude. " +
+        "Il descend vite, il est froid toute l'année, il saute par-dessus les rochers en cascades et il roule des galets. " +
+        "C'est exactement ce que vous avez sous les yeux.";
+      corps.appendChild(g);
+
+      const v = el("div", "encart");
+      v.innerHTML = '<span class="lab">Et celui-ci, où va-t-il ?</span>' +
+        "Le gave du Valentin naît tout là-haut, du côté du lac d'Uzious. Il traverse Gourette, saute la cascade des Eaux-Bonnes, " +
+        "puis rejoint le <strong>gave d'Ossau</strong> à Laruns. Ensuite : le gave d'Oloron, l'Adour, et l'océan à Bayonne.<br><br>" +
+        "L'eau que vous touchez du doigt sera dans l'Atlantique dans quelques jours.";
+      corps.appendChild(v);
+
+      c.appendChild(corps);
+      return c;
+    }
+
+    const c = el("div", pretes ? "carte" : "carte scellee");
+    const t = el("div", "carte-tete");
+    t.appendChild(el("div", pretes ? "pastille" : "pastille vide", "★"));
+    const x = el("div");
+    x.appendChild(el("h2", null, "Le coffre de la marmotte"));
+    x.appendChild(el("div", "lieu", pretes
+      ? "Au bord de l'eau. Lisez les lettres, tout en haut de l'écran."
+      : "Il manque encore des lettres"));
+    t.appendChild(x);
+    c.appendChild(t);
+    if (!pretes) return c;
+
+    const corps = el("div", "corps");
+    corps.appendChild(el("div", "consigne",
+      "Toutes les lettres sont tamponnées. Mises bout à bout, elles font quatre mots que vous connaissez très bien maintenant. <strong>Tapez-les.</strong>"));
+    const ligne = el("div", "saisie");
+    const inp = document.createElement("input");
+    inp.type = "text"; inp.placeholder = "Les quatre mots"; inp.autocapitalize = "characters"; inp.autocomplete = "off";
+    const ok = el("button", "btn petit or", "Ouvrir");
+    ok.addEventListener("click", function () {
+      const v = inp.value.trim().toUpperCase().replace(/[^A-Z]/g, "");
+      if (v === MOT) {
+        S.coffre = true; sauver(); dessiner();
+        vibre([80, 50, 80, 50, 160]);
+        toast("Le coffre s'ouvre ! +" + PTS_COFFRE + " points");
+      } else { toast("Ce n'est pas ça. Relisez les lettres du haut, dans l'ordre."); }
+    });
+    ligne.appendChild(inp); ligne.appendChild(ok);
+    corps.appendChild(ligne);
+    c.appendChild(corps);
+    return c;
+  }
+
+  /* ---------- défis libres ---------- */
+
+  function blocDefis(liste, store, intro) {
+    const d = document.createElement("div");
+    const p = el("p", null, intro);
+    p.style.cssText = "color:var(--roche-2);margin-bottom:14px";
+    d.appendChild(p);
+
+    liste.forEach(function (def) {
+      const fait = !!store[def.id];
+      const l = el("div", "defi-libre" + (fait ? " fait" : ""));
+      const txt = el("div", "d-txt");
+      txt.appendChild(el("b", null, def.titre));
+      txt.appendChild(el("span", null, def.texte));
+      l.appendChild(txt);
+      const col = el("div");
+      col.style.cssText = "display:flex;flex-direction:column;align-items:center;gap:4px";
+      const b = el("button", "btn petit" + (fait ? "" : " creux"), fait ? "✓ Fait" : "Réussi");
+      b.addEventListener("click", function () {
+        if (store[def.id]) delete store[def.id]; else { store[def.id] = true; vibre(30); }
+        sauver(); dessiner();
+      });
+      col.appendChild(b);
+      col.appendChild(el("span", "pts", "+" + def.pts));
+      l.appendChild(col);
+      d.appendChild(l);
+    });
+    return d;
+  }
+
+  /* ---------- diplôme ---------- */
+
+  function diplome() {
+    const p = points(), max = pointsMax(), tr = nbTrouvailles();
+    const d = el("div", "diplome");
+    d.appendChild(el("div", "eyebrow", "Brevet d'explorateur du Valentin"));
+    d.appendChild(el("div", "gros", p + " pts"));
+    d.appendChild(el("div", null, "sur " + max + " possibles"));
+
+    let rang = "Apprenti marmotte";
+    if (p > max * 0.35) rang = "Éclaireur du cirque";
+    if (p > max * 0.6) rang = "Guide du gave";
+    if (p > max * 0.85) rang = "Gardien du trésor";
+    const h = el("h2", null, rang);
+    h.style.marginTop = "14px";
+    d.appendChild(h);
+
+    const badges = el("div", "badges");
+    const g = [];
+    if (toutesLesLettres()) g.push("Les 16 lettres");
+    if (S.coffre) g.push("Le coffre ouvert");
+    if (tr[0] >= tr[1]) g.push("La liste entière !");
+    else if (tr[0] >= tr[1] / 2) g.push(tr[0] + " trouvailles");
+    if (S.riviere.propre) g.push("Zéro trace");
+    if (DEFIS_RIVIERE.every(function (x) { return S.riviere[x.id]; })) g.push("Roi de la rivière");
+    if (DEFIS_RETOUR.every(function (x) { return S.retour[x.id]; })) g.push("La descente aussi");
+    if (INDICES.every(function (x, i) { return !x.bonus || etat(i).bonus; })) g.push("Tous les défis des grands");
+    if (S.metres > 200) g.push(Math.round(S.metres) + " m à pied");
+    g.forEach(function (b) { badges.appendChild(el("span", "badge", b)); });
+    d.appendChild(badges);
+    return d;
+  }
+
+  /* =========================================================
+     DÉMARRAGE
+     ========================================================= */
+
+  $("#btn-reset").addEventListener("click", function () {
+    if (!confirm("Effacer toute la progression et recommencer à zéro ?")) return;
+    S = neuf(); sauver(); dessiner();
+  });
+
+  document.addEventListener("visibilitychange", function () {
+    if (!document.hidden && gpsActif && "wakeLock" in navigator) {
+      navigator.wakeLock.request("screen").catch(function () {});
+    }
+  });
+
+  dessiner();
+  if (S.demarre) demarrerGPS();
+})();
+</script>
