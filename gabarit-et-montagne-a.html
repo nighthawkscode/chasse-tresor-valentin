@@ -1,0 +1,456 @@
+<title>Le gabarit du carnet + Montagne, carnet A</title>
+
+<style>
+  :root {
+    --fond:      #F4F7F8;
+    --papier:    #FFFFFF;
+    --papier-2:  #EBF2F3;
+    --trait:     #D0DFE1;
+    --encre:     #14252B;
+    --encre-2:   #48606A;
+    --gave:      #0B767A;
+    --gave-2:    #D5EDED;
+    --or:        #A96A08;
+    --or-2:      #F9EBD0;
+    --gentiane:  #2A4894;
+    --gentiane-2:#E2E8F8;
+    --display: "American Typewriter", "Rockwell", "Courier New", serif;
+    --corps: "Avenir Next", "Avenir", "Segoe UI", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fond:#0B1417; --papier:#131F24; --papier-2:#1A2C31; --trait:#253B41;
+      --encre:#E6EFEF; --encre-2:#90A7AD; --gave:#3AC3C5; --gave-2:#0F3438;
+      --or:#EFB040; --or-2:#382A0E; --gentiane:#88A9F1; --gentiane-2:#1A2646;
+    }
+  }
+  :root[data-theme="dark"] {
+    --fond:#0B1417; --papier:#131F24; --papier-2:#1A2C31; --trait:#253B41;
+    --encre:#E6EFEF; --encre-2:#90A7AD; --gave:#3AC3C5; --gave-2:#0F3438;
+    --or:#EFB040; --or-2:#382A0E; --gentiane:#88A9F1; --gentiane-2:#1A2646;
+  }
+  :root[data-theme="light"] {
+    --fond:#F4F7F8; --papier:#FFFFFF; --papier-2:#EBF2F3; --trait:#D0DFE1;
+    --encre:#14252B; --encre-2:#48606A; --gave:#0B767A; --gave-2:#D5EDED;
+    --or:#A96A08; --or-2:#F9EBD0; --gentiane:#2A4894; --gentiane-2:#E2E8F8;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--fond); color: var(--encre);
+    font-family: var(--corps); font-size: 17px; line-height: 1.55;
+    -webkit-text-size-adjust: 100%;
+  }
+  .page { max-width: 800px; margin: 0 auto; padding: 0 20px 80px; }
+
+  .nav {
+    position: sticky; top: 0; z-index: 10;
+    margin: 0 -20px 28px; padding: 11px 20px;
+    background: var(--fond); border-bottom: 1px solid var(--trait);
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+  }
+  .nav a {
+    font-size: 13px; font-weight: 600; text-decoration: none;
+    color: var(--encre-2); border: 1px solid var(--trait);
+    padding: 6px 12px; border-radius: 99px; white-space: nowrap;
+  }
+  .nav a:hover, .nav a:focus-visible { color: var(--gave); border-color: var(--gave); }
+
+  .eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--encre-2);
+  }
+  h1 {
+    font-family: var(--display); font-weight: 700; font-size: 36px;
+    line-height: 1.08; margin: 24px 0 12px; text-wrap: balance;
+  }
+  h2 {
+    font-family: var(--display); font-weight: 700; font-size: 27px;
+    line-height: 1.15; margin: 0 0 4px; text-wrap: balance;
+  }
+  h3 { font-family: var(--display); font-weight: 700; font-size: 19px; margin: 26px 0 10px; }
+  h4 {
+    font-size: 12px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--gave); margin: 20px 0 8px;
+  }
+  p { margin: 0 0 14px; }
+  p:last-child { margin-bottom: 0; }
+  .chapeau { font-size: 18px; color: var(--encre-2); }
+
+  section.lieu { margin-top: 44px; padding-top: 30px; border-top: 3px solid var(--gave); }
+  section.lieu .num {
+    font-family: var(--display); font-size: 13px; font-weight: 700;
+    color: var(--gave); letter-spacing: .1em; text-transform: uppercase;
+  }
+
+  .bloc {
+    background: var(--papier); border: 1px solid var(--trait);
+    border-radius: 13px; padding: 18px 20px; margin: 16px 0;
+  }
+
+  .mix { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; margin: 16px 0; }
+  .mix .m {
+    background: var(--papier); border: 1px solid var(--trait);
+    border-radius: 12px; padding: 14px 16px;
+  }
+  .mix .m b { font-family: var(--display); font-size: 16px; display: block; margin-bottom: 4px; }
+  .mix .m span { font-size: 14px; color: var(--encre-2); }
+  .mix .m .q { font-size: 12px; font-weight: 700; color: var(--gave); letter-spacing: .08em; text-transform: uppercase; }
+
+  .mot-bloc {
+    background: var(--gave-2); border-left: 3px solid var(--gave);
+    border-radius: 0 12px 12px 0; padding: 16px 18px; margin: 16px 0;
+  }
+  .mot-bloc .mot {
+    font-family: var(--display); font-size: 30px; font-weight: 700;
+    letter-spacing: .16em; color: var(--gave); line-height: 1.1;
+  }
+  .mot-bloc .lg { font-size: 13px; color: var(--encre-2); margin-top: 2px; }
+
+  ul.trouvailles { columns: 2; column-gap: 26px; margin: 0; padding-left: 20px; font-size: 15.5px; }
+  ul.trouvailles li { margin-bottom: 5px; break-inside: avoid; }
+  @media (max-width: 620px) { ul.trouvailles { columns: 1; } }
+  ul.trouvailles li.rare::after { content: " ★"; color: var(--or); font-size: 12px; }
+
+  .indice {
+    background: var(--papier); border: 1px solid var(--trait);
+    border-radius: 13px; padding: 16px 18px; margin-bottom: 10px;
+    display: grid; grid-template-columns: 38px 1fr; gap: 14px;
+  }
+  .indice .lettre {
+    width: 38px; height: 38px; border-radius: 9px;
+    background: var(--gave-2); color: var(--gave);
+    border: 1px solid color-mix(in srgb, var(--gave) 30%, transparent);
+    display: grid; place-items: center;
+    font-family: var(--display); font-weight: 700; font-size: 18px;
+  }
+  .indice .type {
+    font-size: 11px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--encre-2); margin-bottom: 4px;
+  }
+  .indice .q { font-size: 16.5px; margin-bottom: 8px; }
+  .indice .rep {
+    font-size: 15px; background: var(--papier-2); border-radius: 8px;
+    padding: 9px 12px;
+  }
+  .indice .rep b { color: var(--gave); }
+  .indice .bonus {
+    margin-top: 10px; font-size: 14.5px; padding: 11px 13px;
+    background: var(--gentiane-2); border-radius: 9px;
+    border: 1px solid color-mix(in srgb, var(--gentiane) 30%, transparent);
+  }
+  .indice .bonus .lab {
+    display: block; font-size: 11px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--gentiane); margin-bottom: 4px;
+  }
+
+  .reveal {
+    background: var(--or-2); border: 2px solid var(--or);
+    border-radius: 13px; padding: 20px; margin: 18px 0 0;
+  }
+  .reveal .lab {
+    display: block; font-size: 11px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--or); margin-bottom: 8px;
+  }
+  .reveal .mot {
+    font-family: var(--display); font-size: 26px; font-weight: 700;
+    letter-spacing: .14em; color: var(--or); margin-bottom: 10px;
+  }
+
+  .secu {
+    background: var(--or-2); border-left: 3px solid var(--or);
+    border-radius: 0 10px 10px 0; padding: 13px 15px; font-size: 15px; margin: 16px 0;
+  }
+  .secu .lab {
+    display: block; font-size: 11px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--or); margin-bottom: 4px;
+  }
+
+  .verif {
+    font-size: 13.5px; color: var(--encre-2);
+    border-top: 1px dashed var(--trait); margin-top: 8px; padding-top: 8px;
+  }
+  .verif b { color: var(--encre); font-weight: 600; }
+
+  table.calib { width: 100%; border-collapse: collapse; font-size: 15px; margin: 14px 0; }
+  table.calib th, table.calib td { text-align: left; padding: 9px 12px 9px 0; border-bottom: 1px solid var(--trait); }
+  table.calib th { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--encre-2); }
+  table.calib td:last-child { font-variant-numeric: tabular-nums; }
+
+  :focus-visible { outline: 3px solid var(--gentiane); outline-offset: 2px; border-radius: 6px; }
+</style>
+
+<div class="page">
+
+  <nav class="nav">
+    <a href="#gabarit">Le gabarit</a>
+    <a href="#montagne">Montagne · carnet A</a>
+    <a href="#etat">État des 6 carnets</a>
+  </nav>
+
+  <span class="eyebrow">Production de contenu · 30 juillet 2026</span>
+  <h1>Le gabarit du carnet,<br>et le premier des six</h1>
+  <p class="chapeau">Trois types pour la v1 : <strong>Montagne, Musée d'art, Ville</strong> — les trois moments où un parent cherche à occuper les enfants. Deux carnets par type. Voici le gabarit qui fige ce qui a marché à Gourette, et le carnet Montagne A, dé-localisé et vérifié.</p>
+
+  <!-- ============================ GABARIT ============================ -->
+  <section class="lieu" id="gabarit">
+    <span class="num">Le gabarit</span>
+    <h2>Ce que contient chaque carnet, sans exception</h2>
+    <p class="chapeau">Le cœur du produit, c'est le mix. Un carnet qui ne serait que de l'observation est un échec de fabrication, même bien écrit.</p>
+
+    <div class="mix">
+      <div class="m">
+        <span class="q">≈ 14 items</span>
+        <b>Ouvre l'œil</b>
+        <span>Des choses précises à repérer. Jamais « observe la nature » : toujours vérifiable, souvent inattendu.</span>
+      </div>
+      <div class="m">
+        <span class="q">≈ 10 items · obligatoire</span>
+        <b>Écoute, sens, touche</b>
+        <span>La famille sensorielle. Des sons, des odeurs, des textures, du silence. C'est elle qui rend la sortie mémorable.</span>
+      </div>
+      <div class="m">
+        <span class="q">≈ 12 items · obligatoire</span>
+        <b>À faire</b>
+        <span>Des défis d'action : empiler, imiter, compter, se retourner, demander poliment. Le corps joue, pas seulement les yeux.</span>
+      </div>
+      <div class="m">
+        <span class="q">6 à 8 items · bonus</span>
+        <b>Les rares ★</b>
+        <span>Improbables mais possibles, toujours en bonus au-delà du 100 % : on ne peut pas exiger une marmotte. Ils maintiennent la tension jusqu'à la fin.</span>
+      </div>
+    </div>
+
+    <div class="bloc">
+      <h4 style="margin-top:0">Les énigmes : des devinettes pour apprendre, une lettre chacune</h4>
+      <p>Une énigme, c'est <strong>une question ou une devinette qui apprend quelque chose sur le lieu</strong>, de manière fun et simple : réponse facile à trouver, explication courte, et souvent un <strong>petit défi associé</strong> en une ligne (« maintenant, cherchez-en un »). Les défis d'action purs vivent dans la liste des trouvailles — <strong>jamais de doublon entre les deux</strong>.</p>
+      <p style="margin-bottom:0">Les lettres tombent <strong>en désordre</strong> dans le mot. Le mot est propre au type de lieu, un peu nouveau pour l'enfant mais <strong>raccroché à un mot qu'il connaît</strong> (berger → bergerie), expliqué à la révélation — on gagne un trésor <em>et</em> un mot.</p>
+    </div>
+
+    <div class="bloc">
+      <h4 style="margin-top:0">La cible : les 4-10 ans, et le test de l'enfant de 5 ans</h4>
+      <p style="margin-bottom:0">Le produit s'adresse aux enfants qui ont du mal à suivre leurs parents en balade : les 4-10 ans. Un non-lecteur joue aussi — le parent ou un grand lit à voix haute, donc tout doit sonner juste à l'oral. <strong>Chaque réponse et chaque explication doit être comprise par un enfant de 5 ans</strong> : une image qu'il possède déjà (une couette, une maison, un frigo), jamais un raisonnement. Le « défi des grands », présent sur environ une énigme sur trois, vise les 8-10 ans.</p>
+    </div>
+
+    <div class="bloc">
+      <h4 style="margin-top:0">Calibration : le 100 % est atteignable à chaque sortie</h4>
+      <p>Le carnet est une <strong>réserve</strong> d'environ 45 trouvailles. Mais une partie n'affiche jamais la réserve entière : l'app tire <strong>la sélection du jour, environ 16 trouvailles</strong> (en respectant le mix des familles), plus toutes les énigmes.</p>
+      <div class="scroll-x">
+        <table class="calib">
+          <tbody>
+            <tr><td>Objectif d'une sortie</td><td><strong>Toutes les énigmes + les 16 trouvailles du jour</strong> — tout est faisable, le 100 % existe et se fête</td></tr>
+            <tr><td>Les rares ★</td><td>En <strong>bonus au-delà du 100 %</strong>, jamais requises : croiser une marmotte ne peut pas être une obligation</td></tr>
+            <tr><td>Les points</td><td>Ils célèbrent, ils ne barrent rien : aucun seuil à franchir, le diplôme dit « complet » dès le 100 % et compte les étoiles bonus par-dessus</td></tr>
+            <tr><td>La sortie suivante</td><td>Nouvelle sélection tirée de la réserve + rotation des carnets A/B/C : on ne rejoue jamais la même partie</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-bottom:0;font-size:14.5px;color:var(--encre-2)">Pas de durée demandée au parent. Et aucune liste aux deux tiers vide en fin de journée : ce qu'on voit à l'écran, on peut le finir.</p>
+    </div>
+
+    <div class="bloc">
+      <h4 style="margin-top:0">Règles d'écriture non négociables</h4>
+      <p>Valable dans n'importe quel exemplaire du type de lieu, sur n'importe quel continent. Chaque réponse se referme sur un fait <strong>vrai, concret, vérifié et sourcé</strong> — c'est la condition pour le proposer un jour à des musées. On tutoie l'enfant, phrases courtes, pas d'enthousiasme forcé. Un encart sécurité propre au type, glissé au début, jamais moralisateur. Et dans un lieu pauvre en sensations, on compense par des défis de comparaison et d'action, pas par du remplissage visuel.</p>
+    </div>
+  </section>
+
+  <!-- ============================ MONTAGNE A ============================ -->
+  <section class="lieu" id="montagne">
+    <span class="num">Carnet 1 sur 6 · Montagne · A</span>
+    <h2>Le trésor du berger</h2>
+    <p class="chapeau">Héritier direct de Gourette, dé-localisé : tout ce qui était pyrénéen (le gave, Ossau, le Pic de Ger) est sorti ou généralisé. Vérifié fait par fait.</p>
+
+    <div class="mot-bloc">
+      <div class="eyebrow" style="color:var(--gave)">Mot à deviner</div>
+      <div class="mot">BERGERIE</div>
+      <div class="lg">8 lettres, 8 énigmes. Un enfant de 4 ans connaît « berger » : le mot se raccroche à du connu au lieu de tomber de nulle part — et fait écho au titre du carnet.</div>
+    </div>
+
+    <h3>La liste des trouvailles — 45</h3>
+
+    <h4>Ouvre l'œil · 14</h4>
+    <ul class="trouvailles">
+      <li>Une tache de neige qui a survécu à l'été</li>
+      <li>Un sommet qui a un nom sur la carte, et le trouver</li>
+      <li>Une fleur jaune</li>
+      <li>Une fleur bleue ou violette</li>
+      <li>Un papillon</li>
+      <li>Un troupeau, même très loin</li>
+      <li>Une cabane ou un abri de berger</li>
+      <li>Un caillou plus gros qu'une voiture</li>
+      <li>Un caillou qui brille au soleil</li>
+      <li>Un trou dans le sol : quelqu'un habite là</li>
+      <li>Un arbre tout seul, sans copains autour</li>
+      <li>Un nuage qui touche une montagne</li>
+      <li>Un tas de pierres empilées par quelqu'un pour marquer le chemin</li>
+      <li>Trois verts différents dans le même regard</li>
+    </ul>
+
+    <h4>Écoute, sens, touche · 10</h4>
+    <ul class="trouvailles">
+      <li>Entendre de l'eau sans la voir</li>
+      <li>Entendre le vent dans l'herbe</li>
+      <li>Entendre une cloche de troupeau</li>
+      <li>Dix secondes de silence complet, tous ensemble</li>
+      <li>Sentir une herbe froissée entre tes doigts</li>
+      <li>Toucher de la mousse : douce ou piquante ?</li>
+      <li>Toucher une pierre restée froide à l'ombre, puis une chauffée au soleil</li>
+      <li>Tremper un doigt dans une eau de montagne</li>
+      <li>Sentir le vent changer quand le sentier tourne</li>
+      <li>L'air d'altitude : il sent quoi, au juste ?</li>
+    </ul>
+
+    <h4>À faire · 12</h4>
+    <ul class="trouvailles">
+      <li>Empiler cinq cailloux qui tiennent tout seuls</li>
+      <li>Trouver un caillou en forme de cœur</li>
+      <li>Marcher vingt pas sans faire de bruit</li>
+      <li>Dire bonjour à des randonneurs qu'on croise</li>
+      <li>Se retourner et montrer d'où on est partis</li>
+      <li>Donner un nom inventé à une montagne, adopté pour la journée</li>
+      <li>Boire une gorgée d'eau en regardant le plus loin possible</li>
+      <li>Prendre une photo vraiment rigolote</li>
+      <li>Inventer un cri de ralliement pour l'équipe</li>
+      <li>Repérer où le soleil va se coucher, et le montrer du doigt</li>
+      <li>Compter les virages du sentier pendant dix minutes</li>
+      <li>Ramasser un déchet qui n'est pas à nous</li>
+    </ul>
+
+    <h4>Les rares ★ · 9</h4>
+    <ul class="trouvailles">
+      <li class="rare">Une marmotte, en vrai</li>
+      <li class="rare">Entendre le sifflet d'une marmotte</li>
+      <li class="rare">Un animal sauvage à sabots : chamois, isard, bouquetin, mouflon</li>
+      <li class="rare">Un grand rapace qui plane sans battre des ailes</li>
+      <li class="rare">Un gros chien blanc qui garde un troupeau</li>
+      <li class="rare">Un arc-en-ciel, ou un rayon qui traverse les nuages</li>
+      <li class="rare">Un fossile ou une empreinte dans la roche</li>
+      <li class="rare">Le grondement d'un torrent invisible sous les pierres</li>
+      <li class="rare">Croiser quelqu'un qui monte pieds nus, en sandales ou en courant</li>
+    </ul>
+
+    <h3>Les 8 énigmes</h3>
+    <p style="font-size:14.5px;color:var(--encre-2);margin-top:-4px">Chacune : une question simple, une réponse simple, une explication courte avec une image que connaît déjà un enfant de 5 ans, et souvent un petit défi associé. Aucune ne fait doublon avec la liste des trouvailles.</p>
+
+    <div class="indice">
+      <div class="lettre">B</div>
+      <div>
+        <div class="type">Devinette</div>
+        <div class="q">« Je siffle très fort sur mes deux pattes arrière, et dès que je crie, tout le monde se cache. » Qui suis-je ?</div>
+        <div class="rep"><b>La marmotte.</b> C'est la guetteuse : elle monte la garde debout, et son sifflet prévient tout le monde qu'un danger arrive.</div>
+        <div class="bonus"><span class="lab">Petit défi</span>Essayez de siffler aussi fort qu'une marmotte. Qui y arrive le mieux ?</div>
+        <div class="verif"><b>Vérifié</b> : la marmotte des Alpes se dresse en sentinelle et émet un cri d'alarme aigu à l'approche d'un prédateur (comportement documenté, Marmota marmota).</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">E</div>
+      <div>
+        <div class="type">Question</div>
+        <div class="q">Pourquoi les brebis portent-elles une cloche autour du cou ?</div>
+        <div class="rep">Pour que le berger les <b>entende</b> même quand il ne les voit pas, cachées derrière une bosse ou dans le brouillard. Un peu comme un jouet qui fait du bruit pour qu'on le retrouve dans le noir.</div>
+        <div class="bonus"><span class="lab">Petit défi</span>Fermez les yeux tous ensemble. Si vous entendez une cloche, montrez du doigt d'où vient le bruit, sans regarder.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">R</div>
+      <div>
+        <div class="type">Question</div>
+        <div class="q">Pourquoi les cailloux d'un torrent sont-ils tout ronds et doux, alors que ceux du rocher juste à côté sont pointus ?</div>
+        <div class="rep">Parce que l'eau les fait <b>rouler</b> les uns contre les autres depuis très, très longtemps. C'est comme un savon qu'on frotte encore et encore : à force, tous les coins s'usent et ça devient tout rond.</div>
+        <div class="bonus"><span class="lab">Petit défi</span>Trouvez le caillou le plus rond et le plus pointu que vous pouvez, et comparez-les.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">G</div>
+      <div>
+        <div class="type">Question</div>
+        <div class="q">Un gros chien blanc garde un troupeau de moutons. Pourquoi les moutons n'ont pas peur de lui ?</div>
+        <div class="rep">Parce qu'il a <b>grandi avec eux</b> depuis qu'il était tout petit chiot. Pour lui, les moutons sont sa famille, alors il les protège. S'il vient vers vous, on s'arrête et on le laisse renifler tranquillement : lui aussi, il fait juste son travail.</div>
+        <div class="verif"><b>Vérifié</b> : élevage des chiens de protection (type patou) avec le troupeau dès le plus jeune âge pour créer un attachement social ; consignes de comportement conformes aux recommandations des parcs naturels.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">E</div>
+      <div>
+        <div class="type">Question</div>
+        <div class="q">L'air, autour de la Terre, c'est un peu comme une grosse couette qui garde tout le monde au chaud. Là où vous êtes, tout en haut de la montagne, y a-t-il plus ou moins de couette au-dessus de vous que dans la vallée ?</div>
+        <div class="rep"><b>Moins.</b> En bas, la couette d'air est épaisse et garde la chaleur. Là-haut, il en reste beaucoup moins au-dessus de vous : il fait plus froid, même quand le soleil brille très fort.</div>
+        <div class="bonus"><span class="lab">Défi des grands</span>Il fait 21 °C dans la vallée. En montant, il fait environ 1 degré de moins tous les 150 mètres. Vous montez de 600 mètres : il fait combien là-haut ?<br><strong>→</strong> 600 ÷ 150 = 4 degrés de moins, donc 17 °C.</div>
+        <div class="verif"><b>Vérifié</b> : gradient thermique moyen ≈ 0,65 °C/100 m, arrondi à 1 °C/150 m. L'image de la « couette d'air » simplifie l'épaisseur d'atmosphère sans énoncé faux ; remplace au 31/07 l'analogie de la pompe à vélo, jugée trop abstraite pour un enfant de 5 ans (retour terrain de Jessica).</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">R</div>
+      <div>
+        <div class="type">Question</div>
+        <div class="q">Un grand oiseau tourne dans le ciel sans jamais battre des ailes. Comment fait-il pour ne pas tomber ?</div>
+        <div class="rep">Il a trouvé une <b>bulle d'air chaud</b> qui monte toute seule vers le ciel, comme les bulles dans un verre qui pétille. Il se laisse porter dedans, en tournant, comme sur un toboggan à l'envers.</div>
+        <div class="bonus"><span class="lab">Défi des grands</span>Un vautour fauve mesure environ 2,60 m d'une aile à l'autre. Allongez-vous par terre bout à bout : il faut combien d'enfants pour égaler ça ?<br><strong>→</strong> Deux, à peu près. Mesurez pour de vrai.</div>
+        <div class="verif"><b>Vérifié</b> : envergure du vautour fauve 2,40-2,80 m ; vol en thermiques (colonnes d'air ascendant) documenté chez les grands rapaces planeurs.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">I</div>
+      <div>
+        <div class="type">Question</div>
+        <div class="q">Pourquoi trouve-t-on parfois des touffes de laine blanche accrochées à un buisson ?</div>
+        <div class="rep">Une brebis porte un <b>gros manteau de laine</b> tout l'été. En passant contre les branches, elle se frotte et un peu de laine reste accrochée — comme quand ton pull s'accroche à une haie. Les oiseaux viennent parfois la prendre pour faire un nid bien doux.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">E</div>
+      <div>
+        <div class="type">Question</div>
+        <div class="q">Pourquoi ne voit-on jamais de marmotte en plein hiver ?</div>
+        <div class="rep">Parce qu'elle <b>dort</b>, tout l'hiver, blottie avec sa famille sous la terre, comme une très longue nuit. Pendant qu'elle dort, son cœur bat très, très lentement.</div>
+        <div class="bonus"><span class="lab">Défi des grands</span>Le cœur d'une marmotte endormie bat environ 5 fois par minute. Le tien en fait 80 à 100 quand tu marches. Comptez vos battements pendant 15 secondes en posant la main sur le cœur, puis multipliez par 4 : vous en êtes loin ?</div>
+        <div class="verif"><b>Vérifié</b> : hibernation ~6 mois chez Marmota marmota, fréquence cardiaque en torpeur ~5 bpm (contre ~120 en activité).</div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <span class="lab">Le coffre s'ouvre</span>
+      <div class="mot">BERGERIE</div>
+      <p>Une <strong>bergerie</strong>, c'est la maison des moutons : un abri de pierre où ils dorment à l'abri du froid et des loups. L'été, ils vivent dehors dans les alpages ; l'hiver, ils redescendent se mettre au chaud dedans.</p>
+      <p style="margin-bottom:0">Aujourd'hui, vous avez marché sur le chemin que ces troupeaux empruntent chaque année, entre la bergerie d'en bas et les alpages d'en haut.</p>
+    </div>
+
+    <div class="secu">
+      <span class="lab">Glissé au début du carnet</span>
+      On reste sur le sentier, et on garde les grands en vue. En montagne la météo change vite : si le ciel devient sombre, on écoute l'adulte sans discuter. On ne descend jamais une pente de cailloux en courant. Et si un gros chien blanc s'approche du troupeau qu'il garde, on s'arrête et on ne crie pas — l'énigme du carnet explique tout.
+    </div>
+
+    <div class="verif" style="margin-top:14px">
+      <b>Dé-localisation effectuée</b> : sortis du carnet Gourette — le gave (mot et énigme), OSSAU dans le code du berger, le Pic de Ger et son calcul d'altitude, l'isard nommé seul (élargi à tous les sabots de montagne), le mot « patou » (le chien est décrit sans être nommé, le mot est régional), les fossiles marins d'altitude (fait vrai mais jugé trop abstrait pour un enfant de 5 ans, retiré au profit de sujets plus concrets). Conservés car quasi universels en montagne et compréhensibles jeune : marmotte, cloche des brebis, chien de troupeau, galets de torrent, laine sur les buissons, rapaces planeurs.<br><br>
+      <b>Révision du 31/07</b> (retour terrain Jessica) : mot changé de PIERRIER à <b>BERGERIE</b>, raccroché au mot connu « berger » plutôt qu'un mot savant. Les défis d'action purs (vingt pas silencieux, se retourner vers le départ) déplacés vers la liste des trouvailles pour ne plus faire doublon avec les énigmes. Les 8 énigmes réécrites en questions/devinettes simples avec petit défi associé, chacune relue au niveau de compréhension d'un enfant de 5 ans — cible produit : les 4-10 ans.
+    </div>
+  </section>
+
+  <!-- ============================ ÉTAT ============================ -->
+  <section class="lieu" id="etat">
+    <span class="num">Suivi</span>
+    <h2>État des 6 carnets</h2>
+    <div class="scroll-x">
+      <table class="calib">
+        <thead><tr><th>Carnet</th><th>Mot</th><th>État</th></tr></thead>
+        <tbody>
+          <tr><td>Montagne A — Le trésor du berger</td><td>BERGERIE</td><td><strong>Écrit et vérifié</strong> (ce document)</td></tr>
+          <tr><td>Montagne B — Là-haut, l'eau</td><td>NÉVÉ ou ESTIVE</td><td>À écrire — thème eau/ciel, zéro recouvrement avec A</td></tr>
+          <tr><td>Musée d'art A</td><td>ESQUISSE</td><td>Brouillon existant (test du 29/07), à re-vérifier fait par fait</td></tr>
+          <tr><td>Musée d'art B</td><td>VERNIS ou CARTEL</td><td>À écrire</td></tr>
+          <tr><td>Ville A</td><td>ENSEIGNE</td><td>Brouillon existant (test du 29/07), à re-vérifier fait par fait</td></tr>
+          <tr><td>Ville B</td><td>IMPASSE ou FRONTON</td><td>À écrire</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:14.5px;color:var(--encre-2)">Chaque énigme porte désormais sa note de vérification, qui restera dans nos sources internes (pas dans l'app). C'est le dossier qu'on montrera le jour où on parle à un musée.</p>
+  </section>
+
+</div>

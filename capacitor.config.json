@@ -1,0 +1,21 @@
+{
+  "appId": "com.nighthawkscode.findaro",
+  "appName": "Ludigo",
+  "webDir": "www",
+  "backgroundColor": "#F1F7F4",
+  "ios": {
+    "contentInset": "always",
+    "backgroundColor": "#F1F7F4"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 400,
+      "backgroundColor": "#F1F7F4",
+      "showSpinner": false
+    },
+    "StatusBar": {
+      "style": "dark",
+      "backgroundColor": "#F1F7F4"
+    }
+  }
+}

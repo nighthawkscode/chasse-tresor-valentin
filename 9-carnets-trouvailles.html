@@ -1,0 +1,762 @@
+<title>9 carnets — toutes les trouvailles, pour review</title>
+
+<style>
+  :root {
+    --fond:      #F4F7F8;
+    --papier:    #FFFFFF;
+    --papier-2:  #EBF2F3;
+    --trait:     #D0DFE1;
+    --encre:     #14252B;
+    --encre-2:   #48606A;
+    --gave:      #0B767A;
+    --gave-2:    #D5EDED;
+    --or:        #A96A08;
+    --or-2:      #F9EBD0;
+    --display: "American Typewriter", "Rockwell", "Courier New", serif;
+    --corps: "Avenir Next", "Avenir", "Segoe UI", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fond:#0B1417; --papier:#131F24; --papier-2:#1A2C31; --trait:#253B41;
+      --encre:#E6EFEF; --encre-2:#90A7AD; --gave:#3AC3C5; --gave-2:#0F3438;
+      --or:#EFB040; --or-2:#382A0E;
+    }
+  }
+  :root[data-theme="dark"] {
+    --fond:#0B1417; --papier:#131F24; --papier-2:#1A2C31; --trait:#253B41;
+    --encre:#E6EFEF; --encre-2:#90A7AD; --gave:#3AC3C5; --gave-2:#0F3438;
+    --or:#EFB040; --or-2:#382A0E;
+  }
+  :root[data-theme="light"] {
+    --fond:#F4F7F8; --papier:#FFFFFF; --papier-2:#EBF2F3; --trait:#D0DFE1;
+    --encre:#14252B; --encre-2:#48606A; --gave:#0B767A; --gave-2:#D5EDED;
+    --or:#A96A08; --or-2:#F9EBD0;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--fond); color: var(--encre);
+    font-family: var(--corps); font-size: 16px; line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+  }
+  .page { max-width: 900px; margin: 0 auto; padding: 0 20px 80px; }
+
+  .nav {
+    position: sticky; top: 0; z-index: 10;
+    margin: 0 -20px 24px; padding: 10px 20px;
+    background: var(--fond); border-bottom: 1px solid var(--trait);
+    display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+  }
+  .nav a {
+    font-size: 12.5px; font-weight: 600; text-decoration: none;
+    color: var(--encre-2); border: 1px solid var(--trait);
+    padding: 5px 10px; border-radius: 99px; white-space: nowrap;
+  }
+  .nav a:hover, .nav a:focus-visible { color: var(--gave); border-color: var(--gave); }
+
+  .eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--encre-2);
+  }
+  h1 {
+    font-family: var(--display); font-weight: 700; font-size: 32px;
+    line-height: 1.1; margin: 20px 0 10px; text-wrap: balance;
+  }
+  h2 {
+    font-family: var(--display); font-weight: 700; font-size: 26px;
+    margin: 0 0 4px; text-wrap: balance;
+  }
+  h4 {
+    font-size: 11.5px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--gave); margin: 16px 0 6px;
+  }
+  p { margin: 0 0 12px; }
+  p:last-child { margin-bottom: 0; }
+
+  .bloc {
+    background: var(--papier); border: 1px solid var(--trait);
+    border-radius: 12px; padding: 16px 18px; margin: 14px 0;
+  }
+
+  .typo { margin-top: 46px; padding-top: 24px; border-top: 3px solid var(--gave); }
+  .typo .num {
+    font-family: var(--display); font-size: 13px; font-weight: 700;
+    color: var(--gave); letter-spacing: .1em; text-transform: uppercase;
+  }
+
+  .secu {
+    background: var(--or-2); border-left: 3px solid var(--or);
+    border-radius: 0 9px 9px 0; padding: 11px 14px; font-size: 14px; margin: 14px 0;
+  }
+  .secu .lab {
+    display: block; font-size: 11px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--or); margin-bottom: 3px;
+  }
+
+  .carnet {
+    background: var(--papier); border: 1px solid var(--trait);
+    border-radius: 13px; padding: 18px 20px 20px; margin: 18px 0;
+  }
+  .carnet .titre-carnet {
+    display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .carnet .titre-carnet .n { font-family: var(--display); font-size: 20px; font-weight: 700; }
+  .carnet .titre-carnet .compte { font-size: 12.5px; color: var(--encre-2); font-variant-numeric: tabular-nums; }
+
+  ul.trouvailles { columns: 2; column-gap: 24px; margin: 0; padding-left: 18px; font-size: 15px; }
+  ul.trouvailles li { margin-bottom: 4px; break-inside: avoid; }
+  @media (max-width: 600px) { ul.trouvailles { columns: 1; } }
+  ul.trouvailles li.rare::after { content: " ★"; color: var(--or); font-size: 11px; }
+  ul.trouvailles li.ancre { font-weight: 600; }
+  ul.trouvailles li.ancre::before { content: "◆ "; color: var(--gave); font-size: 11px; }
+
+  .verdict-box {
+    background: var(--gave-2); border-radius: 12px; padding: 16px 18px; margin: 14px 0;
+    font-size: 14.5px;
+  }
+  .verdict-box .lab {
+    display: block; font-size: 11px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--gave); margin-bottom: 4px;
+  }
+  .audit-box {
+    background: var(--or-2); border-radius: 12px; padding: 16px 18px; margin: 14px 0;
+    font-size: 14.5px;
+  }
+  .audit-box .lab {
+    display: block; font-size: 11px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--or); margin-bottom: 4px;
+  }
+  .audit-box table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 14px; }
+  .audit-box td { padding: 5px 8px 5px 0; vertical-align: top; border-bottom: 1px solid color-mix(in srgb, var(--or) 25%, transparent); }
+  .audit-box td.cut { color: var(--encre-2); text-decoration: line-through; white-space: nowrap; }
+  .audit-box td.arrow { color: var(--or); text-align: center; width: 20px; }
+
+  :focus-visible { outline: 3px solid var(--gave); outline-offset: 2px; border-radius: 6px; }
+</style>
+
+<div class="page">
+
+  <nav class="nav">
+    <a href="#brief">L'audit</a>
+    <a href="#montagne">Montagne</a>
+    <a href="#musee">Musée d'art</a>
+    <a href="#ville">Ville</a>
+  </nav>
+
+  <span class="eyebrow">9 carnets, réécrits · 31 juillet 2026</span>
+  <h1>Fini les carnets à thème. Chaque carnet est un mix complet, avec des trouvailles qui ne dépendent que du lieu.</h1>
+
+  <section id="brief">
+    <div class="audit-box">
+      <span class="lab">L'audit de réalisme</span>
+      <p>Le test appliqué à chaque ligne : <strong>est-ce que ça dépend du lieu, ou est-ce que ça dépend d'un coup de chance ?</strong> « Une odeur de pierre chaude » dépend du lieu — il y en a toujours. « De la buée sur une bouteille froide » dépend d'avoir sorti une bouteille froide au bon moment, sous le bon taux d'humidité : un coup de chance déguisé en trouvaille. Voici ce qui a sauté :</p>
+      <table>
+        <tbody>
+          <tr><td class="cut">De la buée sur une bouteille froide sortie du sac</td><td class="arrow">→</td><td>coupé (dépend d'avoir une bouteille froide sur soi)</td></tr>
+          <tr><td class="cut">Le courant d'air d'une porte qui s'ouvre au loin</td><td class="arrow">→</td><td>coupé (suppose quelqu'un qui passe pile à ce moment)</td></tr>
+          <tr><td class="cut">Le poids d'un silence, est-ce que ça se sent ?</td><td class="arrow">→</td><td>coupé (pas concret, pas vérifiable par un enfant)</td></tr>
+          <tr><td class="cut">Ton propre souffle après un long silence</td><td class="arrow">→</td><td>coupé (trop introspectif pour être une « trouvaille »)</td></tr>
+          <tr><td class="cut">Un souffle d'air climatisé</td><td class="arrow">→</td><td>coupé (quasi jamais perceptible en pratique)</td></tr>
+          <tr><td class="cut">Le sol qui vibre au passage d'un gros véhicule</td><td class="arrow">→</td><td>coupé (difficile à sentir de façon fiable)</td></tr>
+          <tr><td class="cut">Une fleur jaune / bleue / blanche (couleurs imposées une à une)</td><td class="arrow">→</td><td>remplacé par une recherche de variété, jamais une couleur précise imposée</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="verdict-box">
+      <span class="lab">Deux changements structurels</span>
+      <p><strong>Fini les carnets à thème.</strong> « Roche et sommet », « L'envers du décor »… chaque carnet ne parlait que d'un seul domaine. Les 3 carnets de chaque typologie sont maintenant à nouveau des <strong>mix complets</strong> — un peu de minéral, un peu d'eau, un peu de vivant à chaque sortie en montagne, par exemple — comme le carnet de Gourette qui a fonctionné trois fois de suite. Seuls les items précis changent d'un carnet à l'autre, pas l'esprit.</p>
+      <p style="margin-bottom:0"><strong>Quatre ancrages marqués d'un ◆</strong> reviennent dans les 9 carnets, quelle que soit la typologie : une <strong>photo rigolote</strong>, une <strong>imitation</strong>, <strong>toucher une matière</strong> (pierre, mousse, écorce, mur…), et <strong>un son précis à repérer</strong>. Ce sont les items les plus fiables — faciles à réussir, jamais dépendants de la chance — donc ils méritent d'être partout.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ MONTAGNE ============================================================ -->
+  <section class="typo" id="montagne">
+    <span class="num">Typologie 1</span>
+    <h2>Montagne</h2>
+    <div class="secu">
+      <span class="lab">Sécurité, commune aux 3 carnets</span>
+      On reste sur le sentier, on garde les grands en vue. Si le ciel s'assombrit, on écoute l'adulte sans discuter. On ne court pas sur des pierres qui bougent, on ne s'approche pas du bord d'un torrent ou d'une pente raide. On ne ramasse ni ne déplace rien dans la nature (cailloux, plantes) : on regarde, on photographie, et on repose tout ce qu'on a pris en main.
+    </div>
+
+    <div class="carnet">
+      <div class="titre-carnet"><span class="n">Carnet A</span><span class="compte">44 trouvailles</span></div>
+
+      <h4>Ouvre l'œil · 16</h4>
+      <ul class="trouvailles">
+        <li>Une tache de neige qui a survécu à l'été</li>
+        <li>Un caillou avec des paillettes qui brillent au soleil</li>
+        <li>Trois couleurs de cailloux différentes sur le même chemin</li>
+        <li>Un nuage qui touche une montagne</li>
+        <li>Le lit d'un torrent, même sec</li>
+        <li>Un caillou tout rond, poli par l'eau</li>
+        <li>Une trace de pas d'animal dans la boue ou la neige</li>
+        <li>Une touffe de poils ou de laine accrochée à un buisson</li>
+        <li>Un tas de pierres empilées par quelqu'un pour marquer le chemin</li>
+        <li>Un sentier qui fait des zigzags</li>
+        <li>Trois nuances de vert différentes dans le même regard</li>
+        <li>Une fleur jaune</li>
+        <li>Une fleur bleue ou violette</li>
+        <li>Une fleur blanche</li>
+        <li>Le dernier arbre avant qu'il n'y en ait plus du tout</li>
+        <li>Un endroit d'où on voit plus loin que partout où tu es déjà allé</li>
+      </ul>
+
+      <h4>Écoute, sens, touche · 10</h4>
+      <ul class="trouvailles">
+        <li class="ancre">Toucher une pierre froide à l'ombre, puis une chaude au soleil</li>
+        <li class="ancre">Toucher de la mousse : douce, ou piquante ?</li>
+        <li class="ancre">Écouter l'eau qui coule, et deviner si elle est proche ou loin</li>
+        <li>Le crissement du gravier sous tes pieds</li>
+        <li>Une odeur de pierre chauffée par le soleil</li>
+        <li>Une odeur de plante froissée</li>
+        <li>Ta respiration qui devient plus forte en montant</li>
+        <li>Ton cœur qui bat plus vite après une montée</li>
+        <li>Dix secondes de silence complet, tous ensemble</li>
+        <li>Le goût de l'eau que tu as emportée</li>
+      </ul>
+
+      <h4>À faire · 11</h4>
+      <ul class="trouvailles">
+        <li class="ancre">Prendre une photo vraiment rigolote</li>
+        <li class="ancre">Imiter la démarche d'un randonneur fatigué, ou le vol d'un oiseau</li>
+        <li class="ancre">Boire une gorgée d'eau en regardant le plus loin possible</li>
+        <li>Repérer un caillou en forme de cœur</li>
+        <li>Deviner le temps qu'il faudrait pour atteindre un sommet visible, puis vérifier avec un adulte</li>
+        <li>Marcher vingt pas sans faire de bruit</li>
+        <li>Se retourner et montrer d'où on est partis</li>
+        <li>Donner un nom inventé à une montagne, pour la journée</li>
+        <li>Inventer un cri de ralliement pour l'équipe</li>
+        <li>Compter les virages du sentier pendant dix minutes</li>
+        <li>Ramasser un déchet qui n'est pas à nous</li>
+      </ul>
+
+      <h4>Les rares ★ · 7</h4>
+      <ul class="trouvailles">
+        <li class="rare">Un grand oiseau qui plane sans battre des ailes</li>
+        <li class="rare">Un arc-en-ciel, ou un rayon qui traverse les nuages</li>
+        <li class="rare">Un animal sauvage, quel qu'il soit</li>
+        <li class="rare">Le grondement d'un torrent invisible sous les pierres</li>
+        <li class="rare">Un écho, en criant face à une paroi</li>
+        <li class="rare">Un animal qui siffle pour prévenir les autres d'un danger</li>
+        <li class="rare">Un grand chien qui protège un troupeau</li>
+      </ul>
+    </div>
+
+    <div class="carnet">
+      <div class="titre-carnet"><span class="n">Carnet B</span><span class="compte">43 trouvailles</span></div>
+
+      <h4>Ouvre l'œil · 16</h4>
+      <ul class="trouvailles">
+        <li>Un ruisseau ou un torrent qui descend la pente</li>
+        <li>Une petite cascade, même minuscule</li>
+        <li>Un caillou bien pointu, jamais touché par l'eau</li>
+        <li>Un caillou avec des paillettes qui brillent au soleil</li>
+        <li>Une roche avec des rayures, comme un gâteau à étages</li>
+        <li>Une fourmilière</li>
+        <li>Une toile d'araignée couverte de rosée</li>
+        <li>Un papillon</li>
+        <li>Un arbre tordu par le vent, toujours penché du même côté</li>
+        <li>Un nuage qui change de forme en quelques minutes</li>
+        <li>Une flaque qui reflète le ciel</li>
+        <li>Une pierre qui a une forme rigolote (animal, visage, chapeau)</li>
+        <li>Trois nuances de vert différentes dans le même regard</li>
+        <li>Une fleur jaune</li>
+        <li>Une fleur bleue ou violette</li>
+        <li>Une fleur blanche</li>
+      </ul>
+
+      <h4>Écoute, sens, touche · 10</h4>
+      <ul class="trouvailles">
+        <li class="ancre">Toucher une écorce rugueuse, puis une lisse</li>
+        <li class="ancre">Toucher l'eau d'un torrent ou d'une flaque</li>
+        <li class="ancre">Le bruit de l'eau qui change selon qu'elle coule vite ou lentement</li>
+        <li>Le bourdonnement d'un insecte qui passe</li>
+        <li>Une odeur de mousse ou de terre humide</li>
+        <li>Un vent qui te pousse dans le dos, ou qui te freine de face</li>
+        <li>L'air qui devient plus frais quand un nuage passe devant le soleil</li>
+        <li>Le silence entre deux bruits d'eau</li>
+        <li>Sentir une fleur, sans la cueillir</li>
+        <li>Le goût d'une goutte de pluie, s'il pleut un peu</li>
+      </ul>
+
+      <h4>À faire · 10</h4>
+      <ul class="trouvailles">
+        <li class="ancre">Prendre une photo vraiment rigolote</li>
+        <li class="ancre">Imiter le vol d'un oiseau, ou la démarche d'un animal de montagne</li>
+        <li class="ancre">Boire une gorgée d'eau en regardant le plus loin possible</li>
+        <li>Choisir un nuage et lui donner un nom</li>
+        <li>Repérer où le soleil est en train d'aller</li>
+        <li>Deviner ce que mange l'animal dont vous avez trouvé une trace</li>
+        <li>Compter les fleurs de trois couleurs différentes</li>
+        <li>Suivre une piste ou une trace pendant vingt pas</li>
+        <li>Observer un insecte sans le toucher, une minute entière</li>
+        <li>Ramasser un déchet qui n'est pas à nous</li>
+      </ul>
+
+      <h4>Les rares ★ · 7</h4>
+      <ul class="trouvailles">
+        <li class="rare">Un poisson dans l'eau</li>
+        <li class="rare">Un arc-en-ciel dans les gouttelettes d'une cascade</li>
+        <li class="rare">Un oiseau qui plonge pour pêcher</li>
+        <li class="rare">Un animal sauvage à sabots, quel qu'il soit</li>
+        <li class="rare">Un lézard qui se réchauffe au soleil</li>
+        <li class="rare">Une libellule près d'un point d'eau</li>
+        <li class="rare">Un randonneur qui a l'air de connaître le coin par cœur</li>
+      </ul>
+    </div>
+
+    <div class="carnet">
+      <div class="titre-carnet"><span class="n">Carnet C</span><span class="compte">44 trouvailles</span></div>
+
+      <h4>Ouvre l'œil · 16</h4>
+      <ul class="trouvailles">
+        <li>Une cabane ou un abri isolé en pierre</li>
+        <li>Un troupeau, même très loin</li>
+        <li>Des crottes qui indiquent qu'un animal est passé</li>
+        <li>Un nid, vide ou occupé</li>
+        <li>Un scarabée ou un insecte que tu ne connais pas</li>
+        <li>Un arbre creux</li>
+        <li>Un caillou avec des paillettes qui brillent au soleil</li>
+        <li>Un caillou plus gros que ta tête</li>
+        <li>Le lit d'un torrent, même sec</li>
+        <li>Un nuage qui touche une montagne</li>
+        <li>Une ombre qui bouge sur le sol pendant que tu marches</li>
+        <li>Trois nuances de vert différentes dans le même regard</li>
+        <li>Une fleur jaune</li>
+        <li>Une fleur bleue ou violette</li>
+        <li>Une fleur blanche</li>
+        <li>Un endroit d'où on voit plus loin que partout où tu es déjà allé</li>
+      </ul>
+
+      <h4>Écoute, sens, touche · 10</h4>
+      <ul class="trouvailles">
+        <li class="ancre">Toucher une pierre froide à l'ombre, puis une chaude au soleil</li>
+        <li class="ancre">Entendre un oiseau chanter, et essayer de le repérer</li>
+        <li>Sentir l'odeur d'un troupeau, si vous en croisez un</li>
+        <li>Le bruit d'un animal qui s'enfuit dans les buissons</li>
+        <li>Une odeur de foin ou d'herbe sèche</li>
+        <li>Sentir le sol : dur, meuble, sec, humide ?</li>
+        <li>Ta respiration qui devient plus forte en montant</li>
+        <li>Dix secondes de silence complet, tous ensemble</li>
+        <li>Un vent qui te pousse dans le dos, ou qui te freine de face</li>
+        <li>Le goût de l'eau que tu as emportée</li>
+      </ul>
+
+      <h4>À faire · 11</h4>
+      <ul class="trouvailles">
+        <li class="ancre">Prendre une photo vraiment rigolote</li>
+        <li class="ancre">Imiter le cri d'un animal de la montagne</li>
+        <li class="ancre">Boire une gorgée d'eau en regardant le plus loin possible</li>
+        <li>Inventer le nom d'un animal imaginaire qui vivrait ici</li>
+        <li>Dire bonjour à un troupeau croisé, sans s'approcher</li>
+        <li>Chercher un endroit où un animal pourrait se cacher, et pourquoi</li>
+        <li>Se retourner et montrer d'où on est partis</li>
+        <li>Marcher vingt pas sans faire de bruit</li>
+        <li>Décider ensemble quel animal vous aimeriez le plus croiser</li>
+        <li>Chercher le plus bel endroit pour un pique-nique</li>
+        <li>Ramasser un déchet qui n'est pas à nous</li>
+      </ul>
+
+      <h4>Les rares ★ · 7</h4>
+      <ul class="trouvailles">
+        <li class="rare">Un renard, ou une trace de petit prédateur</li>
+        <li class="rare">Un aigle, un vautour, ou un autre grand rapace</li>
+        <li class="rare">Un serpent, à bonne distance</li>
+        <li class="rare">Un grand chien qui protège un troupeau</li>
+        <li class="rare">Un arc-en-ciel, ou un rayon qui traverse les nuages</li>
+        <li class="rare">Une chute d'eau qu'on entend avant de la voir</li>
+        <li class="rare">Une vue qui se dégage soudainement après un passage étroit</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================ MUSÉE ============================================================ -->
+  <section class="typo" id="musee">
+    <span class="num">Typologie 2</span>
+    <h2>Musée d'art</h2>
+    <div class="secu">
+      <span class="lab">Sécurité / savoir-vivre, commun aux 3 carnets</span>
+      On ne touche pas les œuvres, même pas les cadres ou les socles. On marche, on ne court pas. On parle bas, et on reste avec le groupe.
+    </div>
+
+    <div class="carnet">
+      <div class="titre-carnet"><span class="n">Carnet A</span><span class="compte">41 trouvailles</span></div>
+
+      <h4>Ouvre l'œil · 14</h4>
+      <ul class="trouvailles">
+        <li>Une œuvre plus grande que toi</li>
+        <li>Une œuvre plus petite que ta main</li>
+        <li>La même couleur qui revient dans trois salles différentes</li>
+        <li>Un dégradé de couleurs à l'intérieur d'une seule œuvre</li>
+        <li>Une œuvre où tu ne sais pas dire ce qu'elle représente</li>
+        <li>Un objet fait dans une matière que tu ne reconnais pas</li>
+        <li>Une signature, et une œuvre sans signature</li>
+        <li>Un cartel (petite étiquette), et lis ce qu'il dit</li>
+        <li>Un détail minuscule qu'on ne voit qu'en s'approchant très près</li>
+        <li>Une œuvre qui a un titre bizarre ou drôle</li>
+        <li>Une corde, une ligne au sol, ou un espace vide autour d'une œuvre</li>
+        <li>Un objet très ancien à côté d'un très récent</li>
+        <li>L'ombre qu'une sculpture dessine sur le mur ou le sol</li>
+        <li>Une œuvre qui te fait sourire</li>
+      </ul>
+
+      <h4>Écoute, sens, touche · 10</h4>
+      <ul class="trouvailles">
+        <li class="ancre">Une texture qui a l'air rugueuse, puis une qui a l'air lisse — devinées des yeux, jamais des doigts</li>
+        <li>Le silence d'une salle, dix secondes complètes</li>
+        <li>Le bruit de tes pas qui change de son sur deux sols différents</li>
+        <li>Une salle plus fraîche ou plus chaude qu'une autre</li>
+        <li>Une odeur particulière au musée</li>
+        <li class="ancre">Deux visiteurs qui chuchotent, ou le bruit d'une salle vide comparé à une salle pleine</li>
+        <li>Une salle où la lumière est plus tamisée qu'ailleurs</li>
+        <li>Une texture qu'on devine en regardant de très près, sans toucher</li>
+        <li>Un détail qu'on ne remarque qu'en s'arrêtant vraiment</li>
+        <li>Une différence de température entre deux salles</li>
+      </ul>
+
+      <h4>À faire · 10</h4>
+      <ul class="trouvailles">
+        <li class="ancre">Prendre une photo vraiment rigolote</li>
+        <li class="ancre">Imiter la pose d'un personnage ou d'une sculpture</li>
+        <li>Choisir l'œuvre qu'on emporterait à la maison, et dire pourquoi</li>
+        <li>Deviner laquelle de deux œuvres est la plus ancienne, puis vérifier</li>
+        <li>Regarder une œuvre à un pas, puis à dix pas, comparer</li>
+        <li>S'asseoir sur un banc une minute, sans rien faire d'autre que regarder</li>
+        <li>Décrire une œuvre à quelqu'un sans dire ce que c'est, pour deviner</li>
+        <li>Sourire à un gardien</li>
+        <li>Repérer la salle la plus sombre, et deviner pourquoi</li>
+        <li>Ramasser un ticket ou un papier qui traîne, et le jeter</li>
+      </ul>
+
+      <h4>Les rares ★ · 7</h4>
+      <ul class="trouvailles">
+        <li class="rare">Un artiste en train de créer sur place</li>
+        <li class="rare">Un gardien qui raconte une anecdote</li>
+        <li class="rare">Une salle où vous êtes seuls, pour de vrai</li>
+        <li class="rare">Une œuvre en train d'être installée ou déplacée</li>
+        <li class="rare">Un groupe scolaire en visite</li>
+        <li class="rare">Une œuvre qui vient de votre pays ou région</li>
+        <li class="rare">Une œuvre carrément drôle</li>
+      </ul>
+    </div>
+
+    <div class="carnet">
+      <div class="titre-carnet"><span class="n">Carnet B</span><span class="compte">41 trouvailles</span></div>
+
+      <h4>Ouvre l'œil · 14</h4>
+      <ul class="trouvailles">
+        <li>Une œuvre inachevée, volontairement ou non</li>
+        <li>Un outil de l'artiste exposé (pinceau, ciseau, appareil…)</li>
+        <li>Deux œuvres du même artiste, à des périodes différentes</li>
+        <li>Une œuvre faite de plusieurs matériaux assemblés</li>
+        <li>Un socle qui a l'air plus travaillé que l'œuvre elle-même</li>
+        <li>Une date de création très précise</li>
+        <li>Une œuvre collective, faite à plusieurs mains</li>
+        <li>Une réparation visible sur un objet ancien</li>
+        <li>Une vitrine, et ce qu'elle protège</li>
+        <li>Un thermomètre ou un capteur discret dans une salle</li>
+        <li>La même couleur qui revient dans trois salles différentes</li>
+        <li>Trois nuances d'une seule couleur dans une même salle</li>
+        <li>Une œuvre posée plus haut que ta tête, et une plus basse</li>
+        <li>Une caméra ou un capteur de sécurité</li>
+      </ul>
+
+      <h4>Écoute, sens, touche · 10</h4>
+      <ul class="trouvailles">
+        <li class="ancre">Une matière qui a l'air lisse, puis une texturée — devinées des yeux</li>
+        <li>Une odeur de bois ou de vernis</li>
+        <li>Le contraste entre le bruit du hall d'entrée et le calme des salles</li>
+        <li>Ton pas qui ralentit tout seul en entrant dans une salle calme</li>
+        <li>Une salle sensiblement plus fraîche que le hall d'entrée</li>
+        <li class="ancre">Le bruit d'une salle vide, comparé à une salle pleine de monde</li>
+        <li>Une texture rugueuse qu'on devine à distance</li>
+        <li>Le silence propre à une salle d'exposition</li>
+        <li>Une différence d'éclairage qui change la couleur perçue d'une œuvre</li>
+        <li>Une odeur particulière au musée</li>
+      </ul>
+
+      <h4>À faire · 10</h4>
+      <ul class="trouvailles">
+        <li class="ancre">Prendre une photo vraiment rigolote</li>
+        <li class="ancre">Imiter la pose d'un personnage ou d'une sculpture</li>
+        <li>Imaginer le tout premier essai raté d'une œuvre</li>
+        <li>Deviner combien de temps a pris la fabrication d'une œuvre</li>
+        <li>Choisir une œuvre et inventer son titre, avant de vérifier le vrai</li>
+        <li>Compter les matériaux différents utilisés dans une seule œuvre</li>
+        <li>Trouver l'œuvre qui a dû demander le plus de patience</li>
+        <li>Voter pour l'œuvre la plus difficile à fabriquer</li>
+        <li>Sourire à un gardien</li>
+        <li>Ramasser un ticket ou un papier qui traîne, et le jeter</li>
+      </ul>
+
+      <h4>Les rares ★ · 7</h4>
+      <ul class="trouvailles">
+        <li class="rare">Un artiste en résidence en train de travailler</li>
+        <li class="rare">Une salle avec des outils d'atelier exposés</li>
+        <li class="rare">Une vidéo montrant la fabrication d'une œuvre</li>
+        <li class="rare">Une restauration en cours visible</li>
+        <li class="rare">Un objet religieux ou rituel ancien</li>
+        <li class="rare">Une œuvre plus vieille que le bâtiment qui l'abrite</li>
+        <li class="rare">Une salle vide de visiteurs</li>
+      </ul>
+    </div>
+
+    <div class="carnet">
+      <div class="titre-carnet"><span class="n">Carnet C</span><span class="compte">42 trouvailles</span></div>
+
+      <h4>Ouvre l'œil · 15</h4>
+      <ul class="trouvailles">
+        <li>Un endroit devenu brillant à force d'être touché, avant que ce soit interdit</li>
+        <li>Une œuvre entourée de plus de précautions que les autres, et deviner pourquoi</li>
+        <li>Un extincteur ou un dispositif de sécurité incendie</li>
+        <li>Une vitrine fermée à clé, et deviner comment elle s'ouvre</li>
+        <li>Une caméra de sécurité, bien visible ou bien cachée</li>
+        <li>Une œuvre installée loin de toute fenêtre</li>
+        <li>Un gardien assis, un gardien debout</li>
+        <li>Une signature, et une œuvre sans signature</li>
+        <li>Un autoportrait, si vous en trouvez un</li>
+        <li>Une copie ou une reproduction d'une œuvre plus ancienne</li>
+        <li>Un dégradé de couleurs à l'intérieur d'une seule œuvre</li>
+        <li>Trois nuances d'une seule couleur dans une même salle</li>
+        <li>Une œuvre plus grande que toi</li>
+        <li>Une œuvre plus petite que ta main</li>
+        <li>Un détail qu'on ne devait pas voir à l'origine (dos, revers, dessous)</li>
+      </ul>
+
+      <h4>Écoute, sens, touche · 10</h4>
+      <ul class="trouvailles">
+        <li class="ancre">Une matière lisse, puis une texturée, devinées des yeux</li>
+        <li>Le silence particulier d'une salle qui protège des œuvres fragiles</li>
+        <li>Une odeur neutre, presque absente, dans certaines salles</li>
+        <li>Le silence après le passage d'un groupe bruyant</li>
+        <li>Ta respiration qui ralentit devant une œuvre qui t'impressionne</li>
+        <li>Le bruit de tes pas qui change de son sur deux sols différents</li>
+        <li>Une salle où la lumière est plus tamisée qu'ailleurs</li>
+        <li class="ancre">Le bruit d'une salle vide, comparé à une salle pleine de monde</li>
+        <li>Une odeur particulière au musée</li>
+        <li>Une différence de température entre deux salles</li>
+      </ul>
+
+      <h4>À faire · 10</h4>
+      <ul class="trouvailles">
+        <li class="ancre">Prendre une photo vraiment rigolote</li>
+        <li class="ancre">Imiter la pose d'un personnage ou d'une sculpture</li>
+        <li>Observer un gardien une minute sans qu'il s'en aperçoive</li>
+        <li>Chercher l'œuvre la mieux protégée du musée, et dire pourquoi</li>
+        <li>Repérer tous les dispositifs de sécurité d'une seule salle</li>
+        <li>Choisir l'œuvre que vous sauveriez en premier s'il y avait un incendie</li>
+        <li>Marcher aussi doucement que possible dans une salle entière</li>
+        <li>Compter les caméras visibles dans une salle</li>
+        <li>Sourire à un gardien</li>
+        <li>Ramasser un ticket ou un papier qui traîne, et le jeter</li>
+      </ul>
+
+      <h4>Les rares ★ · 7</h4>
+      <ul class="trouvailles">
+        <li class="rare">Un gardien qui explique une règle de sécurité</li>
+        <li class="rare">Un restaurateur ou une restauratrice au travail, si visible</li>
+        <li class="rare">Une salle en travaux de rénovation</li>
+        <li class="rare">Une œuvre qui vient de sortir de restauration</li>
+        <li class="rare">Une vitrine avec un système d'ouverture visible</li>
+        <li class="rare">Un visiteur qui connaît vraiment bien le musée</li>
+        <li class="rare">Une œuvre carrément mystérieuse, qu'on ne comprend pas du tout</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================================ VILLE ============================================================ -->
+  <section class="typo" id="ville">
+    <span class="num">Typologie 3</span>
+    <h2>Ville</h2>
+    <div class="secu">
+      <span class="lab">Sécurité, commune aux 3 carnets</span>
+      On traverse toujours à un passage piéton ou avec le feu, la main d'un adulte tenue ou juste à côté. Dans la foule, on choisit un point de rendez-vous en cas de séparation. On s'arrête pour regarder en l'air, on ne marche jamais les yeux levés.
+    </div>
+
+    <div class="carnet">
+      <div class="titre-carnet"><span class="n">Carnet A</span><span class="compte">41 trouvailles</span></div>
+
+      <h4>Ouvre l'œil · 14</h4>
+      <ul class="trouvailles">
+        <li>Un numéro sur une porte ou un immeuble</li>
+        <li>Une plaque d'égout — ronde, ou pas ?</li>
+        <li>Un panneau écrit dans une langue que tu ne lis pas</li>
+        <li>Une enseigne qui utilise un dessin plutôt que des mots</li>
+        <li>Un bâtiment très ancien juste à côté d'un tout neuf</li>
+        <li>Une peinture ou un dessin sur un mur</li>
+        <li>Un arbre qui pousse au milieu du béton</li>
+        <li>Un mur avec plusieurs couleurs ou matières différentes</li>
+        <li>Trois teintes de gris différentes sur les trottoirs ou les façades</li>
+        <li>Un feu de circulation</li>
+        <li>Un vélo, une trottinette ou une poussette garée</li>
+        <li>Une vitrine de magasin bien décorée</li>
+        <li>Une fenêtre allumée alors qu'il fait encore jour</li>
+        <li>Quelqu'un qui promène un chien</li>
+      </ul>
+
+      <h4>Écoute, sens, touche · 10</h4>
+      <ul class="trouvailles">
+        <li class="ancre">Toucher un tronc d'arbre, puis un mur (brique, pierre, béton…)</li>
+        <li>Une sirène au loin</li>
+        <li>De la musique qui sort d'une fenêtre ou d'un magasin</li>
+        <li>Le bruit de tes pas qui change de son sur deux sols différents</li>
+        <li>Une odeur de nourriture qui cuit</li>
+        <li>Deux personnes qui rient franchement</li>
+        <li>Une langue que tu n'as jamais entendue</li>
+        <li>Le silence relatif d'une petite rue après une grande rue bruyante</li>
+        <li>La chaleur du trottoir en plein soleil, comparée à l'ombre</li>
+        <li class="ancre">Un klaxon ou une sonnette de vélo</li>
+      </ul>
+
+      <h4>À faire · 10</h4>
+      <ul class="trouvailles">
+        <li class="ancre">Prendre une photo vraiment rigolote</li>
+        <li class="ancre">Imiter un pigeon qui picore</li>
+        <li>Compter les vélos d'une seule rue</li>
+        <li>Trouver le nom de rue le plus rigolo</li>
+        <li>Demander l'heure à quelqu'un, poliment</li>
+        <li>Élire le meilleur banc de la rue, et s'y asseoir une minute</li>
+        <li>Suivre un pigeon pendant vingt pas</li>
+        <li>Désigner le bâtiment qui a l'air le plus vieux, et dire pourquoi</li>
+        <li>Dire bonjour à quelqu'un, gentiment</li>
+        <li>Ramasser un déchet qui n'est pas à nous</li>
+      </ul>
+
+      <h4>Les rares ★ · 7</h4>
+      <ul class="trouvailles">
+        <li class="rare">Un chat en pleine rue</li>
+        <li class="rare">Un oiseau en train de construire un nid sur un bâtiment</li>
+        <li class="rare">Quelqu'un qui joue de la musique dans la rue</li>
+        <li class="rare">Un très vieux véhicule</li>
+        <li class="rare">Un arc-en-ciel entre deux immeubles</li>
+        <li class="rare">Un marché ou des étals en pleine rue</li>
+        <li class="rare">Une queue de gens qui attendent devant un endroit</li>
+      </ul>
+    </div>
+
+    <div class="carnet">
+      <div class="titre-carnet"><span class="n">Carnet B</span><span class="compte">41 trouvailles</span></div>
+
+      <h4>Ouvre l'œil · 14</h4>
+      <ul class="trouvailles">
+        <li>Un passage piéton — vérifie s'il a des picots en relief</li>
+        <li>Un bus, un tram ou un métro</li>
+        <li>Une trottinette ou un vélo en libre-service</li>
+        <li>Un rond-point</li>
+        <li>Une valise à roulettes</li>
+        <li>Un parking à vélos plein</li>
+        <li>Un panneau publicitaire animé ou lumineux</li>
+        <li>Un scooter ou une moto garée</li>
+        <li>Un chantier ou un échafaudage</li>
+        <li>Une rampe pour fauteuils roulants ou poussettes</li>
+        <li>Une horloge visible depuis la rue</li>
+        <li>Trois teintes de gris différentes sur les trottoirs ou les façades</li>
+        <li>Un mur avec plusieurs couleurs ou matières différentes</li>
+        <li>Une grille au sol qui laisse échapper de la vapeur ou de l'air</li>
+      </ul>
+
+      <h4>Écoute, sens, touche · 10</h4>
+      <ul class="trouvailles">
+        <li class="ancre">Toucher un banc public, puis un lampadaire ou un poteau</li>
+        <li>Le bruit d'un moteur qui démarre</li>
+        <li>Un signal sonore pour piétons, si la rue en a un</li>
+        <li class="ancre">Le crissement de freins, ou le bruit d'un vélo qui passe</li>
+        <li>Une odeur d'essence, si vous en croisez</li>
+        <li>Une odeur de nourriture qui cuit</li>
+        <li>Le silence relatif d'une petite rue après une grande rue bruyante</li>
+        <li>La chaleur du trottoir en plein soleil, comparée à l'ombre</li>
+        <li>Un klaxon au loin</li>
+        <li>Le bruit différent de deux types de moteurs (voiture, scooter, bus…)</li>
+      </ul>
+
+      <h4>À faire · 10</h4>
+      <ul class="trouvailles">
+        <li class="ancre">Prendre une photo vraiment rigolote</li>
+        <li class="ancre">Imiter le bruit d'un moyen de transport que vous venez de voir passer</li>
+        <li>Compter combien de moyens de transport différents vous voyez en cinq minutes</li>
+        <li>Deviner où va un bus, avant de vérifier son panneau</li>
+        <li>Traverser en respectant bien le feu ou le passage piéton</li>
+        <li>Choisir le meilleur moyen de transport pour un très court trajet, et dire pourquoi</li>
+        <li>Compter les vélos garés dans une seule rue</li>
+        <li>Repérer un panneau qu'on ne comprend pas tout de suite</li>
+        <li>Imaginer un moyen de transport qui n'existe pas encore</li>
+        <li>Ramasser un déchet qui n'est pas à nous</li>
+      </ul>
+
+      <h4>Les rares ★ · 7</h4>
+      <ul class="trouvailles">
+        <li class="rare">Un très vieux vélo ou une très vieille voiture</li>
+        <li class="rare">Un embouteillage impressionnant</li>
+        <li class="rare">Un cheval ou une calèche</li>
+        <li class="rare">Une ambulance, des pompiers ou une police en intervention, à distance</li>
+        <li class="rare">Un vélo cargo chargé d'objets improbables</li>
+        <li class="rare">Un groupe qui fait du vélo tous ensemble</li>
+        <li class="rare">Un feu qui clignote au lieu de fonctionner normalement</li>
+      </ul>
+    </div>
+
+    <div class="carnet">
+      <div class="titre-carnet"><span class="n">Carnet C</span><span class="compte">41 trouvailles</span></div>
+
+      <h4>Ouvre l'œil · 14</h4>
+      <ul class="trouvailles">
+        <li>Quelqu'un qui lit un livre ou un journal en public</li>
+        <li>Un enfant plus petit que toi</li>
+        <li>Une personne âgée qui marche tranquillement</li>
+        <li>Un groupe d'amis qui rient ensemble</li>
+        <li>Quelqu'un qui porte un uniforme (facteur, policier, livreur…)</li>
+        <li>Une terrasse de café avec des gens installés</li>
+        <li>Quelqu'un qui fait du sport en pleine rue</li>
+        <li>Un enfant qui fait du vélo ou de la trottinette</li>
+        <li>Deux personnes qui se saluent d'une façon différente d'une poignée de main</li>
+        <li>Quelqu'un qui porte quelque chose de très lourd ou très encombrant</li>
+        <li>Un animal de compagnie inhabituel (pas un chien ni un chat)</li>
+        <li>Quelqu'un qui vous sourit sans se connaître</li>
+        <li>Trois teintes de gris différentes sur les trottoirs ou les façades</li>
+        <li>Un immeuble ancien juste à côté d'un tout neuf</li>
+      </ul>
+
+      <h4>Écoute, sens, touche · 10</h4>
+      <ul class="trouvailles">
+        <li class="ancre">Toucher un mur (brique, pierre, béton…), puis un arbre</li>
+        <li>Un éclat de rire, loin dans la rue</li>
+        <li>Une conversation dans une langue que tu ne connais pas</li>
+        <li>Une odeur de parfum en croisant quelqu'un</li>
+        <li>Une odeur de nourriture différente d'un stand ou d'un restaurant</li>
+        <li class="ancre">Le brouhaha d'une terrasse pleine de monde, comparé à une rue calme</li>
+        <li>Un enfant qui pleure ou qui rit très fort au loin</li>
+        <li>Le silence d'une rue soudain vide de monde</li>
+        <li>La chaleur d'une foule dense, si vous en croisez une</li>
+        <li>Un bonjour ou un sourire échangé avec un inconnu</li>
+      </ul>
+
+      <h4>À faire · 10</h4>
+      <ul class="trouvailles">
+        <li class="ancre">Prendre une photo vraiment rigolote</li>
+        <li class="ancre">Imiter la démarche de quelqu'un qui n'est vraiment pas pressé</li>
+        <li>Dire bonjour à quelqu'un, gentiment</li>
+        <li>Compter combien de personnes vous croisez en une minute</li>
+        <li>Deviner le métier de quelqu'un à sa tenue</li>
+        <li>Sourire à un inconnu et voir s'il vous sourit en retour</li>
+        <li>Choisir la personne la plus élégante croisée dans la rue</li>
+        <li>Aider poliment quelqu'un si l'occasion se présente (tenir une porte…)</li>
+        <li>Compter les langues différentes entendues en dix minutes</li>
+        <li>Ramasser un déchet qui n'est pas à nous</li>
+      </ul>
+
+      <h4>Les rares ★ · 7</h4>
+      <ul class="trouvailles">
+        <li class="rare">Un mariage ou une fête qui sort d'un bâtiment</li>
+        <li class="rare">Un anniversaire fêté en pleine rue</li>
+        <li class="rare">Quelqu'un en costume ou déguisement inhabituel</li>
+        <li class="rare">Un rassemblement, observé à distance avec un adulte</li>
+        <li class="rare">Des retrouvailles visiblement joyeuses entre deux personnes</li>
+        <li class="rare">Un groupe qui prend une photo tous ensemble</li>
+        <li class="rare">Quelqu'un qui joue d'un instrument dans la rue</li>
+      </ul>
+    </div>
+  </section>
+
+</div>

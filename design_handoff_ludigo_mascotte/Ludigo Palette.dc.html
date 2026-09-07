@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="width:100%;min-height:100%;box-sizing:border-box;padding:40px;background:#f4f1e8;display:flex;flex-direction:column;gap:44px;font-family:'Nunito',Helvetica,sans-serif;color:#2b2519;max-width:1100px">
+  <helmet>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet" />
+    <style>
+      a { color: #1f8f77; }
+      a:hover { color: #12503f; }
+    </style>
+  </helmet>
+
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <span style="font-size:12px;font-weight:900;letter-spacing:0.18em;text-transform:uppercase;color:#6a6354">Ludigo — gamme de couleurs</span>
+    <h1 style="margin:0;font-size:38px;line-height:1.05;font-weight:900">Système « Zoé »</h1>
+    <p style="margin:0;max-width:620px;font-size:16px;line-height:1.55;color:#5c5647;text-wrap:pretty">Palette dérivée de la mascotte loupe : un vert forêt profond comme fond de jeu, une menthe vive pour la mascotte et les actions, du laiton pour les objets de quête, et une encre verte pour tout le texte.</p>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start">
+    <div style="width:220px;height:220px;border-radius:50px;overflow:hidden;box-shadow:0 16px 32px rgba(18,80,63,0.28);flex:0 0 auto">
+      <div style="width:340px;height:340px;transform:scale(0.6471);transform-origin:top left">
+        <dc-import name="Loupe Icon" hint-size="340px,340px"></dc-import>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;flex:1 1 420px;min-width:0">
+      <div style="width:104px;height:104px;border-radius:16px;background:#12503f"></div>
+      <div style="width:104px;height:104px;border-radius:16px;background:#1c6b53"></div>
+      <div style="width:104px;height:104px;border-radius:16px;background:#0d3b30"></div>
+      <div style="width:104px;height:104px;border-radius:16px;background:#39c3a2"></div>
+      <div style="width:104px;height:104px;border-radius:16px;background:#6fdcc0"></div>
+      <div style="width:104px;height:104px;border-radius:16px;background:#a7f0d8"></div>
+      <div style="width:104px;height:104px;border-radius:16px;background:#eafaf4"></div>
+      <div style="width:104px;height:104px;border-radius:16px;background:#c98a4d"></div>
+      <div style="width:104px;height:104px;border-radius:16px;background:#ff8460"></div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:14px">
+    <span style="font-size:12px;font-weight:900;letter-spacing:0.18em;text-transform:uppercase;color:#6a6354">Rôles — noyau</span>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px">
+      <div style="border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 3px 10px rgba(43,37,25,0.08)">
+        <div style="height:86px;background:#12503f"></div>
+        <div style="padding:12px 14px;display:flex;flex-direction:column;gap:2px">
+          <span style="font-size:14px;font-weight:900">forest-900 · #12503F</span>
+          <span style="font-size:13px;color:#5c5647">Fond d'écran de jeu, barres, icône app</span>
+        </div>
+      </div>
+      <div style="border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 3px 10px rgba(43,37,25,0.08)">
+        <div style="height:86px;background:#1c6b53"></div>
+        <div style="padding:12px 14px;display:flex;flex-direction:column;gap:2px">
+          <span style="font-size:14px;font-weight:900">forest-700 · #1C6B53</span>
+          <span style="font-size:13px;color:#5c5647">Cartes sur fond sombre, halo de lumière</span>
+        </div>
+      </div>
+      <div style="border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 3px 10px rgba(43,37,25,0.08)">
+        <div style="height:86px;background:#0d3b30"></div>
+        <div style="padding:12px 14px;display:flex;flex-direction:column;gap:2px">
+          <span style="font-size:14px;font-weight:900">forest-950 · #0D3B30</span>
+          <span style="font-size:13px;color:#5c5647">Vignette, ombres, bords d'écran</span>
+        </div>
+      </div>
+      <div style="border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 3px 10px rgba(43,37,25,0.08)">
+        <div style="height:86px;background:#39c3a2"></div>
+        <div style="padding:12px 14px;display:flex;flex-direction:column;gap:2px">
+          <span style="font-size:14px;font-weight:900">mint-500 · #39C3A2</span>
+          <span style="font-size:13px;color:#5c5647">Mascotte, bouton primaire, progression</span>
+        </div>
+      </div>
+      <div style="border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 3px 10px rgba(43,37,25,0.08)">
+        <div style="height:86px;background:#1f8f77"></div>
+        <div style="padding:12px 14px;display:flex;flex-direction:column;gap:2px">
+          <span style="font-size:14px;font-weight:900">mint-700 · #1F8F77</span>
+          <span style="font-size:13px;color:#5c5647">Menthe sur fond clair (texte, liens, pressed)</span>
+        </div>
+      </div>
+      <div style="border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 3px 10px rgba(43,37,25,0.08)">
+        <div style="height:86px;background:#a7f0d8"></div>
+        <div style="padding:12px 14px;display:flex;flex-direction:column;gap:2px">
+          <span style="font-size:14px;font-weight:900">mint-200 · #A7F0D8</span>
+          <span style="font-size:13px;color:#5c5647">Étincelles, texte secondaire sur forest</span>
+        </div>
+      </div>
+      <div style="border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 3px 10px rgba(43,37,25,0.08)">
+        <div style="height:86px;background:#eafaf4"></div>
+        <div style="padding:12px 14px;display:flex;flex-direction:column;gap:2px">
+          <span style="font-size:14px;font-weight:900">lens-50 · #EAFAF4</span>
+          <span style="font-size:13px;color:#5c5647">Lentille, bulles d'indice, surfaces claires</span>
+        </div>
+      </div>
+      <div style="border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 3px 10px rgba(43,37,25,0.08)">
+        <div style="height:86px;background:#123a30"></div>
+        <div style="padding:12px 14px;display:flex;flex-direction:column;gap:2px">
+          <span style="font-size:14px;font-weight:900">ink-900 · #123A30</span>
+          <span style="font-size:13px;color:#5c5647">Yeux, bouche, texte sur surfaces claires</span>
+        </div>
+      </div>
+      <div style="border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 3px 10px rgba(43,37,25,0.08)">
+        <div style="height:86px;background:#c98a4d"></div>
+        <div style="padding:12px 14px;display:flex;flex-direction:column;gap:2px">
+          <span style="font-size:14px;font-weight:900">brass-500 · #C98A4D</span>
+          <span style="font-size:13px;color:#5c5647">Manche, objets de quête, badges</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:14px">
+    <span style="font-size:12px;font-weight:900;letter-spacing:0.18em;text-transform:uppercase;color:#6a6354">Rôles — signaux</span>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px">
+      <div style="border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 3px 10px rgba(43,37,25,0.08)">
+        <div style="height:70px;background:#ffc94d"></div>
+        <div style="padding:12px 14px;display:flex;flex-direction:column;gap:2px">
+          <span style="font-size:14px;font-weight:900">gold-400 · #FFC94D</span>
+          <span style="font-size:13px;color:#5c5647">Trésor trouvé, étoiles, célébration</span>
+        </div>
+      </div>
+      <div style="border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 3px 10px rgba(43,37,25,0.08)">
+        <div style="height:70px;background:#ff8460"></div>
+        <div style="padding:12px 14px;display:flex;flex-direction:column;gap:2px">
+          <span style="font-size:14px;font-weight:900">coral-400 · #FF8460</span>
+          <span style="font-size:13px;color:#5c5647">Joues, chaleur, « presque ! »</span>
+        </div>
+      </div>
+      <div style="border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 3px 10px rgba(43,37,25,0.08)">
+        <div style="height:70px;background:#d9503f"></div>
+        <div style="padding:12px 14px;display:flex;flex-direction:column;gap:2px">
+          <span style="font-size:14px;font-weight:900">alert-600 · #D9503F</span>
+          <span style="font-size:13px;color:#5c5647">Erreur, temps écoulé (usage rare)</span>
+        </div>
+      </div>
+      <div style="border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 3px 10px rgba(43,37,25,0.08)">
+        <div style="height:70px;background:#f4f1e8"></div>
+        <div style="padding:12px 14px;display:flex;flex-direction:column;gap:2px">
+          <span style="font-size:14px;font-weight:900">paper-100 · #F4F1E8</span>
+          <span style="font-size:13px;color:#5c5647">Écrans hors-jeu (réglages, parents)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:14px">
+    <span style="font-size:12px;font-weight:900;letter-spacing:0.18em;text-transform:uppercase;color:#6a6354">Paires validées (contraste ≥ 4.5:1)</span>
+    <div style="display:flex;flex-wrap:wrap;gap:12px">
+      <div style="padding:18px 22px;border-radius:16px;background:#12503f;color:#eafaf4;font-size:16px;font-weight:900">Texte lens-50 sur forest-900</div>
+      <div style="padding:18px 22px;border-radius:16px;background:#12503f;color:#a7f0d8;font-size:16px;font-weight:900">Texte mint-200 sur forest-900</div>
+      <div style="padding:18px 22px;border-radius:16px;background:#eafaf4;color:#123a30;font-size:16px;font-weight:900">Texte ink-900 sur lens-50</div>
+      <div style="padding:18px 22px;border-radius:16px;background:#39c3a2;color:#0d3b30;font-size:16px;font-weight:900">Texte forest-950 sur mint-500</div>
+      <div style="padding:18px 22px;border-radius:16px;background:#ffc94d;color:#2b2519;font-size:16px;font-weight:900">Texte encre sur gold-400</div>
+    </div>
+    <p style="margin:0;font-size:14px;line-height:1.5;color:#6a6354;max-width:620px">À éviter : blanc pur sur mint-500 (2.1:1), mint-500 comme couleur de texte sur paper-100 (2.3:1) — utiliser mint-700 à la place.</p>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:14px">
+    <span style="font-size:12px;font-weight:900;letter-spacing:0.18em;text-transform:uppercase;color:#6a6354">Palette secondaire — Lumi (piste conservée)</span>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+      <div style="width:104px;height:104px;border-radius:16px;background:#22376b"></div>
+      <div style="width:104px;height:104px;border-radius:16px;background:#35569a"></div>
+      <div style="width:104px;height:104px;border-radius:16px;background:#e39a2c"></div>
+      <div style="width:104px;height:104px;border-radius:16px;background:#ffd977"></div>
+      <div style="width:104px;height:104px;border-radius:16px;background:#fff0bd"></div>
+      <p style="margin:0;font-size:14px;line-height:1.5;color:#6a6354;max-width:340px">Bleu nuit / ambre. Utilisable comme thème « nuit » ou pour une seconde mascotte, jamais mélangé au vert dans un même écran.</p>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

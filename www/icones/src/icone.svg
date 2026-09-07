@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 340" width="1024" height="1024">
+  <defs>
+    <clipPath id="iconClip"><rect x="0" y="0" width="340" height="340" rx="78" ry="78"/></clipPath>
+    <clipPath id="handleClip"><rect x="150" y="146" width="36" height="196" rx="18" ry="18"/></clipPath>
+    <clipPath id="lensClip"><circle cx="168" cy="146" r="90"/></clipPath>
+    <radialGradient id="bgGrad" cx="50%" cy="40%" r="66%">
+      <stop offset="0%" stop-color="#1C6B53"/>
+      <stop offset="58%" stop-color="#145244"/>
+      <stop offset="100%" stop-color="#0D3B30"/>
+    </radialGradient>
+    <radialGradient id="lensGrad" cx="44%" cy="38%" r="72%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="60%" stop-color="#E4F6EE"/>
+      <stop offset="100%" stop-color="#CFEADE"/>
+    </radialGradient>
+    <linearGradient id="reflet" x1="15%" y1="0%" x2="85%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="blush" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF8460" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#FF8460" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <g clip-path="url(#iconClip)">
+    <rect x="0" y="0" width="340" height="340" fill="#12503F"/>
+    <rect x="0" y="0" width="340" height="340" fill="url(#bgGrad)"/>
+    <circle cx="170" cy="150" r="145" fill="none" stroke="rgba(160,240,215,0.14)" stroke-width="2"/>
+
+    <g transform="rotate(-38 168 146)">
+      <g clip-path="url(#handleClip)">
+        <rect x="150" y="146" width="36" height="196" rx="18" ry="18" fill="#C98A4D"/>
+        <rect x="156" y="264" width="9" height="62" rx="5" ry="5" fill="rgba(255,255,255,0.2)"/>
+        <rect x="150" y="274" width="36" height="26" fill="#A86C34"/>
+      </g>
+    </g>
+
+    <circle cx="168" cy="146" r="106" fill="#39C3A2"/>
+    <circle cx="168" cy="146" r="90" fill="url(#lensGrad)"/>
+    <g clip-path="url(#lensClip)">
+      <ellipse cx="120" cy="116" rx="28" ry="48" fill="url(#reflet)" transform="rotate(26 120 116)"/>
+      <ellipse cx="123" cy="181" rx="23" ry="15" fill="url(#blush)"/>
+      <ellipse cx="213" cy="181" rx="23" ry="15" fill="url(#blush)"/>
+      <ellipse cx="132" cy="139" rx="18" ry="21" fill="#123A30"/>
+      <circle cx="128.5" cy="132.5" r="6.5" fill="#EAFAF4"/>
+      <ellipse cx="204" cy="139" rx="18" ry="21" fill="#123A30"/>
+      <circle cx="200.5" cy="132.5" r="6.5" fill="#EAFAF4"/>
+      <path transform="translate(138,174)" d="M2,2 C6,20 15,29 29,29 C43,29 52,20 56,2 C50,15 41,21 29,21 C17,21 8,15 2,2 Z" fill="#123A30"/>
+    </g>
+
+    <circle cx="46" cy="280" r="6" fill="#A7F0D8"/>
+    <circle cx="300.5" cy="82.5" r="4.5" fill="#A7F0D8"/>
+    <circle cx="40" cy="68" r="4" fill="#A7F0D8"/>
+  </g>
+</svg>

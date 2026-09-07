@@ -1,0 +1,855 @@
+<title>Test de génération — trois carnets, trois types de lieu</title>
+
+<style>
+  :root {
+    --fond:      #F4F7F8;
+    --papier:    #FFFFFF;
+    --papier-2:  #EBF2F3;
+    --trait:     #D0DFE1;
+    --encre:     #14252B;
+    --encre-2:   #48606A;
+    --gave:      #0B767A;
+    --gave-2:    #D5EDED;
+    --or:        #A96A08;
+    --or-2:      #F9EBD0;
+    --gentiane:  #2A4894;
+    --gentiane-2:#E2E8F8;
+    --display: "American Typewriter", "Rockwell", "Courier New", serif;
+    --corps: "Avenir Next", "Avenir", "Segoe UI", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fond:#0B1417; --papier:#131F24; --papier-2:#1A2C31; --trait:#253B41;
+      --encre:#E6EFEF; --encre-2:#90A7AD; --gave:#3AC3C5; --gave-2:#0F3438;
+      --or:#EFB040; --or-2:#382A0E; --gentiane:#88A9F1; --gentiane-2:#1A2646;
+    }
+  }
+  :root[data-theme="dark"] {
+    --fond:#0B1417; --papier:#131F24; --papier-2:#1A2C31; --trait:#253B41;
+    --encre:#E6EFEF; --encre-2:#90A7AD; --gave:#3AC3C5; --gave-2:#0F3438;
+    --or:#EFB040; --or-2:#382A0E; --gentiane:#88A9F1; --gentiane-2:#1A2646;
+  }
+  :root[data-theme="light"] {
+    --fond:#F4F7F8; --papier:#FFFFFF; --papier-2:#EBF2F3; --trait:#D0DFE1;
+    --encre:#14252B; --encre-2:#48606A; --gave:#0B767A; --gave-2:#D5EDED;
+    --or:#A96A08; --or-2:#F9EBD0; --gentiane:#2A4894; --gentiane-2:#E2E8F8;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--fond); color: var(--encre);
+    font-family: var(--corps); font-size: 17px; line-height: 1.55;
+    -webkit-text-size-adjust: 100%;
+  }
+  .page { max-width: 800px; margin: 0 auto; padding: 0 20px 80px; }
+
+  .nav {
+    position: sticky; top: 0; z-index: 10;
+    margin: 0 -20px 28px; padding: 11px 20px;
+    background: var(--fond);
+    border-bottom: 1px solid var(--trait);
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+  }
+  .nav a {
+    font-size: 13px; font-weight: 600; text-decoration: none;
+    color: var(--encre-2); border: 1px solid var(--trait);
+    padding: 6px 12px; border-radius: 99px; white-space: nowrap;
+  }
+  .nav a:hover, .nav a:focus-visible { color: var(--gave); border-color: var(--gave); }
+
+  .eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--encre-2);
+  }
+  h1 {
+    font-family: var(--display); font-weight: 700; font-size: 36px;
+    line-height: 1.08; margin: 24px 0 12px; text-wrap: balance;
+  }
+  h2 {
+    font-family: var(--display); font-weight: 700; font-size: 27px;
+    line-height: 1.15; margin: 0 0 4px; text-wrap: balance;
+  }
+  h3 {
+    font-family: var(--display); font-weight: 700; font-size: 19px;
+    margin: 26px 0 10px;
+  }
+  h4 {
+    font-size: 12px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--gave);
+    margin: 20px 0 8px;
+  }
+  p { margin: 0 0 14px; }
+  p:last-child { margin-bottom: 0; }
+  .chapeau { font-size: 18px; color: var(--encre-2); }
+
+  .regle { height: 1px; background: var(--trait); margin: 40px 0 0; border: 0; }
+
+  section.lieu { margin-top: 44px; padding-top: 30px; border-top: 3px solid var(--gave); }
+  section.lieu .num {
+    font-family: var(--display); font-size: 13px; font-weight: 700;
+    color: var(--gave); letter-spacing: .1em; text-transform: uppercase;
+  }
+
+  .bloc {
+    background: var(--papier); border: 1px solid var(--trait);
+    border-radius: 13px; padding: 18px 20px; margin: 16px 0;
+  }
+  .traits { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .trait-chip {
+    font-size: 12.5px; font-weight: 600; background: var(--papier-2);
+    border: 1px solid var(--trait); border-radius: 7px; padding: 4px 9px;
+    color: var(--encre-2);
+  }
+  .trait-chip.non { color: var(--or); border-color: color-mix(in srgb, var(--or) 40%, transparent); background: var(--or-2); }
+
+  .mot-bloc {
+    background: var(--gave-2); border-left: 3px solid var(--gave);
+    border-radius: 0 12px 12px 0; padding: 16px 18px; margin: 16px 0;
+  }
+  .mot-bloc .mot {
+    font-family: var(--display); font-size: 30px; font-weight: 700;
+    letter-spacing: .16em; color: var(--gave); line-height: 1.1;
+  }
+  .mot-bloc .lg { font-size: 13px; color: var(--encre-2); margin-top: 2px; }
+
+  ul.trouvailles {
+    columns: 2; column-gap: 26px; margin: 0; padding-left: 20px;
+    font-size: 15.5px;
+  }
+  ul.trouvailles li { margin-bottom: 5px; break-inside: avoid; }
+  @media (max-width: 620px) { ul.trouvailles { columns: 1; } }
+  ul.trouvailles li.rare::after {
+    content: " ★"; color: var(--or); font-size: 12px;
+  }
+
+  .indice {
+    background: var(--papier); border: 1px solid var(--trait);
+    border-radius: 13px; padding: 16px 18px; margin-bottom: 10px;
+    display: grid; grid-template-columns: 38px 1fr; gap: 14px;
+  }
+  .indice .lettre {
+    width: 38px; height: 38px; border-radius: 9px;
+    background: var(--gave-2); color: var(--gave);
+    border: 1px solid color-mix(in srgb, var(--gave) 30%, transparent);
+    display: grid; place-items: center;
+    font-family: var(--display); font-weight: 700; font-size: 18px;
+  }
+  .indice .type {
+    font-size: 11px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--encre-2); margin-bottom: 4px;
+  }
+  .indice .q { font-size: 16.5px; margin-bottom: 8px; }
+  .indice .rep {
+    font-size: 15px; background: var(--papier-2); border-radius: 8px;
+    padding: 9px 12px; color: var(--encre);
+  }
+  .indice .rep b { color: var(--gave); }
+  .indice .bonus {
+    margin-top: 10px; font-size: 14.5px; padding: 11px 13px;
+    background: var(--gentiane-2); border-radius: 9px;
+    border: 1px solid color-mix(in srgb, var(--gentiane) 30%, transparent);
+  }
+  .indice .bonus .lab {
+    display: block; font-size: 11px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--gentiane); margin-bottom: 4px;
+  }
+
+  .reveal {
+    background: var(--or-2); border: 2px solid var(--or);
+    border-radius: 13px; padding: 20px; margin: 18px 0 0;
+  }
+  .reveal .lab {
+    display: block; font-size: 11px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--or); margin-bottom: 8px;
+  }
+  .reveal .mot {
+    font-family: var(--display); font-size: 26px; font-weight: 700;
+    letter-spacing: .14em; color: var(--or); margin-bottom: 10px;
+  }
+
+  .secu {
+    background: var(--or-2); border-left: 3px solid var(--or);
+    border-radius: 0 10px 10px 0; padding: 13px 15px; font-size: 15px;
+    margin: 16px 0;
+  }
+  .secu .lab {
+    display: block; font-size: 11px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--or); margin-bottom: 4px;
+  }
+
+  table.pools { width: 100%; border-collapse: collapse; font-size: 15px; margin: 14px 0; }
+  table.pools th, table.pools td { text-align: left; padding: 9px 12px 9px 0; border-bottom: 1px solid var(--trait); vertical-align: top; }
+  table.pools th { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--encre-2); }
+  table.pools td:first-child { font-weight: 600; white-space: nowrap; padding-right: 18px; }
+  table.pools code {
+    font-family: var(--display); font-size: 14px; letter-spacing: .06em;
+    background: var(--gave-2); color: var(--gave); padding: 1px 6px; border-radius: 5px;
+    display: inline-block; margin: 1px 3px 1px 0;
+  }
+  .scroll-x { overflow-x: auto; }
+
+  pre {
+    background: var(--papier-2); border: 1px solid var(--trait);
+    border-radius: 11px; padding: 16px; overflow-x: auto;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 13px; line-height: 1.55; margin: 14px 0;
+  }
+  code.inline {
+    font-family: ui-monospace, Menlo, monospace; font-size: .88em;
+    background: var(--papier-2); padding: 1px 5px; border-radius: 4px;
+  }
+
+  .verdict { border-top: 3px solid var(--or); padding-top: 30px; margin-top: 48px; }
+  .verdict .item { margin-bottom: 22px; }
+  .verdict .item h4 { color: var(--or); }
+
+  :focus-visible { outline: 3px solid var(--gentiane); outline-offset: 2px; border-radius: 6px; }
+</style>
+
+<div class="page">
+
+  <nav class="nav">
+    <a href="#musee">Musée d'art</a>
+    <a href="#ville">Ville</a>
+    <a href="#mer">Bord de mer</a>
+    <a href="#mots">Les 11 pools de mots</a>
+    <a href="#prompt">Le prompt</a>
+    <a href="#verdict">Verdict</a>
+  </nav>
+
+  <span class="eyebrow">Test de génération · 29 juillet 2026</span>
+  <h1>Trois carnets, trois types de lieu</h1>
+  <p class="chapeau">Objectif : savoir si un carnet généré à partir du seul <em>type de lieu</em> peut atteindre le niveau d'écriture de la chasse au trésor de Gourette. Trois types volontairement éloignés, dont deux intérieurs ou urbains, là où le vocabulaire sensoriel est le plus pauvre et le risque de fadeur le plus grand.</p>
+
+  <div class="bloc">
+    <h4 style="margin-top:0">La règle qui structure tout</h4>
+    <p style="margin-bottom:0">Le mot à deviner est un <strong>mot propre au type de lieu que les enfants ne connaissent probablement pas</strong>, et qui leur est expliqué au moment de la révélation. C'est la généralisation du moment « gave » : on ne gagne pas seulement un trésor, on gagne un mot. Sa <strong>longueur fixe le nombre d'indices</strong>, donc on choisit un mot court pour une sortie courte.</p>
+  </div>
+
+  <!-- ============================ MUSÉE ============================ -->
+  <section class="lieu" id="musee">
+    <span class="num">Carnet 1</span>
+    <h2>Musée d'art</h2>
+    <p class="chapeau">Le cas le plus difficile : un seul sens vraiment disponible, interdiction de toucher, obligation de chuchoter.</p>
+
+    <div class="bloc">
+      <h4 style="margin-top:0">Traits lus par le générateur</h4>
+      <div class="traits">
+        <span class="trait-chip">intérieur</span>
+        <span class="trait-chip non">toucher interdit</span>
+        <span class="trait-chip">bruit : modéré</span>
+        <span class="trait-chip non">ramasser : non</span>
+        <span class="trait-chip">déplacement libre</span>
+        <span class="trait-chip non">pas de ciel</span>
+        <span class="trait-chip non">pas de vivant</span>
+        <span class="trait-chip">foule : passants</span>
+        <span class="trait-chip">sens : vue, ouïe</span>
+        <span class="trait-chip">durée : 1 h 30</span>
+      </div>
+    </div>
+
+    <div class="mot-bloc">
+      <div class="eyebrow" style="color:var(--gave)">Mot à deviner</div>
+      <div class="mot">ESQUISSE</div>
+      <div class="lg">8 lettres, donc 8 indices. Valable dans n'importe quel musée d'art au monde.</div>
+    </div>
+
+    <h3>La liste des trouvailles</h3>
+    <h4>Ouvre l'œil</h4>
+    <ul class="trouvailles">
+      <li>Un tableau plus grand que toi</li>
+      <li>Un tableau plus petit que ta main</li>
+      <li>Quelqu'un qui sourit vraiment dans un tableau</li>
+      <li>Un animal caché quelque part</li>
+      <li>Des pieds nus</li>
+      <li>Un chapeau</li>
+      <li>Un miroir ou un reflet peint</li>
+      <li>Une fenêtre peinte, avec un paysage derrière</li>
+      <li>Quelqu'un qui te regarde droit dans les yeux</li>
+      <li>Un tableau où il pleut, ou il neige</li>
+      <li>La même couleur dans trois salles différentes</li>
+      <li>Un cadre plus intéressant que son tableau</li>
+      <li>Une signature (cherche les coins)</li>
+      <li>Un tableau où il n'y a aucun humain</li>
+      <li>Un coup de pinceau en relief : regarde de côté</li>
+      <li>Une craquelure dans la peinture</li>
+      <li class="rare">De la vraie feuille d'or</li>
+      <li class="rare">Une œuvre en cours de restauration ou de décrochage</li>
+    </ul>
+
+    <h4>Écoute et sens</h4>
+    <ul class="trouvailles">
+      <li>Le bruit de tes pas change en changeant de salle</li>
+      <li>Un parquet qui grince</li>
+      <li>Le silence, quand plus personne ne parle</li>
+      <li>L'odeur du musée : cire ? vieux papier ? rien du tout ?</li>
+      <li>Le courant d'air d'une bouche d'aération</li>
+      <li>Deux personnes qui chuchotent</li>
+      <li class="rare">Une salle où vous êtes tout seuls</li>
+    </ul>
+
+    <h4>À faire, dans n'importe quelle salle</h4>
+    <ul class="trouvailles">
+      <li>Choisir le tableau qu'on emporterait à la maison</li>
+      <li>Imiter la pose d'un personnage</li>
+      <li>Trouver le tableau qui fait un peu peur, et rester devant dix secondes</li>
+      <li>Inventer ce que deux personnages se disent</li>
+      <li>Lire un cartel en entier et retenir la date</li>
+      <li>Regarder un tableau à un pas, puis à dix pas</li>
+      <li>S'asseoir sur un banc une minute sans rien faire</li>
+      <li>Compter les œuvres d'une salle sans se tromper</li>
+      <li class="rare">Un gardien qui sourit</li>
+      <li class="rare">Un artiste en train de dessiner sur place</li>
+    </ul>
+    <p style="font-size:13.5px;color:var(--encre-2)">★ = les rares, gros points. 35 trouvailles au total.</p>
+
+    <h3>Les 8 indices</h3>
+
+    <div class="indice">
+      <div class="lettre">E</div>
+      <div>
+        <div class="type">Devinette</div>
+        <div class="q">« Je te suis du regard où que tu ailles dans la salle, et pourtant je n'ai jamais bougé les yeux. »</div>
+        <div class="rep"><b>Un portrait.</b> Le peintre a peint les yeux de face : d'où que tu regardes, ils te regardent. Recule, avance, va sur le côté : il te suit.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">S</div>
+      <div>
+        <div class="type">Défi</div>
+        <div class="q">Trouve deux tableaux côte à côte. Devine lequel a été peint en premier, puis vérifie sur les petites étiquettes.</div>
+        <div class="rep">Bien joué même si vous vous êtes trompés. Ces étiquettes s'appellent des <b>cartels</b>.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">Q</div>
+      <div>
+        <div class="type">Question</div>
+        <div class="q">Pourquoi beaucoup de très vieux tableaux sont-ils sombres et un peu jaunes ?</div>
+        <div class="rep">Parce que <b>le vernis qui les protège a jauni</b> avec les siècles. Sous ce voile, les couleurs d'origine sont beaucoup plus vives. Quand on nettoie un tableau, on redécouvre un bleu que personne n'avait vu depuis 300 ans.</div>
+        <div class="bonus"><span class="lab">Défi des grands</span>Pourquoi met-on du vernis sur un tableau, si ça finit par jaunir ?<br><strong>→</strong> Parce que sans lui la peinture s'écaille, se salit et l'humidité l'attaque. On accepte le jaune pour éviter la ruine, et on le remplace tous les cent ans environ.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">U</div>
+      <div>
+        <div class="type">Défi</div>
+        <div class="q">Colle-toi à un tableau, à un pas. Tu vois des traces, des bosses, des poils de pinceau ? Recule maintenant, dix pas. À quel moment exactement ça redevient une image ?</div>
+        <div class="rep">De près, c'est de la matière. De loin, c'est un monde. C'est tout le métier.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">I</div>
+      <div>
+        <div class="type">Question</div>
+        <div class="q">On trouve parfois quelque chose de caché <em>sous</em> la peinture d'un tableau ancien. Quoi ?</div>
+        <div class="rep"><b>Un autre tableau.</b> Les toiles coûtaient cher : les peintres repeignaient par-dessus un travail raté ou invendu. Aujourd'hui, en passant le tableau aux rayons X, on découvre le dessin du dessous — parfois un tout autre personnage, à l'envers.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">S</div>
+      <div>
+        <div class="type">Défi</div>
+        <div class="q">Chacun choisit un personnage en secret et prend sa pose, sans rien dire. Les autres doivent retrouver le tableau.</div>
+        <div class="rep">Le plus dur à imiter gagne. Attention aux gardiens : on ne recule pas sans regarder.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">S</div>
+      <div>
+        <div class="type">Question</div>
+        <div class="q">Pourquoi n'a-t-on absolument pas le droit de toucher les œuvres ?</div>
+        <div class="rep">Parce que <b>la graisse de tes doigts reste dans la matière et l'abîme pour toujours</b>. Invisible aujourd'hui, une tache brune dans vingt ans. Un doigt ne fait presque rien ; un million de doigts détruit un tableau.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">E</div>
+      <div>
+        <div class="type">Défi</div>
+        <div class="q">Le tableau que tu emporterais chez toi : montre-le et dis pourquoi, en une seule phrase.</div>
+        <div class="rep">Pas de bonne réponse. C'est la seule question du musée à laquelle personne d'autre ne peut répondre pour toi.</div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <span class="lab">Le coffre s'ouvre</span>
+      <div class="mot">ESQUISSE</div>
+      <p>Avant de se lancer dans un grand tableau, un peintre fait souvent un dessin rapide pour essayer son idée : une <strong>esquisse</strong>. Quelques traits, aucun détail, juste l'élan. Les musées en gardent beaucoup, et elles sont souvent plus vivantes que le tableau fini — parce qu'on y voit la main qui cherche, qui se trompe, qui recommence.</p>
+      <p style="margin-bottom:0">Aujourd'hui, vous avez fait l'esquisse de votre visite. La vraie, ce sera la prochaine fois.</p>
+    </div>
+
+    <div class="secu">
+      <span class="lab">Rappel glissé au début</span>
+      On ne touche rien, même pas les cadres. On marche, on ne court pas. Et on recule toujours en regardant derrière soi : c'est comme ça qu'on renverse une sculpture.
+    </div>
+  </section>
+
+  <!-- ============================ VILLE ============================ -->
+  <section class="lieu" id="ville">
+    <span class="num">Carnet 2</span>
+    <h2>Ville</h2>
+    <p class="chapeau">Centre-ville, vieille ville ou village : mêmes trouvailles. Le principe du carnet est de faire regarder ce que personne ne regarde.</p>
+
+    <div class="bloc">
+      <h4 style="margin-top:0">Traits lus par le générateur</h4>
+      <div class="traits">
+        <span class="trait-chip">extérieur</span>
+        <span class="trait-chip">toucher prudent</span>
+        <span class="trait-chip">bruit libre</span>
+        <span class="trait-chip non">ramasser : non (sauf déchets)</span>
+        <span class="trait-chip">déplacement : trottoirs</span>
+        <span class="trait-chip">ciel visible</span>
+        <span class="trait-chip">vivant : oiseaux, arbres</span>
+        <span class="trait-chip">foule : dense</span>
+        <span class="trait-chip">sens : les cinq</span>
+        <span class="trait-chip">durée : 2 h</span>
+      </div>
+    </div>
+
+    <div class="mot-bloc">
+      <div class="eyebrow" style="color:var(--gave)">Mot à deviner</div>
+      <div class="mot">ENSEIGNE</div>
+      <div class="lg">8 lettres, 8 indices. Valable dans n'importe quelle ville du monde.</div>
+    </div>
+
+    <h3>La liste des trouvailles</h3>
+    <h4>Lève la tête — personne ne le fait jamais</h4>
+    <ul class="trouvailles">
+      <li>Une date gravée dans la pierre</li>
+      <li>Un visage sculpté sur une façade</li>
+      <li>Une statue sur un toit ou un balcon</li>
+      <li>Un pigeon posé sur la tête d'une statue</li>
+      <li>Une fenêtre murée, bouchée avec des briques</li>
+      <li>Un balcon transformé en jungle</li>
+      <li>Une girouette</li>
+      <li>Une cheminée de travers</li>
+      <li>Une vieille publicité peinte à moitié effacée sur un mur</li>
+      <li class="rare">Une plaque en mémoire de quelqu'un</li>
+    </ul>
+
+    <h4>Baisse la tête</h4>
+    <ul class="trouvailles">
+      <li>Une plaque d'égout avec un dessin dessus</li>
+      <li>Un pavé qui n'est pas comme les autres</li>
+      <li>Une herbe qui pousse dans une fissure</li>
+      <li>Une trace de patte séchée dans du ciment</li>
+      <li>Un chewing-gum qui ressemble à quelque chose</li>
+      <li class="rare">Une borne, un anneau ou un crochet dont personne ne connaît plus l'usage</li>
+    </ul>
+
+    <h4>Les gens, les bruits, les odeurs</h4>
+    <ul class="trouvailles">
+      <li>Une langue que tu ne reconnais pas</li>
+      <li>Deux personnes qui rient franchement</li>
+      <li>Une horloge ou une cloche qui sonne</li>
+      <li>Une sirène au loin</li>
+      <li>De la musique qui sort d'une fenêtre</li>
+      <li>Un chien plus petit qu'une chaussure</li>
+      <li>L'odeur du pain</li>
+      <li>L'odeur du café</li>
+      <li>Une odeur de fleurs</li>
+      <li>Une odeur franchement mauvaise</li>
+      <li class="rare">Un chat, en pleine ville</li>
+    </ul>
+
+    <h4>À faire</h4>
+    <ul class="trouvailles">
+      <li>Compter les vélos d'une seule rue</li>
+      <li>Trouver le nom de rue le plus rigolo</li>
+      <li>Demander l'heure à quelqu'un, poliment</li>
+      <li>Élire le banc le mieux placé de la ville, et s'y asseoir</li>
+      <li>Suivre un pigeon pendant vingt pas</li>
+      <li>Désigner le plus vieux bâtiment de la rue, et justifier</li>
+      <li>Repérer une boutique qui a fermé pour toujours</li>
+      <li>Ramasser un déchet qui n'est pas à nous</li>
+      <li class="rare">Un tag vraiment beau, que tu défendrais</li>
+      <li class="rare">Une fontaine dont l'eau coule encore</li>
+    </ul>
+    <p style="font-size:13.5px;color:var(--encre-2)">37 trouvailles au total.</p>
+
+    <h3>Les 8 indices</h3>
+
+    <div class="indice">
+      <div class="lettre">E</div>
+      <div>
+        <div class="type">Devinette</div>
+        <div class="q">« Je suis en pierre, je regarde cette rue depuis deux cents ans, et personne ne m'a jamais dit bonjour. »</div>
+        <div class="rep"><b>Un visage sculpté sur une façade.</b> Cherchez-en un et dites-lui bonjour. Il attend depuis longtemps.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">N</div>
+      <div>
+        <div class="type">Défi</div>
+        <div class="q">Dans une ville, tout le monde regarde devant soi ou son téléphone. Lève la tête au-dessus du premier étage et trouve trois choses que personne d'autre dans cette rue n'est en train de voir.</div>
+        <div class="rep">C'est là qu'on a laissé les statues, les dates et les animaux sculptés : trop haut pour être abîmés, trop haut pour être vus.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">S</div>
+      <div>
+        <div class="type">Question</div>
+        <div class="q">Pourquoi les rues des vieux quartiers sont-elles tordues, alors que les rues récentes sont droites ?</div>
+        <div class="rep">Parce qu'elles <b>suivent d'anciens chemins</b> : des sentiers de bêtes, un ruisseau aujourd'hui enterré, le contour d'un mur disparu. Personne ne les a dessinées, elles se sont usées à force de passer.</div>
+        <div class="bonus"><span class="lab">Défi des grands</span>Beaucoup de villes ont un grand boulevard qui fait le tour du centre, souvent très large et un peu circulaire. Qu'y avait-il à cet endroit avant ?<br><strong>→</strong> Les remparts. On a démoli la muraille et pavé son emplacement. Quand tu marches sur ce boulevard, tu marches sur l'épaisseur d'un mur.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">E</div>
+      <div>
+        <div class="type">Défi</div>
+        <div class="q">Trouvez la date la plus ancienne gravée quelque part : une façade, une porte, une fontaine. Puis calculez l'âge du bâtiment.</div>
+        <div class="rep">Comparez avec l'âge du plus vieux de la famille. Il en faut combien, bout à bout, pour arriver jusqu'à cette date ?</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">I</div>
+      <div>
+        <div class="type">Question</div>
+        <div class="q">Ces vieilles publicités peintes directement sur les murs ont survécu cinquante ou cent ans. Souvent, c'est parce qu'elles ont été protégées. Par quoi ?</div>
+        <div class="rep">Par <b>l'immeuble voisin, collé contre elles</b> — et démoli depuis. À l'abri de la pluie et du soleil pendant des décennies, la peinture est restée. Le jour où le mur mitoyen est tombé, une publicité des années 1930 est réapparue intacte.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">G</div>
+      <div>
+        <div class="type">Défi</div>
+        <div class="q">Chacun choisit une fenêtre éclairée et invente qui habite derrière : le prénom, le métier, ce qu'il mange ce soir.</div>
+        <div class="rep">Le plus crédible gagne, pas le plus drôle. Et on ne montre pas du doigt.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">N</div>
+      <div>
+        <div class="type">Question</div>
+        <div class="q">Les plaques d'égout sont presque toujours rondes. Pourquoi pas carrées ?</div>
+        <div class="rep">Parce qu'<b>une plaque ronde ne peut pas tomber dans son propre trou</b>. Une plaque carrée, si tu la mets en diagonale, passe — et elle tombe sur la tête de celui qui est en bas.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">E</div>
+      <div>
+        <div class="type">Défi</div>
+        <div class="q">Le mot de la fin : la chose la plus étrange que vous ayez vue aujourd'hui, chacun la sienne.</div>
+        <div class="rep">Elle était là hier aussi. Et avant-hier.</div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <span class="lab">Le coffre s'ouvre</span>
+      <div class="mot">ENSEIGNE</div>
+      <p>Une <strong>enseigne</strong>, c'est ce qu'on accroche au-dessus d'une boutique pour dire ce qu'on y vend. Aujourd'hui c'est un panneau avec des lettres. Mais avant, presque personne ne savait lire : alors le boulanger suspendait un énorme bretzel doré, le serrurier une clé géante, le coiffeur un plat à barbe en cuivre. On lisait la rue avec les yeux, pas avec des mots.</p>
+      <p style="margin-bottom:0">Il en reste, dans les vieilles villes, accrochées au coin des rues. Maintenant que vous savez, vous allez en voir partout.</p>
+    </div>
+
+    <div class="secu">
+      <span class="lab">Rappel glissé au début</span>
+      On regarde en haut, mais on s'arrête d'abord : lever la tête en marchant, c'est comme ça qu'on descend d'un trottoir sans le voir. On traverse ensemble. Et on ne suit jamais quelqu'un qui nous propose de venir voir quelque chose.
+    </div>
+  </section>
+
+  <!-- ============================ MER ============================ -->
+  <section class="lieu" id="mer">
+    <span class="num">Carnet 3</span>
+    <h2>Bord de mer, hors saison</h2>
+    <p class="chapeau">Le cas facile, celui qui ressemble le plus à Gourette. Utile comme témoin : si celui-ci n'est pas nettement meilleur que les deux autres, c'est que je me trompe sur la difficulté des lieux pauvres en sensations.</p>
+
+    <div class="bloc">
+      <h4 style="margin-top:0">Traits lus par le générateur</h4>
+      <div class="traits">
+        <span class="trait-chip">extérieur</span>
+        <span class="trait-chip">toucher libre</span>
+        <span class="trait-chip">bruit libre</span>
+        <span class="trait-chip">ramasser oui</span>
+        <span class="trait-chip">déplacement libre</span>
+        <span class="trait-chip">ciel visible</span>
+        <span class="trait-chip">vivant oui</span>
+        <span class="trait-chip">eau</span>
+        <span class="trait-chip">foule : désert</span>
+        <span class="trait-chip">sens : les cinq</span>
+        <span class="trait-chip non">marée : danger</span>
+      </div>
+    </div>
+
+    <div class="mot-bloc">
+      <div class="eyebrow" style="color:var(--gave)">Mot à deviner</div>
+      <div class="mot">EMBRUNS</div>
+      <div class="lg">7 lettres, 7 indices — sortie plus courte. Autres mots du même pool : ESTRAN, RESSAC, MARNAGE, DUNE.</div>
+    </div>
+
+    <h3>La liste des trouvailles</h3>
+    <h4>Ce que la mer a posé sur le sable</h4>
+    <ul class="trouvailles">
+      <li>Un coquillage entier, sans une fissure</li>
+      <li>Un coquillage avec un trou parfaitement rond</li>
+      <li>Un morceau de verre poli, devenu doux</li>
+      <li>Une plume</li>
+      <li>Un bois flotté usé comme un os</li>
+      <li>Une empreinte d'oiseau</li>
+      <li>Un galet parfaitement rond</li>
+      <li>Un galet avec une bande blanche en travers</li>
+      <li>Une algue en forme de ruban</li>
+      <li>Une carapace de crabe vide</li>
+      <li>Un os de seiche, blanc et léger</li>
+      <li>Un morceau de filet ou de corde</li>
+      <li>Un déchet en plastique — à ramasser</li>
+      <li class="rare">Un objet venu de très loin</li>
+    </ul>
+
+    <h4>La mer et le ciel</h4>
+    <ul class="trouvailles">
+      <li>Une vague qui casse tout en blanc</li>
+      <li>Un bateau à l'horizon</li>
+      <li>Un oiseau qui plonge dans l'eau pour pêcher</li>
+      <li>Un nuage nettement plus sombre que les autres</li>
+      <li>La ligne d'horizon, parfaitement droite</li>
+      <li class="rare">Un phare allumé en plein jour</li>
+      <li class="rare">Un phoque, un dauphin, un marsouin</li>
+    </ul>
+
+    <h4>Écoute, sens, touche</h4>
+    <ul class="trouvailles">
+      <li>Le bruit du ressac, les yeux fermés</li>
+      <li>Le crissement du sable sec sous les pieds</li>
+      <li>Le goût du sel sur les lèvres</li>
+      <li>Le vent qui pousse dans le dos</li>
+      <li>L'eau glacée sur les chevilles</li>
+      <li>L'odeur des algues chauffées au soleil</li>
+      <li>Un coquillage collé à l'oreille</li>
+    </ul>
+
+    <h4>À faire</h4>
+    <ul class="trouvailles">
+      <li>Écrire son prénom là où la mer viendra l'effacer</li>
+      <li>Faire un ricochet</li>
+      <li>Creuser jusqu'à trouver le sable mouillé</li>
+      <li>Courir contre une vague sans se faire mouiller</li>
+      <li>Construire quelque chose que la marée détruira</li>
+      <li>Marcher cinquante pas pieds nus</li>
+      <li>Rapporter le plus beau caillou… ou décider de le laisser</li>
+      <li class="rare">Une méduse : on regarde, on ne touche pas</li>
+      <li class="rare">Une étoile de mer</li>
+    </ul>
+    <p style="font-size:13.5px;color:var(--encre-2)">39 trouvailles au total.</p>
+
+    <h3>Les 7 indices</h3>
+
+    <div class="indice">
+      <div class="lettre">E</div>
+      <div>
+        <div class="type">Question</div>
+        <div class="q">La mer monte et descend deux fois par jour. Qui la fait bouger ?</div>
+        <div class="rep"><b>La Lune.</b> Elle tire l'eau vers elle et forme un renflement, comme si l'océan se penchait de son côté. La Terre tourne dessous : chaque plage passe donc deux fois par jour dans le renflement.</div>
+        <div class="bonus"><span class="lab">Défi des grands</span>Certains jours la mer monte beaucoup plus haut que d'habitude. Ça arrive quand la Lune est pleine, ou toute nouvelle. Pourquoi ces deux moments-là ?<br><strong>→</strong> Parce que ce sont les moments où le Soleil et la Lune sont alignés avec la Terre : les deux tirent dans le même axe et leurs forces s'additionnent. Ce sont les grandes marées.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">M</div>
+      <div>
+        <div class="type">Défi</div>
+        <div class="q">Trouve la ligne de débris, d'algues et de bois qui traverse la plage en longueur. C'est la trace exacte de la dernière marée haute — le point le plus loin où l'eau est montée. Fouillez-la : c'est là que la mer range ce qu'elle a ramassé.</div>
+        <div class="rep">Elle s'appelle <b>la laisse de mer</b>. Tout ce qui est intéressant sur une plage est dedans.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">B</div>
+      <div>
+        <div class="type">Question</div>
+        <div class="q">Certains coquillages vides ont un petit trou parfaitement rond, comme percé à la perceuse. Qui l'a fait ?</div>
+        <div class="rep">Un <b>escargot de mer</b>. Il se colle sur le coquillage et râpe la coquille pendant des heures avec sa langue couverte de dents minuscules, jusqu'à percer, puis mange l'animal à l'intérieur. Chaque trou rond que tu trouves est la fin d'une longue histoire.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">R</div>
+      <div>
+        <div class="type">Défi</div>
+        <div class="q">Ramasse le galet le plus rond que tu trouves. Puis cherche l'endroit de la plage où ils sont <em>tous</em> ronds, et l'endroit où ils sont anguleux. Pourquoi pas au même endroit ?</div>
+        <div class="rep">Là où les vagues tapent le plus fort, les pierres roulent le plus : elles s'usent les unes contre les autres. Un galet bien rond a passé des milliers d'années dans le bruit.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">U</div>
+      <div>
+        <div class="type">Question</div>
+        <div class="q">Un morceau de verre cassé devient doux et dépoli à force de rouler dans la mer. Ça prend combien de temps ?</div>
+        <div class="rep"><b>Des dizaines d'années.</b> Le verre que tu tiens a probablement été jeté avant ta naissance. Il n'a plus un seul angle vif, et il est devenu joli — c'est la seule fois où on est content de trouver un déchet.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">N</div>
+      <div>
+        <div class="type">Défi</div>
+        <div class="q">Écris ton prénom sur le sable, assez près de l'eau pour que la mer vienne le chercher. Repassez voir avant de partir.</div>
+        <div class="rep">Il n'y sera plus. C'est un peu triste et c'est très bien.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">S</div>
+      <div>
+        <div class="type">Question</div>
+        <div class="q">Pourquoi l'eau de mer est-elle salée, alors que l'eau de pluie et celle des rivières ne le sont pas ?</div>
+        <div class="rep">Parce que la pluie <b>arrache un peu de sel aux roches</b> qu'elle traverse, les rivières le transportent jusqu'à la mer, et là l'eau s'évapore en laissant le sel derrière elle. Ça fait des millions d'années que ça dure : la mer, c'est un verre d'eau qu'on remplit sans jamais le vider.</div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <span class="lab">Le coffre s'ouvre</span>
+      <div class="mot">EMBRUNS</div>
+      <p>Les <strong>embruns</strong>, ce sont les gouttelettes d'eau de mer que le vent arrache à la crête des vagues et emporte dans l'air. C'est pour ça que tu as le goût du sel sur les lèvres sans être entré dans l'eau, que tes cheveux sont collants et tes lunettes voilées.</p>
+      <p style="margin-bottom:0">Les embruns vont loin. Ils salent la terre et déforment les arbres du littoral, qui poussent penchés et coiffés du même côté, comme peignés par la mer. Regardez les arbres en repartant : ils montrent tous la même direction.</p>
+    </div>
+
+    <div class="secu">
+      <span class="lab">Rappel glissé au début</span>
+      La marée monte plus vite qu'on ne marche, et elle coupe les chemins derrière vous : on vérifie l'horaire avant de partir et on ne s'engage pas sur des rochers isolés. Les rochers mouillés sont glissants. On ne tourne jamais le dos à la mer.
+    </div>
+  </section>
+
+  <!-- ============================ POOLS ============================ -->
+  <section class="lieu" id="mots">
+    <span class="num">Livrable</span>
+    <h2>Les mots à deviner, pour les 11 types</h2>
+    <p class="chapeau">Un pool par type. Tous respectent la même règle : propres au type de lieu, valables sur n'importe quel exemplaire de ce type dans le monde, et probablement inconnus d'un enfant. La longueur du mot choisi fixe le nombre d'indices, donc la durée de la sortie.</p>
+
+    <div class="scroll-x">
+      <table class="pools">
+        <thead><tr><th>Type de lieu</th><th>Mots du pool</th></tr></thead>
+        <tbody>
+          <tr><td>Montagne</td><td><code>ESTIVE</code><code>ALPAGE</code><code>NEVE</code><code>CRETE</code><code>PIERRIER</code><code>TORRENT</code></td></tr>
+          <tr><td>Forêt &amp; campagne</td><td><code>LISIERE</code><code>SOUSBOIS</code><code>HUMUS</code><code>CLAIRIERE</code><code>SEVE</code><code>HAIE</code></td></tr>
+          <tr><td>Bord de mer</td><td><code>EMBRUNS</code><code>ESTRAN</code><code>RESSAC</code><code>MARNAGE</code><code>DUNE</code></td></tr>
+          <tr><td>Lac &amp; rivière</td><td><code>MEANDRE</code><code>BERGE</code><code>ROSEAU</code><code>SOURCE</code><code>GALET</code></td></tr>
+          <tr><td>Ville</td><td><code>ENSEIGNE</code><code>FACADE</code><code>PAVE</code><code>IMPASSE</code><code>PORCHE</code><code>FRONTON</code></td></tr>
+          <tr><td>Parc &amp; jardin</td><td><code>MASSIF</code><code>ECORCE</code><code>POLLEN</code><code>BOSQUET</code><code>ALLEE</code><code>TREILLE</code></td></tr>
+          <tr><td>Monument &amp; lieu de culte</td><td><code>VITRAIL</code><code>VOUTE</code><code>MEURTRIERE</code><code>CLOCHER</code><code>CRYPTE</code><code>GARGOUILLE</code></td></tr>
+          <tr><td>Musée d'art</td><td><code>ESQUISSE</code><code>VERNIS</code><code>CARTEL</code><code>PALETTE</code><code>RELIEF</code></td></tr>
+          <tr><td>Musée de sciences &amp; nature</td><td><code>FOSSILE</code><code>SQUELETTE</code><code>VITRINE</code><code>MAQUETTE</code><code>MINERAL</code><code>ESPECE</code></td></tr>
+          <tr><td>Zoo &amp; aquarium</td><td><code>ENCLOS</code><code>NAGEOIRE</code><code>CARAPACE</code><code>PLUMAGE</code><code>TERRIER</code><code>BASSIN</code></td></tr>
+          <tr><td>Trajet &amp; attente</td><td><code>HORIZON</code><code>ITINERAIRE</code><code>ESCALE</code><code>HUBLOT</code><code>RAIL</code><code>PAYSAGE</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:14.5px;color:var(--encre-2)">Note d'implémentation : les mots sont stockés sans accent pour que la saisie du raccourci « on a deviné ! » reste simple. La révélation, elle, affiche l'orthographe correcte avec accents.</p>
+  </section>
+
+  <!-- ============================ PROMPT ============================ -->
+  <section class="lieu" id="prompt">
+    <span class="num">Livrable</span>
+    <h2>Le prompt générateur</h2>
+    <p class="chapeau">C'est l'actif du produit. Tout le reste est du code.</p>
+
+<pre>Tu écris une chasse au trésor pour des enfants, à faire pendant une sortie
+en famille. Elle sera jouée sur un seul téléphone, partagée entre les enfants.
+
+ENTRÉES
+  type_de_lieu : &lt;un des 11 types&gt;
+  traits       : &lt;objet, préréglage du type, éventuellement modifié&gt;
+  ages         : &lt;ex. 6-11&gt;
+  duree        : &lt;ex. 2 h&gt;
+  mot          : &lt;mot tiré du pool du type&gt;
+
+RÈGLE ABSOLUE — L'INDÉPENDANCE AU LIEU
+Aucun élément ne doit supposer un endroit précis. Tout doit être trouvable
+dans N'IMPORTE QUEL lieu de ce type, sur n'importe quel continent, à
+n'importe quelle saison. Interdits : noms propres, monuments identifiés,
+espèces locales, « le grand rocher à gauche du sentier ».
+Test à t'appliquer : est-ce que ça marche aussi bien dans les Andes,
+dans le Jura et en Tasmanie ? Sinon, réécris.
+
+STRUCTURE
+1. Une liste de 30 à 40 trouvailles, groupées en 4 familles, cochables
+   à tout moment et dans n'importe quel ordre. C'est le jeu de fond :
+   c'est ce que les enfants utilisent réellement. Points : 5 / 10 / 15,
+   et 20-25 pour 5 à 8 « rares » qui tiennent la tension jusqu'au bout.
+2. Autant d'indices que le mot a de lettres. Chaque indice est COURT
+   (on est debout, en marche, avec une guide qui n'attend pas) et donne
+   une lettre. Alterne : devinette, question à choix, défi à faire.
+3. Une révélation finale qui explique le mot.
+4. Un encart de sécurité propre au lieu, glissé au début, jamais moralisateur.
+
+QUALITÉ — c'est là que tout se joue
+- Chaque question doit se refermer sur UN FAIT VRAI, CONCRET ET SURPRENANT.
+  Pas « c'est joli » : « la graisse de tes doigts abîme la peinture pour
+  toujours », « une plaque ronde ne peut pas tomber dans son trou »,
+  « cette publicité a été protégée par l'immeuble voisin, démoli depuis ».
+- N'affirme QUE ce dont tu es sûr. En cas de doute, change de fait.
+  Un fait faux détruit la confiance des parents, qui vérifient.
+- Bannis le vague : « trouve un arbre », « observe la nature »,
+  « admire le paysage » sont des échecs. Une trouvaille doit être
+  précise, vérifiable, et faire voir autrement quelque chose de banal.
+- Varie les sens selon les traits. Si le lieu est pauvre en odeurs et
+  en sons, ne compense pas par du remplissage visuel : fabrique des
+  défis d'ACTION et de COMPARAISON (de près / de loin, avant / après).
+- Ton : on tutoie l'enfant, phrases courtes, aucune condescendance,
+  aucun point d'exclamation de complaisance. De l'humour sec plutôt
+  que de l'enthousiasme.
+
+DEUX ÂGES DANS LA MÊME PARTIE
+Le défi principal doit être réussissable par le plus jeune. Environ un
+indice sur trois porte en plus un « défi des grands » : une question qui
+demande un raisonnement, un calcul ou une déduction.
+
+INTERDITS DE SÉCURITÉ, quels que soient les traits
+Ne jamais envoyer un enfant vers l'eau, la route, une falaise, un animal
+sauvage ou un inconnu. Ne jamais demander de toucher un être vivant, de
+cueillir une plante protégée, de grimper, ni de s'éloigner du groupe.
+Si traits.toucher = interdit : aucun défi tactile.
+Si traits.ramasser = non : aucun défi de collecte.
+
+SORTIE
+JSON strict conforme au schéma fourni. Aucun texte hors du JSON.</pre>
+  </section>
+
+  <!-- ============================ VERDICT ============================ -->
+  <section class="verdict" id="verdict">
+    <span class="eyebrow" style="color:var(--or)">Ce que le test m'a appris</span>
+    <h2 style="margin-top:6px">Verdict, y compris ce qui ne va pas</h2>
+
+    <div class="item">
+      <h4>La thèse tient, et le cas difficile passe</h4>
+      <p>Je m'attendais à ce que le musée d'art soit fade. Il ne l'est pas, mais il a fallu changer de levier : là où la montagne offre des odeurs, des bruits et des objets à ramasser, le musée n'a que la vue. La solution n'est pas plus de choses à voir, c'est des défis de <strong>comparaison et d'action</strong> — regarder à un pas puis à dix, imiter une pose, deviner l'ordre de deux tableaux. Cette règle est maintenant dans le prompt, et c'est probablement la découverte la plus utile du test.</p>
+    </div>
+
+    <div class="item">
+      <h4>Le vrai risque n'est pas la fadeur, c'est le faux</h4>
+      <p>En écrivant, je me suis appuyé sur des faits précis : l'escargot qui perce les coquillages, les rayons X qui révèlent un tableau sous l'autre, les remparts devenus boulevards. Ils sont vrais. Mais un générateur lancé sans garde-fou produira des faits <em>de la même forme</em>, plausibles et faux — et ce sont les parents qui vérifient. Une seule erreur et le produit perd sa crédibilité.</p>
+      <p>C'est une exigence produit, pas un détail : il faut <strong>une passe de vérification des faits</strong> avant qu'un carnet soit servi. C'est faisable, mais ça change l'architecture — la génération n'est plus un seul appel.</p>
+    </div>
+
+    <div class="item">
+      <h4>Les pools de mots doivent être écrits à la main</h4>
+      <p>Onze pools de cinq ou six mots, soit une soixantaine de mots au total : c'est une heure de travail, une fois. Les laisser générer serait absurde — ils portent la révélation finale, donc la meilleure minute du jeu, et ils doivent être justes, prononçables et vraiment un peu inconnus. Le générateur reçoit le mot en entrée, il ne le choisit pas.</p>
+    </div>
+
+    <div class="item">
+      <h4>Ce que ce test ne prouve pas</h4>
+      <p>Je les ai écrits en suivant le prompt, mais je les ai écrits <em>moi</em>. Le vrai test, c'est de lancer le prompt à froid, plusieurs fois, sur les types les plus ingrats — « Trajet &amp; attente » et « Zoo &amp; aquarium » — et de mesurer combien de carnets sur dix sont servables sans retouche. C'est l'étape suivante, et elle demande de vraies générations, pas mon écriture.</p>
+    </div>
+
+    <div class="item">
+      <h4>Un doute sur la longueur de la liste</h4>
+      <p>Hier, 38 trouvailles se sont révélées être le bon nombre pour trois heures. Pour une visite de musée d'une heure et demie, 35 est probablement trop : ils n'en cocheront pas la moitié et finiront avec un sentiment d'inachevé. La liste devrait se dimensionner sur la durée annoncée, pas être constante. À corriger dans le prompt.</p>
+    </div>
+  </section>
+
+</div>

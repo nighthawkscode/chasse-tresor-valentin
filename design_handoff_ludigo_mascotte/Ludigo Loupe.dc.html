@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="width:100%;min-height:100%;box-sizing:border-box;padding:40px;background:#f4f1e8;display:flex;flex-direction:column;gap:48px;font-family:'Nunito',Helvetica,sans-serif;color:#2b2519">
+  <helmet>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;900&display=swap" rel="stylesheet" />
+  </helmet>
+
+  <div style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-end">
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div style="box-shadow:0 22px 44px rgba(18,80,63,0.3);border-radius:78px;width:340px;height:340px">
+        <dc-import name="Loupe Icon" hint-size="340px,340px"></dc-import>
+      </div>
+      <span style="font-size:12px;font-weight:900;letter-spacing:0.18em;text-transform:uppercase;color:#6a6354">Icône app — Zoé la loupe</span>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px;max-width:320px">
+      <h1 style="margin:0;font-size:40px;line-height:1;font-weight:900">Zoé</h1>
+      <p style="margin:0;font-size:16px;line-height:1.5;color:#5c5647;text-wrap:pretty">Une loupe qui voit tout de trop près. Elle s'emballe, montre le mauvais buisson, puis trouve le vrai indice deux secondes plus tard.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <span style="padding:7px 13px;border-radius:999px;background:#12503f;color:#a7f0d8;font-size:12px;font-weight:900;letter-spacing:0.08em">CURIEUSE</span>
+        <span style="padding:7px 13px;border-radius:999px;background:#39c3a2;color:#0d3b30;font-size:12px;font-weight:900;letter-spacing:0.08em">MALADROITE</span>
+        <span style="padding:7px 13px;border-radius:999px;background:#c98a4d;color:#2b2519;font-size:12px;font-weight:900;letter-spacing:0.08em">FONCEUSE</span>
+      </div>
+      <p style="margin:0;font-size:14px;line-height:1.5;color:#6a6354">Même grammaire que Lumi : silhouette d'un seul tenant, bras et main dessinés en un trait, joues douces. Palette vert-sapin / laiton pour la distinguer.</p>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <span style="font-size:12px;font-weight:900;letter-spacing:0.18em;text-transform:uppercase;color:#6a6354">Lisibilité aux tailles réelles</span>
+    <div style="display:flex;align-items:flex-end;gap:28px">
+      <div style="width:120px;height:120px;overflow:hidden;border-radius:28px;box-shadow:0 8px 18px rgba(18,80,63,0.22)">
+        <div style="width:340px;height:340px;transform:scale(0.3529);transform-origin:top left">
+          <dc-import name="Loupe Icon" hint-size="340px,340px"></dc-import>
+        </div>
+      </div>
+      <div style="width:76px;height:76px;overflow:hidden;border-radius:18px;box-shadow:0 6px 14px rgba(18,80,63,0.2)">
+        <div style="width:340px;height:340px;transform:scale(0.2235);transform-origin:top left">
+          <dc-import name="Loupe Icon" hint-size="340px,340px"></dc-import>
+        </div>
+      </div>
+      <div style="width:44px;height:44px;overflow:hidden;border-radius:11px;box-shadow:0 4px 10px rgba(18,80,63,0.2)">
+        <div style="width:340px;height:340px;transform:scale(0.1294);transform-origin:top left">
+          <dc-import name="Loupe Icon" hint-size="340px,340px"></dc-import>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <span style="font-size:12px;font-weight:900;letter-spacing:0.18em;text-transform:uppercase;color:#6a6354">Dans l'app — trois humeurs</span>
+    <div style="display:flex;flex-wrap:wrap;gap:24px">
+      <div style="display:flex;flex-direction:column;gap:10px;align-items:center">
+        <div style="width:170px;height:170px;overflow:hidden;border-radius:39px">
+          <div style="width:340px;height:340px;transform:scale(0.5);transform-origin:top left">
+            <dc-import name="Loupe Icon" expression="curieux" hint-size="340px,340px"></dc-import>
+          </div>
+        </div>
+        <span style="font-size:13px;font-weight:900;color:#5c5647">Curieuse</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;align-items:center">
+        <div style="width:170px;height:170px;overflow:hidden;border-radius:39px">
+          <div style="width:340px;height:340px;transform:scale(0.5);transform-origin:top left">
+            <dc-import name="Loupe Icon" expression="malicieux" hint-size="340px,340px"></dc-import>
+          </div>
+        </div>
+        <span style="font-size:13px;font-weight:900;color:#5c5647">Malicieuse — un indice</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;align-items:center">
+        <div style="width:170px;height:170px;overflow:hidden;border-radius:39px">
+          <div style="width:340px;height:340px;transform:scale(0.5);transform-origin:top left">
+            <dc-import name="Loupe Icon" expression="fier" hint-size="340px,340px"></dc-import>
+          </div>
+        </div>
+        <span style="font-size:13px;font-weight:900;color:#5c5647">Fière — trésor trouvé</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <span style="font-size:12px;font-weight:900;letter-spacing:0.18em;text-transform:uppercase;color:#6a6354">Côte à côte avec Lumi</span>
+    <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end">
+      <div style="width:170px;height:170px;overflow:hidden;border-radius:39px;box-shadow:0 10px 22px rgba(0,0,0,0.14)">
+        <div style="width:340px;height:340px;transform:scale(0.5);transform-origin:top left">
+          <dc-import name="Lumi Icon" hint-size="340px,340px"></dc-import>
+        </div>
+      </div>
+      <div style="width:170px;height:170px;overflow:hidden;border-radius:39px;box-shadow:0 10px 22px rgba(0,0,0,0.14)">
+        <div style="width:340px;height:340px;transform:scale(0.5);transform-origin:top left">
+          <dc-import name="Loupe Icon" hint-size="340px,340px"></dc-import>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script></script>
+</body>
+</html>

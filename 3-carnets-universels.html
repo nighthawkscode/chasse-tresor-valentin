@@ -1,0 +1,736 @@
+<title>Trois carnets universels — Montagne, Musée, Ville</title>
+
+<style>
+  :root {
+    --fond:      #F4F7F8;
+    --papier:    #FFFFFF;
+    --papier-2:  #EBF2F3;
+    --trait:     #D0DFE1;
+    --encre:     #14252B;
+    --encre-2:   #48606A;
+    --gave:      #0B767A;
+    --gave-2:    #D5EDED;
+    --or:        #A96A08;
+    --or-2:      #F9EBD0;
+    --gentiane:  #2A4894;
+    --gentiane-2:#E2E8F8;
+    --display: "American Typewriter", "Rockwell", "Courier New", serif;
+    --corps: "Avenir Next", "Avenir", "Segoe UI", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fond:#0B1417; --papier:#131F24; --papier-2:#1A2C31; --trait:#253B41;
+      --encre:#E6EFEF; --encre-2:#90A7AD; --gave:#3AC3C5; --gave-2:#0F3438;
+      --or:#EFB040; --or-2:#382A0E; --gentiane:#88A9F1; --gentiane-2:#1A2646;
+    }
+  }
+  :root[data-theme="dark"] {
+    --fond:#0B1417; --papier:#131F24; --papier-2:#1A2C31; --trait:#253B41;
+    --encre:#E6EFEF; --encre-2:#90A7AD; --gave:#3AC3C5; --gave-2:#0F3438;
+    --or:#EFB040; --or-2:#382A0E; --gentiane:#88A9F1; --gentiane-2:#1A2646;
+  }
+  :root[data-theme="light"] {
+    --fond:#F4F7F8; --papier:#FFFFFF; --papier-2:#EBF2F3; --trait:#D0DFE1;
+    --encre:#14252B; --encre-2:#48606A; --gave:#0B767A; --gave-2:#D5EDED;
+    --or:#A96A08; --or-2:#F9EBD0; --gentiane:#2A4894; --gentiane-2:#E2E8F8;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--fond); color: var(--encre);
+    font-family: var(--corps); font-size: 17px; line-height: 1.55;
+    -webkit-text-size-adjust: 100%;
+  }
+  .page { max-width: 800px; margin: 0 auto; padding: 0 20px 80px; }
+
+  .nav {
+    position: sticky; top: 0; z-index: 10;
+    margin: 0 -20px 28px; padding: 11px 20px;
+    background: var(--fond); border-bottom: 1px solid var(--trait);
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+  }
+  .nav a {
+    font-size: 13px; font-weight: 600; text-decoration: none;
+    color: var(--encre-2); border: 1px solid var(--trait);
+    padding: 6px 12px; border-radius: 99px; white-space: nowrap;
+  }
+  .nav a:hover, .nav a:focus-visible { color: var(--gave); border-color: var(--gave); }
+
+  .eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--encre-2);
+  }
+  h1 {
+    font-family: var(--display); font-weight: 700; font-size: 36px;
+    line-height: 1.08; margin: 24px 0 12px; text-wrap: balance;
+  }
+  h2 {
+    font-family: var(--display); font-weight: 700; font-size: 27px;
+    line-height: 1.15; margin: 0 0 4px; text-wrap: balance;
+  }
+  h3 { font-family: var(--display); font-weight: 700; font-size: 19px; margin: 26px 0 10px; }
+  h4 {
+    font-size: 12px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--gave); margin: 20px 0 8px;
+  }
+  p { margin: 0 0 14px; }
+  p:last-child { margin-bottom: 0; }
+  .chapeau { font-size: 18px; color: var(--encre-2); }
+
+  section.lieu { margin-top: 44px; padding-top: 30px; border-top: 3px solid var(--gave); }
+  section.lieu .num {
+    font-family: var(--display); font-size: 13px; font-weight: 700;
+    color: var(--gave); letter-spacing: .1em; text-transform: uppercase;
+  }
+
+  .bloc {
+    background: var(--papier); border: 1px solid var(--trait);
+    border-radius: 13px; padding: 18px 20px; margin: 16px 0;
+  }
+
+  .univ {
+    background: var(--gentiane-2); border: 1px solid color-mix(in srgb, var(--gentiane) 30%, transparent);
+    border-radius: 13px; padding: 16px 18px; margin: 16px 0; font-size: 15px;
+  }
+  .univ .lab {
+    display: block; font-size: 11px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--gentiane); margin-bottom: 6px;
+  }
+
+  .mot-bloc {
+    background: var(--gave-2); border-left: 3px solid var(--gave);
+    border-radius: 0 12px 12px 0; padding: 16px 18px; margin: 16px 0;
+  }
+  .mot-bloc .mot {
+    font-family: var(--display); font-size: 30px; font-weight: 700;
+    letter-spacing: .16em; color: var(--gave); line-height: 1.1;
+  }
+  .mot-bloc .lg { font-size: 13px; color: var(--encre-2); margin-top: 2px; }
+
+  ul.trouvailles { columns: 2; column-gap: 26px; margin: 0; padding-left: 20px; font-size: 15.5px; }
+  ul.trouvailles li { margin-bottom: 5px; break-inside: avoid; }
+  @media (max-width: 620px) { ul.trouvailles { columns: 1; } }
+  ul.trouvailles li.rare::after { content: " ★"; color: var(--or); font-size: 12px; }
+
+  .indice {
+    background: var(--papier); border: 1px solid var(--trait);
+    border-radius: 13px; padding: 16px 18px; margin-bottom: 10px;
+    display: grid; grid-template-columns: 38px 1fr; gap: 14px;
+  }
+  .indice .lettre {
+    width: 38px; height: 38px; border-radius: 9px;
+    background: var(--gave-2); color: var(--gave);
+    border: 1px solid color-mix(in srgb, var(--gave) 30%, transparent);
+    display: grid; place-items: center;
+    font-family: var(--display); font-weight: 700; font-size: 18px;
+  }
+  .indice .type {
+    font-size: 11px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--encre-2); margin-bottom: 4px;
+  }
+  .indice .q { font-size: 16.5px; margin-bottom: 8px; }
+  .indice .rep {
+    font-size: 15px; background: var(--papier-2); border-radius: 8px;
+    padding: 9px 12px;
+  }
+  .indice .rep b { color: var(--gave); }
+  .indice .bonus {
+    margin-top: 10px; font-size: 14.5px; padding: 11px 13px;
+    background: var(--gentiane-2); border-radius: 9px;
+    border: 1px solid color-mix(in srgb, var(--gentiane) 30%, transparent);
+  }
+  .indice .bonus .lab {
+    display: block; font-size: 11px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--gentiane); margin-bottom: 4px;
+  }
+
+  .reveal {
+    background: var(--or-2); border: 2px solid var(--or);
+    border-radius: 13px; padding: 20px; margin: 18px 0 0;
+  }
+  .reveal .lab {
+    display: block; font-size: 11px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--or); margin-bottom: 8px;
+  }
+  .reveal .mot {
+    font-family: var(--display); font-size: 26px; font-weight: 700;
+    letter-spacing: .14em; color: var(--or); margin-bottom: 10px;
+  }
+
+  .secu {
+    background: var(--or-2); border-left: 3px solid var(--or);
+    border-radius: 0 10px 10px 0; padding: 13px 15px; font-size: 15px; margin: 16px 0;
+  }
+  .secu .lab {
+    display: block; font-size: 11px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--or); margin-bottom: 4px;
+  }
+
+  .verif {
+    font-size: 13.5px; color: var(--encre-2);
+    border-top: 1px dashed var(--trait); margin-top: 8px; padding-top: 8px;
+  }
+  .verif b { color: var(--encre); font-weight: 600; }
+
+  :focus-visible { outline: 3px solid var(--gentiane); outline-offset: 2px; border-radius: 6px; }
+</style>
+
+<div class="page">
+
+  <nav class="nav">
+    <a href="#brief">Le brief</a>
+    <a href="#montagne">Montagne</a>
+    <a href="#musee">Musée d'art</a>
+    <a href="#ville">Ville</a>
+    <a href="#verdict">Ce qui reste ouvert</a>
+  </nav>
+
+  <span class="eyebrow">Trois carnets « socle universel » · 31 juillet 2026</span>
+  <h1>Un carnet par typologie, valable sur n'importe quelle montagne, dans n'importe quel musée d'art, dans n'importe quelle ville du monde</h1>
+  <p class="chapeau">Aucune faune, aucune flore, aucune culture, aucune tradition artistique régionale. Chaque item a été passé au filtre : est-ce que ça marche aussi bien dans les Andes, l'Atlas, l'Himalaya, les Rocheuses, un désert volcanique, l'Océanie, l'Asie de l'Est ? Sinon, retiré ou reformulé.</p>
+
+  <!-- ============================ BRIEF ============================ -->
+  <section id="brief">
+    <div class="bloc">
+      <h4 style="margin-top:0">Le brief accumulé, tel qu'appliqué à ces trois carnets</h4>
+      <p><strong>Cible</strong> : les 4-10 ans, non-lecteurs compris (un parent ou un grand lit à voix haute). <strong>Test de recevabilité</strong> : chaque énigme et sa réponse doivent être comprises par un enfant de 5 ans — une image déjà connue (une couette, un pull qui s'accroche, un tuyau qu'on pince), jamais un raisonnement technique.</p>
+      <p><strong>Le mix obligatoire</strong> : quatre familles de trouvailles (observation, sensoriel, action, rares-bonus), les deux du milieu non négociables. <strong>Les énigmes sont des devinettes pour apprendre</strong> — question simple → réponse simple → explication courte → petit défi optionnel — jamais des défis d'action déguisés, et jamais un doublon avec un item de la liste.</p>
+      <p style="margin-bottom:0"><strong>Calibration</strong> : chaque carnet est une réserve d'environ 45 trouvailles ; une partie en tire une sélection du jour d'environ 16, plus toutes les énigmes — et ce sous-ensemble est <strong>toujours atteignable à 100 %</strong>. Les rares ★ sont un bonus au-delà, jamais requises.</p>
+    </div>
+  </section>
+
+  <!-- ============================ MONTAGNE ============================ -->
+  <section class="lieu" id="montagne">
+    <span class="num">Montagne · socle universel</span>
+    <h2>Le trésor du sommet</h2>
+    <p class="chapeau">Zéro pastoralisme, zéro espèce nommée. Rocher, eau, ciel, altitude, physique simple. Valable sur un sommet pâturé des Alpes comme sur un pic volcanique désert.</p>
+
+    <div class="univ">
+      <span class="lab">Universalité testée</span>
+      Rocher, froid, vent, silence et oiseaux planeurs génériques existent sur toute montagne habitable. Aucune espèce animale nommée (pas de marmotte, pas de chamois) : remplacés par des faits de physique et de géologie qui ne dépendent d'aucune faune locale. Un torrent à sec reste un torrent « endormi » — le thème fonctionne même en montagne aride.
+    </div>
+
+    <div class="mot-bloc">
+      <div class="eyebrow" style="color:var(--gave)">Mot à deviner</div>
+      <div class="mot">TORRENT</div>
+      <div class="lg">7 lettres, 7 énigmes.</div>
+    </div>
+
+    <h3>La liste des trouvailles — 45</h3>
+
+    <h4>Ouvre l'œil · 14</h4>
+    <ul class="trouvailles">
+      <li>Une tache de neige qui a survécu à l'été</li>
+      <li>Un sommet qui a un nom sur la carte, et le trouver</li>
+      <li>Un nuage qui touche une montagne</li>
+      <li>Un caillou plus gros que ta tête</li>
+      <li>Un caillou qui brille au soleil</li>
+      <li>Une roche avec des lignes ou des rayures, comme un gâteau à étages</li>
+      <li>Un arbre tordu par le vent, penché toujours du même côté</li>
+      <li>Le dernier arbre avant qu'il n'y en ait plus du tout</li>
+      <li>Un sentier qui fait des zigzags au lieu de monter tout droit</li>
+      <li>Un tas de pierres empilées par quelqu'un pour marquer le chemin</li>
+      <li>Ton ombre, et deviens capable de dire quelle heure il est grâce à elle</li>
+      <li>Le lit d'un torrent, même complètement sec</li>
+      <li>Trois verts différents dans le même regard</li>
+      <li>Un endroit d'où on voit plus loin que partout où tu es déjà allé</li>
+    </ul>
+
+    <h4>Écoute, sens, touche · 10</h4>
+    <ul class="trouvailles">
+      <li>Dix secondes de silence complet, tous ensemble</li>
+      <li>Ta respiration qui devient plus forte en montant</li>
+      <li>Toucher une pierre restée froide à l'ombre, puis une chauffée au soleil</li>
+      <li>Le crissement du gravier ou de la neige sous tes pieds</li>
+      <li>Un vent qui te pousse dans le dos, ou qui te freine de face</li>
+      <li>Une odeur de pierre chaude</li>
+      <li>Une odeur de plante froissée</li>
+      <li>Le goût de l'eau que tu as emportée</li>
+      <li>L'air qui devient plus frais quand un nuage passe devant le soleil</li>
+      <li>Ton cœur qui bat plus vite après une montée</li>
+    </ul>
+
+    <h4>À faire · 12</h4>
+    <ul class="trouvailles">
+      <li>Empiler cinq cailloux qui tiennent tout seuls, puis les remettre comme avant</li>
+      <li>Trouver un caillou en forme de cœur</li>
+      <li>Marcher vingt pas sans faire de bruit</li>
+      <li>Dire bonjour à des randonneurs qu'on croise</li>
+      <li>Se retourner et montrer d'où on est partis</li>
+      <li>Donner un nom inventé à une montagne, adopté pour la journée</li>
+      <li>Deviner combien de temps il faudrait pour atteindre un sommet que tu vois, puis vérifier avec un adulte</li>
+      <li>Prendre une photo vraiment rigolote</li>
+      <li>Inventer un cri de ralliement pour l'équipe</li>
+      <li>Trouver une forme rigolote dans un nuage</li>
+      <li>Compter les virages du sentier pendant dix minutes</li>
+      <li>Ramasser un déchet qui n'est pas à nous</li>
+    </ul>
+
+    <h4>Les rares ★ · 8</h4>
+    <ul class="trouvailles">
+      <li class="rare">Un grand oiseau qui plane sans jamais battre des ailes</li>
+      <li class="rare">Un arc-en-ciel, ou un rayon qui traverse les nuages</li>
+      <li class="rare">Un animal sauvage, quel qu'il soit</li>
+      <li class="rare">Le grondement d'un torrent invisible sous les pierres</li>
+      <li class="rare">Un changement de météo qui arrive en quelques minutes</li>
+      <li class="rare">Une chute d'eau qu'on entend avant de la voir</li>
+      <li class="rare">De la grêle ou des flocons, même en été</li>
+      <li class="rare">Un randonneur qui a l'air de connaître le coin par cœur</li>
+    </ul>
+
+    <h3>Les 7 énigmes</h3>
+
+    <div class="indice">
+      <div class="lettre">T</div>
+      <div>
+        <div class="type">Devinette</div>
+        <div class="q">« Plus tu montes vers moi, moins je te donne à respirer à chaque bouffée. Je ne me vois pas, je ne se sens pas, et pourtant tout le monde m'essouffle. Qui suis-je ? »</div>
+        <div class="rep">L'air d'altitude. Là-haut, il est plus <b>étalé</b> : chaque respiration en attrape un peu moins. Alors ton corps respire plus souvent, pour compenser.</div>
+        <div class="bonus"><span class="lab">Petit défi</span>Comptez vos respirations pendant 15 secondes ici, puis recomptez après une bonne montée. C'est plus rapide ?</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">O</div>
+      <div>
+        <div class="type">Question</div>
+        <div class="q">Pourquoi le ciel est-il souvent d'un bleu plus foncé tout en haut d'une montagne ?</div>
+        <div class="rep">Il y a moins d'air et de poussière au-dessus de toi pour <b>brouiller</b> le bleu. Le ciel devient plus pur, plus profond.</div>
+        <div class="bonus"><span class="lab">Petit défi</span>Regardez le ciel bien en l'air, puis vers l'horizon. La couleur change ?</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">R</div>
+      <div>
+        <div class="type">Défi</div>
+        <div class="q">Faites l'expérience avant de lire la suite : montez cinq pas bien droit dans la pente à côté du sentier, puis cinq pas en suivant les zigzags du vrai chemin. Lequel vous essouffle le plus ?</div>
+        <div class="rep">Le tout droit, presque à chaque fois. Une pente en <b>zigzag</b> est moins raide à chaque pas qu'une pente tout droit : ça fatigue beaucoup moins, même si le chemin est plus long.</div>
+        <div class="verif"><b>Vérifié</b> : principe de conception des sentiers en lacets, réduction de la pente effective par unité de distance — universel à toute montagne aménagée.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">R</div>
+      <div>
+        <div class="type">Question</div>
+        <div class="q">Pourquoi entend-on parfois un écho en criant face à une paroi rocheuse ?</div>
+        <div class="rep">Ta voix part, tape sur la roche dure et <b>rebondit</b> jusqu'à toi, un tout petit peu plus tard. C'est le même son qui revient.</div>
+        <div class="bonus"><span class="lab">Petit défi</span>Trouvez une paroi bien en face de vous, criez un mot court, et écoutez s'il revient.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">E</div>
+      <div>
+        <div class="type">Devinette</div>
+        <div class="q">« L'été a fait fondre presque toutes mes sœurs. Moi, je résiste, cachée dans un coin où le soleil ne me trouve presque jamais. Qui suis-je ? »</div>
+        <div class="rep">Une tache de neige tardive. Elle survit dans un <b>creux à l'ombre</b> : sans soleil direct, elle fond beaucoup plus lentement que le reste.</div>
+        <div class="bonus"><span class="lab">Petit défi</span>Si vous en trouvez une, touchez-la et regardez de quel côté elle se cache : plein soleil, ou à l'ombre ?</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">N</div>
+      <div>
+        <div class="type">Question</div>
+        <div class="q">Pourquoi le vent souffle-t-il souvent bien plus fort sur une crête ou dans un col étroit qu'un peu plus bas ?</div>
+        <div class="rep">C'est comme quand tu <b>pinces</b> un tuyau d'arrosage : l'eau sort plus vite par le trou rétréci. Le vent fait pareil en passant par un endroit étroit entre deux pentes : il accélère.</div>
+        <div class="bonus"><span class="lab">Petit défi</span>Comparez la force du vent dans un endroit dégagé et derrière un gros rocher qui vous abrite.</div>
+        <div class="verif"><b>Vérifié</b> : effet Venturi / accélération du vent en col — phénomène de mécanique des fluides universel, indépendant du massif.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">T</div>
+      <div>
+        <div class="type">Défi</div>
+        <div class="q">Dernier défi : cherchez une petite chute d'eau ou un torrent qui éclabousse en plein soleil, et regardez bien dans les gouttelettes en l'air. Une couleur apparaît, qui n'était pas là avant ?</div>
+        <div class="rep">Un tout petit <b>arc-en-ciel</b>. La lumière du soleil traverse plein de minuscules gouttes d'eau en suspension et se sépare en couleurs — exactement comme dans la pluie, en beaucoup plus petit.</div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <span class="lab">Le coffre s'ouvre</span>
+      <div class="mot">TORRENT</div>
+      <p>Un <strong>torrent</strong>, c'est un cours d'eau de montagne, froid et rapide, qui dévale la pente en sautant sur les rochers. Il grossit avec la pluie ou la fonte des neiges, et peut presque disparaître le reste du temps — un lit de pierres sèches est un torrent qui dort, prêt à se réveiller à la prochaine pluie.</p>
+      <p style="margin-bottom:0">Vous avez peut-être marché à côté d'un torrent bien réveillé aujourd'hui. Ou à côté d'un qui dormait. Les deux comptent.</p>
+    </div>
+
+    <div class="secu">
+      <span class="lab">Glissé au début du carnet</span>
+      On reste sur le sentier et on garde les grands en vue. La météo de montagne change vite : si le ciel s'assombrit, on écoute l'adulte sans discuter. On ne court jamais sur des pierres qui bougent, et on ne s'approche pas du bord d'un torrent ou d'une pente raide.
+    </div>
+  </section>
+
+  <!-- ============================ MUSÉE ============================ -->
+  <section class="lieu" id="musee">
+    <span class="num">Musée d'art · socle universel</span>
+    <h2>Le trésor de l'atelier</h2>
+    <p class="chapeau">Zéro peinture à l'huile vernie, zéro portrait supposé. Le carnet parle de ce que tout musée d'art protège et montre, quel que soit le médium ou la tradition artistique.</p>
+
+    <div class="univ">
+      <span class="lab">Universalité testée</span>
+      Retiré : le vernis jauni (peinture occidentale à l'huile uniquement), la signature systématique (beaucoup de traditions sont anonymes ou collectives), les personnages en portrait (l'art abstrait, la calligraphie, la sculpture non figurative n'en ont pas). Conservé et généralisé : la protection climatique, la salle silencieuse, le cartel, le gardien, la conservation-restauration, le passage de la matière brute à l'œuvre finie — vrais pour la peinture, la sculpture, la céramique, la photographie, le textile, la calligraphie.
+    </div>
+
+    <div class="mot-bloc">
+      <div class="eyebrow" style="color:var(--gave)">Mot à deviner</div>
+      <div class="mot">ATELIER</div>
+      <div class="lg">7 lettres, 7 énigmes. Un mot que beaucoup d'enfants ont déjà entendu (« atelier créatif »), réemployé ici pour désigner l'endroit où l'œuvre est née — avant le musée.</div>
+    </div>
+
+    <h3>La liste des trouvailles — 44</h3>
+
+    <h4>Ouvre l'œil · 14</h4>
+    <ul class="trouvailles">
+      <li>Une œuvre plus grande que toi</li>
+      <li>Une œuvre plus petite que ta main</li>
+      <li>Un endroit d'une sculpture ou d'un objet devenu brillant à force d'être touché par des visiteurs depuis des années</li>
+      <li>Une salle avec très peu d'œuvres, et une salle qui en a beaucoup</li>
+      <li>Une couleur qui revient dans trois salles différentes</li>
+      <li>Une œuvre où tu ne sais pas dire ce qu'elle représente</li>
+      <li>Un objet fait dans une matière que tu ne reconnais pas</li>
+      <li>Une petite étiquette (un cartel), et lis ce qu'elle dit</li>
+      <li>Une caméra ou un capteur de sécurité</li>
+      <li>Une œuvre signée, et une qui ne l'est pas</li>
+      <li>Un socle ou un piédestal</li>
+      <li>Une œuvre posée plus haut que ta tête, et une plus basse</li>
+      <li>Un objet très ancien à côté d'un très récent</li>
+      <li>L'ombre qu'une sculpture dessine sur le mur ou le sol</li>
+    </ul>
+
+    <h4>Écoute, sens, touche · 10</h4>
+    <ul class="trouvailles">
+      <li>Le silence d'une salle, dix secondes complètes</li>
+      <li>Le bruit de tes pas qui change de son sur deux sols différents</li>
+      <li>Une salle plus fraîche, ou plus chaude, qu'une autre</li>
+      <li>Une odeur particulière au musée (bois ciré, papier, rien du tout ?)</li>
+      <li>Ton propre souffle après être resté longtemps silencieux</li>
+      <li>Deux visiteurs qui chuchotent</li>
+      <li>Une texture qu'on devine juste en regardant de très près, sans toucher</li>
+      <li>Une salle où la lumière est beaucoup plus tamisée qu'ailleurs</li>
+      <li>Le courant d'air d'une porte qui s'ouvre au loin</li>
+      <li>Le poids du silence : est-ce que ça se sent, un silence ?</li>
+    </ul>
+
+    <h4>À faire · 12</h4>
+    <ul class="trouvailles">
+      <li>Choisir l'œuvre qu'on emporterait à la maison, et dire pourquoi en une phrase</li>
+      <li>Imiter la pose d'un personnage ou d'une sculpture</li>
+      <li>Deviner laquelle de deux œuvres est la plus ancienne, puis vérifier sur les cartels</li>
+      <li>Choisir l'œuvre la plus bizarre de la salle et lui trouver un surnom</li>
+      <li>S'asseoir sur un banc une minute, sans rien faire d'autre que regarder</li>
+      <li>Compter les œuvres d'une salle sans se tromper</li>
+      <li>Inventer ce que deux personnages d'une même œuvre se disent</li>
+      <li>Décrire une œuvre à quelqu'un sans dire ce que c'est, pour lui faire deviner laquelle</li>
+      <li>Sourire à un gardien</li>
+      <li>Demander à un adulte laquelle il emporterait, lui</li>
+      <li>Repérer la salle la plus sombre du musée, et deviner pourquoi</li>
+      <li>Ramasser un ticket ou un papier qui traîne, et le jeter</li>
+    </ul>
+
+    <h4>Les rares ★ · 8</h4>
+    <ul class="trouvailles">
+      <li class="rare">Un artiste en train de créer sur place</li>
+      <li class="rare">Un gardien qui raconte une anecdote sur une œuvre</li>
+      <li class="rare">Une salle où vous êtes seuls, pour de vrai</li>
+      <li class="rare">Une œuvre en train d'être installée, déplacée ou décrochée</li>
+      <li class="rare">Un groupe scolaire qui chante ou récite quelque chose devant une œuvre</li>
+      <li class="rare">Une œuvre qui vient de ton pays ou de ta région</li>
+      <li class="rare">Une salle de restauration visible depuis le public</li>
+      <li class="rare">Une œuvre que tu trouves carrément drôle</li>
+    </ul>
+
+    <h3>Les 7 énigmes</h3>
+
+    <div class="indice">
+      <div class="lettre">A</div>
+      <div>
+        <div class="type">Devinette</div>
+        <div class="q">« Tu ne me vois pas sur tes doigts, tu ne me sens pas non plus. Et pourtant, si tu me poses sur une œuvre, je peux l'abîmer pour toujours. Qui suis-je ? »</div>
+        <div class="rep">Le gras invisible de ta peau. À force d'être touchée par des milliers de mains, une œuvre <b>s'abîme</b> pour de bon — chaque doigt fait presque rien, un million de doigts détruit tout.</div>
+        <div class="bonus"><span class="lab">Petit défi</span>Devinez laquelle des œuvres de la salle serait la plus abîmée si tout le monde la touchait un jour.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">T</div>
+      <div>
+        <div class="type">Défi</div>
+        <div class="q">Choisissez une œuvre. Regardez-la d'abord d'un seul pas, cherchez la matière, les détails, les petits accidents. Puis reculez de dix grands pas et regardez encore. Qu'est-ce qui a disparu ? Qu'est-ce qui est apparu ?</div>
+        <div class="rep">De très près, c'est de la <b>matière</b> : du grain, des reliefs, des traces. De loin, la matière disparaît et devient une image, un sujet, une histoire. C'est le même objet, et pourtant on ne voit jamais tout à fait la même chose.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">E</div>
+      <div>
+        <div class="type">Question</div>
+        <div class="q">Pourquoi un même bruit résonne-t-il beaucoup plus fort dans une grande salle vide que dans une pièce pleine de monde ?</div>
+        <div class="rep">Le son <b>rebondit</b> sur tout ce qui est dur et nu — les murs, le sol, le plafond — un peu comme une balle sur un mur. Les choses molles autour de toi — vêtements, tissus, même les gens — l'<b>avalent</b> au lieu de le renvoyer. Une grande salle vide et dure fait donc beaucoup plus d'écho qu'une pièce remplie de monde et de matières douces.</div>
+        <div class="bonus"><span class="lab">Petit défi</span>Tapez une fois dans vos mains dans une grande salle peu fréquentée, puis dans une salle pleine de visiteurs. Le bruit revient plus fort où ?</div>
+        <div class="verif"><b>Vérifié</b> : réflexion vs absorption acoustique — les surfaces dures et rigides réfléchissent le son, les matériaux mous et poreux (tissus, corps) l'absorbent. Principe physique universel, indépendant du musée.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">L</div>
+      <div>
+        <div class="type">Devinette</div>
+        <div class="q">« Je veille sur une salle entière sans jamais dire un mot. Je remarque tout de suite si quelqu'un s'approche trop près. Et je peux rester debout huit heures sans qu'on me remarque, moi. Qui suis-je ? »</div>
+        <div class="rep">Le gardien, ou la gardienne, de salle. Son travail, ce n'est pas seulement surveiller qu'on ne touche pas : c'est aussi observer, connaître chaque œuvre par cœur à force de la voir tous les jours, et parfois répondre aux questions des visiteurs.</div>
+        <div class="bonus"><span class="lab">Petit défi</span>Observez un gardien une minute sans qu'il s'en aperçoive : regarde-t-il plutôt les visiteurs, ou plutôt les œuvres ?</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">I</div>
+      <div>
+        <div class="type">Question</div>
+        <div class="q">Certains musées ont des machines capables de voir à l'intérieur d'une œuvre sans l'ouvrir et sans l'abîmer — comme un docteur qui te fait une radio pour voir tes os sans te découper. Qu'est-ce qu'on peut découvrir, caché à l'intérieur d'un objet, de cette façon ?</div>
+        <div class="rep">Une <b>fissure invisible</b>, une vieille réparation faite il y a des siècles, ou même un <b>tout autre dessin caché en dessous</b> — un premier essai que l'artiste a recouvert parce qu'il n'en était pas content. L'œuvre que tu vois cache parfois un secret que même les yeux les plus perçants ne peuvent pas voir.</div>
+        <div class="bonus"><span class="lab">Petit défi</span>Choisissez une œuvre et imaginez ce que cette machine pourrait bien trouver, caché à l'intérieur.</div>
+        <div class="verif"><b>Vérifié</b> : imagerie scientifique en conservation (radiographie X, réflectographie infrarouge, lumière UV) utilisée pour examiner peintures, sculptures, céramiques et objets archéologiques dans les musées du monde entier — révèle repentirs, réparations anciennes et couches cachées.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">E</div>
+      <div>
+        <div class="type">Question</div>
+        <div class="q">Pourquoi certaines œuvres sont-elles entourées d'une corde, d'une ligne au sol ou d'un grand espace vide, même quand rien n'a l'air fragile ?</div>
+        <div class="rep">Pas seulement pour t'empêcher de toucher exprès : c'est surtout pour éviter les <b>accidents</b> — un coup de sac à dos, un pas en arrière sans regarder, une poussette qui frôle. Plus une œuvre est précieuse et impossible à refaire, plus l'espace autour d'elle est grand.</div>
+        <div class="bonus"><span class="lab">Petit défi</span>Trouvez la corde ou la ligne au sol la plus large que vous puissiez voir. À votre avis, pourquoi celle-là particulièrement ?</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">R</div>
+      <div>
+        <div class="type">Défi</div>
+        <div class="q">Choisissez une œuvre. Avant d'arriver dans cette salle calme et bien rangée, elle a d'abord vécu ailleurs, dans le désordre, entourée d'outils et d'essais ratés. Décrivez à voix haute à quoi cet endroit pouvait ressembler.</div>
+        <div class="rep">Un endroit couvert de poussière, d'esquisses jetées, d'outils qui traînent — presque l'inverse de la salle où vous êtes. C'est là que tout commence, et que rien n'est encore parfait.</div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <span class="lab">Le coffre s'ouvre</span>
+      <div class="mot">ATELIER</div>
+      <p>Un <strong>atelier</strong>, c'est l'endroit où un artiste fabrique ses œuvres — souvent en désordre, plein d'essais ratés, d'outils et de traces de travail. Ce que vous avez vu aujourd'hui, c'est la fin de l'histoire : le résultat, choisi, protégé, mis en valeur.</p>
+      <p style="margin-bottom:0">Le musée montre la fin. L'atelier, c'était le début — et personne ne vous l'a montré.</p>
+    </div>
+
+    <div class="secu">
+      <span class="lab">Glissé au début du carnet</span>
+      On ne touche rien, même pas les cadres ou les socles. On marche, on ne court pas. On chuchote, et on reste avec le groupe.
+    </div>
+  </section>
+
+  <!-- ============================ VILLE ============================ -->
+  <section class="lieu" id="ville">
+    <span class="num">Ville · socle universel</span>
+    <h2>Le trésor de la rue</h2>
+    <p class="chapeau">Zéro façade sculptée, zéro pavé ancien supposé. Ce qui reste vrai dans une mégapole neuve d'Asie comme dans un petit village de plaine.</p>
+
+    <div class="univ">
+      <span class="lab">Universalité testée</span>
+      Retiré : les dates gravées, les façades sculptées, les vieilles publicités peintes, les pavés anciens (spécifiques aux vieilles villes européennes). Conservé et généralisé : les plaques d'égout rondes, les pigeons, les passages piétons, les numéros de rue, les arbres plantés en ville, les bruits qui rebondissent entre les bâtiments — vrais dans toute agglomération habitée, ancienne ou toute neuve.
+    </div>
+
+    <div class="mot-bloc">
+      <div class="eyebrow" style="color:var(--gave)">Mot à deviner</div>
+      <div class="mot">RÉVERBÈRE</div>
+      <div class="lg">9 lettres, 9 énigmes. Un mot un peu désuet que peu d'enfants connaissent précisément — le lampadaire qui éclaire la rue le soir.</div>
+    </div>
+
+    <h3>La liste des trouvailles — 44</h3>
+
+    <h4>Ouvre l'œil · 14</h4>
+    <ul class="trouvailles">
+      <li>Un numéro sur une porte ou un immeuble</li>
+      <li>Un feu de circulation</li>
+      <li>Un vélo</li>
+      <li>Un banc public</li>
+      <li>Un arbre qui pousse au milieu du béton ou du bitume</li>
+      <li>Un chantier ou un échafaudage</li>
+      <li>Une enseigne qui utilise un dessin plutôt que des mots</li>
+      <li>Un panneau écrit dans une langue ou une écriture que tu ne lis pas</li>
+      <li>Un bâtiment très ancien juste à côté d'un tout neuf</li>
+      <li>Une peinture ou un dessin sur un mur</li>
+      <li>Un vélo, une trottinette ou une poussette garée</li>
+      <li>Une rampe pour les fauteuils roulants ou les poussettes</li>
+      <li>Une horloge visible depuis la rue</li>
+      <li>Une fenêtre allumée alors qu'il fait encore jour</li>
+    </ul>
+
+    <h4>Écoute, sens, touche · 10</h4>
+    <ul class="trouvailles">
+      <li>Une sirène au loin</li>
+      <li>De la musique qui sort d'une fenêtre ou d'un magasin</li>
+      <li>Le bruit de tes pas qui change de son sur deux sols différents (bitume, dalle, métal…)</li>
+      <li>Une odeur de nourriture qui cuit</li>
+      <li>Une odeur de pain frais, si tu en croises</li>
+      <li>Le vent qui s'engouffre entre deux immeubles</li>
+      <li>La chaleur du trottoir en plein soleil, comparée à l'ombre</li>
+      <li>Deux personnes qui rient franchement</li>
+      <li>Une langue que tu n'as jamais entendue</li>
+      <li>Le silence relatif d'une petite rue, juste après une grande rue bruyante</li>
+    </ul>
+
+    <h4>À faire · 12</h4>
+    <ul class="trouvailles">
+      <li>Compter les vélos d'une seule rue</li>
+      <li>Trouver le nom de rue le plus rigolo</li>
+      <li>Demander l'heure à quelqu'un, poliment</li>
+      <li>Élire le meilleur banc de la rue, et s'y asseoir une minute</li>
+      <li>Suivre un pigeon pendant vingt pas</li>
+      <li>Désigner le bâtiment qui a l'air le plus vieux de la rue, et dire pourquoi</li>
+      <li>Repérer une boutique qui a fermé pour de bon</li>
+      <li>Ramasser un déchet qui n'est pas à nous</li>
+      <li>Inventer qui habite derrière une fenêtre allumée, et ce qu'il mange ce soir</li>
+      <li>Dire bonjour à quelqu'un, gentiment</li>
+      <li>Deviner ce qu'il y a derrière une porte ou un portail fermé</li>
+      <li>Choisir la devise de l'équipe pour la journée</li>
+    </ul>
+
+    <h4>Les rares ★ · 8</h4>
+    <ul class="trouvailles">
+      <li class="rare">Un chat en pleine rue</li>
+      <li class="rare">Un oiseau en train de construire un nid sur un rebord de bâtiment</li>
+      <li class="rare">Quelqu'un qui joue d'un instrument de musique dans la rue</li>
+      <li class="rare">Un très vieux véhicule</li>
+      <li class="rare">Un arc-en-ciel entre deux immeubles</li>
+      <li class="rare">De la neige qui tombe en ville</li>
+      <li class="rare">Un marché ou des étals en pleine rue</li>
+      <li class="rare">Quelqu'un qui vend à manger dans un petit stand ou un chariot</li>
+    </ul>
+
+    <h3>Les 9 énigmes</h3>
+
+    <div class="indice">
+      <div class="lettre">R</div>
+      <div>
+        <div class="type">Question</div>
+        <div class="q">Pourquoi les plaques d'égout sont-elles presque toujours rondes, et jamais carrées ?</div>
+        <div class="rep">Une plaque <b>ronde</b> ne peut jamais tomber dans son propre trou, quelle que soit la façon dont on la tourne. Une plaque carrée, elle, peut basculer en diagonale et tomber — sur la tête de quelqu'un en dessous.</div>
+        <div class="bonus"><span class="lab">Petit défi</span>Trouvez-en une et vérifiez : impossible de la faire passer par son propre trou, même en la penchant ?</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">E</div>
+      <div>
+        <div class="type">Devinette</div>
+        <div class="q">« Mes ancêtres nichaient sur des falaises rocheuses, pleines de petits rebords. Aujourd'hui, je trouve que vos immeubles leur ressemblent beaucoup. Qui suis-je ? »</div>
+        <div class="rep">Le pigeon. Fenêtres, corniches, rebords : une ville entière ressemble à une immense falaise pour lui, avec de la nourriture en plus.</div>
+        <div class="bonus"><span class="lab">Petit défi</span>Comptez les pigeons que vous croisez en cinq minutes.</div>
+        <div class="verif"><b>Vérifié</b> : le pigeon des villes descend du pigeon biset, nicheur de falaises rocheuses ; l'architecture urbaine imite cet habitat. Présent sur tous les continents habités.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">V</div>
+      <div>
+        <div class="type">Question</div>
+        <div class="q">Sur certains passages piétons, le sol a de petits picots en relief. À quoi ça sert ?</div>
+        <div class="rep">Une personne qui ne voit pas bien peut les <b>sentir</b> avec ses pieds ou sa canne, et savoir qu'elle arrive au bord du trottoir, juste avant la route.</div>
+        <div class="bonus"><span class="lab">Petit défi</span>Cherchez-en un, et marchez dessus pieds nus dans vos chaussures — vous sentez la différence ?</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">E</div>
+      <div>
+        <div class="type">Défi</div>
+        <div class="q">Regardez le sol sous vos pieds sur quelques mètres : il est fait d'un seul bloc, ou de plein de petits morceaux séparés par des lignes (dalles, pavés, bandes de bitume) ? À votre avis, pourquoi ne coule-t-on jamais un trottoir en un seul immense bloc ?</div>
+        <div class="rep">Parce que le sol <b>bouge</b> tout le temps, un tout petit peu : la chaleur le dilate, le gel le pousse, la terre en dessous se tasse. Un bloc unique et géant se fissurerait n'importe où, au hasard. En le découpant d'avance en petits morceaux avec des joints, on décide où il a le droit de bouger un peu — sans jamais casser.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">R</div>
+      <div>
+        <div class="type">Question</div>
+        <div class="q">Pourquoi une rue peut-elle sembler très bruyante, et la petite rue juste à côté toute calme ?</div>
+        <div class="rep">Le son <b>rebondit</b> entre des immeubles hauts et serrés, comme dans un couloir, et s'entend plus fort. Dans une rue plus large ou plus courte, le bruit s'échappe et se disperse.</div>
+        <div class="bonus"><span class="lab">Petit défi</span>Tapez une fois dans vos mains dans une rue étroite, puis dans un endroit bien ouvert. Le bruit revient plus fort où ?</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">B</div>
+      <div>
+        <div class="type">Devinette</div>
+        <div class="q">« Je porte plusieurs couleurs et plusieurs matières sur moi, cousues comme un patchwork. Chaque morceau raconte une réparation faite à une époque différente. Qui suis-je ? »</div>
+        <div class="rep">Un mur ou un bâtiment rafistolé. Il a été réparé ou agrandi à des moments différents, parfois à des dizaines d'années d'écart — chaque morceau garde la trace de son époque.</div>
+        <div class="bonus"><span class="lab">Petit défi</span>Trouvez un mur avec au moins deux matières ou couleurs différentes, et devinez laquelle est arrivée en premier.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">E</div>
+      <div>
+        <div class="type">Devinette</div>
+        <div class="q">« Je grandis le matin, je rapetisse à midi, je regrandis le soir, et je ne suis jamais deux fois exactement pareille. Qui suis-je, dans une rue pleine d'immeubles ? »</div>
+        <div class="rep">Une ombre. Celle d'un bâtiment, d'un arbre, ou la tienne : elle change de taille et de forme toute la journée, au rythme du soleil qui se déplace dans le ciel.</div>
+        <div class="bonus"><span class="lab">Petit défi</span>Comparez votre ombre à celle d'un immeuble : combien de « vous » faudrait-il empiler pour égaler sa longueur ?</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">R</div>
+      <div>
+        <div class="type">Défi</div>
+        <div class="q">Si vous voyez une flaque ou une trace de pluie récente, cherchez où l'eau a fini par disparaître dans la rue — la petite grille ou le trou par lequel elle est passée.</div>
+        <div class="rep">Sous presque toutes les rues du monde, un immense réseau de <b>tuyaux invisibles</b> attend la pluie et l'emmène loin, pour qu'elle ne reste jamais en flaque géante bien longtemps.</div>
+      </div>
+    </div>
+
+    <div class="indice">
+      <div class="lettre">E</div>
+      <div>
+        <div class="type">Question</div>
+        <div class="q">Le soir, une lumière de rue s'allume toute seule, sans que personne n'appuie sur un bouton. Comment fait-elle pour savoir quand s'allumer ?</div>
+        <div class="rep">Elle a un tout petit <b>capteur</b> sensible à la lumière du jour. Quand il commence à faire sombre, le capteur le sent et déclenche l'allumage tout seul.</div>
+        <div class="bonus"><span class="lab">Petit défi</span>Ce soir, essayez de repérer le moment exact où les lumières de votre rue s'allument.</div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <span class="lab">Le coffre s'ouvre</span>
+      <div class="mot">RÉVERBÈRE</div>
+      <p>Un <strong>réverbère</strong>, c'est ce lampadaire de rue qui s'allume tout seul à la tombée de la nuit, celui du capteur dont on vient de parler. On en trouve dans des villes du monde entier, sous toutes les formes.</p>
+      <p style="margin-bottom:0">La nuit, vus depuis l'espace, les réverbères de toutes les villes du monde forment un immense réseau de petits points de lumière — c'est comme ça qu'on reconnaît une ville sur une photo prise depuis une fusée.</p>
+    </div>
+
+    <div class="secu">
+      <span class="lab">Glissé au début du carnet</span>
+      On traverse toujours à un passage piéton ou avec le feu, la main d'un adulte tenue ou juste à côté. Dans la foule, on choisit un point de rendez-vous si jamais on se perd de vue. On lève la tête, mais on s'arrête d'abord pour regarder : on ne marche jamais en levant les yeux en même temps.
+    </div>
+  </section>
+
+  <!-- ============================ VERDICT ============================ -->
+  <section class="lieu" id="verdict">
+    <span class="num">Bilan</span>
+    <h2>Ce que ces trois carnets prouvent, et ce qui reste ouvert</h2>
+
+    <div class="bloc">
+      <h4 style="margin-top:0">Ce qui tient</h4>
+      <p style="margin-bottom:0">Sur les trois typologies, retirer la faune et la culture régionale n'a pas appauvri le contenu : ça a simplement déplacé le centre de gravité vers la <strong>physique simple et la mécanique du lieu</strong> (pourquoi les plaques sont rondes, pourquoi les zigzags fatiguent moins, pourquoi une salle sombre protège le papier). Ces faits sont souvent plus faciles à vérifier et à sourcer qu'un fait culturel régional — un bon signe pour la fiabilité du produit.</p>
+    </div>
+
+    <div class="bloc">
+      <h4 style="margin-top:0">Révision après relecture critique (31/07)</h4>
+      <p>Un premier jet mettait les 23 énigmes au même format (« Pourquoi… ? » en boucle), avec un petit défi présent une fois sur deux, et le musée répétait trois fois la même idée (le toucher, l'humidité, la lumière abîment). Contre l'étalon Gourette — rejoué trois fois sans lassitude — c'était trop scolaire et pas assez surprenant.</p>
+      <p style="margin-bottom:0">Corrigé : alternance devinette / question / défi sur les trois carnets, un défi sur presque chaque énigme, et au musée le remplacement de deux énigmes plates (climat, éclairage) par le gardien qui observe en silence et les cordons qui protègent surtout des accidents — deux domaines neufs plutôt qu'une troisième variation sur « c'est fragile ». En ville, trois énigmes sans enjeu (l'ombre des arbres, les numéros de porte, la ville qui grandit en anneaux) ont été remplacées par les joints du trottoir, l'ombre qui grandit et rapetisse, et le réseau de tuyaux caché sous la pluie.</p>
+    </div>
+
+    <div class="bloc">
+      <h4 style="margin-top:0">Ce qui reste ouvert</h4>
+      <p>Ces trois carnets sont des <strong>socles</strong>, pas encore le foisonnement complet visé au départ (marmotte, patou, esquisse vernie, enseigne historique). Ils sont volontairement plus sobres — c'est le prix de l'universalité totale. Les carnets « couleur régionale » (Montagne A, Musée A, Ville A déjà écrits) restent le contenu le plus riche pour l'Europe et l'Asie tempérée : le produit final proposera probablement les deux, le socle universel garantissant qu'aucun pays du monde ne se retrouve sans rien.</p>
+      <p style="margin-bottom:0">Reste aussi à vérifier une hypothèse que je n'ai pas testée sur le terrain : est-ce que le mot RÉVERBÈRE, un peu long et un peu désuet, fonctionne aussi bien à l'oral pour un enfant de 4 ans que BERGERIE ? C'est le genre de chose qu'une vraie sortie révèle et qu'aucune relecture ne peut garantir.</p>
+    </div>
+  </section>
+
+</div>

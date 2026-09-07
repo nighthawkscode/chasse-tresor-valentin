@@ -1,364 +1,321 @@
-<title>Le trésor du Valentin — carnet d'explorateur</title>
+<meta charset="utf-8">
+<title>Ludigo</title>
 
 <style>
   :root {
-    --neige:      #F5F8F8;
-    --papier:     #FFFFFF;
-    --papier-2:   #EDF3F3;
-    --brume:      #D2E0E1;
-    --roche:      #16272E;
-    --roche-2:    #4A6169;
-    --gave:       #0C7A7D;
-    --gave-2:     #D2ECEC;
-    --or:         #B87309;
-    --or-2:       #FAEDD4;
-    --gentiane:   #2C4C9B;
-    --gentiane-2: #E1E8F7;
-    --sur-plein:  #FFFFFF;
+    --paper:        #F1F7F4;
+    --surface:      #FFFFFF;
+    --ink:          #10221C;
+    --muted:        #567065;
+    --line:         #DCE9E3;
+    --line-strong:  #B9D4C8;
+    --hero:         #12503F;
+    --hero-deep:    #0D3B30;
+    --hero-soft:    #EAFAF4;
+    --sur-hero:     #EAFAF4;
 
-    --display: "American Typewriter", "Rockwell", "Courier New", serif;
-    --corps: "Avenir Next", "Avenir", "Segoe UI", system-ui, sans-serif;
+    --fam-ouvre:      #2A5EA8;
+    --fam-ouvre-soft: #E7EEF9;
+    --fam-sens:       #16786F;
+    --fam-sens-soft:  #E3F2EF;
+    --fam-faire:      #5B57A6;
+    --fam-faire-soft: #EEECF8;
+    --rare:         #B07C10;
+    --rare-bg:      #FBF1DA;
+    --rare-line:    #E7D6AE;
+    --rare-ink:     #8A6009;
 
-    --r: 14px;
-    --ombre: 0 1px 2px rgba(22,39,46,.06), 0 6px 18px rgba(22,39,46,.07);
+    --disp: ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, monospace;
+    --corps: -apple-system, system-ui, "Segoe UI", sans-serif;
+
+    --ombre-celeb: 0 10px 26px rgba(13,59,48,.38);
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --neige:#0C1518; --papier:#142226; --papier-2:#1B2E33; --brume:#274046;
-      --roche:#E7F0F0; --roche-2:#93AAB0; --gave:#3CC7C9; --gave-2:#10373A;
-      --or:#F0B341; --or-2:#3B2C0F; --gentiane:#8AABF2; --gentiane-2:#1B2748;
-      --sur-plein:#08181A;
-      --ombre: 0 1px 2px rgba(0,0,0,.4), 0 6px 18px rgba(0,0,0,.35);
-    }
-  }
-  :root[data-theme="dark"] {
-    --neige:#0C1518; --papier:#142226; --papier-2:#1B2E33; --brume:#274046;
-    --roche:#E7F0F0; --roche-2:#93AAB0; --gave:#3CC7C9; --gave-2:#10373A;
-    --or:#F0B341; --or-2:#3B2C0F; --gentiane:#8AABF2; --gentiane-2:#1B2748;
-    --sur-plein:#08181A;
-    --ombre: 0 1px 2px rgba(0,0,0,.4), 0 6px 18px rgba(0,0,0,.35);
-  }
-  :root[data-theme="light"] {
-    --neige:#F5F8F8; --papier:#FFFFFF; --papier-2:#EDF3F3; --brume:#D2E0E1;
-    --roche:#16272E; --roche-2:#4A6169; --gave:#0C7A7D; --gave-2:#D2ECEC;
-    --or:#B87309; --or-2:#FAEDD4; --gentiane:#2C4C9B; --gentiane-2:#E1E8F7;
-    --sur-plein:#FFFFFF;
-    --ombre: 0 1px 2px rgba(22,39,46,.06), 0 6px 18px rgba(22,39,46,.07);
-  }
-
-  * { box-sizing: border-box; }
-
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; }
   body {
-    margin: 0;
-    background: var(--neige);
-    color: var(--roche);
-    font-family: var(--corps);
-    font-size: 17px;
-    line-height: 1.5;
-    -webkit-text-size-adjust: 100%;
-    overflow-x: hidden;
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--corps); font-size: 17px; line-height: 1.45;
+    -webkit-text-size-adjust: 100%; overflow-x: hidden; overscroll-behavior-y: none;
+  }
+  button { font-family: inherit; color: inherit; -webkit-appearance: none; appearance: none; }
+
+  .ecran { min-height: 100vh; display: flex; flex-direction: column; }
+  .contenu { flex: 1; max-width: 560px; width: 100%; margin: 0 auto; padding: 0 18px max(40px, env(safe-area-inset-bottom)); }
+
+  /* ---------------- accueil ---------------- */
+  .ecran-accueil { background: linear-gradient(180deg, var(--hero-soft) 0%, var(--paper) 60%); }
+  .accueil-tete { padding: max(20px, env(safe-area-inset-top)) 18px 8px; display: flex; flex-direction: column; gap: 4px; }
+  .accueil-tete .marque { display: flex; align-items: center; gap: 10px; }
+  .accueil-tete .marque .badge {
+    flex: none; width: 40px; height: 40px; border-radius: 12px;
+    overflow: hidden; display: flex; align-items: center; justify-content: center;
+  }
+  .accueil-tete h1 {
+    font-family: var(--disp); font-weight: 800; font-size: 27px;
+    margin: 0; letter-spacing: -0.01em;
+  }
+  .accueil-tete p { color: var(--muted); font-size: 15px; margin: 4px 0 0; }
+  .info-carte.parent { background: var(--hero-soft); border-color: transparent; }
+  .info-carte.parent .lab { color: var(--hero-deep); }
+
+  .cartes-lieux { display: flex; flex-direction: column; gap: 12px; padding-top: 14px; }
+  .carte-lieu {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 22px; padding: 14px; text-align: left; width: 100%;
+    cursor: pointer; transition: transform .1s ease;
+  }
+  .carte-lieu:active { transform: scale(.98); }
+  .carte-lieu.en-cours { border: 1.5px solid var(--hero); }
+  .carte-lieu .picto {
+    flex: none; width: 66px; height: 66px; border-radius: 18px;
+    background: var(--hero-soft); display: flex; align-items: center; justify-content: center;
+  }
+  .carte-lieu .picto svg { width: 40px; height: 40px; }
+  .carte-lieu .txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+  .carte-lieu .txt b { font-family: var(--disp); font-size: 19px; font-weight: 800; color: var(--ink); }
+  .carte-lieu .txt span { font-size: 13px; color: var(--muted); }
+  .carte-lieu .txt .barre-mini {
+    height: 5px; border-radius: 3px; background: var(--hero-soft); margin-top: 4px; overflow: hidden;
+  }
+  .carte-lieu .txt .barre-mini > i { display: block; height: 100%; background: var(--hero); border-radius: 3px; }
+  .carte-lieu .chevron { font-size: 28px; font-weight: 700; color: var(--hero); line-height: 1; flex: none; }
+
+  .bas-accueil { margin-top: 22px; text-align: center; display: flex; flex-direction: column; gap: 2px; }
+  .lien-discret {
+    background: none; border: none; color: var(--muted); font-size: 13px;
+    text-decoration: underline; text-underline-offset: 3px; padding: 8px; cursor: pointer;
+    display: inline-block; margin: 0 auto;
   }
 
-  .topo { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-  .topo svg { width: 100%; height: 100%; }
-  .topo ellipse { fill: none; stroke: var(--gave); stroke-width: 1.1; opacity: .09; }
-
-  .wrap { position: relative; z-index: 1; max-width: 620px; margin: 0 auto; padding: 0 16px 70px; }
-
-  /* ---------- bandeau ---------- */
-  .bandeau {
-    position: sticky; top: 0; z-index: 20;
-    margin: 0 -16px 18px; padding: 10px 16px 11px;
-    background: var(--neige);
-    background: color-mix(in srgb, var(--neige) 90%, transparent);
-    -webkit-backdrop-filter: saturate(1.6) blur(12px);
-    backdrop-filter: saturate(1.6) blur(12px);
-    border-bottom: 1px solid var(--brume);
-    display: flex; flex-direction: column; gap: 8px;
-  }
-  .bandeau-haut { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
-  .eyebrow {
-    font-size: 11px; font-weight: 600; letter-spacing: .14em;
-    text-transform: uppercase; color: var(--roche-2);
-  }
-  .score {
-    font-family: var(--display); font-size: 19px; font-weight: 700;
-    color: var(--or); font-variant-numeric: tabular-nums; white-space: nowrap;
-  }
-
-  .mot { display: flex; flex-wrap: wrap; gap: 4px 11px; }
-  .groupe { display: flex; gap: 4px; }
-  .case {
-    width: 27px; height: 32px;
-    border: 1.5px dashed var(--brume); border-radius: 6px;
-    display: grid; place-items: center;
-    font-family: var(--display); font-size: 17px; font-weight: 700;
-    color: transparent;
-  }
-  .case.pleine {
-    border: 1.5px solid var(--gave); background: var(--gave-2); color: var(--gave);
-    animation: tampon .45s cubic-bezier(.2,1.5,.4,1) both;
-  }
-  @keyframes tampon {
-    0%   { transform: scale(2.1) rotate(-14deg); opacity: 0; }
-    60%  { transform: scale(.93) rotate(3deg);   opacity: 1; }
-    100% { transform: scale(1) rotate(-2deg);    opacity: 1; }
-  }
-
-  .gps { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--roche-2); min-height: 20px; }
-  .gps b { color: var(--roche); font-variant-numeric: tabular-nums; font-weight: 600; }
-  .gps-sep { color: var(--brume); }
-  .lien {
-    background: none; border: none; padding: 0; font: inherit; font-size: 13px; font-weight: 600;
-    color: var(--gave); text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
-  }
-
-  h1 {
-    font-family: var(--display); font-size: 34px; line-height: 1.08; font-weight: 700;
-    margin: 20px 0 10px; text-wrap: balance; letter-spacing: -.01em;
-  }
-  h2 { font-family: var(--display); font-size: 21px; line-height: 1.2; font-weight: 700; margin: 0; text-wrap: balance; }
-  p { margin: 0 0 12px; }
-  p:last-child { margin-bottom: 0; }
-
-  .section-titre { display: flex; align-items: center; gap: 12px; margin: 34px 0 12px; }
-  .section-titre .eyebrow { white-space: nowrap; }
-  .section-titre::after { content: ""; flex: 1; height: 1px; background: var(--brume); }
-
-  .carte {
-    background: var(--papier); border: 1px solid var(--brume); border-radius: var(--r);
-    padding: 18px; margin-bottom: 12px; box-shadow: var(--ombre);
-  }
-  .carte.scellee { background: transparent; border-style: dashed; box-shadow: none; }
-
-  .carte-tete { display: flex; align-items: flex-start; gap: 12px; }
-  .pastille {
-    flex: none; width: 38px; height: 38px; border-radius: 10px;
-    display: grid; place-items: center;
-    font-family: var(--display); font-size: 18px; font-weight: 700;
-    background: var(--gave-2); color: var(--gave);
-    border: 1px solid color-mix(in srgb, var(--gave) 30%, transparent);
-  }
-  .pastille.vide { background: transparent; color: var(--roche-2); border: 1px dashed var(--brume); font-size: 16px; }
-  .lieu { font-size: 13px; color: var(--roche-2); margin-top: 2px; }
-
-  .corps { margin-top: 14px; display: flex; flex-direction: column; gap: 14px; }
-  .consigne { font-size: 18px; }
-
-  /* ---------- barre de progression ---------- */
-  .jauge { height: 8px; border-radius: 99px; background: var(--brume); overflow: hidden; }
-  .jauge > i { display: block; height: 100%; background: var(--gave); border-radius: 99px; transition: width .4s ease; }
-  .jauge-ligne { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; font-size: 13px; color: var(--roche-2); margin-bottom: 6px; }
-  .jauge-ligne > :last-child { white-space: nowrap; }
-  .jauge-ligne b { color: var(--roche); font-variant-numeric: tabular-nums; }
-
-  /* ---------- familles de trouvailles ---------- */
-  details.famille {
-    background: var(--papier); border: 1px solid var(--brume);
-    border-radius: var(--r); margin-bottom: 10px; overflow: hidden;
-  }
-  details.famille > summary {
-    list-style: none; cursor: pointer; padding: 15px 18px;
-    display: flex; align-items: center; gap: 12px;
-    font-family: var(--display); font-size: 18px; font-weight: 700;
-  }
-  details.famille > summary::-webkit-details-marker { display: none; }
-  .compte {
-    margin-left: auto; font-family: var(--corps); font-size: 13px; font-weight: 600;
-    color: var(--roche-2); font-variant-numeric: tabular-nums; white-space: nowrap;
-  }
-  .chev { color: var(--roche-2); font-size: 13px; transition: transform .2s; }
-  details[open] > summary .chev { transform: rotate(90deg); }
-  .famille-corps { padding: 0 12px 12px; display: flex; flex-direction: column; gap: 6px; }
-
-  .coche {
-    display: flex; align-items: center; gap: 12px;
-    min-height: 52px; padding: 8px 12px;
-    border: 1px solid var(--brume); border-radius: 11px;
-    background: var(--papier); color: var(--roche);
-    font: inherit; font-size: 16px; text-align: left; cursor: pointer;
-    transition: background .12s, border-color .12s;
-  }
-  .coche .box {
-    flex: none; width: 24px; height: 24px; border-radius: 7px;
-    border: 2px solid var(--brume); display: grid; place-items: center;
-    font-size: 14px; font-weight: 700; color: transparent;
-  }
-  .coche .lab-txt { flex: 1; min-width: 0; }
-  .coche .val { font-size: 12px; font-weight: 700; color: var(--roche-2); font-variant-numeric: tabular-nums; }
-  .coche[aria-pressed="true"] { border-color: var(--gave); background: var(--gave-2); }
-  .coche[aria-pressed="true"] .box { background: var(--gave); border-color: var(--gave); color: var(--sur-plein); }
-  .coche[aria-pressed="true"] .lab-txt { text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--gave) 60%, transparent); }
-  .coche.rare { border-style: dashed; }
-  .coche.rare .val { color: var(--or); }
-
-  /* ---------- quiz ---------- */
-  .options { display: flex; flex-direction: column; gap: 8px; }
-  .opt {
-    min-height: 52px; padding: 10px 16px;
-    border: 1px solid var(--brume); border-radius: 11px;
-    background: var(--papier); color: var(--roche);
-    font: inherit; text-align: left; cursor: pointer;
-  }
-  .opt.juste { border-color: var(--gave); background: var(--gave-2); font-weight: 600; }
-  .opt.faux { border-color: color-mix(in srgb, var(--or) 55%, transparent); background: var(--or-2); opacity: .7; }
-  .opt:disabled { cursor: default; }
-
-  .saisie { display: flex; gap: 8px; }
-  input[type="text"] {
-    flex: 1; min-width: 0; min-height: 52px; padding: 10px 14px;
-    border: 1px solid var(--brume); border-radius: 11px;
-    background: var(--papier); color: var(--roche);
-    font-family: var(--display); font-size: 19px; letter-spacing: .1em; text-transform: uppercase;
-  }
-  input[type="text"]::placeholder {
-    letter-spacing: 0; text-transform: none; font-family: var(--corps); font-size: 16px;
-    color: var(--roche-2); opacity: .6;
-  }
-
+  /* ---------------- boutons ---------------- */
   .btn {
-    min-height: 54px; padding: 12px 20px; border-radius: 12px;
-    border: 1px solid transparent; background: var(--gave); color: var(--sur-plein);
-    font-family: var(--corps); font-size: 17px; font-weight: 600; cursor: pointer; width: 100%;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    width: 100%; height: 58px; padding: 0 22px; border-radius: 29px; border: none;
+    background: var(--hero); color: var(--sur-hero);
+    font-family: var(--disp); font-weight: 800; font-size: 18px; cursor: pointer;
   }
-  .btn.creux { background: transparent; border-color: var(--brume); color: var(--roche); }
-  .btn.or { background: var(--or); color: var(--sur-plein); }
-  .btn:disabled { opacity: .4; cursor: default; }
-  .btn.petit { min-height: 46px; font-size: 15px; padding: 8px 16px; width: auto; }
+  .btn:active { transform: scale(.98); }
+  .btn.creux { background: transparent; color: var(--hero); border: 2px solid var(--hero); height: 52px; font-size: 16px; }
 
-  .encart {
-    border-left: 3px solid var(--gave); background: var(--gave-2);
-    border-radius: 0 10px 10px 0; padding: 12px 14px; font-size: 15px;
+  /* ---------------- intro / sécurité ---------------- */
+  .intro-tete { display: flex; align-items: center; gap: 6px; padding: max(14px, env(safe-area-inset-top)) 18px 0; }
+  .intro-tete .retour {
+    background: none; border: none; color: var(--muted); font-size: 15px; font-weight: 600;
+    padding: 6px 4px; cursor: pointer;
   }
-  .encart .lab {
-    display: block; font-size: 11px; font-weight: 700; letter-spacing: .12em;
-    text-transform: uppercase; color: var(--gave); margin-bottom: 4px;
+  .intro-badge {
+    width: 74px; height: 74px; border-radius: 18px; margin: 14px auto 14px;
+    background: var(--hero-soft); display: flex; align-items: center; justify-content: center;
   }
-  .encart.alerte { border-left-color: var(--or); background: var(--or-2); }
-  .encart.alerte .lab { color: var(--or); }
+  .intro-badge svg { width: 42px; height: 42px; }
+  .intro h2 { font-family: var(--disp); font-weight: 800; font-size: 25px; text-align: center; margin: 0 0 4px; }
+  .intro .sous { text-align: center; color: var(--muted); font-size: 14.5px; margin-bottom: 20px; }
+  .carnet-picker { display: flex; gap: 8px; margin: 0 0 18px; }
+  .chip-carnet {
+    flex: 1; background: var(--surface); border: 2px solid var(--line); border-radius: 16px;
+    padding: 10px 6px; text-align: center; cursor: pointer; font-family: inherit;
+  }
+  .chip-carnet b { display: block; font-family: var(--disp); font-size: 15px; font-weight: 800; color: var(--ink); }
+  .chip-carnet span { display: block; font-size: 10.5px; color: var(--muted); margin-top: 2px; }
+  .chip-carnet.actif { border-color: var(--hero); background: var(--hero-soft); }
+  .chip-carnet.actif b { color: var(--hero); }
+  .info-carte {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 18px;
+    padding: 16px 18px; margin-bottom: 14px; font-size: 15px; line-height: 1.5;
+  }
+  .info-carte.alerte { background: var(--rare-bg); border-color: var(--rare-line); }
+  .info-carte .lab {
+    display: block; font-family: var(--mono); font-size: 11px; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--hero); margin-bottom: 6px;
+  }
+  .info-carte.alerte .lab { color: var(--rare); }
 
-  .bonus {
-    border: 1px solid color-mix(in srgb, var(--gentiane) 35%, transparent);
-    background: var(--gentiane-2); border-radius: 11px; padding: 14px; font-size: 15px;
-    display: flex; flex-direction: column; gap: 12px;
+  /* ---------------- bandeau de jeu ---------------- */
+  .bandeau {
+    position: sticky; top: 0; z-index: 30; background: var(--surface);
+    border-bottom: 1px solid var(--line);
+    padding: max(10px, env(safe-area-inset-top)) 18px 14px;
   }
-  .bonus .lab { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gentiane); }
-  .bonus .opt.juste { border-color: var(--gentiane); background: color-mix(in srgb, var(--gentiane) 14%, transparent); }
-
-  .reussi { display: flex; gap: 8px; font-size: 15px; color: var(--roche); }
-  .reussi .tick { color: var(--gave); font-weight: 700; }
-
-  .fait-ligne {
-    display: flex; align-items: center; gap: 10px;
-    padding: 9px 12px; border-radius: 10px; background: var(--papier-2);
-    font-size: 14px; color: var(--roche-2); margin-bottom: 6px;
+  .bandeau-int { max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
+  .bandeau-ligne1 { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .btn-retour {
+    background: none; border: none; color: var(--muted); font-family: var(--mono);
+    font-size: 13px; font-weight: 700; padding: 4px 0; cursor: pointer;
   }
-  .fait-ligne .l {
-    flex: none; width: 26px; height: 26px; border-radius: 7px;
-    background: var(--gave-2); color: var(--gave); display: grid; place-items: center;
-    font-family: var(--display); font-weight: 700; font-size: 14px;
+  .rares-tag { font-size: 12px; font-weight: 700; color: var(--rare); font-variant-numeric: tabular-nums; }
+  .bandeau-ligne2 { display: flex; align-items: center; gap: 16px; }
+  .anneau-jeu { position: relative; flex: none; width: 64px; height: 64px; border-radius: 50%; }
+  .anneau-jeu .disque {
+    position: absolute; inset: 8px; border-radius: 50%; background: var(--surface);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
   }
-
-  .defi-libre {
-    display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center;
-    padding: 12px 14px; border: 1px solid var(--brume); border-radius: 11px;
-    background: var(--papier); margin-bottom: 8px;
+  .anneau-jeu .disque .n { font-size: 14px; font-weight: 800; line-height: 1; }
+  .anneau-jeu .disque .d { font-size: 10.5px; color: var(--muted); line-height: 1.2; }
+  .pts-bloc { display: flex; align-items: baseline; gap: 8px; }
+  .pts-bloc .val {
+    font-size: 42px; font-weight: 900; color: var(--hero); line-height: .9; letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
   }
-  .defi-libre .d-txt { font-size: 15px; }
-  .defi-libre .d-txt b { display: block; font-family: var(--display); font-size: 16px; margin-bottom: 2px; }
-  .defi-libre.fait { background: var(--gave-2); border-color: var(--gave); }
-  .defi-libre .pts { font-size: 12px; color: var(--roche-2); font-weight: 600; }
-
-  .toast {
-    position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%) translateY(150%);
-    z-index: 60; background: var(--roche); color: var(--neige);
-    padding: 13px 20px; border-radius: 999px; font-size: 15px; font-weight: 600;
-    box-shadow: 0 8px 30px rgba(0,0,0,.28);
-    transition: transform .32s cubic-bezier(.2,1,.3,1); max-width: 90vw; text-align: center;
-  }
-  .toast.on { transform: translateX(-50%) translateY(0); }
-
-  .pied {
-    margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--brume);
-    font-size: 13px; color: var(--roche-2);
-    display: flex; justify-content: space-between; gap: 14px; align-items: center;
+  .pts-bloc .lab {
+    font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--muted);
   }
 
-  .diplome {
-    border: 2px solid var(--or); background: var(--or-2);
-    border-radius: var(--r); padding: 26px 20px; text-align: center;
+  /* ---------------- familles : zones teintées ---------------- */
+  .famille {
+    border-radius: 20px; padding: 11px 10px 12px; margin-top: 12px;
+    display: flex; flex-direction: column; gap: 6px;
   }
-  .diplome .gros {
-    font-family: var(--display); font-size: 46px; font-weight: 700; color: var(--or);
-    font-variant-numeric: tabular-nums; line-height: 1; margin: 10px 0 4px;
-  }
-  .badges { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 16px; }
-  .badge { background: var(--papier); border: 1px solid var(--brume); border-radius: 999px; padding: 7px 14px; font-size: 14px; font-weight: 600; }
+  .famille.z-ouvre { background: var(--fam-ouvre-soft); }
+  .famille.z-sens  { background: var(--fam-sens-soft); }
+  .famille.z-faire { background: var(--fam-faire-soft); }
+  .famille.z-rares { background: var(--rare-bg); }
 
-  :focus-visible { outline: 3px solid var(--gentiane); outline-offset: 2px; border-radius: 8px; }
-  @media (prefers-reduced-motion: reduce) { * { animation-duration: .001ms !important; transition-duration: .001ms !important; } }
+  .fam-tete { display: flex; align-items: center; gap: 8px; padding: 0 4px; }
+  .fam-tete .lab {
+    font-family: var(--mono); font-size: 12px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase;
+  }
+  .fam-tete .n { font-size: 12px; font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; margin-left: auto; }
+  .fam-tete .n.rare-n { color: var(--rare-ink); }
+  .fam-tete .etoile { font-size: 14px; color: var(--rare); line-height: 1; }
+
+  .item {
+    display: flex; align-items: center; gap: 10px; width: 100%; text-align: left;
+    background: var(--surface); border: 1px solid rgba(16,34,43,.06); border-radius: 13px;
+    padding: 10px 13px; cursor: pointer;
+  }
+  .item .libelle { flex: 1; font-size: 14.5px; font-weight: 600; line-height: 1.25; min-width: 0; }
+  .item .tag { flex: none; font-size: 12.5px; font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .item .etoile-rare { width: 21px; font-size: 19px; color: var(--rare); text-align: center; flex: none; line-height: 1; }
+
+  .item.faite { background: var(--hero-soft); border-color: var(--hero); }
+  .item.faite .libelle { opacity: .55; text-decoration: line-through; text-decoration-thickness: 2px; }
+  .item.faite .tag { color: var(--hero); font-weight: 800; }
+
+  .item.rare { border: 2px solid var(--rare); background: #FFFDF7; }
+  .item.rare .tag { color: var(--rare-ink); }
+  .item.rare.faite { background: var(--rare-bg); }
+  .item.rare.faite .tag { color: var(--rare); }
+
+  .btn-terminer { margin-top: 26px; }
+
+  /* pastille */
+  .pastille {
+    position: fixed; left: 16px; right: 16px; bottom: max(18px, calc(env(safe-area-inset-bottom) + 8px)); z-index: 60;
+    height: 56px; border-radius: 28px; background: var(--hero);
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    box-shadow: var(--ombre-celeb); max-width: 528px; margin: 0 auto;
+    animation: pastille-in .28s cubic-bezier(.2,1,.3,1) both;
+  }
+  .pastille .glyphe { font-size: 19px; color: var(--sur-hero); }
+  .pastille .msg { font-size: 18px; font-weight: 800; color: var(--sur-hero); }
+  @keyframes pastille-in { 0% { transform: translateY(14px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+  .pastille.sort { animation: pastille-out .2s ease both; }
+  @keyframes pastille-out { to { transform: translateY(14px); opacity: 0; } }
+
+  /* écran de palier */
+  .palier-ecran {
+    position: fixed; inset: 0; z-index: 70; background: var(--hero-deep); color: #fff;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 20px; padding: 24px 26px 30px; text-align: center;
+    animation: fondu-entre .25s ease both;
+  }
+  @keyframes fondu-entre { from { opacity: 0; } to { opacity: 1; } }
+  .palier-ecran .lab {
+    font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .18em;
+    text-transform: uppercase; color: #A7F0D8;
+  }
+  .zoe-palier { border-radius: 24px; box-shadow: 0 16px 32px rgba(13,59,48,.4); }
+  .anneau-palier { width: 178px; height: 178px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .anneau-palier .disque {
+    width: 142px; height: 142px; border-radius: 50%; background: var(--hero-deep);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  }
+  .anneau-palier .disque .pct { font-size: 48px; font-weight: 900; color: #fff; line-height: 1; letter-spacing: -0.02em; }
+  .anneau-palier .disque .sur { font-size: 13.5px; font-weight: 700; color: #A7F0D8; }
+  .palier-ecran h3 { font-family: var(--disp); font-size: 28px; font-weight: 900; line-height: 1.1; margin: 0; color: #fff; }
+  .palier-ecran p { font-size: 15.5px; line-height: 1.45; color: #CFEADE; max-width: 280px; margin: 0; }
+  .pips { display: flex; align-items: center; gap: 8px; }
+  .pips span { width: 32px; height: 8px; border-radius: 4px; background: rgba(255,255,255,.2); }
+  .pips span.faite { background: #39C3A2; }
+  .chip-pts { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,.12); border-radius: 18px; padding: 11px 17px; }
+  .chip-pts .val { font-size: 25px; font-weight: 900; color: #fff; line-height: 1; }
+  .chip-pts .lab2 { font-family: var(--mono); font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #CFEADE; line-height: 1.3; }
+  .btn-palier {
+    height: 58px; width: 100%; max-width: 340px; border-radius: 29px; background: #fff;
+    color: var(--hero-deep); font-family: var(--disp); font-size: 17px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center; border: none; cursor: pointer; margin-top: 2px;
+  }
+
+  /* confettis */
+  .confetti-scene { position: fixed; inset: 0; z-index: 65; pointer-events: none; overflow: hidden; }
+  .confetti { position: absolute; top: -20px; will-change: transform, opacity; animation-name: chute; animation-timing-function: cubic-bezier(.3,.6,.4,1); animation-fill-mode: forwards; }
+  @keyframes chute {
+    0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(var(--dy)) translateX(var(--dx)) rotate(var(--rot)); opacity: 0; }
+  }
+
+  /* fin / diplôme */
+  .fin-contenu {
+    flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 15px; text-align: center; max-width: 400px; margin: 0 auto; width: 100%;
+    padding: max(26px, env(safe-area-inset-top)) 26px max(30px, env(safe-area-inset-bottom));
+  }
+  .fin-contenu .lab { font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+  .fin-contenu h2 { font-family: var(--disp); font-size: 26px; font-weight: 900; line-height: 1.15; margin: 0; }
+  .zoe-fin { border-radius: 22px; box-shadow: 0 10px 26px rgba(13,59,48,.32); }
+  .anneau-fin { width: 156px; height: 156px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 2px 0; }
+  .anneau-fin .disque { width: 130px; height: 130px; border-radius: 50%; background: var(--paper); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; }
+  .anneau-fin .disque .n { font-size: 40px; font-weight: 900; color: var(--hero); line-height: 1; }
+  .anneau-fin .disque .lg { font-size: 13px; font-weight: 700; color: var(--muted); }
+  .stats-3 { display: flex; gap: 10px; width: 100%; }
+  .stat { flex: 1; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 13px 8px; display: flex; flex-direction: column; gap: 3px; }
+  .stat.or { background: var(--rare-bg); border-color: var(--rare); }
+  .stat .val { font-size: 22px; font-weight: 900; line-height: 1; color: var(--ink); }
+  .stat.or .val { color: var(--rare); }
+  .stat .val.hero-c { color: var(--hero); }
+  .stat .lab { font-family: var(--mono); font-size: 9.5px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); }
+  .stat.or .lab { color: var(--rare-ink); }
+  .fin-dedicace { font-size: 14.5px; line-height: 1.45; color: var(--muted); }
+  .fin-actions { display: flex; flex-direction: column; gap: 10px; width: 100%; margin-top: 2px; }
+
+  :focus-visible { outline: 3px solid var(--hero); outline-offset: 2px; border-radius: 8px; }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+  }
 </style>
 
-<div class="topo" aria-hidden="true">
-  <svg viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice">
-    <g transform="translate(200 300) rotate(-16)">
-      <ellipse rx="40" ry="26"/><ellipse rx="78" ry="52"/><ellipse rx="120" ry="80"/>
-      <ellipse rx="166" ry="112"/><ellipse rx="216" ry="148"/><ellipse rx="272" ry="188"/>
-    </g>
-    <g transform="translate(120 640) rotate(24)">
-      <ellipse rx="34" ry="22"/><ellipse rx="70" ry="46"/><ellipse rx="112" ry="74"/>
-      <ellipse rx="160" ry="106"/><ellipse rx="214" ry="142"/>
-    </g>
-  </svg>
-</div>
-
-<div class="wrap">
-  <header class="bandeau">
-    <div class="bandeau-haut">
-      <span class="eyebrow">Carnet d'explorateur · Gourette</span>
-      <span class="score" id="score">0 pts</span>
-    </div>
-    <div class="mot" id="mot" aria-label="Mot de passe du coffre"></div>
-    <div class="gps" id="gps"></div>
-  </header>
-
-  <main id="app"></main>
-
-  <div class="pied">
-    <span>Le trésor du Valentin</span>
-    <button class="lien" id="btn-reset">Tout recommencer</button>
-  </div>
-</div>
-
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div id="app"></div>
 
 <script>
 (function () {
   "use strict";
 
-  // Le fichier doit rester lisible même ouvert en direct depuis le téléphone.
+  /* ============================================================
+     0. PAGE SETUP
+     ============================================================ */
   function meta(attr, nom, valeur) {
     if (document.querySelector("meta[" + attr + '="' + nom + '"]')) return;
     const m = document.createElement("meta");
-    m.setAttribute(attr, nom);
-    m.content = valeur;
+    m.setAttribute(attr, nom); m.content = valeur;
     document.head.appendChild(m);
   }
-  meta("name", "viewport", "width=device-width, initial-scale=1, viewport-fit=cover");
-  meta("name", "theme-color", "#0C7A7D");
+  meta("name", "viewport", "width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1");
+  meta("name", "theme-color", "#12503F");
   meta("name", "apple-mobile-web-app-capable", "yes");
-  meta("name", "apple-mobile-web-app-title", "Trésor");
+  meta("name", "apple-mobile-web-app-title", "Trésors");
   meta("name", "apple-mobile-web-app-status-bar-style", "default");
   document.documentElement.lang = "fr";
-
-  // Installable et utilisable à zéro réseau quand la page est servie en HTTPS.
-  // Sur un artifact Claude, ces deux appels échouent sans bruit : c'est voulu.
   if (!document.querySelector('link[rel="manifest"]')) {
-    const l = document.createElement("link");
-    l.rel = "manifest";
-    l.href = "./manifest.webmanifest";
+    const l = document.createElement("link"); l.rel = "manifest"; l.href = "./manifest.webmanifest";
     document.head.appendChild(l);
+  }
+  if (!document.querySelector('link[rel="apple-touch-icon"]')) {
+    const li = document.createElement("link"); li.rel = "apple-touch-icon"; li.href = "./icones/icone-180.png";
+    document.head.appendChild(li);
   }
   if ("serviceWorker" in navigator && location.protocol === "https:") {
     window.addEventListener("load", function () {
@@ -366,866 +323,718 @@
     });
   }
 
-  /* =========================================================
-     1. LA GRANDE LISTE DES TROUVAILLES
-     Cochable n'importe quand, n'importe où, dans n'importe quel ordre.
-     ========================================================= */
+  /* ============================================================
+     1. DONNÉES — 3 typologies × 3 carnets (inchangé)
+     ============================================================ */
+  function C(items) { return items; }
 
-  const FAMILLES = [
+  const TYPOLOGIES = [
     {
-      id: "voir", titre: "Ouvre l'œil",
-      items: [
-        ["Une fleur jaune", 5],
-        ["Une fleur bleue ou violette", 5],
-        ["Une fleur blanche", 5],
-        ["Un papillon", 10],
-        ["Une vache ou une brebis", 5],
-        ["Un caillou plus gros que ta tête", 5],
-        ["Un caillou avec des paillettes qui brillent", 10],
-        ["Une tache de neige qui a survécu à l'été", 10],
-        ["De l'eau qui coule, même un tout petit filet", 5],
-        ["Un arbre tout seul, sans copains autour", 10],
-        ["Un nuage qui touche la montagne", 10],
-        ["Un trou dans le sol — quelqu'un habite là ?", 10],
-        ["Une pierre posée par quelqu'un, pas par la nature", 10],
-        ["Trois verts différents dans le même regard", 10]
+      id: "montagne", nom: "Montagne", motLieu: "des sommets",
+      accroche: "Sentiers, sommets, torrents",
+      secu: "On reste sur le sentier, on garde les grands en vue. Si le ciel s'assombrit, on écoute l'adulte sans discuter. On ne court pas sur des pierres qui bougent, on ne s'approche pas du bord d'un torrent ou d'une pente raide. On ne ramasse ni ne déplace rien dans la nature : on regarde, on photographie, et on repose tout ce qu'on a pris en main.",
+      carnets: [
+        { id: "A",
+          ouvre: C([["Une tache de neige qui a survécu à l'été",15],["Un caillou avec des paillettes qui brillent au soleil",10],["Trois couleurs de cailloux différentes sur le même chemin",15],["Un nuage qui touche une montagne",10],["Le lit d'un torrent, même sec",10],["Un caillou tout rond, poli par l'eau",15],["Une trace de pas d'animal dans la boue ou la neige",15],["Une touffe de poils ou de laine accrochée à un buisson",20],["Un tas de pierres empilées par quelqu'un pour marquer le chemin",5],["Un sentier qui fait des zigzags",5],["Trois nuances de vert différentes dans le même regard",10],["Une fleur jaune",5],["Une fleur bleue ou violette",10],["Une fleur blanche",5],["Le dernier arbre avant qu'il n'y en ait plus du tout",15],["Un endroit d'où on voit plus loin que partout où tu es déjà allé",10]]),
+          sens: C([["Toucher une pierre froide à l'ombre, puis une chaude au soleil",10],["Toucher de la mousse : douce, ou piquante ?",10],["Écouter l'eau qui coule, et deviner si elle est proche ou loin",15],["Le crissement du gravier sous tes pieds",5],["Une odeur de pierre chauffée par le soleil",10],["Une odeur de plante froissée",10],["Ta respiration qui devient plus forte en montant",5],["Ton cœur qui bat plus vite après une montée",5],["Dix secondes de silence complet, tous ensemble",15],["Le goût de l'eau que tu as emportée",5]]),
+          faire: C([["Prendre une photo vraiment rigolote",5],["Imiter la démarche d'un randonneur fatigué, ou le vol d'un oiseau",5],["Boire une gorgée d'eau en regardant le plus loin possible",5],["Repérer un caillou en forme de cœur",20],["Deviner le temps qu'il faudrait pour atteindre un sommet visible, puis vérifier avec un adulte",15],["Marcher vingt pas sans faire de bruit",15],["Se retourner et montrer d'où on est partis",5],["Donner un nom inventé à une montagne, pour la journée",5],["Inventer un cri de ralliement pour l'équipe",5],["Compter les virages du sentier pendant dix minutes",15],["Ramasser un déchet qui n'est pas à nous",15]]),
+          rares: C([["Un grand oiseau qui plane sans battre des ailes",20],["Un arc-en-ciel, ou un rayon qui traverse les nuages",25],["Un animal sauvage, quel qu'il soit",20],["Le grondement d'un torrent invisible sous les pierres",25],["Un écho, en criant face à une paroi",25],["Un animal qui siffle pour prévenir les autres d'un danger",30],["Un grand chien qui protège un troupeau",25]])
+        },
+        { id: "B",
+          ouvre: C([["Un ruisseau ou un torrent qui descend la pente",10],["Une petite cascade, même minuscule",15],["Un caillou bien pointu, jamais touché par l'eau",10],["Un caillou avec des paillettes qui brillent au soleil",10],["Une roche avec des rayures, comme un gâteau à étages",15],["Une fourmilière",15],["Une toile d'araignée couverte de rosée",20],["Un papillon",10],["Un arbre tordu par le vent, toujours penché du même côté",15],["Un nuage qui change de forme en quelques minutes",15],["Une flaque qui reflète le ciel",15],["Une pierre qui a une forme rigolote (animal, visage, chapeau)",15],["Trois nuances de vert différentes dans le même regard",10],["Une fleur jaune",5],["Une fleur bleue ou violette",10],["Une fleur blanche",5]]),
+          sens: C([["Toucher une écorce rugueuse, puis une lisse",10],["Toucher l'eau d'un torrent ou d'une flaque",10],["Le bruit de l'eau qui change selon qu'elle coule vite ou lentement",15],["Le bourdonnement d'un insecte qui passe",5],["Une odeur de mousse ou de terre humide",10],["Un vent qui te pousse dans le dos, ou qui te freine de face",5],["L'air qui devient plus frais quand un nuage passe devant le soleil",10],["Le silence entre deux bruits d'eau",15],["Sentir une fleur, sans la cueillir",10],["Le goût d'une goutte de pluie, s'il pleut un peu",15]]),
+          faire: C([["Prendre une photo vraiment rigolote",5],["Imiter le vol d'un oiseau, ou la démarche d'un animal de montagne",5],["Boire une gorgée d'eau en regardant le plus loin possible",5],["Choisir un nuage et lui donner un nom",5],["Repérer où le soleil est en train d'aller",5],["Deviner ce que mange l'animal dont vous avez trouvé une trace",15],["Compter les fleurs de trois couleurs différentes",15],["Suivre une piste ou une trace pendant vingt pas",15],["Observer un insecte sans le toucher, une minute entière",15],["Ramasser un déchet qui n'est pas à nous",15]]),
+          rares: C([["Un poisson dans l'eau",25],["Un arc-en-ciel dans les gouttelettes d'une cascade",25],["Un oiseau qui plonge pour pêcher",30],["Un animal sauvage à sabots, quel qu'il soit",20],["Un lézard qui se réchauffe au soleil",20],["Une libellule près d'un point d'eau",20],["Un randonneur qui a l'air de connaître le coin par cœur",20]])
+        },
+        { id: "C",
+          ouvre: C([["Une cabane ou un abri isolé en pierre",15],["Un troupeau, même très loin",15],["Des crottes qui indiquent qu'un animal est passé",10],["Un nid, vide ou occupé",15],["Un scarabée ou un insecte que tu ne connais pas",10],["Un arbre creux",20],["Un caillou avec des paillettes qui brillent au soleil",10],["Un caillou plus gros que ta tête",5],["Le lit d'un torrent, même sec",10],["Un nuage qui touche une montagne",10],["Une ombre qui bouge sur le sol pendant que tu marches",5],["Trois nuances de vert différentes dans le même regard",10],["Une fleur jaune",5],["Une fleur bleue ou violette",10],["Une fleur blanche",5],["Un endroit d'où on voit plus loin que partout où tu es déjà allé",10]]),
+          sens: C([["Toucher une pierre froide à l'ombre, puis une chaude au soleil",10],["Entendre un oiseau chanter, et essayer de le repérer",15],["Sentir l'odeur d'un troupeau, si vous en croisez un",15],["Le bruit d'un animal qui s'enfuit dans les buissons",15],["Une odeur de foin ou d'herbe sèche",10],["Sentir le sol : dur, meuble, sec, humide ?",5],["Ta respiration qui devient plus forte en montant",5],["Dix secondes de silence complet, tous ensemble",15],["Un vent qui te pousse dans le dos, ou qui te freine de face",5],["Le goût de l'eau que tu as emportée",5]]),
+          faire: C([["Prendre une photo vraiment rigolote",5],["Imiter le cri d'un animal de la montagne",5],["Boire une gorgée d'eau en regardant le plus loin possible",5],["Inventer le nom d'un animal imaginaire qui vivrait ici",5],["Dire bonjour à un troupeau croisé, sans s'approcher",5],["Chercher un endroit où un animal pourrait se cacher, et pourquoi",15],["Se retourner et montrer d'où on est partis",5],["Marcher vingt pas sans faire de bruit",15],["Décider ensemble quel animal vous aimeriez le plus croiser",5],["Chercher le plus bel endroit pour un pique-nique",10],["Ramasser un déchet qui n'est pas à nous",15]]),
+          rares: C([["Un renard, ou une trace de petit prédateur",25],["Un aigle, un vautour, ou un autre grand rapace",20],["Un serpent, à bonne distance",25],["Un grand chien qui protège un troupeau",25],["Un arc-en-ciel, ou un rayon qui traverse les nuages",25],["Une chute d'eau qu'on entend avant de la voir",20],["Une vue qui se dégage soudainement après un passage étroit",20]])
+        }
       ]
     },
     {
-      id: "sens", titre: "Écoute, sens, touche",
-      items: [
-        ["Entendre l'eau", 5],
-        ["Entendre le vent dans l'herbe", 5],
-        ["Entendre une cloche de troupeau", 10],
-        ["Sentir une herbe froissée entre tes doigts", 5],
-        ["Toucher de la mousse — douce ou piquante ?", 5],
-        ["Tremper un doigt dans l'eau glacée", 10],
-        ["Dix secondes de silence complet, tous ensemble", 10],
-        ["Sentir l'air : est-ce qu'il sent quelque chose ?", 5]
+      id: "musee", nom: "Musée d'art", motLieu: "du musée",
+      accroche: "Œuvres, ateliers, vitrines",
+      secu: "On ne touche pas les œuvres, même pas les cadres ou les socles. On marche, on ne court pas. On parle bas, et on reste avec le groupe.",
+      carnets: [
+        { id: "A",
+          ouvre: C([["Une œuvre plus grande que toi",5],["Une œuvre plus petite que ta main",15],["La même couleur qui revient dans trois salles différentes",20],["Un dégradé de couleurs à l'intérieur d'une seule œuvre",15],["Une œuvre où tu ne sais pas dire ce qu'elle représente",10],["Un objet fait dans une matière que tu ne reconnais pas",15],["Une signature, et une œuvre sans signature",15],["Un cartel (petite étiquette), et lis ce qu'il dit",5],["Un détail minuscule qu'on ne voit qu'en s'approchant très près",15],["Une œuvre qui a un titre bizarre ou drôle",15],["Une corde, une ligne au sol, ou un espace vide autour d'une œuvre",10],["Un objet très ancien à côté d'un très récent",20],["L'ombre qu'une sculpture dessine sur le mur ou le sol",15],["Une œuvre qui te fait sourire",5]]),
+          sens: C([["Une texture qui a l'air rugueuse, puis une qui a l'air lisse — devinées des yeux, jamais des doigts",10],["Le silence d'une salle, dix secondes complètes",10],["Le bruit de tes pas qui change de son sur deux sols différents",10],["Une salle plus fraîche ou plus chaude qu'une autre",15],["Une odeur particulière au musée",5],["Deux visiteurs qui chuchotent, ou le bruit d'une salle vide comparé à une salle pleine",15],["Une salle où la lumière est plus tamisée qu'ailleurs",10],["Une texture qu'on devine en regardant de très près, sans toucher",10],["Un détail qu'on ne remarque qu'en s'arrêtant vraiment",15],["Une différence de température entre deux salles",15]]),
+          faire: C([["Prendre une photo vraiment rigolote",5],["Imiter la pose d'un personnage ou d'une sculpture",5],["Choisir l'œuvre qu'on emporterait à la maison, et dire pourquoi",5],["Deviner laquelle de deux œuvres est la plus ancienne, puis vérifier",15],["Regarder une œuvre à un pas, puis à dix pas, comparer",10],["S'asseoir sur un banc une minute, sans rien faire d'autre que regarder",10],["Décrire une œuvre à quelqu'un sans dire ce que c'est, pour deviner",15],["Sourire à un gardien",5],["Repérer la salle la plus sombre, et deviner pourquoi",15],["Ramasser un ticket ou un papier qui traîne, et le jeter",15]]),
+          rares: C([["Un artiste en train de créer sur place",30],["Un gardien qui raconte une anecdote",25],["Une salle où vous êtes seuls, pour de vrai",25],["Une œuvre en train d'être installée ou déplacée",30],["Un groupe scolaire en visite",20],["Une œuvre qui vient de votre pays ou région",20],["Une œuvre carrément drôle",20]])
+        },
+        { id: "B",
+          ouvre: C([["Une œuvre inachevée, volontairement ou non",20],["Un outil de l'artiste exposé (pinceau, ciseau, appareil…)",20],["Deux œuvres du même artiste, à des périodes différentes",20],["Une œuvre faite de plusieurs matériaux assemblés",10],["Un socle qui a l'air plus travaillé que l'œuvre elle-même",15],["Une date de création très précise",5],["Une œuvre collective, faite à plusieurs mains",15],["Une réparation visible sur un objet ancien",15],["Une vitrine, et ce qu'elle protège",5],["Un thermomètre ou un capteur discret dans une salle",20],["La même couleur qui revient dans trois salles différentes",20],["Trois nuances d'une seule couleur dans une même salle",15],["Une œuvre posée plus haut que ta tête, et une plus basse",10],["Une caméra ou un capteur de sécurité",5]]),
+          sens: C([["Une matière qui a l'air lisse, puis une texturée — devinées des yeux",10],["Une odeur de bois ou de vernis",10],["Le contraste entre le bruit du hall d'entrée et le calme des salles",10],["Ton pas qui ralentit tout seul en entrant dans une salle calme",10],["Une salle sensiblement plus fraîche que le hall d'entrée",15],["Le bruit d'une salle vide, comparé à une salle pleine de monde",15],["Une texture rugueuse qu'on devine à distance",10],["Le silence propre à une salle d'exposition",10],["Une différence d'éclairage qui change la couleur perçue d'une œuvre",15],["Une odeur particulière au musée",5]]),
+          faire: C([["Prendre une photo vraiment rigolote",5],["Imiter la pose d'un personnage ou d'une sculpture",5],["Imaginer le tout premier essai raté d'une œuvre",10],["Deviner combien de temps a pris la fabrication d'une œuvre",10],["Choisir une œuvre et inventer son titre, avant de vérifier le vrai",10],["Compter les matériaux différents utilisés dans une seule œuvre",15],["Trouver l'œuvre qui a dû demander le plus de patience",15],["Voter pour l'œuvre la plus difficile à fabriquer",10],["Sourire à un gardien",5],["Ramasser un ticket ou un papier qui traîne, et le jeter",15]]),
+          rares: C([["Un artiste en résidence en train de travailler",30],["Une salle avec des outils d'atelier exposés",25],["Une vidéo montrant la fabrication d'une œuvre",20],["Une restauration en cours visible",25],["Un objet religieux ou rituel ancien",20],["Une œuvre plus vieille que le bâtiment qui l'abrite",20],["Une salle vide de visiteurs",20]])
+        },
+        { id: "C",
+          ouvre: C([["Un endroit devenu brillant à force d'être touché, avant que ce soit interdit",20],["Une œuvre entourée de plus de précautions que les autres, et deviner pourquoi",15],["Un extincteur ou un dispositif de sécurité incendie",5],["Une vitrine fermée à clé, et deviner comment elle s'ouvre",15],["Une caméra de sécurité, bien visible ou bien cachée",10],["Une œuvre installée loin de toute fenêtre",15],["Un gardien assis, un gardien debout",10],["Une signature, et une œuvre sans signature",15],["Un autoportrait, si vous en trouvez un",20],["Une copie ou une reproduction d'une œuvre plus ancienne",15],["Un dégradé de couleurs à l'intérieur d'une seule œuvre",15],["Trois nuances d'une seule couleur dans une même salle",15],["Une œuvre plus grande que toi",5],["Une œuvre plus petite que ta main",15],["Un détail qu'on ne devait pas voir à l'origine (dos, revers, dessous)",20]]),
+          sens: C([["Une matière lisse, puis une texturée, devinées des yeux",10],["Le silence particulier d'une salle qui protège des œuvres fragiles",10],["Une odeur neutre, presque absente, dans certaines salles",10],["Le silence après le passage d'un groupe bruyant",15],["Ta respiration qui ralentit devant une œuvre qui t'impressionne",10],["Le bruit de tes pas qui change de son sur deux sols différents",10],["Une salle où la lumière est plus tamisée qu'ailleurs",10],["Le bruit d'une salle vide, comparé à une salle pleine de monde",15],["Une odeur particulière au musée",5],["Une différence de température entre deux salles",15]]),
+          faire: C([["Prendre une photo vraiment rigolote",5],["Imiter la pose d'un personnage ou d'une sculpture",5],["Observer un gardien une minute sans qu'il s'en aperçoive",15],["Chercher l'œuvre la mieux protégée du musée, et dire pourquoi",15],["Repérer tous les dispositifs de sécurité d'une seule salle",15],["Choisir l'œuvre que vous sauveriez en premier s'il y avait un incendie",10],["Marcher aussi doucement que possible dans une salle entière",10],["Compter les caméras visibles dans une salle",15],["Sourire à un gardien",5],["Ramasser un ticket ou un papier qui traîne, et le jeter",15]]),
+          rares: C([["Un gardien qui explique une règle de sécurité",25],["Un restaurateur ou une restauratrice au travail, si visible",30],["Une salle en travaux de rénovation",25],["Une œuvre qui vient de sortir de restauration",25],["Une vitrine avec un système d'ouverture visible",20],["Un visiteur qui connaît vraiment bien le musée",20],["Une œuvre carrément mystérieuse, qu'on ne comprend pas du tout",20]])
+        }
       ]
     },
     {
-      id: "faire", titre: "À faire, où que tu sois",
-      items: [
-        ["Empiler cinq cailloux les uns sur les autres", 10],
-        ["Trouver un caillou en forme de cœur", 15],
-        ["Faire un câlin à un arbre", 5],
-        ["Marcher vingt pas sans faire de bruit", 10],
-        ["Dire bonjour à quelqu'un qu'on croise", 5],
-        ["Prendre une photo vraiment rigolote", 10],
-        ["Inventer un cri de ralliement pour l'équipe", 10],
-        ["Se retourner et montrer d'où on est partis", 5],
-        ["Boire une gorgée d'eau en regardant loin", 5],
-        ["Ramasser un déchet qui n'est pas à nous", 20]
-      ]
-    },
-    {
-      id: "rares", titre: "Les rares — gros points",
-      rare: true,
-      items: [
-        ["Une marmotte, en vrai", 25],
-        ["Entendre le sifflet d'une marmotte", 20],
-        ["Un isard (le chamois des Pyrénées)", 25],
-        ["Un grand oiseau qui plane sans battre des ailes", 20],
-        ["Un patou, le gros chien blanc du troupeau", 20],
-        ["Un arc-en-ciel, ou un rayon à travers les nuages", 20]
+      id: "ville", nom: "Ville", motLieu: "des rues",
+      accroche: "Rues, façades, passants",
+      secu: "On traverse toujours à un passage piéton ou avec le feu, la main d'un adulte tenue ou juste à côté. Dans la foule, on choisit un point de rendez-vous en cas de séparation. On s'arrête pour regarder en l'air, on ne marche jamais les yeux levés.",
+      carnets: [
+        { id: "A",
+          ouvre: C([["Un numéro sur une porte ou un immeuble",5],["Une plaque d'égout — ronde, ou pas ?",5],["Un panneau écrit dans une langue que tu ne lis pas",10],["Une enseigne qui utilise un dessin plutôt que des mots",10],["Un bâtiment très ancien juste à côté d'un tout neuf",15],["Une peinture ou un dessin sur un mur",10],["Un arbre qui pousse au milieu du béton",10],["Un mur avec plusieurs couleurs ou matières différentes",10],["Trois teintes de gris différentes sur les trottoirs ou les façades",15],["Un feu de circulation",5],["Un vélo, une trottinette ou une poussette garée",5],["Une vitrine de magasin bien décorée",10],["Une fenêtre allumée alors qu'il fait encore jour",15],["Quelqu'un qui promène un chien",5]]),
+          sens: C([["Toucher un tronc d'arbre, puis un mur (brique, pierre, béton…)",10],["Une sirène au loin",15],["De la musique qui sort d'une fenêtre ou d'un magasin",10],["Le bruit de tes pas qui change de son sur deux sols différents",10],["Une odeur de nourriture qui cuit",10],["Deux personnes qui rient franchement",10],["Une langue que tu n'as jamais entendue",15],["Le silence relatif d'une petite rue après une grande rue bruyante",10],["La chaleur du trottoir en plein soleil, comparée à l'ombre",10],["Un klaxon ou une sonnette de vélo",5]]),
+          faire: C([["Prendre une photo vraiment rigolote",5],["Imiter un pigeon qui picore",5],["Compter les vélos d'une seule rue",10],["Trouver le nom de rue le plus rigolo",10],["Demander l'heure à quelqu'un, poliment",15],["Élire le meilleur banc de la rue, et s'y asseoir une minute",5],["Suivre un pigeon pendant vingt pas",10],["Désigner le bâtiment qui a l'air le plus vieux, et dire pourquoi",15],["Dire bonjour à quelqu'un, gentiment",10],["Ramasser un déchet qui n'est pas à nous",15]]),
+          rares: C([["Un chat en pleine rue",15],["Un oiseau en train de construire un nid sur un bâtiment",25],["Quelqu'un qui joue de la musique dans la rue",20],["Un très vieux véhicule",25],["Un arc-en-ciel entre deux immeubles",25],["Un marché ou des étals en pleine rue",20],["Une queue de gens qui attendent devant un endroit",15]])
+        },
+        { id: "B",
+          ouvre: C([["Un passage piéton — vérifie s'il a des picots en relief",10],["Un bus, un tram ou un métro",5],["Une trottinette ou un vélo en libre-service",5],["Un rond-point",5],["Une valise à roulettes",5],["Un parking à vélos plein",10],["Un panneau publicitaire animé ou lumineux",10],["Un scooter ou une moto garée",5],["Un chantier ou un échafaudage",10],["Une rampe pour fauteuils roulants ou poussettes",5],["Une horloge visible depuis la rue",10],["Trois teintes de gris différentes sur les trottoirs ou les façades",15],["Un mur avec plusieurs couleurs ou matières différentes",10],["Une grille au sol qui laisse échapper de la vapeur ou de l'air",20]]),
+          sens: C([["Toucher un banc public, puis un lampadaire ou un poteau",10],["Le bruit d'un moteur qui démarre",10],["Un signal sonore pour piétons, si la rue en a un",10],["Le crissement de freins, ou le bruit d'un vélo qui passe",10],["Une odeur d'essence, si vous en croisez",10],["Une odeur de nourriture qui cuit",10],["Le silence relatif d'une petite rue après une grande rue bruyante",10],["La chaleur du trottoir en plein soleil, comparée à l'ombre",10],["Un klaxon au loin",5],["Le bruit différent de deux types de moteurs (voiture, scooter, bus…)",15]]),
+          faire: C([["Prendre une photo vraiment rigolote",5],["Imiter le bruit d'un moyen de transport que vous venez de voir passer",5],["Compter combien de moyens de transport différents vous voyez en cinq minutes",15],["Deviner où va un bus, avant de vérifier son panneau",10],["Traverser en respectant bien le feu ou le passage piéton",5],["Choisir le meilleur moyen de transport pour un très court trajet, et dire pourquoi",10],["Compter les vélos garés dans une seule rue",10],["Repérer un panneau qu'on ne comprend pas tout de suite",10],["Imaginer un moyen de transport qui n'existe pas encore",5],["Ramasser un déchet qui n'est pas à nous",15]]),
+          rares: C([["Un très vieux vélo ou une très vieille voiture",25],["Un embouteillage impressionnant",20],["Un cheval ou une calèche",30],["Une ambulance, des pompiers ou une police en intervention, à distance",20],["Un vélo cargo chargé d'objets improbables",20],["Un groupe qui fait du vélo tous ensemble",20],["Un feu qui clignote au lieu de fonctionner normalement",20]])
+        },
+        { id: "C",
+          ouvre: C([["Quelqu'un qui lit un livre ou un journal en public",10],["Un enfant plus petit que toi",5],["Une personne âgée qui marche tranquillement",5],["Un groupe d'amis qui rient ensemble",10],["Quelqu'un qui porte un uniforme (facteur, policier, livreur…)",10],["Une terrasse de café avec des gens installés",5],["Quelqu'un qui fait du sport en pleine rue",10],["Un enfant qui fait du vélo ou de la trottinette",5],["Deux personnes qui se saluent d'une façon différente d'une poignée de main",15],["Quelqu'un qui porte quelque chose de très lourd ou très encombrant",10],["Un animal de compagnie inhabituel (pas un chien ni un chat)",20],["Quelqu'un qui vous sourit sans se connaître",15],["Trois teintes de gris différentes sur les trottoirs ou les façades",15],["Un immeuble ancien juste à côté d'un tout neuf",15]]),
+          sens: C([["Toucher un mur (brique, pierre, béton…), puis un arbre",10],["Un éclat de rire, loin dans la rue",10],["Une conversation dans une langue que tu ne connais pas",10],["Une odeur de parfum en croisant quelqu'un",10],["Une odeur de nourriture différente d'un stand ou d'un restaurant",10],["Le brouhaha d'une terrasse pleine de monde, comparé à une rue calme",15],["Un enfant qui pleure ou qui rit très fort au loin",10],["Le silence d'une rue soudain vide de monde",15],["La chaleur d'une foule dense, si vous en croisez une",15],["Un bonjour ou un sourire échangé avec un inconnu",15]]),
+          faire: C([["Prendre une photo vraiment rigolote",5],["Imiter la démarche de quelqu'un qui n'est vraiment pas pressé",5],["Dire bonjour à quelqu'un, gentiment",10],["Compter combien de personnes vous croisez en une minute",10],["Deviner le métier de quelqu'un à sa tenue",10],["Sourire à un inconnu et voir s'il vous sourit en retour",15],["Choisir la personne la plus élégante croisée dans la rue",5],["Aider poliment quelqu'un si l'occasion se présente (tenir une porte…)",15],["Compter les langues différentes entendues en dix minutes",15],["Ramasser un déchet qui n'est pas à nous",15]]),
+          rares: C([["Un mariage ou une fête qui sort d'un bâtiment",30],["Un anniversaire fêté en pleine rue",25],["Quelqu'un en costume ou déguisement inhabituel",25],["Un rassemblement, observé à distance avec un adulte",25],["Des retrouvailles visiblement joyeuses entre deux personnes",20],["Un groupe qui prend une photo tous ensemble",15],["Quelqu'un qui joue d'un instrument dans la rue",20]])
+        }
       ]
     }
   ];
 
-  /* =========================================================
-     2. LES INDICES DU COFFRE — un tous les ~150 m
-     Aucun n'est lié à un endroit : tous faisables n'importe où.
-     ========================================================= */
+  const NOMS_FAMILLE = { ouvre: "Ouvre l'œil", sens: "Écoute, sens, touche", faire: "À faire" };
+  const CONFETTI_COULEURS = ["#2A5EA8", "#16786F", "#5B57A6", "#B07C10", "#12503F"];
 
-  const MOT = "LEGAVEDUVALENTIN";
-  const GROUPES = [2, 4, 2, 8]; // LE · GAVE · DU · VALENTIN
-  const PAS = 150;              // mètres entre deux indices
-
-  // Les lettres n'apparaissent pas de gauche à droite : chaque indice révèle
-  // une case tirée au hasard dans le mot, pour qu'on ne devine pas trop tôt.
-  const CASES = [7, 12, 2, 15, 5, 9, 0, 13, 4, 10, 1, 14, 8, 3, 11, 6];
-  function lettreDe(i) { return MOT[CASES[i]]; }
-
-  const INDICES = [
-    { titre: "La devinette du début",
-      quiz: { q: "« Je descends toujours et je ne remonte jamais. Je fais du bruit sans avoir de bouche. Je suis glacé même au mois de juillet. » Qui suis-je ?",
-        options: ["Le vent", "La rivière", "Un caillou", "L'ombre"], bonne: 1,
-        exp: "La rivière. C'est elle que vous allez rejoindre." } },
-
-    { titre: "Le caillou porte-bonheur",
-      defi: "Chacun ramasse <strong>un caillou</strong> qui tient dans la main. Gardez-le : c'est votre porte-bonheur jusqu'à la rivière." },
-
-    { titre: "Le sifflet",
-      quiz: { q: "Un coup de sifflet très aigu, une seule note, très forte. Qui vient de siffler ?",
-        options: ["Un berger", "Une marmotte", "Un isard", "Le vent dans les câbles"], bonne: 1,
-        exp: "La marmotte. Elle monte la garde debout. Un sifflet = danger dans le ciel. Plusieurs = danger au sol." },
-      bonus: { q: "Combien de mois par an la marmotte dort-elle ?",
-        options: ["Deux mois", "Six mois", "Toute l'année"], bonne: 1,
-        exp: "Six mois. Son cœur descend à 5 battements par minute — le tien en fait environ 90 en marchant." } },
-
-    { titre: "Les vingt pas muets",
-      defi: "Vingt pas sans faire un bruit et sans dire un mot. On compte dans sa tête. Le premier qui parle recommence." },
-
-    { titre: "Le mot d'ici",
-      quiz: { q: "Dans les Pyrénées, une rivière de montagne ne s'appelle pas une rivière. On dit :",
-        options: ["Un torrent", "Un gave", "Un ruz", "Un val"], bonne: 1,
-        exp: "Un gave, mot béarnais. Celui que vous rejoignez s'appelle le gave du Valentin." },
-      bonus: { q: "Le gave du Valentin descend jusqu'à Laruns et s'y jette dans un plus gros gave. Lequel ?",
-        options: ["Le gave d'Ossau", "La Garonne", "Le gave de Pau"], bonne: 0,
-        exp: "Le gave d'Ossau. Qui rejoint ensuite le gave d'Oloron, puis l'Adour, puis l'océan. Cette eau glacée finit à Bayonne." } },
-
-    { titre: "Le nez de l'explorateur",
-      defi: "Froisse un brin d'herbe entre tes doigts et sens-le. Puis fais sentir à quelqu'un d'autre. Ça sent quoi, à ton avis ?" },
-
-    { titre: "Plus haut, plus froid",
-      quiz: { q: "Plus on monte en altitude, plus il fait froid. Pourtant on se rapproche du soleil. Pourquoi ?",
-        options: ["Le soleil chauffe le sol, et c'est le sol qui réchauffe l'air", "Le vent est plus fort en haut", "Le soleil est moins allumé en haut"], bonne: 0,
-        exp: "Le soleil chauffe d'abord le sol. Plus tu t'éloignes du sol, moins l'air est réchauffé. En gros : 1 °C de moins tous les 150 m." } },
-
-    { titre: "Le planeur",
-      quiz: { q: "Quel oiseau plane des heures sans presque jamais battre des ailes, avec 2,60 m d'envergure ?",
-        options: ["La buse", "Le vautour fauve", "Le corbeau", "La mouette"], bonne: 1,
-        exp: "Le vautour fauve. Plus large que deux enfants couchés bout à bout. Il monte en tournant dans l'air chaud." },
-      bonus: { q: "Son cousin le gypaète barbu se nourrit surtout d'os. Comment fait-il pour les casser ?",
-        options: ["Il les écrase avec ses pattes", "Il les emporte en vol et les lâche sur les rochers", "Il les trempe dans l'eau pour les ramollir"], bonne: 1,
-        exp: "Il monte haut avec l'os et le lâche sur une dalle de pierre, jusqu'à ce qu'il se brise. Puis il avale les morceaux." } },
-
-    { titre: "Le concours de verts",
-      defi: "Chacun montre du doigt <strong>un vert différent</strong> : le vert de l'herbe, celui de la mousse, celui d'une feuille… Combien de verts différents à vous tous ?" },
-
-    { titre: "Le code du berger",
-      code: { enigme: "15 · 19 · 19 · 1 · 21",
-        intro: "Un vieux berger écrivait en chiffres. Sa règle : <strong>A = 1, B = 2, C = 3</strong>… à toi de continuer.",
-        reponse: "OSSAU", indice: "Cinq lettres. C'est le nom de la vallée où vous marchez.",
-        exp: "OSSAU. Vous êtes en vallée d'Ossau, en Béarn. C'est aussi le nom du fromage de brebis d'ici." } },
-
-    { titre: "Le manteau de laine",
-      quiz: { q: "« Je porte un manteau de laine même au mois d'août, je mange de l'herbe du matin au soir et je ne sais dire qu'un seul mot. » Qui suis-je ?",
-        options: ["La marmotte", "La brebis", "Le patou", "L'isard"], bonne: 1,
-        exp: "La brebis. Sa laine reste accrochée aux buissons — et les oiseaux viennent la chercher pour tapisser leur nid." } },
-
-    { titre: "Le regard en arrière",
-      defi: "Tout le monde se retourne. Montrez du doigt l'endroit d'où vous êtes partis. Vous avez marché tout ça." },
-
-    { titre: "Les galets tout ronds",
-      quiz: { q: "Pourquoi les galets d'une rivière sont-ils lisses et ronds, alors que les cailloux de la montagne sont pointus ?",
-        options: ["Ils sont d'une autre roche", "L'eau les roule et ils s'usent les uns contre les autres", "Le soleil les fait fondre"], bonne: 1,
-        exp: "L'eau les fait rouler pendant des milliers d'années. Un galet bien rond a beaucoup voyagé." },
-      bonus: { q: "Certaines pierres d'ici étaient au fond de la mer il y a très longtemps. Qu'y trouve-t-on parfois ?",
-        options: ["Du sel", "Des coquillages fossilisés", "Du sable de plage"], bonne: 1,
-        exp: "Des coquillages fossilisés, à 2 000 m d'altitude. Les Pyrénées ont soulevé un ancien fond marin." } },
-
-    { titre: "Le baptême de la montagne",
-      defi: "Chacun choisit une montagne en face et lui invente un nom. Le nom le plus rigolo est adopté pour la journée." },
-
-    { titre: "Le gros chien blanc",
-      quiz: { q: "Un gros chien blanc se lève près du troupeau et vient vers vous. Qu'est-ce qu'on fait ?",
-        options: ["On court", "On s'arrête, on ne crie pas, on le laisse renifler, puis on contourne", "On le caresse", "On lui donne à manger"], bonne: 1,
-        exp: "C'est un patou : il garde son troupeau, c'est son travail. On s'arrête, on baisse le bâton, on ne court jamais, et on contourne largement." },
-      bonus: { q: "Pourquoi élève-t-on le patou au milieu des brebis depuis qu'il est tout petit ?",
-        options: ["Pour qu'il apprenne à les compter", "Pour qu'il les prenne pour sa famille et les défende", "Pour qu'il ait chaud l'hiver"], bonne: 1,
-        exp: "Pour lui, le troupeau est sa famille. Il ne le dresse pas, il le protège — c'est pour ça qu'il vient voir qui approche." } },
-
-    { titre: "Le premier qui entend l'eau",
-      defi: "Tout le monde ferme les yeux et écoute pendant dix secondes. <strong>Le premier qui entend l'eau lève la main.</strong>" }
-  ];
-
-  const DEFIS_RIVIERE = [
-    { id: "ricochet", titre: "Les ricochets", texte: "Sortez les cailloux porte-bonheur. Combien de rebonds ? Le record de la famille compte double.", pts: 15 },
-    { id: "barrage", titre: "Le barrage", texte: "Construisez un petit barrage de galets à tous. Avant de repartir : on le défait, la rivière reprend son chemin.", pts: 15 },
-    { id: "bateau", titre: "La course de feuilles", texte: "Chacun choisit une feuille, on les lâche ensemble en amont. Première arrivée au caillou repère.", pts: 10 },
-    { id: "glacee", titre: "La main glacée", texte: "La main dans l'eau, on compte jusqu'à dix tous ensemble. On n'insiste pas si ça pique trop.", pts: 10 },
-    { id: "landart", titre: "Le land art", texte: "Avec des galets, des brindilles et des feuilles : fabriquez un animal ou un visage sur la berge. Photo obligatoire.", pts: 15 },
-    { id: "propre", titre: "Ne rien laisser", texte: "Avant de repartir, on ramasse tout. Y compris ce qui n'est pas à nous. Zéro trace.", pts: 20 }
-  ];
-
-  const DEFIS_RETOUR = [
-    { id: "silence", titre: "Les cent pas silencieux", texte: "Cent pas sans dire un mot, en comptant dans sa tête.", pts: 10 },
-    { id: "jevois", titre: "Je vois quelque chose que tu ne vois pas…", texte: "…et c'est de couleur ___ . Trois tours chacun.", pts: 10 },
-    { id: "meteo", titre: "Le nez au vent", texte: "Le vent souffle vers où ? Les nuages vont-ils dans le même sens ? Chacun donne sa prévision pour ce soir.", pts: 10 },
-    { id: "raconte", titre: "L'histoire à trois voix", texte: "Quelqu'un commence une histoire par « Il était une fois une marmotte… ». Chacun ajoute une phrase, chacun son tour.", pts: 15 },
-    { id: "merci", titre: "Le mot de la fin", texte: "Chacun dit son meilleur moment de la journée. En un mot, ou en une phrase.", pts: 15 }
-  ];
-
-  const PTS_INDICE = 20, PTS_BONUS = 10, PTS_COFFRE = 60;
-
-  /* =========================================================
-     ÉTAT
-     ========================================================= */
-
-  const CLE = "tresor-valentin-v2";
-  function neuf() {
-    return { demarre: false, trouvailles: {}, indices: {}, coffre: false,
-             riviere: {}, aRepart: false, retour: {}, fini: false, metres: 0 };
+  function typo(id) { return TYPOLOGIES.find(function (t) { return t.id === id; }); }
+  function carnet(typoId, carnetId) {
+    return typo(typoId).carnets.find(function (c) { return c.id === carnetId; });
   }
-  let S = charger();
+  function toutesFamilles(c) { return [["ouvre", c.ouvre], ["sens", c.sens], ["faire", c.faire]]; }
+  function totalCarnet(c) { return c.ouvre.length + c.sens.length + c.faire.length + c.rares.length; }
 
+  /* ============================================================
+     2. PICTOGRAMMES (SVG dessinés à la main)
+     ============================================================ */
+  function svgMontagne() {
+    return '<svg viewBox="0 0 48 48" fill="none">' +
+      '<circle cx="35" cy="12" r="4.5" fill="var(--hero)" opacity=".45"/>' +
+      '<path d="M2 38 L17 13 C17.5 12.2 18.6 12.2 19.1 13 L27 26" stroke="var(--hero-deep)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>' +
+      '<path d="M14 38 L26.3 17.3 C26.8 16.5 27.9 16.5 28.4 17.3 L44 38 Z" fill="var(--hero)"/>' +
+      '<path d="M2 38 L17 13 C17.5 12.2 18.6 12.2 19.1 13 L27 26 L21 38 Z" fill="var(--hero-deep)"/>' +
+      '<path d="M25.4 20.6 L28.4 17.3 C27.9 16.5 26.8 16.5 26.3 17.3 L23.5 22 Z" fill="#fff" opacity=".8"/>' +
+      '<path d="M16.2 17.6 L19.1 13 C18.6 12.2 17.5 12.2 17 13 L14.6 16.8 Z" fill="#fff" opacity=".8"/>' +
+      "</svg>";
+  }
+  function svgMusee() {
+    return '<svg viewBox="0 0 48 48" fill="none">' +
+      '<path d="M24 6 L42 17 H6 Z" fill="var(--hero-deep)"/>' +
+      '<rect x="6" y="19" width="36" height="3" rx="1.5" fill="var(--hero)"/>' +
+      '<rect x="10" y="25" width="4.5" height="13" rx="2" fill="var(--hero)"/>' +
+      '<rect x="21.75" y="25" width="4.5" height="13" rx="2" fill="var(--hero-deep)"/>' +
+      '<rect x="33.5" y="25" width="4.5" height="13" rx="2" fill="var(--hero)"/>' +
+      '<rect x="6" y="40" width="36" height="3.4" rx="1.7" fill="var(--hero-deep)"/>' +
+      "</svg>";
+  }
+  function svgVille() {
+    return '<svg viewBox="0 0 48 48" fill="none">' +
+      '<rect x="5" y="21" width="9" height="19" rx="2" fill="var(--hero)"/>' +
+      '<rect x="16.5" y="10" width="10.5" height="30" rx="2.4" fill="var(--hero-deep)"/>' +
+      '<path d="M19 10 a2.75 2.75 0 0 1 5.5 0 Z" fill="var(--hero-deep)"/>' +
+      '<rect x="29.5" y="17" width="9" height="23" rx="2" fill="var(--hero)"/>' +
+      '<rect x="20" y="15" width="3" height="3" rx=".6" fill="#fff" opacity=".85"/>' +
+      '<rect x="20" y="22" width="3" height="3" rx=".6" fill="#fff" opacity=".85"/>' +
+      '<rect x="20" y="29" width="3" height="3" rx=".6" fill="#fff" opacity=".85"/>' +
+      '<rect x="8" y="26" width="3" height="3" rx=".6" fill="#fff" opacity=".7"/>' +
+      '<rect x="32.5" y="22" width="3" height="3" rx=".6" fill="#fff" opacity=".7"/>' +
+      "</svg>";
+  }
+  const SVG_TYPO = { montagne: svgMontagne, musee: svgMusee, ville: svgVille };
+
+  /* mascotte "Zoé" — loupe vivante, 3 humeurs (curieux / malicieux / fier) */
+  function zoeHTML(mood, opts) {
+    opts = opts || {};
+    const blush = opts.blush !== false;
+    const sparks = opts.sparks !== false;
+    const wink = mood === "malicieux";
+    const wide = mood === "fier";
+    let h = '<div style="position:relative;width:340px;height:340px;border-radius:78px;background:#12503f;overflow:hidden">';
+    h += '<div style="position:absolute;left:50%;top:50%;width:340px;height:340px;background:radial-gradient(66% 60% at 50% 40%, #1c6b53 0%, #145244 58%, #0d3b30 100%);transform:translate(-50%,-50%)"></div>';
+    h += '<div style="position:absolute;left:50%;top:150px;width:290px;height:290px;border-radius:50%;border:2px solid rgba(160,240,215,0.14);transform:translate(-50%,-50%)"></div>';
+    h += '<div style="position:absolute;left:150px;top:146px;width:36px;height:196px;border-radius:18px;background:#c98a4d;transform:rotate(-38deg);transform-origin:top center;overflow:hidden">' +
+      '<div style="position:absolute;left:6px;top:118px;width:9px;height:62px;border-radius:5px;background:rgba(255,255,255,0.2)"></div>' +
+      '<div style="position:absolute;left:0;top:128px;width:36px;height:26px;background:#a86c34"></div>' +
+      '</div>';
+    h += '<div style="position:absolute;left:62px;top:40px;width:212px;height:212px;border-radius:50%;background:#39c3a2"></div>';
+    h += '<div style="position:absolute;left:78px;top:56px;width:180px;height:180px;border-radius:50%;background:#eafaf4;overflow:hidden">';
+    h += '<div style="position:absolute;inset:0;background:radial-gradient(72% 62% at 44% 38%, #ffffff 0%, #e4f6ee 60%, #cfeade 100%)"></div>';
+    h += '<div style="position:absolute;left:14px;top:12px;width:56px;height:96px;background:linear-gradient(150deg, rgba(255,255,255,0.9), rgba(255,255,255,0));border-radius:50%;transform:rotate(26deg)"></div>';
+    if (blush) {
+      h += '<div style="position:absolute;left:22px;top:110px;width:46px;height:30px;background:radial-gradient(closest-side, rgba(255,132,96,0.4), rgba(255,132,96,0))"></div>';
+      h += '<div style="position:absolute;left:112px;top:110px;width:46px;height:30px;background:radial-gradient(closest-side, rgba(255,132,96,0.4), rgba(255,132,96,0))"></div>';
+    }
+    h += '<div style="position:absolute;left:36px;top:62px;width:36px;height:42px;border-radius:50%;background:#123a30"></div>';
+    h += '<div style="position:absolute;left:44px;top:70px;width:13px;height:13px;border-radius:50%;background:#eafaf4"></div>';
+    if (!wink) {
+      h += '<div style="position:absolute;left:108px;top:62px;width:36px;height:42px;border-radius:50%;background:#123a30"></div>';
+      h += '<div style="position:absolute;left:116px;top:70px;width:13px;height:13px;border-radius:50%;background:#eafaf4"></div>';
+    } else {
+      h += '<div style="position:absolute;left:106px;top:72px;width:40px;height:22px;border-top:11px solid #123a30;border-radius:26px 26px 0 0"></div>';
+    }
+    if (!wide) {
+      h += '<div style="position:absolute;left:60px;top:118px;width:58px;height:32px;background:#123a30;-webkit-clip-path:path(\'M2,2 C6,20 15,29 29,29 C43,29 52,20 56,2 C50,15 41,21 29,21 C17,21 8,15 2,2 Z\');clip-path:path(\'M2,2 C6,20 15,29 29,29 C43,29 52,20 56,2 C50,15 41,21 29,21 C17,21 8,15 2,2 Z\')"></div>';
+    } else {
+      h += '<div style="position:absolute;left:58px;top:114px;width:62px;height:46px;background:#123a30;-webkit-clip-path:path(\'M3,7 C16,0 46,0 59,7 C59,32 47,45 31,45 C15,45 3,32 3,7 Z\');clip-path:path(\'M3,7 C16,0 46,0 59,7 C59,32 47,45 31,45 C15,45 3,32 3,7 Z\')"></div>';
+      h += '<div style="position:absolute;left:74px;top:140px;width:30px;height:20px;border-radius:10px 10px 15px 15px;background:#ff7a6b"></div>';
+    }
+    h += '</div>';
+    if (sparks) {
+      h += '<div style="position:absolute;left:40px;top:274px;width:12px;height:12px;border-radius:50%;background:#a7f0d8"></div>';
+      h += '<div style="position:absolute;left:296px;top:78px;width:9px;height:9px;border-radius:50%;background:#a7f0d8"></div>';
+      h += '<div style="position:absolute;left:36px;top:64px;width:8px;height:8px;border-radius:50%;background:#a7f0d8"></div>';
+    }
+    h += '</div>';
+    return h;
+  }
+  function zoeBox(sizePx, mood, opts) {
+    const echelle = sizePx / 340;
+    return '<div style="width:' + sizePx + 'px;height:' + sizePx + 'px;overflow:hidden;flex:none" aria-hidden="true">' +
+      '<div style="width:340px;height:340px;transform:scale(' + echelle + ');transform-origin:top left">' +
+      zoeHTML(mood, opts) +
+      '</div></div>';
+  }
+
+  /* ============================================================
+     3. ÉTAT — une progression indépendante par typologie
+     ============================================================ */
+  const CLE = "tresors-dici-v3";
+  function etatVide() { return { progres: {}, dernier: {}, vue: { ecran: "accueil" } }; }
+  let S = charger();
   function charger() {
     try {
-      const brut = localStorage.getItem(CLE);
-      return brut ? Object.assign(neuf(), JSON.parse(brut)) : neuf();
-    } catch (e) { return neuf(); }
+      const b = localStorage.getItem(CLE);
+      const d = b ? Object.assign(etatVide(), JSON.parse(b)) : etatVide();
+      if (!d.vue) d.vue = { ecran: "accueil" };
+      if (!d.progres) d.progres = {};
+      if (!d.dernier) d.dernier = {};
+      return d;
+    } catch (e) { return etatVide(); }
   }
   function sauver() { try { localStorage.setItem(CLE, JSON.stringify(S)); } catch (e) {} }
 
-  function etat(i) {
-    if (!S.indices[i]) S.indices[i] = { ok: false, bonus: false, repondu: false, ouvert: false };
-    return S.indices[i];
+  const ORDRE_CARNETS = ["A", "B", "C"];
+  function progresCarnet(typoId, carnetId) {
+    if (!S.progres[typoId]) S.progres[typoId] = {};
+    if (!S.progres[typoId][carnetId]) S.progres[typoId][carnetId] = { coches: {}, paliers: [] };
+    return withTypo(S.progres[typoId][carnetId], typoId, carnetId);
   }
-  function indiceCourant() {
-    for (let i = 0; i < INDICES.length; i++) if (!etat(i).ok) return i;
-    return INDICES.length;
-  }
-  function toutesLesLettres() { return INDICES.every(function (_, i) { return etat(i).ok; }); }
-
-  function points() {
-    let p = 0;
-    FAMILLES.forEach(function (f) {
-      f.items.forEach(function (it, k) { if (S.trouvailles[f.id + ":" + k]) p += it[1]; });
-    });
-    INDICES.forEach(function (_, i) {
-      const e = S.indices[i];
-      if (!e) return;
-      if (e.ok) p += PTS_INDICE;
-      if (e.bonus) p += PTS_BONUS;
-    });
-    if (S.coffre) p += PTS_COFFRE;
-    DEFIS_RIVIERE.forEach(function (d) { if (S.riviere[d.id]) p += d.pts; });
-    DEFIS_RETOUR.forEach(function (d) { if (S.retour[d.id]) p += d.pts; });
-    return p;
-  }
-  function pointsMax() {
-    let p = INDICES.length * PTS_INDICE + PTS_COFFRE;
-    FAMILLES.forEach(function (f) { f.items.forEach(function (it) { p += it[1]; }); });
-    INDICES.forEach(function (x) { if (x.bonus) p += PTS_BONUS; });
-    DEFIS_RIVIERE.forEach(function (d) { p += d.pts; });
-    DEFIS_RETOUR.forEach(function (d) { p += d.pts; });
-    return p;
-  }
-  function nbTrouvailles() {
-    let n = 0, tot = 0;
-    FAMILLES.forEach(function (f) {
-      f.items.forEach(function (_, k) { tot++; if (S.trouvailles[f.id + ":" + k]) n++; });
-    });
-    return [n, tot];
+  function carnetSuggere(typoId) {
+    for (let i = 0; i < ORDRE_CARNETS.length; i++) {
+      const cid = ORDRE_CARNETS[i];
+      const pr = S.progres[typoId] && S.progres[typoId][cid];
+      if (!pr || scoreEtProgres(withTypo(pr, typoId, cid)).pct < 100) return cid;
+    }
+    return ORDRE_CARNETS[0];
   }
 
-  /* =========================================================
-     OUTILS
-     ========================================================= */
-
-  const $ = function (s) { return document.querySelector(s); };
+  /* ============================================================
+     4. OUTILS DOM
+     ============================================================ */
+  const app = document.getElementById("app");
   function el(tag, cls, html) {
     const n = document.createElement(tag);
     if (cls) n.className = cls;
     if (html != null) n.innerHTML = html;
     return n;
   }
-  let minuteur;
-  function toast(msg) {
-    const t = $("#toast");
-    t.textContent = msg;
-    t.classList.add("on");
-    clearTimeout(minuteur);
-    minuteur = setTimeout(function () { t.classList.remove("on"); }, 3200);
+  /* Vibration : Haptics natif si l'app tourne dans Capacitor (Xcode/App Store),
+     sinon repli sur l'API web standard (PWA hors-ligne). */
+  function capacitorNatif() {
+    return !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform());
   }
-  function vibre(m) { if (navigator.vibrate) navigator.vibrate(m); }
-
-  /* =========================================================
-     GPS — sert uniquement de compteur de mètres
-     ========================================================= */
-
-  let gpsActif = false, dernier = null, altitude = null, veille = null, aUnPoint = false;
-
-  function distance(a, b) {
-    const R = 6371000, r = Math.PI / 180;
-    const dLat = (b.lat - a.lat) * r, dLon = (b.lon - a.lon) * r;
-    const x = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(a.lat * r) * Math.cos(b.lat * r) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    return 2 * R * Math.asin(Math.sqrt(x));
-  }
-
-  function demarrerGPS() {
-    if (!navigator.geolocation) { majGPS("Ce téléphone ne donne pas la position"); return; }
-    if (veille != null) navigator.geolocation.clearWatch(veille);
-
-    gpsActif = true;
-    majGPS(aUnPoint ? null : "Recherche du signal…");
-
-    veille = navigator.geolocation.watchPosition(function (pos) {
-      // Un point qui arrive après un timeout doit rattraper l'affichage.
-      gpsActif = true;
-      aUnPoint = true;
-
-      const c = pos.coords;
-      if (c.altitude != null && !isNaN(c.altitude)) altitude = Math.round(c.altitude);
-      // En montagne les relevés sont moins précis qu'en ville, et iOS espace les
-      // mises à jour quand l'écran est éteint : il faut accepter de gros pas,
-      // sinon le compteur sous-estime énormément la marche réelle.
-      if (c.accuracy != null && c.accuracy < 60) {
-        const p = { lat: c.latitude, lon: c.longitude };
-        if (dernier) {
-          const d = distance(dernier, p);
-          if (d > 6 && d < 400) { S.metres += d; sauver(); }
-        }
-        dernier = p;
-      }
-      majGPS();
-      proposerIndice();
-    }, function (err) {
-      // 1 = refusé, 2 = signal introuvable, 3 = trop lent.
-      if (err && err.code === 1) {
-        gpsActif = false;
-        navigator.geolocation.clearWatch(veille);
-        veille = null;
-        majGPS("Autorisation refusée : Réglages → Safari → Position → Demander");
-        return;
-      }
-      // Un timeout ou une perte de signal n'est jamais définitif : on continue d'écouter.
-      if (!aUnPoint) majGPS("Toujours pas de signal — ça vient parfois au bout d'une minute, dehors");
-      else majGPS();
-    }, { enableHighAccuracy: true, maximumAge: 10000, timeout: 60000 });
-
-    if ("wakeLock" in navigator) navigator.wakeLock.request("screen").catch(function () {});
-  }
-
-  function majGPS(message) {
-    const z = $("#gps");
-    if (!z) return;
-    z.innerHTML = "";
-    const i = indiceCourant();
-
-    if (!gpsActif) {
-      if (message) z.appendChild(el("span", null, message + " · "));
-      const b = el("button", "lien", message ? "réessayer" : "Compter les mètres parcourus (facultatif)");
-      b.addEventListener("click", demarrerGPS);
-      z.appendChild(b);
+  function vibre(m) {
+    if (capacitorNatif() && window.Capacitor.Plugins && window.Capacitor.Plugins.Haptics) {
+      const intense = Array.isArray(m) ? m.length > 2 : m > 40;
+      window.Capacitor.Plugins.Haptics.impact({ style: intense ? "MEDIUM" : "LIGHT" }).catch(function () {});
       return;
     }
-
-    // Actif mais pas encore de point : on le dit, sans faire croire à un échec.
-    if (message) {
-      z.appendChild(el("span", null, message));
-      return;
-    }
-
-    const bouts = [];
-    if (altitude != null) bouts.push("<b>" + altitude + " m</b> d'altitude");
-    bouts.push("<b>" + Math.round(S.metres) + " m</b> parcourus");
-    if (i < INDICES.length && !etat(i).ouvert) {
-      const reste = Math.round((i + 1) * PAS - S.metres);
-      bouts.push(reste > 0
-        ? "indice " + (i + 1) + " dans <b>" + reste + " m</b>"
-        : "<b>indice " + (i + 1) + " prêt !</b>");
-    }
-    z.innerHTML = bouts.join(' <span class="gps-sep">·</span> ');
+    if (navigator.vibrate) navigator.vibrate(m);
   }
 
-  function proposerIndice() {
-    const i = indiceCourant();
-    if (i >= INDICES.length) return;
-    const e = etat(i);
-    if (!e.ouvert && S.metres >= (i + 1) * PAS) {
-      e.ouvert = true; sauver(); dessiner();
-      toast("Indice " + (i + 1) + " débloqué !");
-      vibre([40, 60, 40]);
+  /* ============================================================
+     5. CONFETTIS + PASTILLE
+     ============================================================ */
+  function lancerConfettis(n) {
+    const scene = el("div", "confetti-scene");
+    document.body.appendChild(scene);
+    const largeur = window.innerWidth;
+    for (let i = 0; i < n; i++) {
+      const c = el("div", "confetti");
+      const taille = 8 + Math.random() * 7;
+      c.style.left = (Math.random() * largeur) + "px";
+      c.style.width = taille + "px"; c.style.height = taille + "px";
+      c.style.background = CONFETTI_COULEURS[i % CONFETTI_COULEURS.length];
+      c.style.borderRadius = "4px";
+      c.style.animationDuration = (1500 + Math.random() * 1400) + "ms";
+      c.style.setProperty("--dy", (window.innerHeight * (0.6 + Math.random() * 0.5)) + "px");
+      c.style.setProperty("--dx", ((Math.random() - 0.5) * 160) + "px");
+      c.style.setProperty("--rot", (Math.random() * 720 - 360) + "deg");
+      c.style.animationDelay = (Math.random() * 150) + "ms";
+      scene.appendChild(c);
     }
+    setTimeout(function () { scene.remove(); }, 3200);
   }
 
-  /* =========================================================
-     BANDEAU
-     ========================================================= */
-
-  function dessinerBandeau() {
-    $("#score").textContent = points() + " pts";
-
-    const m = $("#mot");
-    if (!m.dataset.pret) {
-      let n = 0;
-      GROUPES.forEach(function (taille) {
-        const g = el("div", "groupe");
-        for (let k = 0; k < taille; k++) { g.appendChild(el("span", "case")); n++; }
-        m.appendChild(g);
-      });
-      m.dataset.pret = "1";
-    }
-    const revelees = {};
-    INDICES.forEach(function (_, i) { if (etat(i).ok) revelees[CASES[i]] = true; });
-
-    const cases = m.querySelectorAll(".case");
-    for (let p = 0; p < MOT.length; p++) {
-      const c = cases[p];
-      if (!c) continue;
-      const gagne = !!revelees[p];
-      if (gagne && !c.classList.contains("pleine")) { c.classList.add("pleine"); c.textContent = MOT[p]; }
-      else if (!gagne && c.classList.contains("pleine")) { c.classList.remove("pleine"); c.textContent = ""; }
-    }
-    majGPS();
+  let pastilleTimer = null;
+  function montrerPastille(msg) {
+    const ancienne = document.querySelector(".pastille");
+    if (ancienne) ancienne.remove();
+    const p = el("div", "pastille");
+    p.appendChild(el("span", "glyphe", "✦"));
+    p.appendChild(el("span", "msg", msg));
+    document.body.appendChild(p);
+    clearTimeout(pastilleTimer);
+    pastilleTimer = setTimeout(function () {
+      p.classList.add("sort");
+      setTimeout(function () { p.remove(); }, 220);
+    }, 1800);
   }
 
-  /* =========================================================
-     RENDU
-     ========================================================= */
+  const MESSAGES_PALIER = {
+    25: ["Bien parti !", "Encore un bon bout de chemin et le diplôme est à vous. Qui repère la prochaine ?"],
+    50: ["À mi-chemin !", "La moitié du carnet est déjà cochée. Continuez comme ça."],
+    75: ["Trois quarts du carnet !", "Encore un petit effort et le diplôme est à vous. Qui repère la prochaine ?"],
+    100: ["Carnet complet !", "Chaque trésor de ce carnet a été trouvé. Bravo à toute l'équipe."]
+  };
 
+  function celebrerPalier(pct, sp) {
+    const msg = MESSAGES_PALIER[pct];
+    if (!msg) return;
+    vibre(pct === 100 ? [40, 60, 40, 60, 120] : 50);
+    lancerConfettis(pct === 100 ? 90 : 50);
+
+    const ov = el("div", "palier-ecran");
+    const zoe = el("div", "zoe-palier");
+    zoe.innerHTML = zoeBox(104, "fier", { sparks: true });
+    ov.appendChild(zoe);
+    ov.appendChild(el("span", "lab", "Palier atteint"));
+    const ang = el("div", "anneau-palier");
+    ang.style.background = "conic-gradient(#39C3A2 " + pct + "%, rgba(255,255,255,.16) 0)";
+    const disque = el("div", "disque");
+    disque.appendChild(el("div", "pct", pct + " %"));
+    disque.appendChild(el("div", "sur", sp.faits + " sur " + sp.total));
+    ang.appendChild(disque);
+    ov.appendChild(ang);
+    ov.appendChild(el("h3", null, msg[0]));
+    ov.appendChild(el("p", null, msg[1]));
+    const pips = el("div", "pips");
+    [25, 50, 75, 100].forEach(function (p) { pips.appendChild(el("span", pct >= p ? "faite" : "")); });
+    ov.appendChild(pips);
+    const chip = el("div", "chip-pts");
+    chip.appendChild(el("div", "val", sp.pts));
+    chip.appendChild(el("div", "lab2", "points<br>dont " + sp.raresFaits + " rares ★"));
+    ov.appendChild(chip);
+    const btn = el("button", "btn-palier", pct === 100 ? "Voir le diplôme" : "On continue !");
+    btn.addEventListener("click", function () {
+      ov.remove();
+      if (pct === 100) { S.vue.ecran = "fin"; sauver(); dessiner(); }
+    });
+    ov.appendChild(btn);
+    document.body.appendChild(ov);
+  }
+
+  /* ============================================================
+     6. SCORE
+     ============================================================ */
+  function scoreEtProgres(p) {
+    const c = carnet(p.typo, p.carnet);
+    const ck = p.coches;
+    let pts = 0, faits = 0, raresFaits = 0;
+    toutesFamilles(c).forEach(function (pair) {
+      pair[1].forEach(function (item, i) { if (ck[pair[0] + i]) { pts += item[1]; faits++; } });
+    });
+    c.rares.forEach(function (item, i) { if (ck["rares" + i]) { pts += item[1]; raresFaits++; faits++; } });
+    const total = totalCarnet(c);
+    const totalSansRares = total - c.rares.length;
+    const pct = totalSansRares ? Math.round(((faits - raresFaits) / totalSansRares) * 100) : 0;
+    return { pts: pts, faits: faits, total: total, raresFaits: raresFaits, totalRares: c.rares.length, pct: Math.min(100, pct) };
+  }
+  function withTypo(p, typoId, carnetId) { p.typo = typoId; if (carnetId) p.carnet = carnetId; return p; }
+
+  /* ============================================================
+     7. RENDU
+     ============================================================ */
   function dessiner() {
-    const app = $("#app");
-    const memo = window.scrollY;
     app.innerHTML = "";
-
-    if (!S.demarre) { app.appendChild(ecranDepart()); dessinerBandeau(); return; }
-
-    app.appendChild(sectionTitre("La liste des trouvailles"));
-    app.appendChild(blocTrouvailles());
-
-    app.appendChild(sectionTitre("Les indices du coffre"));
-    app.appendChild(blocIndices());
-
-    app.appendChild(carteCoffre());
-
-    if (S.coffre) {
-      app.appendChild(sectionTitre("Le pique-nique au bord du gave"));
-      app.appendChild(blocDefis(DEFIS_RIVIERE, S.riviere,
-        "Le coffre est ouvert. Maintenant la rivière est à vous, dans l'ordre que vous voulez."));
-      if (!S.aRepart) {
-        const b = el("button", "btn creux", "On remet les chaussures, on repart →");
-        b.addEventListener("click", function () { S.aRepart = true; sauver(); dessiner(); });
-        app.appendChild(b);
-      }
-    }
-
-    if (S.aRepart) {
-      app.appendChild(sectionTitre("Le retour"));
-      app.appendChild(blocDefis(DEFIS_RETOUR, S.retour,
-        "La liste des trouvailles marche encore : tout ce qui n'est pas coché est rattrapable."));
-      if (!S.fini) {
-        const b = el("button", "btn or", "Nous sommes rentrés — voir le diplôme");
-        b.addEventListener("click", function () { S.fini = true; sauver(); dessiner(); });
-        app.appendChild(b);
-      }
-    }
-
-    if (S.fini) app.appendChild(diplome());
-
-    dessinerBandeau();
-    window.scrollTo(0, memo);
+    const v = S.vue;
+    if (v.ecran === "jeu") { app.appendChild(ecranJeu(v.typo)); return; }
+    if (v.ecran === "fin") { app.appendChild(ecranFin(v.typo)); return; }
+    if (v.ecran === "intro") { app.appendChild(ecranIntro(v.typo)); return; }
+    app.appendChild(ecranAccueil());
   }
 
-  function sectionTitre(t) {
-    const d = el("div", "section-titre");
-    d.appendChild(el("span", "eyebrow", t));
-    return d;
+  function aller(ecran, typoId, carnetId) {
+    S.vue = { ecran: ecran, typo: typoId, carnet: carnetId };
+    if (carnetId) S.dernier[typoId] = carnetId;
+    sauver(); dessiner();
   }
 
-  function ecranDepart() {
-    const d = document.createElement("div");
-    d.appendChild(el("h1", null, "Le trésor<br>du Valentin"));
+  /* ---------- accueil ---------- */
+  function ecranAccueil() {
+    const e = el("div", "ecran ecran-accueil");
+    const c = el("div", "contenu");
 
-    const c = el("div", "carte");
-    c.appendChild(el("p", null,
-      "Il paraît qu'une marmotte du cirque de Gourette a trouvé, il y a très longtemps, une pépite d'or dans le lit du gave. Elle l'a cachée au bord de l'eau, dans un coffre fermé par un mot de passe."));
-    c.appendChild(el("p", null,
-      "Puis elle s'est endormie pour l'hiver. Au printemps, elle avait oublié le mot. Heureusement, elle avait semé <strong>seize indices</strong> le long du chemin — un par lettre."));
+    const tete = el("div", "accueil-tete");
+    const marque = el("div", "marque");
+    const badge = el("div", "badge");
+    badge.innerHTML = zoeBox(40, "curieux", { sparks: false });
+    marque.appendChild(badge);
+    marque.appendChild(el("h1", null, "Ludigo"));
+    tete.appendChild(marque);
+    tete.appendChild(el("p", null, "Où allez-vous aujourd'hui ?"));
+    c.appendChild(tete);
 
-    const e1 = el("div", "encart");
-    e1.innerHTML = '<span class="lab">Deux jeux en même temps</span>' +
-      "<strong>La liste des trouvailles</strong> : 38 choses à repérer ou à faire, n'importe où, n'importe quand, dans l'ordre que vous voulez. C'est le jeu de fond, pendant toute la marche.<br><br>" +
-      "<strong>Les indices du coffre</strong> : un toutes les cinq minutes de marche environ. Chacun donne une lettre.";
-    c.appendChild(e1);
+    const explique = el("div", "info-carte parent");
+    explique.innerHTML = '<span class="lab">Pour les parents</span>' +
+      "Pas besoin de préparer quoi que ce soit : dites-nous où vous êtes (montagne, musée, ville…) et l'appli " +
+      "propose aussitôt une vraie chasse au trésor adaptée, pour occuper les enfants pendant toute la sortie, " +
+      "où que vous soyez dans le monde. Ils cochent ce qu'ils trouvent à leur rythme, jusqu'au diplôme final.";
+    c.appendChild(explique);
 
-    const e2 = el("div", "encart");
-    e2.innerHTML = '<span class="lab">Aucun indice n\'est attaché à un endroit</span>' +
-      "Tous sont faisables où que vous soyez sur le chemin. Si vous activez le compteur de mètres, l'app vous prévient quand le suivant est mûr — sinon, vous ouvrez quand vous voulez.";
-    c.appendChild(e2);
-
-    const e3 = el("div", "encart alerte");
-    e3.innerHTML = '<span class="lab">Pour les parents</span>' +
-      "Cachez un vrai petit trésor au bord de la rivière (bonbons, pièces dorées, un mot) avant que les enfants n'entrent le mot de passe.";
-    c.appendChild(e3);
-    d.appendChild(c);
-
-    const b = el("button", "btn", "Commencer l'expédition");
-    b.addEventListener("click", function () {
-      S.demarre = true; etat(0).ouvert = true; sauver(); dessiner(); demarrerGPS();
-    });
-    d.appendChild(b);
-    return d;
-  }
-
-  /* ---------- la grande liste ---------- */
-
-  function blocTrouvailles() {
-    const d = document.createElement("div");
-    const paire = nbTrouvailles();
-
-    const ligne = el("div", "jauge-ligne");
-    ligne.appendChild(el("span", null, "Cochez tout ce que vous croisez, quand vous voulez"));
-    ligne.appendChild(el("span", null, "<b>" + paire[0] + "</b> / " + paire[1]));
-    d.appendChild(ligne);
-    const j = el("div", "jauge");
-    j.style.marginBottom = "16px";
-    j.appendChild(el("i")).style.width = (paire[1] ? (paire[0] / paire[1]) * 100 : 0) + "%";
-    d.appendChild(j);
-
-    FAMILLES.forEach(function (f) {
-      let n = 0;
-      f.items.forEach(function (_, k) { if (S.trouvailles[f.id + ":" + k]) n++; });
-
-      const det = el("details", "famille");
-      if (n < f.items.length) det.open = true;
-
-      const sum = document.createElement("summary");
-      sum.appendChild(el("span", "chev", "▸"));
-      sum.appendChild(el("span", null, f.titre));
-      sum.appendChild(el("span", "compte", n + " / " + f.items.length));
-      det.appendChild(sum);
-
-      const corps = el("div", "famille-corps");
-      f.items.forEach(function (it, k) {
-        const cle = f.id + ":" + k;
-        const coche = !!S.trouvailles[cle];
-        const b = el("button", "coche" + (f.rare ? " rare" : ""));
-        b.type = "button";
-        b.setAttribute("aria-pressed", coche ? "true" : "false");
-        b.appendChild(el("span", "box", "✓"));
-        b.appendChild(el("span", "lab-txt", it[0]));
-        b.appendChild(el("span", "val", "+" + it[1]));
-        b.addEventListener("click", function () {
-          if (S.trouvailles[cle]) { delete S.trouvailles[cle]; }
-          else { S.trouvailles[cle] = true; vibre(30); }
-          sauver();
-          b.setAttribute("aria-pressed", S.trouvailles[cle] ? "true" : "false");
-          const nn = f.items.reduce(function (acc, _, kk) { return acc + (S.trouvailles[f.id + ":" + kk] ? 1 : 0); }, 0);
-          sum.querySelector(".compte").textContent = nn + " / " + f.items.length;
-          const p2 = nbTrouvailles();
-          ligne.lastChild.innerHTML = "<b>" + p2[0] + "</b> / " + p2[1];
-          j.firstChild.style.width = (p2[0] / p2[1]) * 100 + "%";
-          dessinerBandeau();
-        });
-        corps.appendChild(b);
+    const cartes = el("div", "cartes-lieux");
+    TYPOLOGIES.forEach(function (t) {
+      const progresT = S.progres[t.id] || {};
+      const scores = ORDRE_CARNETS.map(function (cid) {
+        return progresT[cid] ? scoreEtProgres(progresCarnet(t.id, cid)) : null;
       });
-      det.appendChild(corps);
-      d.appendChild(det);
-    });
-    return d;
-  }
+      const finis = scores.filter(function (s) { return s && s.pct >= 100; }).length;
+      const commence = scores.some(function (s) { return s && s.faits > 0; });
 
-  /* ---------- les indices ---------- */
+      const b = el("div", "carte-lieu" + (commence ? " en-cours" : ""));
+      b.setAttribute("role", "button");
+      b.tabIndex = 0;
+      const picto = el("div", "picto");
+      picto.innerHTML = SVG_TYPO[t.id]();
+      b.appendChild(picto);
 
-  function blocIndices() {
-    const d = document.createElement("div");
-    const courant = indiceCourant();
+      const txt = el("div", "txt");
+      txt.appendChild(el("b", null, t.nom));
 
-    for (let i = 0; i < courant; i++) {
-      const l = el("div", "fait-ligne");
-      l.appendChild(el("span", "l", lettreDe(i)));
-      l.appendChild(el("span", null, INDICES[i].titre + (etat(i).bonus ? " · bonus réussi" : "")));
-      d.appendChild(l);
-    }
-
-    if (courant < INDICES.length) {
-      d.appendChild(carteIndice(INDICES[courant], courant));
-      const reste = INDICES.length - courant - 1;
-      if (reste > 0) {
-        const p = el("p", null, "Encore " + reste + " indice" + (reste > 1 ? "s" : "") + " après celui-là.");
-        p.style.cssText = "font-size:13px;color:var(--roche-2);text-align:center;margin:2px 0 0";
-        d.appendChild(p);
-      }
-    }
-    return d;
-  }
-
-  function carteIndice(ind, i) {
-    const e = etat(i);
-
-    if (!e.ouvert) {
-      const c = el("div", "carte scellee");
-      const t = el("div", "carte-tete");
-      t.appendChild(el("div", "pastille vide", String(i + 1)));
-      const x = el("div");
-      x.appendChild(el("h2", null, "Indice " + (i + 1) + " sur " + INDICES.length));
-      x.appendChild(el("div", "lieu", gpsActif
-        ? "Il s'ouvre tout seul après " + ((i + 1) * PAS) + " m de marche — ou tout de suite si vous voulez."
-        : "Faisable n'importe où sur le chemin."));
-      t.appendChild(x);
-      c.appendChild(t);
-      const b = el("button", "btn creux", "Ouvrir l'indice " + (i + 1));
-      b.style.marginTop = "14px";
-      b.addEventListener("click", function () { e.ouvert = true; sauver(); dessiner(); });
-      c.appendChild(b);
-      return c;
-    }
-
-    const c = el("div", "carte");
-    const t = el("div", "carte-tete");
-    t.appendChild(el("div", "pastille", String(i + 1)));
-    const x = el("div");
-    x.appendChild(el("h2", null, ind.titre));
-    x.appendChild(el("div", "lieu", "Indice " + (i + 1) + " sur " + INDICES.length + " · cache la lettre " + lettreDe(i)));
-    t.appendChild(x);
-    c.appendChild(t);
-
-    const corps = el("div", "corps");
-    c.appendChild(corps);
-
-    const valider = el("button", "btn", "Tamponner la lettre " + lettreDe(i));
-    function gagner() {
-      e.ok = true;
-      const suiv = i + 1;
-      if (suiv < INDICES.length && S.metres >= (suiv + 1) * PAS) etat(suiv).ouvert = true;
-      sauver(); dessiner(); vibre(60);
-      toast("Lettre " + lettreDe(i) + " tamponnée — mais où ?");
-    }
-
-    if (ind.quiz) {
-      corps.appendChild(el("div", "consigne", ind.quiz.q));
-      const box = el("div", "options");
-      ind.quiz.options.forEach(function (txt, k) {
-        const o = el("button", "opt", txt);
-        o.type = "button";
-        if (e.repondu && k === ind.quiz.bonne) o.classList.add("juste");
-        if (e.repondu) o.disabled = true;
-        o.addEventListener("click", function () {
-          if (k === ind.quiz.bonne) {
-            e.repondu = true; sauver();
-            o.classList.add("juste");
-            Array.prototype.forEach.call(box.children, function (n) { n.disabled = true; });
-            box.after(explication(ind.quiz.exp));
-            valider.disabled = false;
-            valider.textContent = "Tamponner la lettre " + lettreDe(i);
-          } else {
-            o.classList.add("faux"); o.disabled = true;
-            toast("Pas tout à fait. Réessaie !");
-          }
-        });
-        box.appendChild(o);
-      });
-      corps.appendChild(box);
-      if (e.repondu) corps.appendChild(explication(ind.quiz.exp));
-      valider.disabled = !e.repondu;
-      if (!e.repondu) valider.textContent = "Réponds d'abord à la question";
-    }
-
-    if (ind.code) {
-      corps.appendChild(el("div", "consigne", ind.code.intro));
-      const en = el("div", "encart");
-      en.innerHTML = '<span class="lab">Gravé dans la pierre</span>' +
-        '<span style="font-family:var(--display);font-size:23px;letter-spacing:.05em;">' + ind.code.enigme + "</span>";
-      corps.appendChild(en);
-
-      if (e.repondu) {
-        corps.appendChild(explication(ind.code.exp));
+      const dernierCid = S.dernier[t.id];
+      const dernierSp = dernierCid && progresT[dernierCid] ? scoreEtProgres(progresCarnet(t.id, dernierCid)) : null;
+      if (dernierSp && dernierSp.pct < 100) {
+        const totalSansRares = dernierSp.total - dernierSp.totalRares;
+        txt.appendChild(el("span", null, "Carnet " + dernierCid + " en cours · " + (dernierSp.faits - dernierSp.raresFaits) + "/" + totalSansRares));
+        const barre = el("div", "barre-mini");
+        barre.appendChild(el("i")).style.width = dernierSp.pct + "%";
+        txt.appendChild(barre);
+      } else if (finis > 0) {
+        txt.appendChild(el("span", null, finis + "/3 carnets terminés"));
       } else {
-        const ligne = el("div", "saisie");
-        const inp = document.createElement("input");
-        inp.type = "text"; inp.placeholder = "Le mot déchiffré";
-        inp.autocapitalize = "characters"; inp.autocomplete = "off";
-        const ok = el("button", "btn petit", "Vérifier");
-        ok.addEventListener("click", function () {
-          const v = inp.value.trim().toUpperCase().replace(/[^A-Z]/g, "");
-          if (v === ind.code.reponse) { e.repondu = true; sauver(); dessiner(); toast("Message déchiffré !"); }
-          else if (v.length) { toast(ind.code.indice); }
-        });
-        ligne.appendChild(inp); ligne.appendChild(ok);
-        corps.appendChild(ligne);
+        const cid = carnetSuggere(t.id);
+        const cnt = carnet(t.id, cid);
+        txt.appendChild(el("span", null, "3 carnets · " + totalCarnet(cnt) + " trouvailles"));
       }
-      valider.disabled = !e.repondu;
-      if (!e.repondu) valider.textContent = "Déchiffre d'abord le message";
-    }
-
-    if (ind.defi) {
-      corps.appendChild(el("div", "consigne", ind.defi));
-      valider.textContent = "C'est fait — tamponner la lettre " + lettreDe(i);
-    }
-
-    corps.appendChild(valider);
-    valider.addEventListener("click", gagner);
-
-    if (ind.bonus && !e.bonus) {
-      const b = el("div", "bonus");
-      b.appendChild(el("div", "lab", "Défi des grands · +" + PTS_BONUS + " pts"));
-      b.appendChild(el("div", null, ind.bonus.q));
-      const box = el("div", "options");
-      ind.bonus.options.forEach(function (txt, k) {
-        const o = el("button", "opt", txt);
-        o.type = "button";
-        o.addEventListener("click", function () {
-          if (k === ind.bonus.bonne) {
-            e.bonus = true; sauver();
-            o.classList.add("juste");
-            Array.prototype.forEach.call(box.children, function (n) { n.disabled = true; });
-            b.appendChild(explication(ind.bonus.exp));
-            dessinerBandeau();
-            toast("+" + PTS_BONUS + " points !");
-          } else { o.classList.add("faux"); o.disabled = true; toast("Non… mais tu peux réessayer."); }
-        });
-        box.appendChild(o);
-      });
-      b.appendChild(box);
-      corps.appendChild(b);
-    }
-
-    return c;
-  }
-
-  function explication(txt) {
-    const d = el("div", "reussi");
-    d.appendChild(el("span", "tick", "✓"));
-    d.appendChild(el("span", null, txt));
-    return d;
-  }
-
-  /* ---------- le coffre ---------- */
-
-  function carteCoffre() {
-    const pretes = toutesLesLettres();
-
-    if (S.coffre) {
-      const c = el("div", "carte");
-      const t = el("div", "carte-tete");
-      t.appendChild(el("div", "pastille", "★"));
-      const x = el("div");
-      x.appendChild(el("h2", null, "Le coffre est ouvert"));
-      x.appendChild(el("div", "lieu", "Le mot de passe, c'était le nom de la rivière devant vous"));
-      t.appendChild(x);
-      c.appendChild(t);
-
-      const corps = el("div", "corps");
-      corps.appendChild(el("div", "consigne",
-        "<strong>LE GAVE DU VALENTIN.</strong> Voilà comment s'appelle l'eau que vous entendez."));
-
-      const g = el("div", "encart");
-      g.innerHTML = '<span class="lab">Mais au fait, c\'est quoi un gave ?</span>' +
-        "Ailleurs en France, on dit « rivière » ou « torrent ». Ici, dans les Pyrénées, on dit <strong>un gave</strong>. " +
-        "C'est un mot béarnais et gascon — les langues qu'on parlait dans ces vallées bien avant le français.<br><br>" +
-        "Un gave, ce n'est pas n'importe quelle rivière : il naît en haute montagne, de la neige qui fond et des sources d'altitude. " +
-        "Il descend vite, il est froid toute l'année, il saute par-dessus les rochers en cascades et il roule des galets. " +
-        "C'est exactement ce que vous avez sous les yeux.";
-      corps.appendChild(g);
-
-      const v = el("div", "encart");
-      v.innerHTML = '<span class="lab">Et celui-ci, où va-t-il ?</span>' +
-        "Le gave du Valentin naît tout là-haut, du côté du lac d'Uzious. Il traverse Gourette, saute la cascade des Eaux-Bonnes, " +
-        "puis rejoint le <strong>gave d'Ossau</strong> à Laruns. Ensuite : le gave d'Oloron, l'Adour, et l'océan à Bayonne.<br><br>" +
-        "L'eau que vous touchez du doigt sera dans l'Atlantique dans quelques jours.";
-      corps.appendChild(v);
-
-      c.appendChild(corps);
-      return c;
-    }
-
-    const c = el("div", pretes ? "carte" : "carte scellee");
-    const t = el("div", "carte-tete");
-    t.appendChild(el("div", pretes ? "pastille" : "pastille vide", "★"));
-    const x = el("div");
-    x.appendChild(el("h2", null, "Le coffre de la marmotte"));
-    x.appendChild(el("div", "lieu", pretes
-      ? "Au bord de l'eau. Lisez les lettres, tout en haut de l'écran."
-      : "Il manque encore des lettres"));
-    t.appendChild(x);
-    c.appendChild(t);
-    if (!pretes) return c;
-
-    const corps = el("div", "corps");
-    corps.appendChild(el("div", "consigne",
-      "Toutes les lettres sont tamponnées. Mises bout à bout, elles font quatre mots que vous connaissez très bien maintenant. <strong>Tapez-les.</strong>"));
-    const ligne = el("div", "saisie");
-    const inp = document.createElement("input");
-    inp.type = "text"; inp.placeholder = "Les quatre mots"; inp.autocapitalize = "characters"; inp.autocomplete = "off";
-    const ok = el("button", "btn petit or", "Ouvrir");
-    ok.addEventListener("click", function () {
-      const v = inp.value.trim().toUpperCase().replace(/[^A-Z]/g, "");
-      if (v === MOT) {
-        S.coffre = true; sauver(); dessiner();
-        vibre([80, 50, 80, 50, 160]);
-        toast("Le coffre s'ouvre ! +" + PTS_COFFRE + " points");
-      } else { toast("Ce n'est pas ça. Relisez les lettres du haut, dans l'ordre."); }
+      b.appendChild(txt);
+      b.appendChild(el("span", "chevron", "›"));
+      b.addEventListener("click", function () { aller("intro", t.id); });
+      cartes.appendChild(b);
     });
-    ligne.appendChild(inp); ligne.appendChild(ok);
-    corps.appendChild(ligne);
-    c.appendChild(corps);
-    return c;
-  }
+    c.appendChild(cartes);
 
-  /* ---------- défis libres ---------- */
-
-  function blocDefis(liste, store, intro) {
-    const d = document.createElement("div");
-    const p = el("p", null, intro);
-    p.style.cssText = "color:var(--roche-2);margin-bottom:14px";
-    d.appendChild(p);
-
-    liste.forEach(function (def) {
-      const fait = !!store[def.id];
-      const l = el("div", "defi-libre" + (fait ? " fait" : ""));
-      const txt = el("div", "d-txt");
-      txt.appendChild(el("b", null, def.titre));
-      txt.appendChild(el("span", null, def.texte));
-      l.appendChild(txt);
-      const col = el("div");
-      col.style.cssText = "display:flex;flex-direction:column;align-items:center;gap:4px";
-      const b = el("button", "btn petit" + (fait ? "" : " creux"), fait ? "✓ Fait" : "Réussi");
-      b.addEventListener("click", function () {
-        if (store[def.id]) delete store[def.id]; else { store[def.id] = true; vibre(30); }
-        sauver(); dessiner();
-      });
-      col.appendChild(b);
-      col.appendChild(el("span", "pts", "+" + def.pts));
-      l.appendChild(col);
-      d.appendChild(l);
+    const bas = el("div", "bas-accueil");
+    const reset = el("button", "lien-discret", "Tout effacer et recommencer à zéro");
+    reset.addEventListener("click", function () {
+      if (!confirm("Effacer toutes les sorties en cours, pour toutes les typologies ?")) return;
+      S = etatVide(); sauver(); dessiner();
     });
-    return d;
+    bas.appendChild(reset);
+    const confid = el("a", "lien-discret");
+    confid.textContent = "Politique de confidentialité";
+    confid.href = "https://findaro-legal.vercel.app";
+    confid.target = "_blank";
+    confid.rel = "noopener";
+    bas.appendChild(confid);
+    c.appendChild(bas);
+
+    e.appendChild(c);
+    return e;
   }
 
-  /* ---------- diplôme ---------- */
+  /* ---------- intro / sécurité ---------- */
+  function ecranIntro(typoId) {
+    const t = typo(typoId);
+    if (!S.vue.carnet) {
+      const d = S.dernier[typoId];
+      const dEstFini = d && scoreEtProgres(progresCarnet(typoId, d)).pct >= 100;
+      S.vue.carnet = (d && !dEstFini) ? d : carnetSuggere(typoId);
+    }
+    const cid = S.vue.carnet;
+    const cnt = carnet(typoId, cid);
+    const sp = scoreEtProgres(progresCarnet(typoId, cid));
+    const e = el("div", "ecran");
 
-  function diplome() {
-    const p = points(), max = pointsMax(), tr = nbTrouvailles();
-    const d = el("div", "diplome");
-    d.appendChild(el("div", "eyebrow", "Brevet d'explorateur du Valentin"));
-    d.appendChild(el("div", "gros", p + " pts"));
-    d.appendChild(el("div", null, "sur " + max + " possibles"));
+    const tete = el("div", "intro-tete");
+    const retour = el("button", "retour", "← Accueil");
+    retour.addEventListener("click", function () { S.vue = { ecran: "accueil" }; sauver(); dessiner(); });
+    tete.appendChild(retour);
+    e.appendChild(tete);
 
-    let rang = "Apprenti marmotte";
-    if (p > max * 0.35) rang = "Éclaireur du cirque";
-    if (p > max * 0.6) rang = "Guide du gave";
-    if (p > max * 0.85) rang = "Gardien du trésor";
-    const h = el("h2", null, rang);
-    h.style.marginTop = "14px";
-    d.appendChild(h);
+    const c = el("div", "contenu intro");
+    const badge = el("div", "intro-badge");
+    badge.innerHTML = SVG_TYPO[typoId]();
+    c.appendChild(badge);
+    c.appendChild(el("h2", null, t.nom));
 
-    const badges = el("div", "badges");
-    const g = [];
-    if (toutesLesLettres()) g.push("Les 16 lettres");
-    if (S.coffre) g.push("Le coffre ouvert");
-    if (tr[0] >= tr[1]) g.push("La liste entière !");
-    else if (tr[0] >= tr[1] / 2) g.push(tr[0] + " trouvailles");
-    if (S.riviere.propre) g.push("Zéro trace");
-    if (DEFIS_RIVIERE.every(function (x) { return S.riviere[x.id]; })) g.push("Roi de la rivière");
-    if (DEFIS_RETOUR.every(function (x) { return S.retour[x.id]; })) g.push("La descente aussi");
-    if (INDICES.every(function (x, i) { return !x.bonus || etat(i).bonus; })) g.push("Tous les défis des grands");
-    if (S.metres > 200) g.push(Math.round(S.metres) + " m à pied");
-    g.forEach(function (b) { badges.appendChild(el("span", "badge", b)); });
-    d.appendChild(badges);
-    return d;
+    const picker = el("div", "carnet-picker");
+    ORDRE_CARNETS.forEach(function (id) {
+      const spId = scoreEtProgres(progresCarnet(typoId, id));
+      const statut = spId.faits === 0 ? "Pas commencé" : spId.pct >= 100 ? "Terminé ✓" : "En cours";
+      const chip = el("button", "chip-carnet" + (id === cid ? " actif" : ""));
+      chip.type = "button";
+      chip.innerHTML = "<b>Carnet " + id + "</b><span>" + statut + "</span>";
+      chip.addEventListener("click", function () { S.vue.carnet = id; sauver(); dessiner(); });
+      picker.appendChild(chip);
+    });
+    c.appendChild(picker);
+
+    const secu = el("div", "info-carte alerte");
+    secu.innerHTML = '<span class="lab">Avant de partir</span>' + t.secu;
+    c.appendChild(secu);
+
+    const obj = el("div", "info-carte");
+    obj.innerHTML = '<span class="lab">Comment on joue</span>' +
+      "Cochez ce que vous trouvez, dans n'importe quel ordre, à votre rythme. " +
+      "Les <strong>" + (totalCarnet(cnt) - cnt.rares.length) + " trésors</strong> réguliers rapportent des points. " +
+      "Les <strong>" + cnt.rares.length + " rares ★</strong> sont un bonus : ils arrivent quand ils arrivent, rien d'obligatoire.";
+    c.appendChild(obj);
+
+    const label = sp.faits === 0 ? "C'est parti !" : sp.pct >= 100 ? "Rejouer ce carnet" : "Reprendre";
+    const btn = el("button", "btn", label);
+    btn.addEventListener("click", function () { aller("jeu", typoId, cid); });
+    c.appendChild(btn);
+
+    e.appendChild(c);
+    return e;
   }
 
-  /* =========================================================
+  /* ---------- jeu ---------- */
+  function anneauJeuHTML(pct, faits, total) {
+    return '<div class="anneau-jeu" id="anneau-jeu" style="background:conic-gradient(var(--hero) ' + pct + '%, var(--hero-soft) 0)">' +
+      '<div class="disque"><div class="n">' + faits + '</div><div class="d">/ ' + total + '</div></div></div>';
+  }
+
+  function ecranJeu(typoId) {
+    const t = typo(typoId);
+    const cid = S.vue.carnet;
+    const p = progresCarnet(typoId, cid);
+    const cnt = carnet(typoId, p.carnet);
+    const e = el("div", "ecran");
+
+    const bandeau = el("div", "bandeau");
+    const int_ = el("div", "bandeau-int");
+    const l1 = el("div", "bandeau-ligne1");
+    const retour = el("button", "btn-retour", "← Accueil");
+    retour.addEventListener("click", function () { S.vue = { ecran: "accueil" }; sauver(); dessiner(); });
+    l1.appendChild(retour);
+    const sp0 = scoreEtProgres(p);
+    l1.appendChild(el("span", "rares-tag", "★ " + sp0.raresFaits + "/" + cnt.rares.length + " rares"));
+    int_.appendChild(l1);
+
+    const l2 = el("div", "bandeau-ligne2");
+    l2.innerHTML = anneauJeuHTML(sp0.pct, sp0.faits - sp0.raresFaits, totalCarnet(cnt) - cnt.rares.length);
+    const ptsBloc = el("div", "pts-bloc");
+    ptsBloc.innerHTML = '<span class="val" id="pts-val">' + sp0.pts + '</span><span class="lab">points</span>';
+    l2.appendChild(ptsBloc);
+    int_.appendChild(l2);
+    bandeau.appendChild(int_);
+    e.appendChild(bandeau);
+
+    const c = el("div", "contenu");
+    toutesFamilles(cnt).forEach(function (pair) {
+      c.appendChild(blocFamille(p, pair[0], pair[1], false));
+    });
+    c.appendChild(blocFamille(p, "rares", cnt.rares, true));
+
+    const finBtn = el("button", "btn creux btn-terminer", "Terminer la sortie");
+    finBtn.addEventListener("click", function () { aller("fin", typoId, cid); });
+    c.appendChild(finBtn);
+
+    const bas = el("div", "bas-accueil");
+    const recommencer = el("button", "lien-discret", "Recommencer ce carnet à zéro");
+    recommencer.addEventListener("click", function () {
+      if (!confirm("Effacer votre progression sur ce carnet et repartir de zéro ?")) return;
+      S.progres[typoId][cid] = { coches: {}, paliers: [] };
+      sauver(); dessiner();
+    });
+    bas.appendChild(recommencer);
+    c.appendChild(bas);
+
+    e.appendChild(c);
+    return e;
+  }
+
+  function blocFamille(p, cle, items, estRare) {
+    const bloc = el("div", "famille z-" + cle);
+    const tete = el("div", "fam-tete");
+    const ck = p.coches;
+    const faits = items.filter(function (_, i) { return ck[cle + i]; }).length;
+
+    if (estRare) {
+      tete.appendChild(el("span", "etoile", "★"));
+      const lab = el("span", "lab", "Les rares"); lab.style.color = "var(--rare)"; tete.appendChild(lab);
+      tete.appendChild(el("span", "n rare-n", faits + "/" + items.length));
+    } else {
+      const lab = el("span", "lab", NOMS_FAMILLE[cle]); lab.style.color = "var(--fam-" + cle + ")";
+      tete.appendChild(lab);
+      tete.appendChild(el("span", "n", faits + "/" + items.length));
+    }
+    bloc.appendChild(tete);
+
+    items.forEach(function (item, i) {
+      const txt = item[0], pts = item[1];
+      const cleItem = cle + i;
+      const fait = !!ck[cleItem];
+      const row = el("button", "item" + (estRare ? " rare" : "") + (fait ? " faite" : ""));
+      row.type = "button";
+      if (estRare) row.appendChild(el("span", "etoile-rare", "★"));
+      row.appendChild(el("span", "libelle", txt));
+      row.appendChild(el("span", "tag", "+" + pts));
+      row.addEventListener("click", function () { basculerItem(p, cleItem, row, estRare, pts); });
+      bloc.appendChild(row);
+    });
+    return bloc;
+  }
+
+  function basculerItem(p, cleItem, rowEl, estRare, pts) {
+    const ck = p.coches;
+    if (ck[cleItem]) {
+      delete ck[cleItem];
+      sauver(); dessiner();
+      return;
+    }
+    ck[cleItem] = true;
+    sauver();
+    vibre(estRare ? [20, 30, 20] : 22);
+    montrerPastille((estRare ? "Rare trouvée ! +" : "+") + pts + " points" + (estRare ? "" : " ! Bravo"));
+
+    const cnt = carnet(p.typo, p.carnet);
+    const sp = scoreEtProgres(p);
+    const paliers = [25, 50, 75, 100];
+    let toucheP = null;
+    if (!p.paliers) p.paliers = [];
+    paliers.forEach(function (pl) {
+      if (sp.pct >= pl && p.paliers.indexOf(pl) === -1) { p.paliers.push(pl); toucheP = pl; }
+    });
+    sauver();
+
+    const ptsVal = document.getElementById("pts-val");
+    if (ptsVal) ptsVal.textContent = sp.pts;
+    const anneau = document.getElementById("anneau-jeu");
+    if (anneau) {
+      anneau.style.background = "conic-gradient(var(--hero) " + sp.pct + "%, var(--hero-soft) 0)";
+      anneau.querySelector(".n").textContent = sp.faits - sp.raresFaits;
+    }
+    const raresTag = document.querySelector(".rares-tag");
+    if (raresTag) raresTag.textContent = "★ " + sp.raresFaits + "/" + cnt.rares.length + " rares";
+
+    rowEl.classList.add("faite");
+    const famTete = rowEl.parentElement.querySelector(".fam-tete .n");
+    if (famTete) {
+      const parts = famTete.textContent.split("/");
+      famTete.textContent = (parseInt(parts[0], 10) + 1) + "/" + parts[1];
+    }
+
+    if (toucheP) setTimeout(function () { celebrerPalier(toucheP, sp); }, 350);
+  }
+
+  /* ---------- fin / diplôme ---------- */
+  const QUALIFICATIFS = [
+    { min: 0, mot: "Apprenti" },
+    { min: 25, mot: "" },
+    { min: 50, mot: "Grand" },
+    { min: 75, mot: "Expert" },
+    { min: 100, mot: "Maître" }
+  ];
+  function qualificatifPour(pct) {
+    let q = QUALIFICATIFS[0];
+    QUALIFICATIFS.forEach(function (x) { if (pct >= x.min) q = x; });
+    return q.mot;
+  }
+  function ecranFin(typoId) {
+    const t = typo(typoId);
+    const cid = S.vue.carnet;
+    const p = progresCarnet(typoId, cid);
+    const sp = scoreEtProgres(p);
+    const qual = qualificatifPour(sp.pct);
+    const titre = (qual ? qual + " chasseur" : "Chasseur") + " de trésors " + t.motLieu;
+
+    const e = el("div", "ecran");
+    const c = el("div", "fin-contenu");
+    const zoe = el("div", "zoe-fin");
+    zoe.innerHTML = zoeBox(96, "fier", { sparks: false });
+    c.appendChild(zoe);
+    c.appendChild(el("span", "lab", "Diplôme officiel"));
+    c.appendChild(el("h2", null, titre));
+
+    const ann = el("div", "anneau-fin");
+    ann.style.background = "conic-gradient(var(--hero) " + sp.pct + "%, var(--hero-soft) 0)";
+    const disque = el("div", "disque");
+    disque.appendChild(el("div", "n", (sp.faits - sp.raresFaits)));
+    disque.appendChild(el("div", "lg", "sur " + (sp.total - sp.totalRares)));
+    ann.appendChild(disque);
+    c.appendChild(ann);
+
+    const stats = el("div", "stats-3");
+    const s1 = el("div", "stat"); s1.innerHTML = '<div class="val hero-c">' + sp.pts + '</div><div class="lab">points</div>';
+    const s2 = el("div", "stat or"); s2.innerHTML = '<div class="val">' + sp.raresFaits + '★</div><div class="lab">rares</div>';
+    stats.appendChild(s1); stats.appendChild(s2);
+    c.appendChild(stats);
+
+    const auj = new Date();
+    c.appendChild(el("div", "fin-dedicace",
+      "Décerné à toute l'équipe, le " + auj.getDate() + " " +
+      ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"][auj.getMonth()] +
+      ", pour avoir cherché plus loin que prévu."));
+
+    const actions = el("div", "fin-actions");
+    const suite = el("button", "btn creux", "Continuer à chercher");
+    suite.addEventListener("click", function () { aller("jeu", typoId, cid); });
+    const accueil = el("button", "btn", "Choisir une autre sortie");
+    accueil.addEventListener("click", function () {
+      S.vue = { ecran: "accueil" };
+      sauver(); dessiner();
+    });
+    actions.appendChild(suite);
+    actions.appendChild(accueil);
+    c.appendChild(actions);
+
+    e.appendChild(c);
+    setTimeout(function () { lancerConfettis(sp.pct >= 100 ? 70 : 40); }, 150);
+    return e;
+  }
+
+  /* ============================================================
      DÉMARRAGE
-     ========================================================= */
-
-  $("#btn-reset").addEventListener("click", function () {
-    if (!confirm("Effacer toute la progression et recommencer à zéro ?")) return;
-    S = neuf(); sauver(); dessiner();
-  });
-
-  document.addEventListener("visibilitychange", function () {
-    if (!document.hidden && gpsActif && "wakeLock" in navigator) {
-      navigator.wakeLock.request("screen").catch(function () {});
-    }
-  });
-
+     ============================================================ */
   dessiner();
-  if (S.demarre) demarrerGPS();
+
+  if (capacitorNatif()) {
+    const Plugins = window.Capacitor.Plugins;
+    if (Plugins.StatusBar) {
+      Plugins.StatusBar.setStyle({ style: "DARK" }).catch(function () {});
+      Plugins.StatusBar.setBackgroundColor({ color: "#F1F7F4" }).catch(function () {});
+    }
+    if (Plugins.SplashScreen) Plugins.SplashScreen.hide().catch(function () {});
+    if (Plugins.App) {
+      Plugins.App.addListener("backButton", function () {
+        if (S.vue.ecran !== "accueil") { S.vue = { ecran: "accueil" }; sauver(); dessiner(); }
+        else Plugins.App.exitApp();
+      });
+    }
+  }
 })();
 </script>

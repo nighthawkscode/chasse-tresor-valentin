@@ -1,0 +1,179 @@
+<title>Brief design — Trésors d'ici</title>
+
+<style>
+  :root {
+    --fond:      #F4F7F8;
+    --papier:    #FFFFFF;
+    --papier-2:  #EBF2F3;
+    --trait:     #D0DFE1;
+    --encre:     #14252B;
+    --encre-2:   #48606A;
+    --gave:      #0B767A;
+    --gave-2:    #D5EDED;
+    --or:        #A96A08;
+    --or-2:      #F9EBD0;
+    --display: "American Typewriter", "Rockwell", "Courier New", serif;
+    --corps: "Avenir Next", "Avenir", "Segoe UI", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fond:#0B1417; --papier:#131F24; --papier-2:#1A2C31; --trait:#253B41;
+      --encre:#E6EFEF; --encre-2:#90A7AD; --gave:#3AC3C5; --gave-2:#0F3438;
+      --or:#EFB040; --or-2:#382A0E;
+    }
+  }
+  :root[data-theme="dark"] {
+    --fond:#0B1417; --papier:#131F24; --papier-2:#1A2C31; --trait:#253B41;
+    --encre:#E6EFEF; --encre-2:#90A7AD; --gave:#3AC3C5; --gave-2:#0F3438;
+    --or:#EFB040; --or-2:#382A0E;
+  }
+  :root[data-theme="light"] {
+    --fond:#F4F7F8; --papier:#FFFFFF; --papier-2:#EBF2F3; --trait:#D0DFE1;
+    --encre:#14252B; --encre-2:#48606A; --gave:#0B767A; --gave-2:#D5EDED;
+    --or:#A96A08; --or-2:#F9EBD0;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--fond); color: var(--encre);
+    font-family: var(--corps); font-size: 17px; line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
+  }
+  .page { max-width: 720px; margin: 0 auto; padding: 0 22px 90px; }
+
+  .eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--encre-2);
+  }
+  h1 {
+    font-family: var(--display); font-weight: 700; font-size: 33px;
+    line-height: 1.12; margin: 20px 0 10px; text-wrap: balance;
+  }
+  h2 {
+    font-family: var(--display); font-weight: 700; font-size: 22px;
+    margin: 40px 0 12px; text-wrap: balance; padding-top: 20px; border-top: 1px solid var(--trait);
+  }
+  h2:first-of-type { border-top: none; padding-top: 0; margin-top: 30px; }
+  h3 { font-family: var(--display); font-weight: 700; font-size: 17px; margin: 20px 0 8px; }
+  p { margin: 0 0 13px; max-width: 62ch; }
+  p:last-child { margin-bottom: 0; }
+  .chapeau { font-size: 18px; color: var(--encre-2); max-width: 62ch; }
+  strong { color: var(--encre); }
+  ul, ol { padding-left: 22px; margin: 0 0 13px; }
+  li { margin-bottom: 6px; }
+
+  .bloc {
+    background: var(--papier); border: 1px solid var(--trait);
+    border-radius: 13px; padding: 18px 20px; margin: 14px 0;
+  }
+  .bloc.franc {
+    border-left: 3px solid var(--or); border-radius: 0 12px 12px 0;
+    background: var(--or-2);
+  }
+  .bloc.franc h3 { margin-top: 0; color: var(--or); font-size: 13px; text-transform: uppercase; letter-spacing: .08em; }
+
+  .contexte-grille { display: flex; flex-direction: column; gap: 10px; margin: 14px 0; }
+  .contexte-item {
+    display: grid; grid-template-columns: 90px 1fr; gap: 14px;
+    background: var(--papier); border: 1px solid var(--trait); border-radius: 12px; padding: 13px 16px;
+    font-size: 15px;
+  }
+  .contexte-item b { font-family: var(--display); font-size: 14px; color: var(--gave); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 12px 0; }
+  th, td { text-align: left; padding: 9px 10px 9px 0; border-bottom: 1px solid var(--trait); vertical-align: top; }
+  th { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--encre-2); }
+
+  .swatches { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+  .swatch {
+    display: flex; align-items: center; gap: 8px; padding: 6px 10px 6px 6px;
+    border: 1px solid var(--trait); border-radius: 99px; font-size: 13px; font-variant-numeric: tabular-nums;
+  }
+  .swatch .puce { width: 20px; height: 20px; border-radius: 6px; flex: none; border: 1px solid rgba(0,0,0,.08); }
+
+  .checklist { list-style: none; padding-left: 0; }
+  .checklist li { padding-left: 26px; position: relative; }
+  .checklist li::before {
+    content: "→"; position: absolute; left: 0; color: var(--gave); font-weight: 700;
+  }
+
+  code.inline {
+    font-family: ui-monospace, Menlo, monospace; font-size: .88em;
+    background: var(--papier-2); padding: 1px 5px; border-radius: 4px;
+  }
+
+  :focus-visible { outline: 3px solid var(--gave); outline-offset: 2px; border-radius: 6px; }
+</style>
+
+<div class="page">
+
+  <span class="eyebrow">Brief design · 31 juillet 2026</span>
+  <h1>Trésors d'ici — refaire le design system depuis zéro</h1>
+  <p class="chapeau">La première version des couleurs a été jugée ratée par la cliente. Ce document explique le produit, son contexte d'usage réel, ce qui a été tenté, et pourquoi c'est probablement raté — pour que la prochaine tentative parte sur de meilleures bases, quel que soit qui la mène.</p>
+
+  <div class="bloc franc">
+    <h3>Verdict honnête sur la v1</h3>
+    <p style="margin-bottom:0">J'ai utilisé cinq teintes saturées simultanément (corail, vert, or, bleu ciel, violet) pour distinguer quatre familles d'items plus l'état « coché ». Sur un petit écran de téléphone, ça fait beaucoup de couleurs vives qui se battent en même temps — le résultat lu comme du bruit plutôt que de la joie. La prochaine tentative doit probablement partir d'<strong>une seule couleur héroïne</strong>, pas d'un système de repérage à cinq teintes.</p>
+  </div>
+
+  <h2>Le produit, en une phrase</h2>
+  <p>Une chasse au trésor à cocher, jouée sur un seul téléphone tenu par un parent, pour des enfants de 4 à 10 ans, pendant une sortie : une randonnée en montagne, une visite de musée d'art, ou une balade en ville. Ce n'est pas une app touristique — c'est un outil de parent pour que les enfants aient envie de marcher, de regarder, de tenir plus longtemps.</p>
+
+  <h2>Le vrai problème de design : trois contextes d'usage opposés</h2>
+  <p>Le même écran doit fonctionner dans trois lumières et trois ambiances sociales complètement différentes, sans donner l'impression d'être trois apps différentes.</p>
+  <div class="contexte-grille">
+    <div class="contexte-item"><b>Montagne</b><span>Plein soleil direct, écran qui reflète, parfois des gants ou des mains froides sur l'écran tactile. Le contraste doit survivre à la luminosité extérieure la plus dure.</span></div>
+    <div class="contexte-item"><b>Musée</b><span>Salle sombre ou tamisée, ambiance silencieuse et un peu solennelle. Un écran trop criard ou trop « jeu vidéo » dénote et gêne dans ce contexte — il faut que ce soit tenable à la main sans se sentir déplacé.</span></div>
+    <div class="contexte-item"><b>Ville</b><span>Luminosité changeante, usage rapide en marchant, souvent une main occupée (poussette, main d'un enfant). Il faut lire l'écran d'un coup d'œil, pas s'y attarder.</span></div>
+  </div>
+
+  <h2>Qui regarde l'écran</h2>
+  <p>Le parent tient le téléphone et pilote l'app. Les enfants — parfois dès 4 ans, non-lecteurs — regardent par-dessus l'épaule ou tapent eux-mêmes. Conséquence directe sur le design : <strong>tout doit rester lisible à bout de bras, sous un angle de travers, pour un adulte et un enfant de 4 ans en même temps.</strong> Les cibles tactiles doivent être grandes (on tape en marchant, parfois d'une main), et le sens ne doit jamais reposer sur la seule lecture d'un mot.</p>
+
+  <h2>Ce que l'interface doit porter visuellement</h2>
+  <table>
+    <thead><tr><th>Élément</th><th>Pourquoi il compte</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Le compteur de points</strong></td><td>C'est l'élément le plus important de tout l'écran, demandé explicitement par la cliente : « qui se voit bien ». Il doit rester visible en permanence (bandeau collant) pendant qu'on fait défiler la liste.</td></tr>
+      <tr><td>L'anneau ou la barre de progression</td><td>Donne un objectif atteignable en un clin d'œil, sans avoir à compter soi-même.</td></tr>
+      <tr><td>3 cartes de lieu à l'accueil</td><td>Montagne / Musée d'art / Ville — doivent être identifiables sans lire, pour un enfant qui ne lit pas encore.</td></tr>
+      <tr><td>4 familles de trouvailles</td><td>Ouvre l'œil, Écoute-sens-touche, À faire, et les Rares (bonus). Une distinction visuelle légère aide à s'y retrouver, mais ne doit pas devenir le geste dominant du design.</td></tr>
+      <tr><td>Les rares ★</td><td>Doivent se sentir comme un jackpot — plus précieux, plus rare visuellement aussi — distincts du reste sans être criards.</td></tr>
+      <tr><td>La célébration</td><td>Demandée explicitement par la cliente. Un moment de fête à chaque coche, un palier plus marqué à 25/50/75/100 %, et un écran de fin façon diplôme. Doit rester généreux et sincère, pas kitsch.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Ce qui a été tenté en v1, et pourquoi c'est probablement raté</h2>
+  <p>Palette utilisée : fond papier à peine teinté cyan (<code class="inline">#F3F7F6</code>), corail <code class="inline">#FF5D73</code> comme couleur héroïne des points et boutons, vert <code class="inline">#2FA84F</code> pour « coché », or <code class="inline">#E8960C</code> pour les rares, plus bleu ciel <code class="inline">#2F8FE0</code> et violet <code class="inline">#8B5CF6</code> uniquement pour repérer deux des quatre familles.</p>
+  <div class="swatches">
+    <span class="swatch"><span class="puce" style="background:#F3F7F6;border-color:#ccc"></span>fond</span>
+    <span class="swatch"><span class="puce" style="background:#FF5D73"></span>corail</span>
+    <span class="swatch"><span class="puce" style="background:#2FA84F"></span>vert</span>
+    <span class="swatch"><span class="puce" style="background:#E8960C"></span>or</span>
+    <span class="swatch"><span class="puce" style="background:#2F8FE0"></span>bleu ciel</span>
+    <span class="swatch"><span class="puce" style="background:#8B5CF6"></span>violet</span>
+  </div>
+  <p>Intention de départ : éviter les clichés de design générés par IA (le crème-terracotta, le noir-néon, le dégradé violet-bleu). Le risque pris à la place — cinq teintes saturées actives sur un seul écran — n'a pas payé : ça se lit comme dispersé plutôt que comme joyeux et intentionnel.</p>
+
+  <h2>Pistes pour la prochaine tentative</h2>
+  <ul class="checklist">
+    <li>Une seule couleur héroïne pour toute l'app (points, boutons, célébration), déclinée en teintes/nuances plutôt que multipliée en couleurs distinctes.</li>
+    <li>Un seul vert (ou une seule couleur sémantique) pour « coché » — pas besoin d'une couleur en plus par famille : la forme, l'icône ou la position peuvent distinguer les familles sans ajouter de teinte.</li>
+    <li>Réserver une couleur unique et clairement à part pour les rares ★ (or, ou toute autre couleur qui ne sert à rien d'autre dans l'app) pour préserver l'effet « jackpot ».</li>
+    <li>Vérifier le rendu en plein soleil simulé (contraste élevé, pas de gris moyen) et en contexte sombre (le mode sombre du musée n'est peut-être pas le même besoin que le mode sombre nocturne d'un téléphone).</li>
+    <li>Revoir la typographie en fonction de la nouvelle direction colorimétrique : la v1 utilisait la police système arrondie (<code class="inline">ui-rounded</code>, native iOS) — à garder ou remplacer selon le ton final choisi.</li>
+    <li>Concevoir aussi l'icône d'écran d'accueil (PWA) une fois la direction colorimétrique choisie.</li>
+  </ul>
+
+  <h2>Contraintes techniques à respecter, quelle que soit la direction</h2>
+  <ul class="checklist">
+    <li>App 100 % hors-ligne (PWA), aucune police externe chargée à distance — toute police doit être système ou embarquée en data URI.</li>
+    <li>Doit fonctionner en clair et en sombre, y compris quand l'utilisateur force un thème manuellement (pas seulement la préférence système).</li>
+    <li>Cibles tactiles larges (utilisation en marchant, parfois une seule main libre).</li>
+    <li>Respect de <code class="inline">prefers-reduced-motion</code> pour les animations de célébration.</li>
+  </ul>
+
+  <h2>Ce qui ne change pas</h2>
+  <p style="margin-bottom:0">Le contenu (9 carnets, 3 par typologie), la mécanique (cocher des trouvailles, pas d'énigmes), la rotation automatique des carnets, et la structure de l'app (accueil → sécurité → jeu → fin) sont validés et ne font pas partie de ce brief. Seul le système visuel — couleurs, typographie, traitement des familles et des célébrations — est à repenser.</p>
+
+</div>

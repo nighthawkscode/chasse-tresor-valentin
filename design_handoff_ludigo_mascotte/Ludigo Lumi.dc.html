@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="width:100%;min-height:100%;box-sizing:border-box;padding:40px;background:#f4f1e8;display:flex;flex-direction:column;gap:48px;font-family:'Nunito',Helvetica,sans-serif;color:#2b2519">
+  <helmet>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;900&display=swap" rel="stylesheet" />
+  </helmet>
+
+  <div style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-end">
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div style="box-shadow:0 22px 44px rgba(30,40,80,0.24);border-radius:78px;width:340px;height:340px">
+        <dc-import name="Lumi Icon" hint-size="340px,340px"></dc-import>
+      </div>
+      <span style="font-size:12px;font-weight:900;letter-spacing:0.18em;text-transform:uppercase;color:#6a6354">Icône app — Lumi</span>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px;max-width:320px">
+      <h1 style="margin:0;font-size:40px;line-height:1;font-weight:900">Lumi</h1>
+      <p style="margin:0;font-size:16px;line-height:1.5;color:#5c5647;text-wrap:pretty">La lanterne vivante de Ludigo. Elle éclaire la piste, glisse des indices, et s'allume plus fort quand on approche du trésor.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <span style="padding:7px 13px;border-radius:999px;background:#22376b;color:#ffd977;font-size:12px;font-weight:900;letter-spacing:0.08em">COURAGEUSE</span>
+        <span style="padding:7px 13px;border-radius:999px;background:#e39a2c;color:#2b2519;font-size:12px;font-weight:900;letter-spacing:0.08em">MALICIEUSE</span>
+        <span style="padding:7px 13px;border-radius:999px;background:#ffd977;color:#2b2519;font-size:12px;font-weight:900;letter-spacing:0.08em">MALADROITE</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <span style="font-size:12px;font-weight:900;letter-spacing:0.18em;text-transform:uppercase;color:#6a6354">Lisibilité aux tailles réelles</span>
+    <div style="display:flex;align-items:flex-end;gap:28px">
+      <div style="width:120px;height:120px;overflow:hidden;border-radius:28px;box-shadow:0 8px 18px rgba(30,40,80,0.18)">
+        <div style="width:340px;height:340px;transform:scale(0.3529);transform-origin:top left">
+          <dc-import name="Lumi Icon" hint-size="340px,340px"></dc-import>
+        </div>
+      </div>
+      <div style="width:76px;height:76px;overflow:hidden;border-radius:18px;box-shadow:0 6px 14px rgba(30,40,80,0.16)">
+        <div style="width:340px;height:340px;transform:scale(0.2235);transform-origin:top left">
+          <dc-import name="Lumi Icon" hint-size="340px,340px"></dc-import>
+        </div>
+      </div>
+      <div style="width:44px;height:44px;overflow:hidden;border-radius:11px;box-shadow:0 4px 10px rgba(30,40,80,0.16)">
+        <div style="width:340px;height:340px;transform:scale(0.1294);transform-origin:top left">
+          <dc-import name="Lumi Icon" hint-size="340px,340px"></dc-import>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <span style="font-size:12px;font-weight:900;letter-spacing:0.18em;text-transform:uppercase;color:#6a6354">Dans l'app — trois humeurs</span>
+    <div style="display:flex;flex-wrap:wrap;gap:24px">
+      <div style="display:flex;flex-direction:column;gap:10px;align-items:center">
+        <div style="width:170px;height:170px;overflow:hidden;border-radius:39px">
+          <div style="width:340px;height:340px;transform:scale(0.5);transform-origin:top left">
+            <dc-import name="Lumi Icon" expression="curieux" hint-size="340px,340px"></dc-import>
+          </div>
+        </div>
+        <span style="font-size:13px;font-weight:900;color:#5c5647">Curieuse</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;align-items:center">
+        <div style="width:170px;height:170px;overflow:hidden;border-radius:39px">
+          <div style="width:340px;height:340px;transform:scale(0.5);transform-origin:top left">
+            <dc-import name="Lumi Icon" expression="malicieux" hint-size="340px,340px"></dc-import>
+          </div>
+        </div>
+        <span style="font-size:13px;font-weight:900;color:#5c5647">Malicieuse — un indice</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;align-items:center">
+        <div style="width:170px;height:170px;overflow:hidden;border-radius:39px">
+          <div style="width:340px;height:340px;transform:scale(0.5);transform-origin:top left">
+            <dc-import name="Lumi Icon" expression="fier" hint-size="340px,340px"></dc-import>
+          </div>
+        </div>
+        <span style="font-size:13px;font-weight:900;color:#5c5647">Fière — trésor trouvé</span>
+      </div>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <span style="font-size:12px;font-weight:900;letter-spacing:0.18em;text-transform:uppercase;color:#6a6354">Formes de bouche</span>
+    <div style="display:flex;flex-wrap:wrap;gap:20px">
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:center">
+        <div style="width:130px;height:130px;overflow:hidden;border-radius:30px">
+          <div style="width:340px;height:340px;transform:scale(0.3824);transform-origin:top left">
+            <dc-import name="Lumi Icon" mouth="croissant" sparks="{{ false }}" hint-size="340px,340px"></dc-import>
+          </div>
+        </div>
+        <span style="font-size:12px;font-weight:900;color:#5c5647">croissant</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:center">
+        <div style="width:130px;height:130px;overflow:hidden;border-radius:30px">
+          <div style="width:340px;height:340px;transform:scale(0.3824);transform-origin:top left">
+            <dc-import name="Lumi Icon" mouth="sourire fin" sparks="{{ false }}" hint-size="340px,340px"></dc-import>
+          </div>
+        </div>
+        <span style="font-size:12px;font-weight:900;color:#5c5647">sourire fin</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:center">
+        <div style="width:130px;height:130px;overflow:hidden;border-radius:30px">
+          <div style="width:340px;height:340px;transform:scale(0.3824);transform-origin:top left">
+            <dc-import name="Lumi Icon" mouth="petit o" sparks="{{ false }}" hint-size="340px,340px"></dc-import>
+          </div>
+        </div>
+        <span style="font-size:12px;font-weight:900;color:#5c5647">petit o</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:center">
+        <div style="width:130px;height:130px;overflow:hidden;border-radius:30px">
+          <div style="width:340px;height:340px;transform:scale(0.3824);transform-origin:top left">
+            <dc-import name="Lumi Icon" mouth="espiègle" sparks="{{ false }}" hint-size="340px,340px"></dc-import>
+          </div>
+        </div>
+        <span style="font-size:12px;font-weight:900;color:#5c5647">espiègle</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:center">
+        <div style="width:130px;height:130px;overflow:hidden;border-radius:30px">
+          <div style="width:340px;height:340px;transform:scale(0.3824);transform-origin:top left">
+            <dc-import name="Lumi Icon" mouth="dents" sparks="{{ false }}" hint-size="340px,340px"></dc-import>
+          </div>
+        </div>
+        <span style="font-size:12px;font-weight:900;color:#5c5647">dents</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:center">
+        <div style="width:130px;height:130px;overflow:hidden;border-radius:30px">
+          <div style="width:340px;height:340px;transform:scale(0.3824);transform-origin:top left">
+            <dc-import name="Lumi Icon" mouth="grand rire" sparks="{{ false }}" hint-size="340px,340px"></dc-import>
+          </div>
+        </div>
+        <span style="font-size:12px;font-weight:900;color:#5c5647">grand rire</span>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

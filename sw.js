@@ -1,6 +1,6 @@
 // Garde une copie de l'app pour qu'elle s'ouvre à zéro réseau, en montagne.
-const CACHE = "valentin-v2";
-const SHELL = ["./", "./index.html", "./manifest.webmanifest"];
+const CACHE = "tresors-dici-v4";
+const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icones/icone-180.png", "./icones/icone-192.png", "./icones/icone-512.png"];
 
 self.addEventListener("install", function (e) {
   e.waitUntil(
