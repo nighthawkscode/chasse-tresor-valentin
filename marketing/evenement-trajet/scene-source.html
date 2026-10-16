@@ -1,0 +1,104 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+html,body{margin:0;padding:0;overflow:hidden}
+#s{position:relative;overflow:hidden;background:linear-gradient(180deg,#DDF5EC 0%,#EAFAF4 55%,#F1F7F4 100%)}
+svg.bg{position:absolute;inset:0}
+.zoe{position:absolute}
+</style></head><body><div id="s"></div><script>
+const F=new URLSearchParams(location.search).get('f')||'card';
+const W=F==='card'?1920:1080, H=F==='card'?1080:1920;
+const s=document.getElementById('s'); s.style.width=W+'px'; s.style.height=H+'px';
+  function zoeHTML(mood, opts) {
+    opts = opts || {};
+    const blush = opts.blush !== false;
+    const sparks = opts.sparks !== false;
+    const wink = mood === "malicieux";
+    const wide = mood === "fier";
+    let h = '<div style="position:relative;width:340px;height:340px">';
+    h += '<div style="position:absolute;left:150px;top:146px;width:36px;height:196px;border-radius:18px;background:#c98a4d;transform:rotate(-38deg);transform-origin:top center;overflow:hidden">' +
+      '<div style="position:absolute;left:6px;top:118px;width:9px;height:62px;border-radius:5px;background:rgba(255,255,255,0.2)"></div>' +
+      '<div style="position:absolute;left:0;top:128px;width:36px;height:26px;background:#a86c34"></div>' +
+      '</div>';
+    h += '<div style="position:absolute;left:62px;top:40px;width:212px;height:212px;border-radius:50%;background:#39c3a2"></div>';
+    h += '<div style="position:absolute;left:78px;top:56px;width:180px;height:180px;border-radius:50%;background:#eafaf4;overflow:hidden">';
+    h += '<div style="position:absolute;inset:0;background:radial-gradient(72% 62% at 44% 38%, #ffffff 0%, #e4f6ee 60%, #cfeade 100%)"></div>';
+    h += '<div style="position:absolute;left:14px;top:12px;width:56px;height:96px;background:linear-gradient(150deg, rgba(255,255,255,0.9), rgba(255,255,255,0));border-radius:50%;transform:rotate(26deg)"></div>';
+    if (blush) {
+      h += '<div style="position:absolute;left:22px;top:110px;width:46px;height:30px;background:radial-gradient(closest-side, rgba(255,132,96,0.4), rgba(255,132,96,0))"></div>';
+      h += '<div style="position:absolute;left:112px;top:110px;width:46px;height:30px;background:radial-gradient(closest-side, rgba(255,132,96,0.4), rgba(255,132,96,0))"></div>';
+    }
+    h += '<div style="position:absolute;left:36px;top:62px;width:36px;height:42px;border-radius:50%;background:#123a30"></div>';
+    h += '<div style="position:absolute;left:44px;top:70px;width:13px;height:13px;border-radius:50%;background:#eafaf4"></div>';
+    if (!wink) {
+      h += '<div style="position:absolute;left:108px;top:62px;width:36px;height:42px;border-radius:50%;background:#123a30"></div>';
+      h += '<div style="position:absolute;left:116px;top:70px;width:13px;height:13px;border-radius:50%;background:#eafaf4"></div>';
+    } else {
+      h += '<div style="position:absolute;left:106px;top:72px;width:40px;height:22px;border-top:11px solid #123a30;border-radius:26px 26px 0 0"></div>';
+    }
+    if (!wide) {
+      h += '<div style="position:absolute;left:60px;top:118px;width:58px;height:32px;background:#123a30;-webkit-clip-path:path(\'M2,2 C6,20 15,29 29,29 C43,29 52,20 56,2 C50,15 41,21 29,21 C17,21 8,15 2,2 Z\');clip-path:path(\'M2,2 C6,20 15,29 29,29 C43,29 52,20 56,2 C50,15 41,21 29,21 C17,21 8,15 2,2 Z\')"></div>';
+    } else {
+      h += '<div style="position:absolute;left:58px;top:114px;width:62px;height:46px;background:#123a30;-webkit-clip-path:path(\'M3,7 C16,0 46,0 59,7 C59,32 47,45 31,45 C15,45 3,32 3,7 Z\');clip-path:path(\'M3,7 C16,0 46,0 59,7 C59,32 47,45 31,45 C15,45 3,32 3,7 Z\')"></div>';
+      h += '<div style="position:absolute;left:74px;top:140px;width:30px;height:20px;border-radius:10px 10px 15px 15px;background:#ff7a6b"></div>';
+    }
+    h += '</div>';
+    if (sparks) {
+      h += '<div style="position:absolute;left:40px;top:274px;width:12px;height:12px;border-radius:50%;background:#a7f0d8"></div>';
+      h += '<div style="position:absolute;left:296px;top:78px;width:9px;height:9px;border-radius:50%;background:#a7f0d8"></div>';
+      h += '<div style="position:absolute;left:36px;top:64px;width:8px;height:8px;border-radius:50%;background:#a7f0d8"></div>';
+    }
+    h += '</div>';
+    return h;
+  }
+
+function turbine(x,y,sc,rot){return `<g transform="translate(${x} ${y}) scale(${sc})"><path d="M-3 0 L-1.6 -120 L1.6 -120 L3 0 Z" fill="#FFFFFF"/><g transform="translate(0 -120) rotate(${rot})"><path d="M0 0 L-5 -6 L0 -62 L5 -6 Z" fill="#FFFFFF"/><path d="M0 0 L-5 -6 L0 -62 L5 -6 Z" fill="#FFFFFF" transform="rotate(120)"/><path d="M0 0 L-5 -6 L0 -62 L5 -6 Z" fill="#FFFFFF" transform="rotate(240)"/><circle r="6" fill="#C98A4D"/></g></g>`}
+function car(x,y,sc){return `<g transform="translate(${x} ${y}) scale(${sc})">
+ <ellipse cx="24.5" cy="37.5" rx="21" ry="2.2" fill="#0D3B30" opacity=".18"/>
+ <path d="M6 30V25C6 23.3 7.1 22 8.6 21.6L13 20.5L17.5 13.8C18.3 12.7 19.6 12 21 12H30C31.4 12 32.7 12.7 33.5 13.8L38 20.5L40.4 21.3C41.9 21.8 43 23.2 43 24.8V30C43 31.1 42.1 32 41 32H8C6.9 32 6 31.1 6 30Z" fill="#3C6E91"/>
+ <path d="M8 26.5H41" stroke="#2E5874" stroke-width=".8" stroke-linecap="round"/>
+ <path d="M18.4 20L21 15.7C21.3 15.2 21.7 15 22.2 15H25V20Z" fill="#EAFAF4"/><path d="M27.5 15H29.8C30.3 15 30.7 15.2 31 15.7L33.6 20H27.5Z" fill="#EAFAF4"/>
+ <rect x="39.4" y="23" width="3" height="2.2" rx="1" fill="#FFC94D"/>
+ <rect x="6" y="23.4" width="2.2" height="2" rx=".8" fill="#FF7A6B"/>
+ <circle cx="15" cy="32" r="5" fill="#123A30"/><circle cx="15" cy="32" r="2.1" fill="#EAFAF4"/>
+ <circle cx="35" cy="32" r="5" fill="#123A30"/><circle cx="35" cy="32" r="2.1" fill="#EAFAF4"/>
+ </g>`}
+function speed(x,y,len){return `<path d="M${x} ${y} h${-len}" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" opacity=".9"/>`}
+let svg, zoeX, zoeY, zoeS, carSvg;
+if(F==='card'){
+ const roadY=800;
+ svg=`<svg class="bg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+  <circle cx="1640" cy="210" r="110" fill="#FFC94D" opacity=".9"/>
+  <circle cx="1640" cy="210" r="160" fill="#FFC94D" opacity=".18"/>
+  <path d="M0 610 C260 520 470 540 700 590 C930 640 1120 520 1380 500 C1600 485 1780 560 1920 600 V${H} H0Z" fill="#9FE3CF"/>
+  ${turbine(330,575,1.25,18)}${turbine(560,590,0.95,52)}${turbine(1480,500,1.15,80)}
+  <path d="M0 700 C320 640 560 660 860 700 C1160 740 1420 650 1920 680 V${H} H0Z" fill="#39C3A2"/>
+  <path d="M0 ${roadY-30} H${W} V${H} H0Z" fill="#1F8F77"/>
+  <rect x="0" y="${roadY}" width="${W}" height="150" fill="#2C4A44"/>
+  <rect x="0" y="${roadY}" width="${W}" height="8" fill="#EAFAF4" opacity=".55"/>
+  <rect x="0" y="${roadY+142}" width="${W}" height="8" fill="#EAFAF4" opacity=".55"/>
+  ${[...Array(9)].map((_,k)=>`<rect x="${k*230-40}" y="${roadY+69}" width="120" height="12" rx="6" fill="#FFC94D"/>`).join('')}
+  <path d="M0 ${roadY+150} H${W} V${H} H0Z" fill="#12503F"/>
+  ${speed(560,700,170)}${speed(520,760,110)}${speed(600,640,120)}
+  <circle cx="1350" cy="300" r="11" fill="#A7F0D8"/><circle cx="1420" cy="380" r="7" fill="#FFFFFF"/><circle cx="560" cy="300" r="9" fill="#A7F0D8"/>
+ </svg>`;
+ zoeS=1.2; zoeX=738; zoeY=275; carSvg=car(600,363,14.5);
+} else {
+ const roadY=1380;
+ svg=`<svg class="bg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+  <circle cx="830" cy="330" r="120" fill="#FFC94D" opacity=".9"/>
+  <circle cx="830" cy="330" r="175" fill="#FFC94D" opacity=".18"/>
+  <path d="M0 1120 C200 1040 380 1060 560 1100 C760 1140 900 1060 1080 1080 V${H} H0Z" fill="#9FE3CF"/>
+  ${turbine(170,1090,1.3,25)}${turbine(880,1075,1.05,70)}
+  <path d="M0 1240 C260 1190 520 1220 760 1250 C900 1265 1000 1230 1080 1235 V${H} H0Z" fill="#39C3A2"/>
+  <path d="M0 ${roadY-30} H${W} V${H} H0Z" fill="#1F8F77"/>
+  <rect x="0" y="${roadY}" width="${W}" height="150" fill="#2C4A44"/>
+  <rect x="0" y="${roadY}" width="${W}" height="8" fill="#EAFAF4" opacity=".55"/>
+  <rect x="0" y="${roadY+142}" width="${W}" height="8" fill="#EAFAF4" opacity=".55"/>
+  ${[...Array(6)].map((_,k)=>`<rect x="${k*230-60}" y="${roadY+69}" width="120" height="12" rx="6" fill="#FFC94D"/>`).join('')}
+  <path d="M0 ${roadY+150} H${W} V${H} H0Z" fill="#12503F"/>
+  ${speed(150,1290,120)}${speed(120,1220,80)}
+  <circle cx="200" cy="560" r="12" fill="#A7F0D8"/><circle cx="930" cy="620" r="8" fill="#FFFFFF"/><circle cx="140" cy="700" r="8" fill="#FFFFFF"/>
+ </svg>`;
+ zoeS=1.45; zoeX=286; zoeY=796; carSvg=car(160,916,15.5);
+}
+s.innerHTML=svg+`<div class="zoe" style="left:${zoeX}px;top:${zoeY}px;width:340px;height:340px;transform:scale(${zoeS});transform-origin:top left">${zoeHTML('curieux',{sparks:false})}</div><svg class="bg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${carSvg}</svg>`;
+</script></body></html>

@@ -1163,6 +1163,14 @@
         if (S.vue.ecran !== "accueil") { S.vue = { ecran: "accueil" }; sauver(); dessiner(); }
         else Plugins.App.exitApp();
       });
+      /* Liens profonds ludigo://<typologie> (ex. ludigo://trajet, utilisé par les
+         événements intégrés de l'App Store) : ouvrent l'intro de la destination. */
+      const ouvrirLien = function (url) {
+        const m = /^ludigo:\/\/([a-z]+)/.exec(url || "");
+        if (m && typo(m[1])) aller("intro", m[1]);
+      };
+      Plugins.App.addListener("appUrlOpen", function (e) { ouvrirLien(e && e.url); });
+      Plugins.App.getLaunchUrl().then(function (r) { ouvrirLien(r && r.url); }).catch(function () {});
     }
   }
 })();

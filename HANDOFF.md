@@ -110,7 +110,7 @@ En cours de remplissage dans App Store Connect, dans cet ordre :
 - **Aucune trouvaille régulière ne dépend de la météo ou de l'heure** (soleil, pluie, froid, nuages, nuit) : retour de Jessica le 16/10, elles risquaient d'être infaisables. Ce qui dépend de la chance (arc-en-ciel, coucher de soleil) n'est accepté que dans les rares ★, qui restent facultatives.
 - Pastille « Nouveau » sur la carte d'accueil (`nouveau: true` sur la typologie, masquée dès que le carnet est commencé). Couleur de médaillon `#3C6E91`, pictogrammes voiture `svgTrajet()` + variante accueil.
 - Version passée à 1.1 (build 2). Textes App Store de la v1.1 dans `ASO.md`.
-- Reste à faire : tester dans le simulateur, archiver, soumettre (viser une validation pendant les vacances de la Toussaint, du 17/10 au 02/11/2026).
+- 16/10/2026 : build 3 envoyé à App Store Connect (le build 2 est remplacé : le build 3 ajoute le lien profond `ludigo://<typologie>`, ex. `ludigo://trajet`, schéma déclaré dans `Info.plist`, géré par `appUrlOpen`/`getLaunchUrl` dans `index.html`, exigé par le formulaire d'événement intégré). Visuels de l'événement : `marketing/evenement-trajet/` et canevas Claude Design « Événement Ludigo – Chasse au trésor en voiture ». Jessica soumet la v1.1 et crée l'événement « Chasse au trésor en voiture » (textes dans `ASO.md`). Avant : tester dans le simulateur, archiver, soumettre (viser une validation pendant les vacances de la Toussaint, du 17/10 au 02/11/2026).
 
 ## Chiffres App Store au 14/10/2026 (17/07 → 14/10)
 
@@ -125,6 +125,8 @@ Compte Google Play personnel = test fermé obligatoire avec au moins 12 testeurs
 1. Soumettre la v1.1 (Trajet) et mettre à jour le texte promo, les mots-clés et la description (voir `ASO.md`).
 2. Travailler la visibilité : mots-clés, test A/B des captures, distribution hors App Store (groupes de parents, offices de tourisme).
 3. Android : réunir 12 testeurs, ou passer par un compte d'organisation.
+4. **Prochaine version : carnet saisonnier Halloween** (décidé le 16/10/2026), plus un événement intégré « Chasse au trésor d'Halloween » (badge Événement spécial). Idée de départ : un carnet pour la tournée des bonbons ou la balade déguisée, visible à l'accueil seulement autour d'Halloween (date du téléphone), avec une sécurité dédiée (adulte, lumière ou gilet, maisons décorées seulement, bonbons vérifiés par un parent). Le contenu doit être dans la version en ligne avant de publier l'événement : pour Halloween 2026, il faudrait une v1.2 validée vers le 25/10 au plus tard. Sinon, ce sera pour Halloween 2027.
+5. Analytics anonymes (TelemetryDeck envisagé) : voir la discussion du 16/10/2026. Cela implique de modifier l'étiquette de confidentialité, la politique de confidentialité et la promesse « zéro donnée collectée ».
 
 ## Claude Design
 

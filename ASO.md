@@ -14,25 +14,42 @@ Nouveau : la destination Trajet !
 Voiture, train ou car : 3 nouveaux carnets de 44 trouvailles à repérer par la fenêtre, pour transformer les longs trajets de vacances en chasse au trésor. Pensé pour se jouer les yeux dehors (idéal contre le mal des transports) et sans jamais distraire le conducteur.
 ```
 
-**Texte promotionnel (170 car. max, modifiable sans revalidation)** — 157 car. :
+**Texte promotionnel (170 car. max, modifiable sans revalidation)** — en deux temps, pour ne jamais annoncer Trajet avant que la v1.1 soit en ligne :
+
+1. **Dès maintenant, sur la v1.0** (147 car.) :
 ```
-Nouveau : le carnet Trajet ! Voiture, train ou car, fini le « on arrive quand ? ». Montagne, musée, ville ou route : 100 % hors ligne, zéro pub, zéro compte.
+Vacances de la Toussaint : chaque balade, chaque musée devient une chasse au trésor ! Prêt en 10 secondes, 100 % hors ligne, zéro pub, zéro compte.
 ```
+2. **Dès que la v1.1 est validée** (142 car.) :
+```
+Nouveau pour les vacances : le carnet Trajet ! En voiture ou en train, fini le « on arrive quand ? ». 100 % hors ligne, zéro pub, zéro compte.
+```
+Après les vacances (03/11), retirer la mention « vacances ». Rappel : ce texte n'est pas indexé par la recherche, il sert seulement à convaincre sur la fiche.
+
+**Événement intégré « Spécial vacances » (App Store Connect > Événements intégrés)**
+
+- Nom (30 car. max), 27 car. : `Chasse au trésor en voiture`. Variante plus « événement » : `Spécial vacances : en route !` (29 car.).
+- Description courte (50 car. max), 42 car. : `Fini le « on arrive quand ? » des vacances`
+- Description longue (120 car. max), 117 car. : `Voiture, train ou car : 3 carnets de trouvailles à repérer par la fenêtre pour occuper les enfants. 100 % hors ligne.`
+- Type de badge : **Mise à jour majeure** (Major Update). Objectif : attirer de nouveaux utilisateurs, pertinent pour tous.
+- Dates : début dès la validation de la v1.1, fin le 02/11/2026 au soir (fin des vacances de la Toussaint). Publication possible jusqu'à 14 jours avant le début.
+- Visuels : carte 16:9 et page détail 9:16 (vérifier les tailles exactes demandées dans App Store Connect). Idée : Zoé sur le capot d'une voiture, route et éoliennes, sans texte incrusté important.
+- L'événement ne peut être en ligne que si la v1.1 (qui contient Trajet) l'est : le soumettre avec la version ou juste après sa validation.
 
 **Nom (30 car. max)** — 25 car. Singulier, comme les parents le tapent :
 ```
 Ludigo : chasse au trésor
 ```
 
-**Sous-titre (30 car. max)** — 29 car. :
+**Sous-titre (30 car. max)** — 29 car. (choix de Jessica du 16/10/2026) :
 ```
-Jeu de piste : rando, voiture
+Jeu de piste balade & voiture
 ```
-Pourquoi : « jeu de piste » est une expression que les parents tapent telle quelle et qui correspond exactement à l'app ; en entier dans le sous-titre, elle pèse bien plus que si on la découpe en `jeu` + `piste` dans les mots-clés. « voiture » vise les requêtes de vacances (« jeu voiture enfant »), « rando » le cœur historique de l'app. Écarté : `Rando, musée, ville, voiture` (28 car.), car ce sont des mots seuls très génériques (« voiture », « ville ») sur lesquels une jeune app ne se classera pas, et une liste de lieux ne dit pas que c'est un jeu. L'universalité se montre plutôt dans la 1re capture d'écran. À confirmer avec les scores de popularité d'Apple Ads.
+Pourquoi « balade » plutôt que « rando » : plus large (parc, forêt, ville, pas seulement la montagne) et plus naturel pour des familles avec de jeunes enfants. « Jeu de piste » reste en entier, c'est l'expression la plus précieuse. Apple ignore « & ». Alternatives écartées : `Jeu de piste : rando, voiture` (29 car.), `Jeu de piste en rando, voiture` (tournure bancale).
 
-**Mots-clés français (100 car. max)** — 99 car. Aucun mot répété du nom ou du sous-titre. Jamais `gratuit` ni aucune mention de prix : interdit par la règle 2.3.7 des App Review Guidelines (pas d'information tarifaire dans les métadonnées). Attention, l'ancien champ de la v1.0 contenait `gratuit`, d'où son retrait :
+**Mots-clés français (100 car. max)** — 98 car. Aucun mot répété du nom ou du sous-titre (`balade`, passé dans le sous-titre, est remplacé par `rando`, qu'Apple ne relie pas toujours à `randonnée`). Jamais `gratuit` ni aucune mention de prix : interdit par la règle 2.3.7 des App Review Guidelines (pas d'information tarifaire dans les métadonnées). Attention, l'ancien champ de la v1.0 contenait `gratuit`, d'où son retrait :
 ```
-randonnée,balade,sortie,enfant,vacances,occuper,montagne,trajet,musée,ville,activité,rallye,famille
+randonnée,rando,sortie,enfant,vacances,occuper,montagne,trajet,musée,ville,activité,rallye,famille
 ```
 
 **Données Apple Ads (relevé du 16/10/2026, France, popularité sur 5)** : `jeux enfants` 2/5 ; tout le reste à 1/5 : chasse au trésor, chasse aux trésors, jeu de piste, jeu voiture enfant, jeux voiture, jeux pour la voiture, occuper enfant, randonnée, rando, activité enfant… Pour comparaison, `alltrails` 3/5 et `instagram` 5/5. L'échelle est trop grossière pour départager nos mots-clés, mais elle montre que **toute la niche a un volume de recherche faible sur l'App Store** : l'ASO seul ne suffira pas, l'acquisition hors App Store (Google, Pinterest, réseaux sociaux) est indispensable. Les requêtes suggérées contiennent souvent l'âge (« jeu enfant 5 ans »). Enchère suggérée par Apple : 2,46 € par tap (cher pour une app gratuite non monétisée).
