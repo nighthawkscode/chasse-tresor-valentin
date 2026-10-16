@@ -1,6 +1,6 @@
 # Ludigo — handoff
 
-Dernière mise à jour : 6 septembre 2026. Écrit pour qu'une session Claude fraîche (autre compte, ou Claude Design) puisse reprendre sans contexte préalable.
+Dernière mise à jour : 16 octobre 2026. Écrit pour qu'une session Claude fraîche (autre compte, ou Claude Design) puisse reprendre sans contexte préalable.
 
 ## En une phrase
 
@@ -39,7 +39,12 @@ Jessica a livré un dossier de design `design_handoff_ludigo_mascotte/` (fichier
 - La politique de confidentialité est hébergée sur `https://findaro-legal.vercel.app` — l'URL elle-même n'a pas besoin de changer pour la review Apple, mais le texte de la page mentionne peut-être "Findaro" à l'intérieur, à vérifier.
 - Icône : loupe + étincelle sur dégradé bleu pétrole, pas de texte dedans — aucun impact du renommage.
 
-## Statut de la publication App Store (18/08/2026)
+## ✅ Publiée sur l'App Store le 10/09/2026
+
+**Ludigo : chasses aux trésors**, v1.0 (build 1), en ligne depuis le 10/09/2026 : https://apps.apple.com/fr/app/ludigo-chasses-aux-tr%C3%A9sors/id6797957916 (Apple ID `6797957916`). Au 16/10/2026 : 1 note (5★). La version publiée correspond au commit qui suit cette mise à jour (lien de confidentialité in-app, In-App Review, `DEVELOPMENT_TEAM = BF83B6KTNS`, langue de développement `fr`).
+
+Historique de la préparation (gardé pour mémoire) :
+
 
 En cours de remplissage dans App Store Connect, dans cet ordre :
 1. ✅ Compte Apple Developer actif, statut DSA à répondre (recommandé : non-trader, app gratuite sans monétisation)
@@ -48,11 +53,11 @@ En cours de remplissage dans App Store Connect, dans cet ordre :
 4. ✅ Sous-titre saisi : "Animez vos sorties enfants" (voir note ci-dessus sur le nom en discussion)
 5. ✅ Age rating : répondu "None"/"No" partout → 4+
 6. ✅ Politique de confidentialité rédigée et **hébergée en ligne : https://findaro-legal.vercel.app** (compte Vercel perso, scope `maison-sereine` — déployé le 18/08, page statique dans `~/Documents/projects/findaro-legal/index.html`, zéro dépendance)
-7. ⏳ **Reste à faire dans App Store Connect** : coller l'URL de confidentialité (onglet App Privacy, en haut de page — pas toujours au même endroit selon la version de l'UI, sinon dans App Information > General Information), Content Rights (répondre Non), Copyright (`2026 Jessica Robert`), Pricing (gratuit), App Privacy questionnaire ("No, we do not collect data from this app" → Publish), puis pour la version 1.0 : captures d'écran, description, mots-clés, texte promo, URL de support, notes pour la review.
-8. ⏳ **Lien in-app vers la politique de confidentialité** : pas encore ajouté dans `index.html` (obligatoire selon la règle Apple 5.1.1(i), pas juste dans la fiche App Store Connect).
-9. ⏳ Xcode : configurer Signing & Capabilities (choisir l'équipe, `DEVELOPMENT_TEAM` pas encore renseigné dans le projet), tester sur un iPhone physique (seul le simulateur a été testé), puis archiver et uploader.
+7. ✅ **App Store Connect rempli** : coller l'URL de confidentialité (onglet App Privacy, en haut de page — pas toujours au même endroit selon la version de l'UI, sinon dans App Information > General Information), Content Rights (répondre Non), Copyright (`2026 Jessica Robert`), Pricing (gratuit), App Privacy questionnaire ("No, we do not collect data from this app" → Publish), puis pour la version 1.0 : captures d'écran, description, mots-clés, texte promo, URL de support, notes pour la review.
+8. ✅ **Lien in-app vers la politique de confidentialité** : ajouté sur l'accueil d'`index.html` (obligatoire selon la règle Apple 5.1.1(i), pas juste dans la fiche App Store Connect).
+9. ✅ Xcode : configurer Signing & Capabilities (choisir l'équipe, `DEVELOPMENT_TEAM` pas encore renseigné dans le projet), tester sur un iPhone physique (seul le simulateur a été testé), puis archiver et uploader.
 
-**Toutes les valeurs prêtes à copier-coller (nom, sous-titre, mots-clés, description longue, texte promo, notes de review, texte complet de la politique de confidentialité, checklist de soumission cochable)** sont dans le dossier de lancement, un artifact Claude publié séparément — demander à Jessica le lien si besoin, ou reconstruire à partir de ce fichier + de la conversation d'origine si l'artifact n'est plus accessible depuis ce compte.
+**Toutes les valeurs prêtes à copier-coller (nom, sous-titre, mots-clés, description longue, texte promo, notes de review, accroches marketing, brief visuels pour les captures d'écran)** sont dans [`ASO.md`](./ASO.md) à la racine du repo (régénéré le 07/09/2026 avec le nom Ludigo, après que le kit précédent — un artifact Claude publié séparément sous le nom Findaro — soit devenu inaccessible depuis ce compte). Il manque encore le texte complet de la politique de confidentialité (déjà en ligne sur `https://findaro-legal.vercel.app`, à vérifier/adapter au nom Ludigo) et la checklist de soumission cochable.
 
 ## Décisions produit clés (dans l'ordre chronologique de découverte)
 
@@ -76,7 +81,7 @@ En cours de remplissage dans App Store Connect, dans cet ordre :
 - `www/` : copie propre servie à Capacitor (webDir), à resynchroniser après chaque modif d'`index.html` (`cp index.html www/` puis `npx cap sync ios`)
 - `ios/App/App.xcworkspace` : projet Xcode généré par Capacitor — **toujours ouvrir le `.xcworkspace`, jamais le `.xcodeproj`** (CocoaPods)
 - Wrapper natif : **Capacitor**, choisi pour conserver ~95 % du code JS/CSS existant sans réécriture native
-- Plugins Capacitor actifs : App (bouton retour Android), Haptics, SplashScreen, StatusBar — 4 plugins seulement depuis le retrait de Share
+- Plugins Capacitor actifs : App (bouton retour Android), Haptics, SplashScreen, StatusBar, **In-App Review** (`@capacitor-community/in-app-review`, ajouté 15/09/2026 — demande native de notation déclenchée une seule fois, au premier carnet terminé par utilisateur, voir `demanderAvis()` dans `index.html`)
 - Bundle ID actuel : `com.nighthawkscode.findaro` (voir section nom en suspens ci-dessus)
 - Repo public GitHub `nighthawkscode/chasse-tresor-valentin` (nom de repo pas encore renommé pour matcher, non bloquant)
 - **Zéro réseau, zéro tracking** : pas de fetch actif dans l'app native (le service worker ne s'active que sous `https:`, jamais sous le schéma `capacitor://` de l'app iOS — vérifié dans le code)
@@ -98,17 +103,9 @@ En cours de remplissage dans App Store Connect, dans cet ordre :
 6. **Après un `xcrun simctl runtime delete`, toujours vérifier `xcrun simctl runtime list` avant de retélécharger** — des doublons orphelins côté CoreSimulator peuvent bloquer l'installation d'un nouveau runtime avec une erreur "Duplicate of X".
 7. Serveur HTTP local (`python3 -m http.server`) plutôt qu'ouverture directe en `file://` pour tester la version web — le navigateur sert les fichiers `file://` comme des instantanés figés.
 
-## Prochaines étapes, dans l'ordre
+## Prochaines étapes
 
-1. Trancher le nom (Findaro / Watchling / Beholda / autre) — voir section en suspens
-2. Répercuter le nom choisi partout si changement
-3. Finir de remplir App Store Connect (voir statut détaillé ci-dessus)
-4. Ajouter le lien vers la politique de confidentialité directement dans l'app
-5. Configurer Signing & Capabilities dans Xcode (choisir l'équipe)
-6. Tester sur un iPhone physique
-7. Capturer les 4-6 screenshots requis (simulateur iPhone 17 Pro Max, 1320×2868)
-8. Archiver (Product > Archive, destination "Any iOS Device") et uploader vers App Store Connect
-9. Soumettre pour review
+La v1.0 est publiée (10/09/2026). La phase suivante vise l'attractivité (téléchargements) et la qualité de l'expérience parents/enfants, avant toute monétisation. La roadmap produit détaillée est à reprendre de la conversation du 16/10/2026 ; premiers chantiers : relever les chiffres App Store Connect (impressions, conversion, téléchargements), puis itérer sur la fiche (texte promo, test A/B des captures) et sur le contenu (nouveaux types de lieux fréquents).
 
 ## Claude Design
 

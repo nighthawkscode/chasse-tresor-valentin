@@ -45,43 +45,70 @@
   .contenu { flex: 1; max-width: 560px; width: 100%; margin: 0 auto; padding: 0 18px max(40px, env(safe-area-inset-bottom)); }
 
   /* ---------------- accueil ---------------- */
-  .ecran-accueil { background: linear-gradient(180deg, var(--hero-soft) 0%, var(--paper) 60%); }
-  .accueil-tete { padding: max(20px, env(safe-area-inset-top)) 18px 8px; display: flex; flex-direction: column; gap: 4px; }
-  .accueil-tete .marque { display: flex; align-items: center; gap: 10px; }
-  .accueil-tete .marque .badge {
-    flex: none; width: 40px; height: 40px; border-radius: 12px;
-    overflow: hidden; display: flex; align-items: center; justify-content: center;
+  .ecran-accueil { background: var(--paper); }
+  .accueil-hero {
+    position: relative; overflow: hidden;
+    background: radial-gradient(120% 90% at 50% 0%, var(--hero) 0%, var(--hero-deep) 70%);
+    border-radius: 0 0 40px 40px;
+    padding: max(30px, env(safe-area-inset-top)) 20px 28px;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
   }
-  .accueil-tete h1 {
-    font-family: var(--disp); font-weight: 800; font-size: 27px;
-    margin: 0; letter-spacing: -0.01em;
+  .accueil-hero .spark { position: absolute; border-radius: 50%; background: #A7F0D8; }
+  .accueil-hero .hero-mascotte { filter: drop-shadow(0 16px 32px rgba(18,80,63,.42)); }
+  .accueil-hero h1 {
+    font-family: var(--disp); font-weight: 900; font-size: 32px;
+    margin: 14px 0 0; letter-spacing: -0.02em; color: var(--hero-soft);
   }
-  .accueil-tete p { color: var(--muted); font-size: 15px; margin: 4px 0 0; }
-  .info-carte.parent { background: var(--hero-soft); border-color: transparent; }
-  .info-carte.parent .lab { color: var(--hero-deep); }
+  .accueil-hero p { margin: 8px 0 0; font-weight: 700; font-size: 15px; color: #A7F0D8; }
 
-  .cartes-lieux { display: flex; flex-direction: column; gap: 12px; padding-top: 14px; }
+  .accueil-corps { padding-top: 22px; }
+  .info-carte.parent { background: var(--hero-soft); border-color: transparent; border-radius: 20px; padding: 16px 18px; }
+  .info-carte.parent .eyebrow { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .info-carte.parent .eyebrow .puce {
+    flex: none; width: 24px; height: 24px; border-radius: 50%; background: #1F8F77;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--hero-soft); font-weight: 900; font-size: 13px;
+  }
+  .info-carte.parent .eyebrow span {
+    font-weight: 900; font-size: 11.5px; letter-spacing: .1em;
+    text-transform: uppercase; color: #1F8F77;
+  }
+  .info-carte.parent .accroche { margin: 0 0 6px; font-weight: 800; font-size: 14.5px; line-height: 1.4; color: var(--ink); }
+  .info-carte.parent .detail { margin: 0; font-weight: 600; font-size: 13px; line-height: 1.55; color: var(--muted); }
+
+  .rubrique-lab {
+    font-family: var(--mono); font-weight: 900; font-size: 12px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--muted); margin: 20px 0 12px;
+  }
+
+  .cartes-lieux { display: flex; flex-direction: column; gap: 12px; }
   .carte-lieu {
     display: flex; align-items: center; gap: 14px;
-    background: var(--surface); border: 1px solid var(--line);
-    border-radius: 22px; padding: 14px; text-align: left; width: 100%;
+    background: var(--surface); border: 1.5px solid transparent;
+    border-radius: 24px; padding: 14px 16px; text-align: left; width: 100%;
     cursor: pointer; transition: transform .1s ease;
+    box-shadow: 0 3px 10px rgba(43,37,25,.08);
   }
   .carte-lieu:active { transform: scale(.98); }
-  .carte-lieu.en-cours { border: 1.5px solid var(--hero); }
+  .carte-lieu.en-cours { border-color: #39C3A2; }
   .carte-lieu .picto {
-    flex: none; width: 66px; height: 66px; border-radius: 18px;
-    background: var(--hero-soft); display: flex; align-items: center; justify-content: center;
+    flex: none; width: 56px; height: 56px; border-radius: 18px;
+    display: flex; align-items: center; justify-content: center;
   }
-  .carte-lieu .picto svg { width: 40px; height: 40px; }
+  .carte-lieu .picto svg { width: 28px; height: 28px; }
   .carte-lieu .txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
   .carte-lieu .txt b { font-family: var(--disp); font-size: 19px; font-weight: 800; color: var(--ink); }
   .carte-lieu .txt span { font-size: 13px; color: var(--muted); }
   .carte-lieu .txt .barre-mini {
     height: 5px; border-radius: 3px; background: var(--hero-soft); margin-top: 4px; overflow: hidden;
   }
-  .carte-lieu .txt .barre-mini > i { display: block; height: 100%; background: var(--hero); border-radius: 3px; }
-  .carte-lieu .chevron { font-size: 28px; font-weight: 700; color: var(--hero); line-height: 1; flex: none; }
+  .carte-lieu .txt .barre-mini > i { display: block; height: 100%; background: #39C3A2; border-radius: 3px; }
+  .carte-lieu .chevron-rond {
+    flex: none; width: 36px; height: 36px; border-radius: 50%;
+    background: var(--hero-soft); color: var(--ink);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .carte-lieu .chevron-rond.actif { background: #39C3A2; color: var(--hero-soft); }
 
   .bas-accueil { margin-top: 22px; text-align: center; display: flex; flex-direction: column; gap: 2px; }
   .lien-discret {
@@ -454,6 +481,32 @@
   }
   const SVG_TYPO = { montagne: svgMontagne, musee: svgMusee, ville: svgVille };
 
+  /* médaillons colorés de l'accueil : une couleur + un pictogramme clair par lieu */
+  const COULEUR_LIEU = { montagne: "#1C6B53", musee: "#A86C34", ville: "#1F8F77" };
+  function svgLieuAccueil(id) {
+    if (id === "montagne") {
+      return '<svg viewBox="0 0 48 48" fill="none">' +
+        '<path d="M4 34L16 14L24 26L30 18L44 34H4Z" fill="#EAFAF4"/>' +
+        '<path d="M16 14L19.5 19.5L16 21L12.5 19.5L16 14Z" fill="#FFC94D"/></svg>';
+    }
+    if (id === "musee") {
+      return '<svg viewBox="0 0 48 48" fill="none">' +
+        '<path d="M24 8L42 20H6Z" fill="#EAFAF4"/>' +
+        '<rect x="10" y="20" width="4" height="18" fill="#EAFAF4"/>' +
+        '<rect x="18" y="20" width="4" height="18" fill="#EAFAF4"/>' +
+        '<rect x="26" y="20" width="4" height="18" fill="#EAFAF4"/>' +
+        '<rect x="34" y="20" width="4" height="18" fill="#EAFAF4"/>' +
+        '<rect x="6" y="38" width="36" height="4" rx="1" fill="#EAFAF4"/></svg>';
+    }
+    return '<svg viewBox="0 0 48 48" fill="none">' +
+      '<rect x="6" y="20" width="10" height="20" fill="#EAFAF4"/>' +
+      '<rect x="19" y="10" width="10" height="30" fill="#EAFAF4"/>' +
+      '<rect x="32" y="24" width="10" height="16" fill="#EAFAF4"/>' +
+      '<rect x="22" y="15" width="3" height="3" fill="#1F8F77"/>' +
+      '<rect x="22" y="21" width="3" height="3" fill="#1F8F77"/>' +
+      '<rect x="9" y="25" width="3" height="3" fill="#1F8F77"/></svg>';
+  }
+
   /* mascotte "Zoé" — loupe vivante, 3 humeurs (curieux / malicieux / fier) */
   function zoeHTML(mood, opts) {
     opts = opts || {};
@@ -511,7 +564,7 @@
      3. ÉTAT — une progression indépendante par typologie
      ============================================================ */
   const CLE = "tresors-dici-v3";
-  function etatVide() { return { progres: {}, dernier: {}, vue: { ecran: "accueil" } }; }
+  function etatVide() { return { progres: {}, dernier: {}, vue: { ecran: "accueil" }, avisDemande: false }; }
   let S = charger();
   function charger() {
     try {
@@ -520,6 +573,7 @@
       if (!d.vue) d.vue = { ecran: "accueil" };
       if (!d.progres) d.progres = {};
       if (!d.dernier) d.dernier = {};
+      if (typeof d.avisDemande !== "boolean") d.avisDemande = false;
       return d;
     } catch (e) { return etatVide(); }
   }
@@ -562,6 +616,17 @@
       return;
     }
     if (navigator.vibrate) navigator.vibrate(m);
+  }
+
+  function demanderAvis() {
+    if (S.avisDemande) return;
+    S.avisDemande = true;
+    sauver();
+    if (!capacitorNatif()) return;
+    setTimeout(function () {
+      const p = window.Capacitor.Plugins;
+      if (p && p.InAppReview) p.InAppReview.requestReview().catch(function () {});
+    }, 1500);
   }
 
   /* ============================================================
@@ -640,7 +705,7 @@
     const btn = el("button", "btn-palier", pct === 100 ? "Voir le diplôme" : "On continue !");
     btn.addEventListener("click", function () {
       ov.remove();
-      if (pct === 100) { S.vue.ecran = "fin"; sauver(); dessiner(); }
+      if (pct === 100) { S.vue.ecran = "fin"; sauver(); dessiner(); demanderAvis(); }
     });
     ov.appendChild(btn);
     document.body.appendChild(ov);
@@ -685,24 +750,29 @@
   /* ---------- accueil ---------- */
   function ecranAccueil() {
     const e = el("div", "ecran ecran-accueil");
-    const c = el("div", "contenu");
 
-    const tete = el("div", "accueil-tete");
-    const marque = el("div", "marque");
-    const badge = el("div", "badge");
-    badge.innerHTML = zoeBox(40, "curieux", { sparks: false });
-    marque.appendChild(badge);
-    marque.appendChild(el("h1", null, "Ludigo"));
-    tete.appendChild(marque);
-    tete.appendChild(el("p", null, "Où allez-vous aujourd'hui ?"));
-    c.appendChild(tete);
+    const hero = el("div", "accueil-hero");
+    const s1 = el("div", "spark"); s1.style.cssText = "left:34px;top:22px;width:8px;height:8px;";
+    const s2 = el("div", "spark"); s2.style.cssText = "right:40px;top:14px;width:6px;height:6px;";
+    const s3 = el("div", "spark"); s3.style.cssText = "right:64px;top:74px;width:5px;height:5px;background:#FFC94D;";
+    hero.appendChild(s1); hero.appendChild(s2); hero.appendChild(s3);
+    const mascotte = el("div", "hero-mascotte");
+    mascotte.innerHTML = zoeBox(168, "curieux", { sparks: true });
+    hero.appendChild(mascotte);
+    hero.appendChild(el("h1", null, "Ludigo"));
+    hero.appendChild(el("p", null, "Où allez-vous aujourd'hui ?"));
+    e.appendChild(hero);
+
+    const c = el("div", "contenu accueil-corps");
 
     const explique = el("div", "info-carte parent");
-    explique.innerHTML = '<span class="lab">Pour les parents</span>' +
-      "Pas besoin de préparer quoi que ce soit : dites-nous où vous êtes (montagne, musée, ville…) et l'appli " +
-      "propose aussitôt une vraie chasse au trésor adaptée, pour occuper les enfants pendant toute la sortie, " +
-      "où que vous soyez dans le monde. Ils cochent ce qu'ils trouvent à leur rythme, jusqu'au diplôme final.";
+    explique.innerHTML =
+      '<div class="eyebrow"><span class="puce">i</span><span>Pour les parents</span></div>' +
+      '<p class="accroche">Partout dans le monde, transformez chaque sortie en aventure.</p>' +
+      '<p class="detail">Musée, ville, montagne… choisissez votre lieu, lancez une chasse au trésor adaptée à vos enfants, et recommencez avec un nouveau parcours à chaque fois.</p>';
     c.appendChild(explique);
+
+    c.appendChild(el("div", "rubrique-lab", "Choisir une destination"));
 
     const cartes = el("div", "cartes-lieux");
     TYPOLOGIES.forEach(function (t) {
@@ -717,7 +787,8 @@
       b.setAttribute("role", "button");
       b.tabIndex = 0;
       const picto = el("div", "picto");
-      picto.innerHTML = SVG_TYPO[t.id]();
+      picto.style.background = COULEUR_LIEU[t.id];
+      picto.innerHTML = svgLieuAccueil(t.id);
       b.appendChild(picto);
 
       const txt = el("div", "txt");
@@ -739,7 +810,9 @@
         txt.appendChild(el("span", null, "3 carnets · " + totalCarnet(cnt) + " trouvailles"));
       }
       b.appendChild(txt);
-      b.appendChild(el("span", "chevron", "›"));
+      const chev = el("div", "chevron-rond" + (commence ? " actif" : ""));
+      chev.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      b.appendChild(chev);
       b.addEventListener("click", function () { aller("intro", t.id); });
       cartes.appendChild(b);
     });

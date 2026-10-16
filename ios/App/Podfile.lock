@@ -3,6 +3,8 @@ PODS:
     - CapacitorCordova
   - CapacitorApp (8.1.1):
     - Capacitor
+  - CapacitorCommunityInAppReview (8.0.0):
+    - Capacitor
   - CapacitorCordova (8.5.0)
   - CapacitorHaptics (8.0.2):
     - Capacitor
@@ -14,6 +16,7 @@ PODS:
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorApp (from `../../node_modules/@capacitor/app`)"
+  - "CapacitorCommunityInAppReview (from `../../node_modules/@capacitor-community/in-app-review`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorHaptics (from `../../node_modules/@capacitor/haptics`)"
   - "CapacitorSplashScreen (from `../../node_modules/@capacitor/splash-screen`)"
@@ -24,6 +27,8 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorApp:
     :path: "../../node_modules/@capacitor/app"
+  CapacitorCommunityInAppReview:
+    :path: "../../node_modules/@capacitor-community/in-app-review"
   CapacitorCordova:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorHaptics:
@@ -34,13 +39,14 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/status-bar"
 
 SPEC CHECKSUMS:
-  Capacitor: 00b87168591cc006ea6f5c0de681ec5c39a2c8eb
-  CapacitorApp: 305bd13c44f6f9d164e2ee66a4faa956ed8c0e06
+  Capacitor: 34ed46c7364734d8d92feb1949ba731013acc93e
+  CapacitorApp: 9fd99482b6536ddf1a54721ce678145fc7fa3418
+  CapacitorCommunityInAppReview: 2a4296ea3e7e4799a87340bd1161c173bd22f3bd
   CapacitorCordova: 9d3acbb574048e7167d2af127a0af2123e619f2f
-  CapacitorHaptics: 296f771ecd89c7a1bd92a7b6826a7d268e2e70f5
-  CapacitorSplashScreen: 7bf61c2001557ff9e195e601c6b87344480d3c65
-  CapacitorStatusBar: eca7bc2b58d9f886f1ef9edb66e57a9b29c121af
+  CapacitorHaptics: 4e1e84c2b74fb5918e403fb8f0e73a07d05937df
+  CapacitorSplashScreen: 120117d1b2264bba31a6e6f998f51e510144dd12
+  CapacitorStatusBar: 40bdc21352ecc617ec71c45ea06d669cdd2da8df
 
-PODFILE CHECKSUM: 449066659a57ab08133fcb4174c874683f9d937b
+PODFILE CHECKSUM: 46fbb86225427424e94871bc36b5fc22ebe76331
 
 COCOAPODS: 1.17.0
