@@ -19,10 +19,31 @@ Voiture, train ou car : 3 nouveaux carnets de 44 trouvailles à repérer par la 
 Nouveau : le carnet Trajet ! Voiture, train ou car, fini le « on arrive quand ? ». Montagne, musée, ville ou route : 100 % hors ligne, zéro pub, zéro compte.
 ```
 
-**Mots-clés (100 car. max)** — 98 car. `gratuit` et `nature` remplacés par `trajet` et `voiture` :
+**Nom (30 car. max)** — 25 car. Singulier, comme les parents le tapent :
 ```
-randonnée,balade,sortie,famille,enfant,vacances,occuper,montagne,trésor,ville,trajet,musée,voiture
+Ludigo : chasse au trésor
 ```
+
+**Sous-titre (30 car. max)** — 29 car. :
+```
+Jeu de piste : rando, voiture
+```
+Pourquoi : « jeu de piste » est une expression que les parents tapent telle quelle et qui correspond exactement à l'app ; en entier dans le sous-titre, elle pèse bien plus que si on la découpe en `jeu` + `piste` dans les mots-clés. « voiture » vise les requêtes de vacances (« jeu voiture enfant »), « rando » le cœur historique de l'app. Écarté : `Rando, musée, ville, voiture` (28 car.), car ce sont des mots seuls très génériques (« voiture », « ville ») sur lesquels une jeune app ne se classera pas, et une liste de lieux ne dit pas que c'est un jeu. L'universalité se montre plutôt dans la 1re capture d'écran. À confirmer avec les scores de popularité d'Apple Ads.
+
+**Mots-clés français (100 car. max)** — 99 car. Aucun mot répété du nom ou du sous-titre. Jamais `gratuit` ni aucune mention de prix : interdit par la règle 2.3.7 des App Review Guidelines (pas d'information tarifaire dans les métadonnées). Attention, l'ancien champ de la v1.0 contenait `gratuit`, d'où son retrait :
+```
+randonnée,balade,sortie,enfant,vacances,occuper,montagne,trajet,musée,ville,activité,rallye,famille
+```
+
+**Données Apple Ads (relevé du 16/10/2026, France, popularité sur 5)** : `jeux enfants` 2/5 ; tout le reste à 1/5 : chasse au trésor, chasse aux trésors, jeu de piste, jeu voiture enfant, jeux voiture, jeux pour la voiture, occuper enfant, randonnée, rando, activité enfant… Pour comparaison, `alltrails` 3/5 et `instagram` 5/5. L'échelle est trop grossière pour départager nos mots-clés, mais elle montre que **toute la niche a un volume de recherche faible sur l'App Store** : l'ASO seul ne suffira pas, l'acquisition hors App Store (Google, Pinterest, réseaux sociaux) est indispensable. Les requêtes suggérées contiennent souvent l'âge (« jeu enfant 5 ans »). Enchère suggérée par Apple : 2,46 € par tap (cher pour une app gratuite non monétisée).
+
+**Localisation Anglais (Royaume-Uni), indexée aussi sur l'App Store français** (selon les guides ASO d'Appfigures et AppTweak, non confirmé par Apple) : ouvrir cette langue dans App Store Connect et y mettre des mots **français**, pour avoir 100 caractères de mots-clés en plus. Mots-clés (99 car.) :
+```
+enquête,découverte,promenade,visite,nature,observation,dehors,train,autoroute,route,week-end,loisir
+```
+Nom de cette localisation (29 car.) : `Ludigo : jeu de piste famille` · Sous-titre (26 car.) : `Chasse aux trésors enfants`
+
+**Description longue (live)** : corriger la faute « CHASSE AU TRÉSORS » → « CHASSE AU TRÉSOR ».
 
 **Description longue** : dans la v3 ci-dessous, remplacer « Montagne, Musée d'art ou Ville » par « Montagne, Musée d'art, Ville ou Trajet », et « 9 carnets différents (3 par type de lieu) » par « 12 carnets différents (3 par type de lieu) ». Ajouter « un long trajet en voiture » à la liste du paragraphe POUR QUI.
 
@@ -164,3 +185,14 @@ Repartir de `design_handoff_ludigo_mascotte/README.md` (déjà dans ce repo) : m
 
 ## Icône de l'app
 Déjà finalisée et intégrée (icône Zoé 1024×1024, voir `HANDOFF.md`) — aucun brief supplémentaire nécessaire pour l'icône elle-même.
+
+---
+
+# Google (SEO) — relevé Google Trends du 16/10/2026
+
+France, 5 dernières années, intérêt moyen relatif (100 = pic du terme le plus cherché du lot) : `activité enfant` 48 · `chasse au trésor` 34 · `jeu de piste` 13 · `jeux voiture enfant` 4 · `occuper les enfants` ~1.
+
+- `chasse au trésor` culmine à **Pâques** (avril) et en été : c'est le pic de l'année.
+- `activité enfant` culmine **pendant les vacances scolaires** (Toussaint jusqu'à 80, février, juillet).
+- `jeux voiture enfant` est faible et culmine en novembre-décembre : intention « jouets / jeux vidéo de voiture », pas « jeux pendant le trajet ». À ne pas viser tel quel.
+- Trends ne donne que des volumes **relatifs**. Pour des volumes absolus : Google Keyword Planner (compte Google Ads gratuit, à créer par Jessica).

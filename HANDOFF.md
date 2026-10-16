@@ -41,7 +41,7 @@ Jessica a livré un dossier de design `design_handoff_ludigo_mascotte/` (fichier
 
 ## ✅ Publiée sur l'App Store le 10/09/2026
 
-**Ludigo : chasses aux trésors**, v1.0 (build 1), en ligne depuis le 10/09/2026 : https://apps.apple.com/fr/app/ludigo-chasses-aux-tr%C3%A9sors/id6797957916 (Apple ID `6797957916`). Au 16/10/2026 : 1 note (5★). La version publiée correspond au commit qui suit cette mise à jour (lien de confidentialité in-app, In-App Review, `DEVELOPMENT_TEAM = BF83B6KTNS`, langue de développement `fr`).
+**Ludigo : chasses aux trésors**, v1.0 (build 1), en ligne depuis le 10/09/2026 : https://apps.apple.com/fr/app/ludigo-chasses-aux-tr%C3%A9sors/id6797957916 (Apple ID `6797957916`). Au 16/10/2026 : 1 note (5★). Le commit « v1.0 publiée » regroupe l'état local au 16/10 (lien de confidentialité in-app, In-App Review, `DEVELOPMENT_TEAM = BF83B6KTNS`, langue `fr`). Attention : le plugin In-App Review a été ajouté le 15/09, après la sortie du 10/09, donc le binaire 1.0 en ligne ne contient très probablement pas la demande de notation ; elle arrive avec la v1.1.
 
 Historique de la préparation (gardé pour mémoire) :
 
@@ -81,7 +81,7 @@ En cours de remplissage dans App Store Connect, dans cet ordre :
 - `www/` : copie propre servie à Capacitor (webDir), à resynchroniser après chaque modif d'`index.html` (`cp index.html www/` puis `npx cap sync ios`)
 - `ios/App/App.xcworkspace` : projet Xcode généré par Capacitor — **toujours ouvrir le `.xcworkspace`, jamais le `.xcodeproj`** (CocoaPods)
 - Wrapper natif : **Capacitor**, choisi pour conserver ~95 % du code JS/CSS existant sans réécriture native
-- Plugins Capacitor actifs : App (bouton retour Android), Haptics, SplashScreen, StatusBar, **In-App Review** (`@capacitor-community/in-app-review`, ajouté 15/09/2026 — demande native de notation déclenchée une seule fois, au premier carnet terminé par utilisateur, voir `demanderAvis()` dans `index.html`)
+- Plugins Capacitor actifs : App (bouton retour Android), Haptics, SplashScreen, StatusBar, **In-App Review** (`@capacitor-community/in-app-review`, ajouté 15/09/2026 — demande native de notation déclenchée en refermant un palier ≥ 50 %, au plus une fois tous les 30 jours et 3 fois en tout, état `S.avis = { nb, dernier }` ; voir `demanderAvis()` dans `index.html`. Changement du 16/10/2026 : avant, une seule demande à 100 %, presque jamais atteinte)
 - Bundle ID actuel : `com.nighthawkscode.findaro` (voir section nom en suspens ci-dessus)
 - Repo public GitHub `nighthawkscode/chasse-tresor-valentin` (nom de repo pas encore renommé pour matcher, non bloquant)
 - **Zéro réseau, zéro tracking** : pas de fetch actif dans l'app native (le service worker ne s'active que sous `https:`, jamais sous le schéma `capacitor://` de l'app iOS — vérifié dans le code)

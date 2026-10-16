@@ -613,7 +613,7 @@
      3. ÉTAT — une progression indépendante par typologie
      ============================================================ */
   const CLE = "tresors-dici-v3";
-  function etatVide() { return { progres: {}, dernier: {}, vue: { ecran: "accueil" }, avisDemande: false }; }
+  function etatVide() { return { progres: {}, dernier: {}, vue: { ecran: "accueil" }, avis: { nb: 0, dernier: 0 } }; }
   let S = charger();
   function charger() {
     try {
@@ -622,7 +622,8 @@
       if (!d.vue) d.vue = { ecran: "accueil" };
       if (!d.progres) d.progres = {};
       if (!d.dernier) d.dernier = {};
-      if (typeof d.avisDemande !== "boolean") d.avisDemande = false;
+      if (!d.avis || typeof d.avis.nb !== "number") d.avis = { nb: d.avisDemande ? 1 : 0, dernier: 0 };
+      delete d.avisDemande;
       return d;
     } catch (e) { return etatVide(); }
   }
@@ -667,9 +668,14 @@
     if (navigator.vibrate) navigator.vibrate(m);
   }
 
+  /* Demande de notation App Store : après un palier d'au moins 50 %, au plus
+     une fois tous les 30 jours et 3 fois en tout (iOS applique en plus son propre plafond). */
+  const AVIS_MAX = 3;
+  const AVIS_ECART_MS = 30 * 24 * 3600 * 1000;
   function demanderAvis() {
-    if (S.avisDemande) return;
-    S.avisDemande = true;
+    if (S.avis.nb >= AVIS_MAX || Date.now() - S.avis.dernier < AVIS_ECART_MS) return;
+    S.avis.nb += 1;
+    S.avis.dernier = Date.now();
     sauver();
     if (!capacitorNatif()) return;
     setTimeout(function () {
@@ -754,7 +760,8 @@
     const btn = el("button", "btn-palier", pct === 100 ? "Voir le diplôme" : "On continue !");
     btn.addEventListener("click", function () {
       ov.remove();
-      if (pct === 100) { S.vue.ecran = "fin"; sauver(); dessiner(); demanderAvis(); }
+      if (pct === 100) { S.vue.ecran = "fin"; sauver(); dessiner(); }
+      if (pct >= 50) demanderAvis();
     });
     ov.appendChild(btn);
     document.body.appendChild(ov);
