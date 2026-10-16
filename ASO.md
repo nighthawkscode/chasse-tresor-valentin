@@ -4,6 +4,32 @@ Rédigé le 7 septembre 2026, après le renommage Findaro → Ludigo. Remplace t
 
 Toutes les valeurs ci-dessous sont vérifiées caractère par caractère contre les limites Apple (script Python, pas de comptage à l'œil).
 
+# v1.1 — destination Trajet (16/10/2026, pour les vacances de la Toussaint)
+
+À coller dans App Store Connect pour la version 1.1. Longueurs vérifiées par script.
+
+**Nouveautés de cette version (What's New, 4000 car. max)** — 301 car. :
+```
+Nouveau : la destination Trajet !
+Voiture, train ou car : 3 nouveaux carnets de 44 trouvailles à repérer par la fenêtre, pour transformer les longs trajets de vacances en chasse au trésor. Pensé pour se jouer les yeux dehors (idéal contre le mal des transports) et sans jamais distraire le conducteur.
+```
+
+**Texte promotionnel (170 car. max, modifiable sans revalidation)** — 157 car. :
+```
+Nouveau : le carnet Trajet ! Voiture, train ou car, fini le « on arrive quand ? ». Montagne, musée, ville ou route : 100 % hors ligne, zéro pub, zéro compte.
+```
+
+**Mots-clés (100 car. max)** — 98 car. `gratuit` et `nature` remplacés par `trajet` et `voiture` :
+```
+randonnée,balade,sortie,famille,enfant,vacances,occuper,montagne,trésor,ville,trajet,musée,voiture
+```
+
+**Description longue** : dans la v3 ci-dessous, remplacer « Montagne, Musée d'art ou Ville » par « Montagne, Musée d'art, Ville ou Trajet », et « 9 carnets différents (3 par type de lieu) » par « 12 carnets différents (3 par type de lieu) ». Ajouter « un long trajet en voiture » à la liste du paragraphe POUR QUI.
+
+**Captures d'écran** : ajouter si possible une capture de l'écran Trajet (liste de trouvailles « Une plaque d'immatriculation d'un autre pays », « Un tunnel »…) avec le titre « Même les longs trajets deviennent une aventure. »
+
+---
+
 ## Nom (App Information > Name, 30 car. max)
 
 ```

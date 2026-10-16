@@ -99,6 +99,7 @@
   .carte-lieu .txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
   .carte-lieu .txt b { font-family: var(--disp); font-size: 19px; font-weight: 800; color: var(--ink); }
   .carte-lieu .txt span { font-size: 13px; color: var(--muted); }
+  .pastille-nouveau { font-style: normal; font-size: 11px; font-weight: 800; letter-spacing: .02em; color: #0D3B30; background: #FFC94D; border-radius: 999px; padding: 2px 8px; margin-left: 6px; vertical-align: 3px; }
   .carte-lieu .txt .barre-mini {
     height: 5px; border-radius: 3px; background: var(--hero-soft); margin-top: 4px; overflow: hidden;
   }
@@ -351,7 +352,7 @@
   }
 
   /* ============================================================
-     1. DONNÉES — 3 typologies × 3 carnets (inchangé)
+     1. DONNÉES — 4 typologies × 3 carnets
      ============================================================ */
   function C(items) { return items; }
 
@@ -430,6 +431,31 @@
           rares: C([["Un mariage ou une fête qui sort d'un bâtiment",30],["Un anniversaire fêté en pleine rue",25],["Quelqu'un en costume ou déguisement inhabituel",25],["Un rassemblement, observé à distance avec un adulte",25],["Des retrouvailles visiblement joyeuses entre deux personnes",20],["Un groupe qui prend une photo tous ensemble",15],["Quelqu'un qui joue d'un instrument dans la rue",20]])
         }
       ]
+    },
+    {
+      id: "trajet", nom: "Trajet", motLieu: "de la route", nouveau: true,
+      accroche: "Voiture, train, car",
+      secu: "Le conducteur conduit, il ne joue qu'à voix haute : c'est un passager qui tient le téléphone et coche. On reste attaché du début à la fin, même pour voir quelque chose de génial. À la pause, on descend côté parking ou trottoir, jamais côté route, et on donne la main. Si on a mal au cœur, on pose l'écran et on regarde loin devant : presque tout se joue les yeux dehors.",
+      carnets: [
+        { id: "A",
+          ouvre: C([["Une voiture de la même couleur que la nôtre",5],["Un camion avec un dessin sur le côté",10],["Une plaque d'immatriculation d'un autre pays",15],["Un panneau avec un animal dessiné dessus",15],["Un pont qui passe au-dessus de la route",5],["Un tunnel",10],["Une éolienne",10],["Un château d'eau",15],["Un champ avec des animaux dedans",10],["Une voiture qui tire une caravane ou une remorque",10],["Un panneau avec le nom d'une ville que tu connais",10],["Un clocher ou une tour qui dépasse au loin",10],["Une moto",5],["Un tracteur dans un champ",10],["Un panneau qui annonce une ville à plus de 100 km",10],["Une rivière vue depuis un pont",15]]),
+          sens: C([["Le bruit des pneus qui change quand la route change",15],["Le bruit qui change d'un coup en entrant dans un tunnel",10],["Les oreilles qui se bouchent dans une grande montée ou une grande descente",20],["Le clic de ta ceinture quand tu t'attaches",5],["Une odeur qui vient de dehors (ferme, forêt, foin…)",10],["Le tic-tac du clignotant",5],["La voiture qui bouge un tout petit peu quand un gros camion passe à côté",15],["Une chanson qu'on connaît par cœur à la radio",10],["Dix secondes de silence complet dans la voiture, tout le monde ensemble",15],["Les petites vibrations sur un pont ou sur une route abîmée",15]]),
+          faire: C([["Prendre une photo vraiment rigolote à la pause",5],["Inventer une histoire à tour de rôle, une phrase chacun",10],["Deviner combien de kilomètres il reste, puis vérifier sur un panneau",15],["Trouver un mot qui commence par chaque lettre d'une plaque",15],["Chanter une chanson tous ensemble, conducteur compris",5],["Faire un concours de grimaces, le premier qui rit a perdu",10],["Compter dix voitures rouges",10],["Donner un nom rigolo à notre voiture, pour la journée",5],["Élire le plus beau paysage du trajet, et dire pourquoi",5],["Faire dix sauts sur place à la pause, loin des voitures",5],["Rassembler tous les déchets de la voiture dans un sac, et le jeter à la pause",15]]),
+          rares: C([["Un arc-en-ciel",25],["Un avion qui décolle ou qui atterrit, vu de près",25],["Une montgolfière dans le ciel",30],["Un animal sauvage au bord d'un champ, à bonne distance",20],["Un convoi exceptionnel, avec ses gyrophares orange",25],["Un train qui roule à côté de la route",20],["Une voiture décorée pour un mariage",30]])
+        },
+        { id: "B",
+          ouvre: C([["Une voiture avec des vélos ou un coffre sur le toit",10],["Un camion-citerne",10],["Une voiture électrique en train de se recharger",15],["Un panneau qui annonce un lieu à visiter",10],["Un rond-point décoré (sculpture, fleurs, objet bizarre)",15],["Un péage, ou une barrière qui se lève",10],["Un chantier avec des engins",10],["Une ferme toute seule au milieu des champs",10],["Un pylône électrique avec ses grands fils",5],["Une forêt qui longe la route",5],["Un panneau avec une flèche qui part dans deux directions",10],["Un lac ou un étang",15],["Une voiture qui a l'air plus vieille que tes parents",20],["Un camion qui transporte des voitures",15],["Une voiture qui roule avec ses phares allumés",5],["Une maison avec des volets d'une couleur vive",10]]),
+          sens: C([["Toucher la vitre : plus froide ou plus chaude que ta main ?",5],["Le souffle de la ventilation quand on l'allume",5],["Taper dans tes mains au rythme du clignotant",10],["Une odeur de nourriture sur une aire de pause",10],["Ton corps qui penche tout seul dans un virage",5],["Le moteur qui ronronne plus fort dans une montée",10],["Tes jambes toutes engourdies quand tu descends à la pause",10],["Le bruit d'une moto qui nous double",10],["Un klaxon au loin",10],["Le chant d'un oiseau pendant la pause",15]]),
+          faire: C([["Prendre une photo vraiment rigolote à la pause",5],["Jouer au « ni oui ni non » pendant une minute entière",15],["Deviner l'heure d'arrivée, puis vérifier en arrivant",15],["Trouver par la fenêtre une chose de chaque couleur de l'arc-en-ciel",20],["Imiter le bruit d'un véhicule que tu viens de voir",5],["Inventer ce que transporte un camion qui passe",10],["Lire le nom d'une ville sur un panneau, et imaginer à quoi elle ressemble",10],["Faire deviner un animal en le mimant seulement avec les mains",10],["Compter les ponts pendant dix minutes",15],["Dire merci au conducteur en arrivant",5],["Rassembler tous les déchets de la voiture dans un sac, et le jeter à la pause",15]]),
+          rares: C([["Un van qui transporte des chevaux",20],["Un grand oiseau posé dans un champ",25],["Un château visible depuis la route",25],["Un coucher de soleil tout orange",20],["Une plaque d'un pays très lointain",30],["Une ambulance, des pompiers ou la police, à distance",15],["Un troupeau qui marche le long de la route",30]])
+        },
+        { id: "C",
+          ouvre: C([["Un panneau qui indique la mer ou la montagne",10],["Une gare, ou un train arrêté",10],["Un passage à niveau",15],["Un bus ou un car",5],["Un toit d'une couleur inhabituelle",10],["Un champ cultivé (blé, maïs, vigne…)",5],["Un arbre tout seul au milieu d'un champ",10],["Trois voitures de couleurs différentes à la suite",10],["Une station-service",5],["Un panneau de vitesse, et le chiffre écrit dessus",5],["Une usine avec une cheminée",10],["Un village perché sur une colline",15],["Un chien qui regarde par la fenêtre d'une voiture",20],["Un camion avec un numéro de téléphone écrit dessus",10],["Une montagne ou une colline à l'horizon",5],["Un panneau qui annonce une ville à plus de 300 km",15]]),
+          sens: C([["Le moteur qui démarre, puis qui ronronne",5],["Une odeur de café ou de croissant à la pause",10],["Le bruit de tes pas sur le sol de l'aire de pause",5],["Le bruit d'un pont en métal sous les roues",15],["Le passage d'un camion très bruyant",10],["Le bruit qui change quand on passe sous un pont",15],["Quelqu'un qui fredonne dans la voiture",10],["Le bruit qui change quand on ouvre la fenêtre un tout petit peu",10],["Ta tête qui se colle au siège quand la voiture accélère",10],["Le silence quand le moteur s'arrête à l'arrivée",10]]),
+          faire: C([["Prendre une photo vraiment rigolote à la pause",5],["Jouer à « je vois une couleur… » et faire deviner trois fois",10],["Inventer une chanson sur notre trajet",15],["Trouver sur les plaques tous les chiffres de 0 à 9",20],["Choisir une couleur de camion, et crier le premier qui la voit",10],["Raconter son meilleur souvenir de vacances",5],["Deviner ce qu'il y a derrière le prochain virage, puis vérifier",10],["Fermer les yeux et décrire le paysage qu'on vient de voir",10],["Choisir une chanson à écouter, chacun son tour",5],["Faire dix sauts sur place à la pause, loin des voitures",5],["Rassembler tous les déchets de la voiture dans un sac, et le jeter à la pause",15]]),
+          rares: C([["Un tracteur qui roule sur la route devant nous",20],["Un parapente ou un deltaplane dans le ciel",30],["Un bateau sur une rivière ou un canal",20],["Une voiture avec un kayak ou une planche sur le toit",20],["Un train très long : compter ses wagons",25],["Un animal sauvage, à bonne distance de la route",25],["Une dépanneuse qui transporte une voiture",20]])
+        }
+      ]
     }
   ];
 
@@ -479,15 +505,38 @@
       '<rect x="32.5" y="22" width="3" height="3" rx=".6" fill="#fff" opacity=".7"/>' +
       "</svg>";
   }
-  const SVG_TYPO = { montagne: svgMontagne, musee: svgMusee, ville: svgVille };
+  function svgTrajet() {
+    return '<svg viewBox="0 0 48 48" fill="none">' +
+      '<path d="M6 30V25C6 23.3 7.1 22 8.6 21.6L13 20.5L17.5 13.8C18.3 12.7 19.6 12 21 12H30C31.4 12 32.7 12.7 33.5 13.8L38 20.5L40.4 21.3C41.9 21.8 43 23.2 43 24.8V30C43 31.1 42.1 32 41 32H8C6.9 32 6 31.1 6 30Z" fill="var(--hero)"/>' +
+      '<path d="M18.4 20L21 15.7C21.3 15.2 21.7 15 22.2 15H25V20Z" fill="#fff" opacity=".85"/>' +
+      '<path d="M27.5 15H29.8C30.3 15 30.7 15.2 31 15.7L33.6 20H27.5Z" fill="#fff" opacity=".85"/>' +
+      '<circle cx="15" cy="32" r="5" fill="var(--hero-deep)"/><circle cx="15" cy="32" r="2" fill="#fff" opacity=".8"/>' +
+      '<circle cx="35" cy="32" r="5" fill="var(--hero-deep)"/><circle cx="35" cy="32" r="2" fill="#fff" opacity=".8"/>' +
+      '<rect x="4" y="40" width="9" height="2.6" rx="1.3" fill="var(--hero-deep)" opacity=".35"/>' +
+      '<rect x="19.5" y="40" width="9" height="2.6" rx="1.3" fill="var(--hero-deep)" opacity=".35"/>' +
+      '<rect x="35" y="40" width="9" height="2.6" rx="1.3" fill="var(--hero-deep)" opacity=".35"/>' +
+      "</svg>";
+  }
+  const SVG_TYPO = { montagne: svgMontagne, musee: svgMusee, ville: svgVille, trajet: svgTrajet };
 
   /* médaillons colorés de l'accueil : une couleur + un pictogramme clair par lieu */
-  const COULEUR_LIEU = { montagne: "#1C6B53", musee: "#A86C34", ville: "#1F8F77" };
+  const COULEUR_LIEU = { montagne: "#1C6B53", musee: "#A86C34", ville: "#1F8F77", trajet: "#3C6E91" };
   function svgLieuAccueil(id) {
     if (id === "montagne") {
       return '<svg viewBox="0 0 48 48" fill="none">' +
         '<path d="M4 34L16 14L24 26L30 18L44 34H4Z" fill="#EAFAF4"/>' +
         '<path d="M16 14L19.5 19.5L16 21L12.5 19.5L16 14Z" fill="#FFC94D"/></svg>';
+    }
+    if (id === "trajet") {
+      return '<svg viewBox="0 0 48 48" fill="none">' +
+        '<path d="M6 30V25C6 23.3 7.1 22 8.6 21.6L13 20.5L17.5 13.8C18.3 12.7 19.6 12 21 12H30C31.4 12 32.7 12.7 33.5 13.8L38 20.5L40.4 21.3C41.9 21.8 43 23.2 43 24.8V30C43 31.1 42.1 32 41 32H8C6.9 32 6 31.1 6 30Z" fill="#EAFAF4"/>' +
+        '<path d="M18.4 20L21 15.7C21.3 15.2 21.7 15 22.2 15H25V20Z" fill="#3C6E91"/>' +
+        '<path d="M27.5 15H29.8C30.3 15 30.7 15.2 31 15.7L33.6 20H27.5Z" fill="#3C6E91"/>' +
+        '<circle cx="15" cy="32" r="5" fill="#EAFAF4" stroke="#3C6E91" stroke-width="2"/>' +
+        '<circle cx="35" cy="32" r="5" fill="#EAFAF4" stroke="#3C6E91" stroke-width="2"/>' +
+        '<rect x="6" y="40" width="10" height="2.6" rx="1.3" fill="#FFC94D"/>' +
+        '<rect x="20" y="40" width="10" height="2.6" rx="1.3" fill="#FFC94D"/>' +
+        '<rect x="34" y="40" width="8" height="2.6" rx="1.3" fill="#FFC94D"/></svg>';
     }
     if (id === "musee") {
       return '<svg viewBox="0 0 48 48" fill="none">' +
@@ -769,7 +818,7 @@
     explique.innerHTML =
       '<div class="eyebrow"><span class="puce">i</span><span>Pour les parents</span></div>' +
       '<p class="accroche">Partout dans le monde, transformez chaque sortie en aventure.</p>' +
-      '<p class="detail">Musée, ville, montagne… choisissez votre lieu, lancez une chasse au trésor adaptée à vos enfants, et recommencez avec un nouveau parcours à chaque fois.</p>';
+      '<p class="detail">Musée, ville, montagne, et même le trajet en voiture… choisissez votre lieu, lancez une chasse au trésor adaptée à vos enfants, et recommencez avec un nouveau parcours à chaque fois.</p>';
     c.appendChild(explique);
 
     c.appendChild(el("div", "rubrique-lab", "Choisir une destination"));
@@ -792,7 +841,7 @@
       b.appendChild(picto);
 
       const txt = el("div", "txt");
-      txt.appendChild(el("b", null, t.nom));
+      txt.appendChild(el("b", null, t.nom + (t.nouveau && !commence ? ' <em class="pastille-nouveau">Nouveau</em>' : "")));
 
       const dernierCid = S.dernier[t.id];
       const dernierSp = dernierCid && progresT[dernierCid] ? scoreEtProgres(progresCarnet(t.id, dernierCid)) : null;

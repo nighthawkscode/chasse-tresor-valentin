@@ -103,9 +103,28 @@ En cours de remplissage dans App Store Connect, dans cet ordre :
 6. **Après un `xcrun simctl runtime delete`, toujours vérifier `xcrun simctl runtime list` avant de retélécharger** — des doublons orphelins côté CoreSimulator peuvent bloquer l'installation d'un nouveau runtime avec une erreur "Duplicate of X".
 7. Serveur HTTP local (`python3 -m http.server`) plutôt qu'ouverture directe en `file://` pour tester la version web — le navigateur sert les fichiers `file://` comme des instantanés figés.
 
+## v1.1 en préparation : destination « Trajet » (16/10/2026)
+
+- 4ᵉ typologie `trajet` (« Voiture, train, car »), 3 carnets A/B/C de 44 trouvailles chacun (16 ouvre / 10 sens / 11 faire / 7 rares), mêmes règles que les autres : points 5-30, aucun doublon dans un carnet, Leave No Trace.
+- Règles spécifiques au trajet : le conducteur ne touche jamais au téléphone (un passager coche), on reste attaché, toutes les trouvailles se jouent les yeux dehors (contre le mal des transports), les actions physiques n'ont lieu qu'« à la pause, loin des voitures ».
+- **Aucune trouvaille régulière ne dépend de la météo ou de l'heure** (soleil, pluie, froid, nuages, nuit) : retour de Jessica le 16/10, elles risquaient d'être infaisables. Ce qui dépend de la chance (arc-en-ciel, coucher de soleil) n'est accepté que dans les rares ★, qui restent facultatives.
+- Pastille « Nouveau » sur la carte d'accueil (`nouveau: true` sur la typologie, masquée dès que le carnet est commencé). Couleur de médaillon `#3C6E91`, pictogrammes voiture `svgTrajet()` + variante accueil.
+- Version passée à 1.1 (build 2). Textes App Store de la v1.1 dans `ASO.md`.
+- Reste à faire : tester dans le simulateur, archiver, soumettre (viser une validation pendant les vacances de la Toussaint, du 17/10 au 02/11/2026).
+
+## Chiffres App Store au 14/10/2026 (17/07 → 14/10)
+
+78 impressions (74 via la recherche), 20 vues de la fiche, 7 téléchargements. Le frein principal est la visibilité dans la recherche, pas la fiche.
+
+## Android
+
+Compte Google Play personnel = test fermé obligatoire avec au moins 12 testeurs inscrits pendant 14 jours avant la mise en production (les comptes d'organisation en sont exemptés). C'est ce qui bloque aujourd'hui.
+
 ## Prochaines étapes
 
-La v1.0 est publiée (10/09/2026). La phase suivante vise l'attractivité (téléchargements) et la qualité de l'expérience parents/enfants, avant toute monétisation. La roadmap produit détaillée est à reprendre de la conversation du 16/10/2026 ; premiers chantiers : relever les chiffres App Store Connect (impressions, conversion, téléchargements), puis itérer sur la fiche (texte promo, test A/B des captures) et sur le contenu (nouveaux types de lieux fréquents).
+1. Soumettre la v1.1 (Trajet) et mettre à jour le texte promo, les mots-clés et la description (voir `ASO.md`).
+2. Travailler la visibilité : mots-clés, test A/B des captures, distribution hors App Store (groupes de parents, offices de tourisme).
+3. Android : réunir 12 testeurs, ou passer par un compte d'organisation.
 
 ## Claude Design
 
